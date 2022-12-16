@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8F128AF2294D0BCA002D3801 /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; platformFilter = ios; productRef = 8F128AF1294D0BCA002D3801 /* CodeScanner */; };
 		8FA603942948CE99001CC2D2 /* VerkaufsTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA603932948CE99001CC2D2 /* VerkaufsTrackerApp.swift */; };
 		8FA603962948CE99001CC2D2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA603952948CE99001CC2D2 /* ContentView.swift */; };
 		8FA603982948CE9A001CC2D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8FA603972948CE9A001CC2D2 /* Assets.xcassets */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8F128AF3294D0C74002D3801 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8FA603902948CE99001CC2D2 /* VerkaufsTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VerkaufsTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FA603932948CE99001CC2D2 /* VerkaufsTrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerkaufsTrackerApp.swift; sourceTree = "<group>"; };
 		8FA603952948CE99001CC2D2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -40,6 +42,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F128AF2294D0BCA002D3801 /* CodeScanner in Frameworks */,
 				8FD6455A294CFD6E00D746F8 /* SwiftSMTP in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -66,6 +69,7 @@
 		8FA603922948CE99001CC2D2 /* VerkaufsTracker */ = {
 			isa = PBXGroup;
 			children = (
+				8F128AF3294D0C74002D3801 /* Info.plist */,
 				8FA603A22948CEDC001CC2D2 /* Structs */,
 				8FA603932948CE99001CC2D2 /* VerkaufsTrackerApp.swift */,
 				8FA603952948CE99001CC2D2 /* ContentView.swift */,
@@ -115,6 +119,7 @@
 			name = VerkaufsTracker;
 			packageProductDependencies = (
 				8FD64559294CFD6E00D746F8 /* SwiftSMTP */,
+				8F128AF1294D0BCA002D3801 /* CodeScanner */,
 			);
 			productName = VerkaufsTracker;
 			productReference = 8FA603902948CE99001CC2D2 /* VerkaufsTracker.app */;
@@ -146,6 +151,7 @@
 			mainGroup = 8FA603872948CE99001CC2D2;
 			packageReferences = (
 				8FD64558294CFD6E00D746F8 /* XCRemoteSwiftPackageReference "Swift-SMTP" */,
+				8F128AF0294D0BCA002D3801 /* XCRemoteSwiftPackageReference "CodeScanner" */,
 			);
 			productRefGroup = 8FA603912948CE99001CC2D2 /* Products */;
 			projectDirPath = "";
@@ -309,6 +315,8 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = VerkaufsTracker/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Benötigt Zugriff, um QR-Codes zu scannen.";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -347,6 +355,8 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = VerkaufsTracker/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Benötigt Zugriff, um QR-Codes zu scannen.";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -396,6 +406,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		8F128AF0294D0BCA002D3801 /* XCRemoteSwiftPackageReference "CodeScanner" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/twostraws/CodeScanner";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		8FD64558294CFD6E00D746F8 /* XCRemoteSwiftPackageReference "Swift-SMTP" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Kitura/Swift-SMTP";
@@ -407,6 +425,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		8F128AF1294D0BCA002D3801 /* CodeScanner */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8F128AF0294D0BCA002D3801 /* XCRemoteSwiftPackageReference "CodeScanner" */;
+			productName = CodeScanner;
+		};
 		8FD64559294CFD6E00D746F8 /* SwiftSMTP */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 8FD64558294CFD6E00D746F8 /* XCRemoteSwiftPackageReference "Swift-SMTP" */;
