@@ -16,6 +16,13 @@ struct ContentView: View {
             Text("Hello, world!")
         }
         .padding()
+
+		Button(action: {
+			let mailer = EmailManager()
+			mailer.sendEmail(recipientAdress: "***REMOVED***", recipientName: "Bene", subject: "Testemail", text: "Diese Email wurde automatisiert versendet. \(UUID())")
+		}) {
+			Text("Send Email")
+		}
     }
 }
 
