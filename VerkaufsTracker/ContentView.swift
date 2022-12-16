@@ -24,6 +24,7 @@ struct ContentView: View {
 		}
 		.padding()
 		.onAppear {
+			let x2 = VerifyTicket()
 			var x = QrCodeImage()
 			image = x.generateQRCode(from: "abc")
 			print(image)
