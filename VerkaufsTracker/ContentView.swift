@@ -27,6 +27,7 @@ struct ContentView: View {
 			let x2 = VerifyTicket()
 			var x = QrCodeImage()
 			image = x.generateQRCode(from: "abc")
+
 			print(image)
 		}
 
@@ -42,7 +43,11 @@ struct ContentView: View {
 
 		Button(action: {
 			let mailer = EmailManager()
-			mailer.sendEmail(recipientAdress: "***REMOVED***", recipientName: "Bene", subject: "Testemail", text: "Diese Email wurde automatisiert versendet. \(UUID())")
+			let v = Verwaltung()
+			let person = Person(id: UUID(), isSynced: false, lastUpdate: .now, lastServerEdit: .now, vorname: "Benedict", nachname: "***REMOVED***", email: "***REMOVED***", q2: true, notes: "", bestellungen: [:], extraFields: [:], verwaltung: v)
+			v.personen.append(person)
+			mailer.sendMail(mail: mailer.generateFormEmail(person: person))
+			
 		}) {
 			Text("Send Email")
 		}

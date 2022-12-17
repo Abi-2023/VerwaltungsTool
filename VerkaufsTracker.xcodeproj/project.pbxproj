@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8F128AF2294D0BCA002D3801 /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; platformFilter = ios; productRef = 8F128AF1294D0BCA002D3801 /* CodeScanner */; };
 		8F128AF5294D1BF5002D3801 /* TicketCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F128AF4294D1BF5002D3801 /* TicketCodes.swift */; };
+		8F7FB049294E4297005F4551 /* FormularMail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7FB048294E4297005F4551 /* FormularMail.swift */; };
 		8FA603942948CE99001CC2D2 /* VerkaufsTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA603932948CE99001CC2D2 /* VerkaufsTrackerApp.swift */; };
 		8FA603962948CE99001CC2D2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA603952948CE99001CC2D2 /* ContentView.swift */; };
 		8FA603982948CE9A001CC2D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8FA603972948CE9A001CC2D2 /* Assets.xcassets */; };
@@ -25,6 +26,7 @@
 /* Begin PBXFileReference section */
 		8F128AF3294D0C74002D3801 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8F128AF4294D1BF5002D3801 /* TicketCodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketCodes.swift; sourceTree = "<group>"; };
+		8F7FB048294E4297005F4551 /* FormularMail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormularMail.swift; sourceTree = "<group>"; };
 		8FA603902948CE99001CC2D2 /* VerkaufsTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VerkaufsTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FA603932948CE99001CC2D2 /* VerkaufsTrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerkaufsTrackerApp.swift; sourceTree = "<group>"; };
 		8FA603952948CE99001CC2D2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -56,6 +58,7 @@
 			isa = PBXGroup;
 			children = (
 				8FD6455B294CFD7C00D746F8 /* EmailManager.swift */,
+				8F7FB048294E4297005F4551 /* FormularMail.swift */,
 			);
 			path = Email;
 			sourceTree = "<group>";
@@ -192,6 +195,7 @@
 			files = (
 				8FA603A62948D02E001CC2D2 /* Item.swift in Sources */,
 				8FD6455F294D014700D746F8 /* secrets.swift in Sources */,
+				8F7FB049294E4297005F4551 /* FormularMail.swift in Sources */,
 				8FD6455C294CFD7C00D746F8 /* EmailManager.swift in Sources */,
 				8FA603A42948CFA5001CC2D2 /* Person.swift in Sources */,
 				8F128AF5294D1BF5002D3801 /* TicketCodes.swift in Sources */,

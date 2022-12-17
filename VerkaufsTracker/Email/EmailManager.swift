@@ -36,6 +36,10 @@ class EmailManager {
 			text: text
 		)
 
+		sendMail(mail: mail)
+	}
+
+	func sendMail(mail: Mail) {
 		smtp.send(mail) { (error) in
 			if let error = error {
 				print(error)
@@ -43,6 +47,11 @@ class EmailManager {
 				print("Email erfolgreich versendet")
 			}
 		}
+	}
+
+	func mailUserFromPerson(person p: Person) -> Mail.User{
+		let name = "\(p.vorname) \(p.nachname)"
+		return Mail.User(name: name, email: p.email!)
 	}
 
 }

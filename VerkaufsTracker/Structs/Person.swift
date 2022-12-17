@@ -22,7 +22,7 @@ class Person: Sync {
 	var extraFields: [String: String]
 	var formID: String
 
-	init(id: UUID, isSynced: Bool, lastUpdate: Date, lastServerEdit: Date, vorname: String, nachname: String, email: String? = nil, q2: Bool, notes: String, bestellungen: [UUID : Int], extraFields: [String : String], verwaltung: Verwaltung) {
+	init(id: UUID, isSynced: Bool, lastUpdate: Date, lastServerEdit: Date, vorname: String, nachname: String, email: String?, q2: Bool, notes: String, bestellungen: [UUID : Int], extraFields: [String : String], verwaltung: Verwaltung) {
 		self.id = id
 		self.isSynced = isSynced
 		self.lastUpdate = lastUpdate
