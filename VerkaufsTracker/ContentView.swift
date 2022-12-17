@@ -33,9 +33,9 @@ struct ContentView: View {
 		if let image2 = image {
 			Image(uiImage: image2)
 				.resizable()
-//				.scaleEffect(2)
-//				.foregroundColor(.blue)
-//				.background(.red)
+			//				.scaleEffect(2)
+			//				.foregroundColor(.blue)
+			//				.background(.red)
 				.scaledToFit()
 		}
 
@@ -57,46 +57,41 @@ struct ContentView: View {
 			CodeScannerView(codeTypes: [.qr], simulatedData: "Paul Hudson\npaul@hackingwithswift.com", completion: handleScan)
 		}
 		.padding()
-
-
-
-
-
 #endif
-    }
+	}
 #if canImport(CodeScanner)
 	func handleScan(result: Result<ScanResult, ScanError>) {
-	   isShowingScanner = false
+		isShowingScanner = false
 
 		print(result)
-	   // more code to come
+		// more code to come
 	}
-	#endif
+#endif
 }
 
 struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
+	static var previews: some View {
+		ContentView()
+	}
 }
 
 struct QrCodeImage {
-    let context = CIContext()
+	let context = CIContext()
 
-    func generateQRCode(from text: String) -> UIImage {
-        var qrImage = UIImage(systemName: "xmark.circle") ?? UIImage()
-        let data = Data(text.utf8)
-        let filter = CIFilter(name: "CIQRCodeGenerator")!
-        filter.setValue(data, forKey: "inputMessage")
+	func generateQRCode(from text: String) -> UIImage {
+		var qrImage = UIImage(systemName: "xmark.circle") ?? UIImage()
+		let data = Data(text.utf8)
+		let filter = CIFilter(name: "CIQRCodeGenerator")!
+		filter.setValue(data, forKey: "inputMessage")
 
-        let transform = CGAffineTransform(scaleX: 20, y: 20)
-        if let outputImage = filter.outputImage?.transformed(by: transform) {
-            if let image = context.createCGImage(
-                outputImage,
-                from: outputImage.extent) {
-                qrImage = UIImage(cgImage: image)
-            }
-        }
-        return qrImage
-    }
+		let transform = CGAffineTransform(scaleX: 20, y: 20)
+		if let outputImage = filter.outputImage?.transformed(by: transform) {
+			if let image = context.createCGImage(
+				outputImage,
+				from: outputImage.extent) {
+				qrImage = UIImage(cgImage: image)
+			}
+		}
+		return qrImage
+	}
 }
