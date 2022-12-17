@@ -54,7 +54,7 @@ struct ContentView: View {
 			Text("Scan")
 		}
 		.sheet(isPresented: $isShowingScanner) {
-			CodeScannerView(codeTypes: [.qr], simulatedData: "Paul Hudson\npaul@hackingwithswift.com", completion: handleScan)
+			CodeScannerView(codeTypes: [.qr], completion: handleScan)
 		}
 		.padding()
 #endif
