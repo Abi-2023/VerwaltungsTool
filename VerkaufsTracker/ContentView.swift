@@ -64,13 +64,14 @@ struct ContentView: View {
 
 #endif
     }
-
+#if canImport(CodeScanner)
 	func handleScan(result: Result<ScanResult, ScanError>) {
 	   isShowingScanner = false
 
 		print(result)
 	   // more code to come
 	}
+	#endif
 }
 
 struct ContentView_Previews: PreviewProvider {
