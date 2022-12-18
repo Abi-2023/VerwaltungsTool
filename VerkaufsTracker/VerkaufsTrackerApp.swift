@@ -7,11 +7,41 @@
 
 import SwiftUI
 
+enum AppState {
+	case personenView, debug
+}
+
 @main
 struct VerkaufsTrackerApp: App {
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-        }
-    }
+	@State var verwaltung = Verwaltung()
+	@State var state: AppState = .personenView
+
+	var body: some Scene {
+		WindowGroup {
+			VStack{
+				switch state {
+				case .personenView:
+					PersonenView()
+				case .debug:
+					ContentView()
+				}
+				Spacer()
+				HStack {
+					Spacer()
+					Button(action: {
+						state = .personenView
+					}) {
+						Text("P")
+					}.buttonStyle(.bordered)
+					Spacer()
+					Button(action: {
+						state = .debug
+					}) {
+						Text("D")
+					}.buttonStyle(.bordered)
+					Spacer()
+				}
+			}
+		}
+	}
 }

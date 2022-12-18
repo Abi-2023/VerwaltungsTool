@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8F128AF2294D0BCA002D3801 /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; platformFilter = ios; productRef = 8F128AF1294D0BCA002D3801 /* CodeScanner */; };
 		8F128AF5294D1BF5002D3801 /* TicketCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F128AF4294D1BF5002D3801 /* TicketCodes.swift */; };
+		8F2B6710294F998100C8FA2C /* PersonenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F2B670F294F998100C8FA2C /* PersonenView.swift */; };
 		8F7FB049294E4297005F4551 /* FormularMail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7FB048294E4297005F4551 /* FormularMail.swift */; };
 		8FA603942948CE99001CC2D2 /* VerkaufsTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA603932948CE99001CC2D2 /* VerkaufsTrackerApp.swift */; };
 		8FA603962948CE99001CC2D2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA603952948CE99001CC2D2 /* ContentView.swift */; };
@@ -26,6 +27,7 @@
 /* Begin PBXFileReference section */
 		8F128AF3294D0C74002D3801 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8F128AF4294D1BF5002D3801 /* TicketCodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketCodes.swift; sourceTree = "<group>"; };
+		8F2B670F294F998100C8FA2C /* PersonenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonenView.swift; sourceTree = "<group>"; };
 		8F7FB048294E4297005F4551 /* FormularMail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormularMail.swift; sourceTree = "<group>"; };
 		8FA603902948CE99001CC2D2 /* VerkaufsTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VerkaufsTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FA603932948CE99001CC2D2 /* VerkaufsTrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerkaufsTrackerApp.swift; sourceTree = "<group>"; };
@@ -54,6 +56,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8F2B670E294F997200C8FA2C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8F2B670F294F998100C8FA2C /* PersonenView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		8F7FB047294E4262005F4551 /* Email */ = {
 			isa = PBXGroup;
 			children = (
@@ -82,6 +92,7 @@
 		8FA603922948CE99001CC2D2 /* VerkaufsTracker */ = {
 			isa = PBXGroup;
 			children = (
+				8F2B670E294F997200C8FA2C /* Views */,
 				8F7FB047294E4262005F4551 /* Email */,
 				8F128AF3294D0C74002D3801 /* Info.plist */,
 				8FA603A22948CEDC001CC2D2 /* Structs */,
@@ -193,6 +204,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F2B6710294F998100C8FA2C /* PersonenView.swift in Sources */,
 				8FA603A62948D02E001CC2D2 /* Item.swift in Sources */,
 				8FD6455F294D014700D746F8 /* secrets.swift in Sources */,
 				8F7FB049294E4297005F4551 /* FormularMail.swift in Sources */,
