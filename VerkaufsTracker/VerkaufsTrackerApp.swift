@@ -21,9 +21,9 @@ struct VerkaufsTrackerApp: App {
 			VStack{
 				switch state {
 				case .personenView:
-					PersonenView()
+					PersonenView(verwaltung: verwaltung)
 				case .debug:
-					ContentView()
+					ContentView(verwaltung: verwaltung)
 				}
 				Spacer()
 				HStack {
@@ -41,6 +41,9 @@ struct VerkaufsTrackerApp: App {
 					}.buttonStyle(.bordered)
 					Spacer()
 				}
+			}.onAppear {
+				let person = Person(id: UUID(), isSynced: false, lastUpdate: .now, lastServerEdit: .now, vorname: "Benedict", nachname: "***REMOVED***", email: "***REMOVED***", q2: true, notes: "", bestellungen: [:], extraFields: [:], verwaltung: verwaltung)
+				verwaltung.personen.append(person)
 			}
 		}
 	}

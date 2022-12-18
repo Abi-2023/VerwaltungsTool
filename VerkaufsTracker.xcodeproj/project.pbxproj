@@ -10,6 +10,7 @@
 		8F128AF2294D0BCA002D3801 /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; platformFilter = ios; productRef = 8F128AF1294D0BCA002D3801 /* CodeScanner */; };
 		8F128AF5294D1BF5002D3801 /* TicketCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F128AF4294D1BF5002D3801 /* TicketCodes.swift */; };
 		8F2B6710294F998100C8FA2C /* PersonenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F2B670F294F998100C8FA2C /* PersonenView.swift */; };
+		8F2B6712294F9C7F00C8FA2C /* PersonDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F2B6711294F9C7F00C8FA2C /* PersonDetailView.swift */; };
 		8F7FB049294E4297005F4551 /* FormularMail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7FB048294E4297005F4551 /* FormularMail.swift */; };
 		8FA603942948CE99001CC2D2 /* VerkaufsTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA603932948CE99001CC2D2 /* VerkaufsTrackerApp.swift */; };
 		8FA603962948CE99001CC2D2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA603952948CE99001CC2D2 /* ContentView.swift */; };
@@ -28,6 +29,7 @@
 		8F128AF3294D0C74002D3801 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8F128AF4294D1BF5002D3801 /* TicketCodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketCodes.swift; sourceTree = "<group>"; };
 		8F2B670F294F998100C8FA2C /* PersonenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonenView.swift; sourceTree = "<group>"; };
+		8F2B6711294F9C7F00C8FA2C /* PersonDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonDetailView.swift; sourceTree = "<group>"; };
 		8F7FB048294E4297005F4551 /* FormularMail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormularMail.swift; sourceTree = "<group>"; };
 		8FA603902948CE99001CC2D2 /* VerkaufsTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VerkaufsTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FA603932948CE99001CC2D2 /* VerkaufsTrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerkaufsTrackerApp.swift; sourceTree = "<group>"; };
@@ -60,6 +62,7 @@
 			isa = PBXGroup;
 			children = (
 				8F2B670F294F998100C8FA2C /* PersonenView.swift */,
+				8F2B6711294F9C7F00C8FA2C /* PersonDetailView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -214,6 +217,7 @@
 				8FA603A82948D31B001CC2D2 /* Zahlungen.swift in Sources */,
 				8FA603962948CE99001CC2D2 /* ContentView.swift in Sources */,
 				8FA603AA2948D3A7001CC2D2 /* Sync.swift in Sources */,
+				8F2B6712294F9C7F00C8FA2C /* PersonDetailView.swift in Sources */,
 				8FA603942948CE99001CC2D2 /* VerkaufsTrackerApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

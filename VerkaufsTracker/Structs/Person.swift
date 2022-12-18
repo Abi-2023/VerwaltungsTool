@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Person: Sync {
+class Person: Sync, Identifiable {
 	var id: UUID
 	var isSynced: Bool
 	var lastUpdate: Date

@@ -13,6 +13,7 @@ import CodeScanner
 struct ContentView: View {
 	@State private var isShowingScanner = false
 	@State var image: UIImage?
+	@State var verwaltung: Verwaltung
 
 
 	var body: some View {
@@ -40,18 +41,6 @@ struct ContentView: View {
 				.scaledToFit()
 		}
 
-
-		Button(action: {
-			let mailer = EmailManager()
-			let v = Verwaltung()
-			let person = Person(id: UUID(), isSynced: false, lastUpdate: .now, lastServerEdit: .now, vorname: "Benedict", nachname: "***REMOVED***", email: "***REMOVED***", q2: true, notes: "", bestellungen: [:], extraFields: [:], verwaltung: v)
-			v.personen.append(person)
-			mailer.sendMail(mail: mailer.generateFormEmail(person: person))
-			
-		}) {
-			Text("Send Email")
-		}
-
 #if canImport(CodeScanner)
 		Button(action: {
 			isShowingScanner = true
@@ -72,12 +61,6 @@ struct ContentView: View {
 		// more code to come
 	}
 #endif
-}
-
-struct ContentView_Previews: PreviewProvider {
-	static var previews: some View {
-		ContentView()
-	}
 }
 
 struct QrCodeImage {

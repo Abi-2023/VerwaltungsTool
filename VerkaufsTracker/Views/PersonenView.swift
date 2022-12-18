@@ -8,13 +8,11 @@
 import SwiftUI
 
 struct PersonenView: View {
+	@State var verwaltung: Verwaltung
     var body: some View {
-        Text("Hello, World!")
-    }
-}
-
-struct PersonenView_Previews: PreviewProvider {
-    static var previews: some View {
-        PersonenView()
+		Text("Suchen") // TODO: searchbar
+		List(verwaltung.personen) { person in
+			Text(person.vorname)
+		}
     }
 }
