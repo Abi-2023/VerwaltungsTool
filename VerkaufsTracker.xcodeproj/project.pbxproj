@@ -11,6 +11,7 @@
 		8F128AF5294D1BF5002D3801 /* TicketCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F128AF4294D1BF5002D3801 /* TicketCodes.swift */; };
 		8F2B6710294F998100C8FA2C /* PersonenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F2B670F294F998100C8FA2C /* PersonenView.swift */; };
 		8F2B6712294F9C7F00C8FA2C /* PersonDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F2B6711294F9C7F00C8FA2C /* PersonDetailView.swift */; };
+		8F68425529550B1600557BB6 /* CloudAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F68425429550B1600557BB6 /* CloudAccess.swift */; };
 		8F7FB049294E4297005F4551 /* FormularMail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7FB048294E4297005F4551 /* FormularMail.swift */; };
 		8FA603942948CE99001CC2D2 /* VerkaufsTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA603932948CE99001CC2D2 /* VerkaufsTrackerApp.swift */; };
 		8FA603962948CE99001CC2D2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA603952948CE99001CC2D2 /* ContentView.swift */; };
@@ -30,6 +31,7 @@
 		8F128AF4294D1BF5002D3801 /* TicketCodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketCodes.swift; sourceTree = "<group>"; };
 		8F2B670F294F998100C8FA2C /* PersonenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonenView.swift; sourceTree = "<group>"; };
 		8F2B6711294F9C7F00C8FA2C /* PersonDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonDetailView.swift; sourceTree = "<group>"; };
+		8F68425429550B1600557BB6 /* CloudAccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudAccess.swift; sourceTree = "<group>"; };
 		8F7FB048294E4297005F4551 /* FormularMail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormularMail.swift; sourceTree = "<group>"; };
 		8FA603902948CE99001CC2D2 /* VerkaufsTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VerkaufsTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FA603932948CE99001CC2D2 /* VerkaufsTrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerkaufsTrackerApp.swift; sourceTree = "<group>"; };
@@ -67,6 +69,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		8F68425329550B0B00557BB6 /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				8F68425429550B1600557BB6 /* CloudAccess.swift */,
+			);
+			path = Firebase;
+			sourceTree = "<group>";
+		};
 		8F7FB047294E4262005F4551 /* Email */ = {
 			isa = PBXGroup;
 			children = (
@@ -95,6 +105,7 @@
 		8FA603922948CE99001CC2D2 /* VerkaufsTracker */ = {
 			isa = PBXGroup;
 			children = (
+				8F68425329550B0B00557BB6 /* Firebase */,
 				8F2B670E294F997200C8FA2C /* Views */,
 				8F7FB047294E4262005F4551 /* Email */,
 				8F128AF3294D0C74002D3801 /* Info.plist */,
@@ -211,6 +222,7 @@
 				8FA603A62948D02E001CC2D2 /* Item.swift in Sources */,
 				8FD6455F294D014700D746F8 /* secrets.swift in Sources */,
 				8F7FB049294E4297005F4551 /* FormularMail.swift in Sources */,
+				8F68425529550B1600557BB6 /* CloudAccess.swift in Sources */,
 				8FD6455C294CFD7C00D746F8 /* EmailManager.swift in Sources */,
 				8FA603A42948CFA5001CC2D2 /* Person.swift in Sources */,
 				8F128AF5294D1BF5002D3801 /* TicketCodes.swift in Sources */,
@@ -348,6 +360,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = VerkaufsTracker/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Abi Tracker";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Benötigt Zugriff, um QR-Codes zu scannen.";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -390,6 +403,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = VerkaufsTracker/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Abi Tracker";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Benötigt Zugriff, um QR-Codes zu scannen.";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;

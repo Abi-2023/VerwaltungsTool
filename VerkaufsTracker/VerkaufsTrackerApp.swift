@@ -43,7 +43,9 @@ struct VerkaufsTrackerApp: App {
 				}
 			}.onAppear {
 				let person = Person(id: UUID(), isSynced: false, lastUpdate: .now, lastServerEdit: .now, vorname: "Benedict", nachname: "***REMOVED***", email: "***REMOVED***", q2: true, notes: "", bestellungen: [:], extraFields: [:], verwaltung: verwaltung)
+				let person2 = Person(id: UUID(), isSynced: false, lastUpdate: .now, lastServerEdit: .now, vorname: "***REMOVED***", nachname: "***REMOVED***", email: "***REMOVED***", q2: true, notes: "", bestellungen: [:], extraFields: [:], verwaltung: verwaltung)
 				verwaltung.personen.append(person)
+				verwaltung.personen.append(person2)
 			}
 		}
 	}
