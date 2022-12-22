@@ -14,7 +14,7 @@ extension Verwaltung {
 	}
 
 	func uploadToCloud() {
-		
+
 	}
 
 }
