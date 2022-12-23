@@ -42,8 +42,8 @@ struct VerkaufsTrackerApp: App {
 					Spacer()
 				}
 			}.onAppear {
-				let person = Person(id: UUID(), vorname: "Benedict", nachname: "***REMOVED***", email: "***REMOVED***", q2: true, notes: "", bestellungen: [:], extraFields: [:], verwaltung: verwaltung)
-				let person2 = Person(id: UUID(), vorname: "***REMOVED***", nachname: "***REMOVED***", email: "***REMOVED***", q2: true, notes: "", bestellungen: [:], extraFields: [:], verwaltung: verwaltung)
+				let person = Q2er(vorname: "Benedict", nachname: "***REMOVED***", email: "***REMOVED***", notes: "", bestellungen: [:], extraFields: [:], verwaltung: verwaltung)
+				let person2 = Q2er(vorname: "***REMOVED***", nachname: "***REMOVED***", email: "***REMOVED***", notes: "", bestellungen: [:], extraFields: [:], verwaltung: verwaltung)
 				verwaltung.personen.append(person)
 				verwaltung.personen.append(person2)
 			}

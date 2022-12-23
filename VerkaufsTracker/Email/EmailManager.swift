@@ -16,7 +16,7 @@ class EmailManager {
 		password: SECRETS.EMAIL_Password
 	)
 
-	let senderMail = Mail.User(name: SECRETS.EMAIL_Name, email: SECRETS.EMAIL_Address)
+	static let senderMail = Mail.User(name: SECRETS.EMAIL_Name, email: SECRETS.EMAIL_Address)
 
 	init() {
 
@@ -30,7 +30,7 @@ class EmailManager {
 		let recipientMail = Mail.User(name: recipientName, email: recipientAdress)
 
 		let mail = Mail(
-			from: senderMail,
+			from: EmailManager.senderMail,
 			to: [recipientMail],
 			subject: subject,
 			text: text
@@ -48,10 +48,4 @@ class EmailManager {
 			}
 		}
 	}
-
-	func mailUserFromPerson(person p: Person) -> Mail.User{
-		let name = "\(p.vorname) \(p.nachname)"
-		return Mail.User(name: name, email: p.email!)
-	}
-
 }

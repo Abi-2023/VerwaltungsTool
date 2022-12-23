@@ -19,10 +19,10 @@ struct PersonDetailView: View {
 			Text("close")
 		}
 		if let p = person {
-			Text(p.vorname)
-			Text(p.nachname)
+//			Text(p.vorname)
+//			Text(p.nachname)
 			Text(p.email ?? "keine Email hinterlegt")
-			Text(p.q2 ? "in Q2" : "nicht in Q2")
+//			Text(p.q2 ? "in Q2" : "nicht in Q2")
 
 			Text(p.notes)
 
@@ -37,7 +37,7 @@ struct PersonDetailView: View {
 			) {
 				Button("Ja, senden!") {
 					let mm = EmailManager()
-					mm.sendMail(mail: mm.generateFormEmail(person: p))
+					mm.sendMail(mail: p.generateFormEmail()!)
 				}
 			}
 			// TODO: einfügen
