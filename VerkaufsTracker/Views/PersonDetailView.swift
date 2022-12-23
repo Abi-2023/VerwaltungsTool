@@ -19,10 +19,13 @@ struct PersonDetailView: View {
 			Text("close")
 		}
 		if let p = person {
-//			Text(p.vorname)
-//			Text(p.nachname)
+			if type(of: p) == Q2er.self {
+				Text((p as! Q2er).vorname)
+				Text((p as! Q2er).nachname)
+			} else {
+				Text(p.name)
+			}
 			Text(p.email ?? "keine Email hinterlegt")
-//			Text(p.q2 ? "in Q2" : "nicht in Q2")
 
 			Text(p.notes)
 

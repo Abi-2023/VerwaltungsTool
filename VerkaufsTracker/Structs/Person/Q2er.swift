@@ -12,11 +12,12 @@ class Q2er: Person {
 
 	var vorname: String
 	var nachname: String
+	override var name: String { get {"\(vorname) \(nachname)"} set {}}
 
 	init(vorname: String, nachname: String, email: String?, notes: String, bestellungen: [UUID : Int], extraFields: [String : String], verwaltung: Verwaltung) {
 		self.vorname = vorname
 		self.nachname = nachname
-		super.init(email: email, notes: notes, bestellungen: bestellungen, extraFields: extraFields, verwaltung: verwaltung)
+		super.init(name: "", email: email, notes: notes, bestellungen: bestellungen, extraFields: extraFields, verwaltung: verwaltung)
 	}
 
 	private enum CodingKeys: String , CodingKey {case vorname, nachname}
@@ -81,7 +82,7 @@ class Q2er: Person {
 
 
 		return Mail(from: EmailManager.senderMail,
-					to: [Mail.User(name: "\(vorname) \(nachname)", email: email!)],
+					to: [Mail.User(name: name, email: email!)],
 					subject: subject,
 					text: content)
 	}

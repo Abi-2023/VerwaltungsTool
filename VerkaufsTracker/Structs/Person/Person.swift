@@ -38,9 +38,11 @@ class Person: Identifiable, Codable, Hashable {
 	var bestellungen: [UUID: Int]
 	var extraFields: [String: String]
 	var formID: String
+	var name: String
 
-	init(email: String?, notes: String, bestellungen: [UUID : Int], extraFields: [String : String], verwaltung: Verwaltung) {
+	init(name: String, email: String?, notes: String, bestellungen: [UUID : Int], extraFields: [String : String], verwaltung: Verwaltung) {
 		self.id = UUID()
+		self.name = name
 		self.email = email
 		self.notes = notes
 		self.bestellungen = bestellungen
