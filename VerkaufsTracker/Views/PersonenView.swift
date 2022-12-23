@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PersonenView: View {
-	@State var verwaltung: Verwaltung
+	@ObservedObject var verwaltung: Verwaltung
 	@State var selectedPerson: Person?
 
 	enum GruppenTypen: String {

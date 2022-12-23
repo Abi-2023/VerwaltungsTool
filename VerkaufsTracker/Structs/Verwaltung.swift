@@ -7,9 +7,9 @@
 
 import Foundation
 
-class Verwaltung {
+class Verwaltung: ObservableObject {
 
-	var personen: [Person] = []
+	@Published var personen: [Person] = []
 
 	func generateFormId() -> String{
 		//regex: /[ABCDEF][175963][SEFWQX][MNDQS5][W3YJ52]/
