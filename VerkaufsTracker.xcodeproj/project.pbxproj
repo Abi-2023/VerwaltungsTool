@@ -27,6 +27,7 @@
 		8FD69E4329565A4D001F4787 /* Q2er.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD69E4229565A4D001F4787 /* Q2er.swift */; };
 		8FD69E4529565A55001F4787 /* Lehrer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD69E4429565A55001F4787 /* Lehrer.swift */; };
 		8FE0073D295880E700E1B355 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE0073C295880E700E1B355 /* Extensions.swift */; };
+		8FE0073F2958857400E1B355 /* Ticket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE0073E2958857400E1B355 /* Ticket.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +52,7 @@
 		8FD69E4229565A4D001F4787 /* Q2er.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Q2er.swift; sourceTree = "<group>"; };
 		8FD69E4429565A55001F4787 /* Lehrer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lehrer.swift; sourceTree = "<group>"; };
 		8FE0073C295880E700E1B355 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		8FE0073E2958857400E1B355 /* Ticket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ticket.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +145,7 @@
 				8FA603A52948D02E001CC2D2 /* Item.swift */,
 				8FA603A72948D31B001CC2D2 /* Zahlungen.swift */,
 				8F68425629550BC300557BB6 /* Verwaltung.swift */,
+				8FE0073E2958857400E1B355 /* Ticket.swift */,
 			);
 			path = Structs;
 			sourceTree = "<group>";
@@ -248,6 +251,7 @@
 				8FA603962948CE99001CC2D2 /* ContentView.swift in Sources */,
 				8FE0073D295880E700E1B355 /* Extensions.swift in Sources */,
 				8F2B6712294F9C7F00C8FA2C /* PersonDetailView.swift in Sources */,
+				8FE0073F2958857400E1B355 /* Ticket.swift in Sources */,
 				8FD69E4329565A4D001F4787 /* Q2er.swift in Sources */,
 				8FA603942948CE99001CC2D2 /* VerkaufsTrackerApp.swift in Sources */,
 				8F68425729550BC300557BB6 /* Verwaltung.swift in Sources */,
