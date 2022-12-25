@@ -39,14 +39,19 @@ struct PersonenView: View {
 
 	var body: some View {
 		HStack {
+			Picker("a", selection: $gruppenTyp) {
+				Text("Alle").tag(GruppenTypen._Alle)
+				Text("Q2").tag(GruppenTypen._Q2er)
+				Text("Lehrer").tag(GruppenTypen._Lehrer)
+			}
 			TextField("filtern", text: $searchQuery)
-				.padding()
+				.textFieldStyle(.roundedBorder)
 			Button(action: {
 				searchQuery = ""
 			}) {
 				Image(systemName: "xmark")
 			}
-		}
+		}.padding()
 
 		Button(action: {
 			selectMode.toggle()
@@ -54,19 +59,12 @@ struct PersonenView: View {
 			Text(selectMode ? "clear selection" : "auswählen")
 		}
 
-		HStack {
-			Picker("a", selection: $gruppenTyp) {
-				Text("Alle").tag(GruppenTypen._Alle)
-				Text("Q2").tag(GruppenTypen._Q2er)
-				Text("Lehrer").tag(GruppenTypen._Lehrer)
-			}
-
-		}
 		List {
-			ForEach(verwaltung.personen
+			let displayedPersonen = verwaltung.personen
 				.filter({type(of: $0) == gruppenTyp.type || gruppenTyp == ._Alle})
-				.filter({searchQuery == "" || $0.searchableText.contains(searchQuery.uppercased())}),
-					id: \.self) { person in
+				.filter({searchQuery == "" || $0.searchableText.contains(searchQuery.uppercased())})
+
+			ForEach(displayedPersonen, id: \.self) { person in
 				HStack{
 					if selectMode {
 						Button(action: {
@@ -81,12 +79,16 @@ struct PersonenView: View {
 						Text(person.name)
 					}
 					.buttonStyle(.borderless)
-					
+
 				}
 			}
 			.sheet(item: $selectedPerson) { _ in
 				PersonDetailView(person: $selectedPerson)
 					.interactiveDismissDisabled(true)
+			}
+
+			if(displayedPersonen.isEmpty) {
+				Text("keine Person gefunden")
 			}
 		}
 	}
