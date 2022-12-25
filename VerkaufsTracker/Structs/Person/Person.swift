@@ -40,6 +40,20 @@ class Person: Identifiable, Codable, Hashable {
 	var formID: String
 	var name: String
 
+	var gezahlterBetrag: Int {
+		return verwaltung.transaktionen.filter({$0.personId == self.id}).map({$0.betrag}).reduce(0, +)
+	}
+
+	var zuzahlenderBetrag: Int {
+		return 0 //TODO: implementieren
+	}
+
+	var offenerBetrag: Int {
+		return zuzahlenderBetrag - gezahlterBetrag
+	}
+
+	unowned let verwaltung: Verwaltung
+
 	var searchableText: String {
 		var str = email ?? ""
 		str += notes
@@ -57,6 +71,7 @@ class Person: Identifiable, Codable, Hashable {
 		self.bestellungen = bestellungen
 		self.extraFields = extraFields
 		self.formID = verwaltung.generateFormId()
+		self.verwaltung = verwaltung
 	}
 
 	func generateFormEmail() -> Mail? {

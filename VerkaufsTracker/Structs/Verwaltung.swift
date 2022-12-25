@@ -7,9 +7,22 @@
 
 import Foundation
 
-class Verwaltung: ObservableObject {
+class Verwaltung: ObservableObject, Codable {
+	required init(from decoder: Decoder) throws {
+
+	}
+
+	func encode(to encoder: Encoder) throws {
+		
+	}
+
 
 	@Published var personen: [Person] = []
+	@Published var transaktionen: [Transaktion] = []
+
+	init() {
+		
+	}
 
 	func generateFormId() -> String{
 		//regex: /[ABCDEF][175963][SEFWQX][MNDQS5][W3YJ52]/
