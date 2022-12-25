@@ -30,6 +30,12 @@ struct PersonenView: View {
 
 	@State var gruppenTyp: GruppenTypen = ._Alle
 	@State var searchQuery: String = ""
+	@State var selectMode = false {
+		didSet {
+			selectedPersonen = []
+		}
+	}
+	@State var selectedPersonen: [Person] = []
 
 	var body: some View {
 		HStack {
@@ -41,6 +47,13 @@ struct PersonenView: View {
 				Image(systemName: "xmark")
 			}
 		}
+
+		Button(action: {
+			selectMode.toggle()
+		}) {
+			Text(selectMode ? "clear selection" : "auswählen")
+		}
+
 		HStack {
 			Picker("a", selection: $gruppenTyp) {
 				Text("Alle").tag(GruppenTypen._Alle)
@@ -54,10 +67,21 @@ struct PersonenView: View {
 				.filter({type(of: $0) == gruppenTyp.type || gruppenTyp == ._Alle})
 				.filter({searchQuery == "" || $0.searchableText.contains(searchQuery.uppercased())}),
 					id: \.self) { person in
-				Button(action: {
-					selectedPerson = person
-				}) {
-					Text(person.name)
+				HStack{
+					if selectMode {
+						Button(action: {
+							selectedPersonen.toggle(e: person)
+						}) {
+							Image(systemName: selectedPersonen.contains(person) ? "x.circle" : "circle")
+						}
+					}
+					Button(action: {
+						selectedPerson = person
+					}) {
+						Text(person.name)
+					}
+					.buttonStyle(.borderless)
+					
 				}
 			}
 			.sheet(item: $selectedPerson) { _ in
