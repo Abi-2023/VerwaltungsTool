@@ -30,12 +30,8 @@ struct PersonenView: View {
 
 	@State var gruppenTyp: GruppenTypen = ._Alle
 	@State var searchQuery: String = ""
-	@State var selectMode = false {
-		didSet {
-			selectedPersonen = []
-		}
-	}
-	@State var selectedPersonen: [Person] = []
+	@Binding var selectMode: Bool
+	@Binding var selectedPersonen: [Person]
 
 	var body: some View {
 		HStack {

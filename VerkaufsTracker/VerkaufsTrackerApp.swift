@@ -15,16 +15,28 @@ enum AppState {
 struct VerkaufsTrackerApp: App {
 	@State var verwaltung = Verwaltung()
 	@State var state: AppState = .personenView
+	@State var selectedPersonen: [Person] = []
+	@State var selectMode = false {
+		didSet {
+			selectedPersonen = []
+		}
+	}
 
 	var body: some Scene {
 		WindowGroup {
-			GeometryReader { reader in
+			GeometryReader { reader in
 				VStack{
 					switch state {
 					case .personenView:
-						PersonenView(verwaltung: verwaltung)
+						PersonenView(verwaltung: verwaltung, selectMode: $selectMode, selectedPersonen: $selectedPersonen)
 					case .debug:
 						ContentView(verwaltung: verwaltung)
+					case .aktionen:
+						if selectedPersonen.isEmpty {
+							AktionenView(verwaltung: verwaltung, selectedPersonen: $selectedPersonen)
+						} else {
+							PersonenActionView(verwaltung: verwaltung, selectedPersonen: $selectedPersonen)
+						}
 					default:
 						ContentView(verwaltung: verwaltung)
 					}
