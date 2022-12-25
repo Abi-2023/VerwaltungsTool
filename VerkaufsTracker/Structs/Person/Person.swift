@@ -35,7 +35,7 @@ class Person: Identifiable, Codable, Hashable {
 
 	var email: String?
 	var notes: String
-	var bestellungen: [UUID: Int]
+	var bestellungen: [Item: Int]
 	var extraFields: [String: String]
 	var formID: String
 	var name: String
@@ -45,7 +45,11 @@ class Person: Identifiable, Codable, Hashable {
 	}
 
 	var zuzahlenderBetrag: Int {
-		return 0 //TODO: implementieren
+		var tmpBetrag = 0
+		for item in bestellungen {
+			tmpBetrag += item.key.preis * item.value
+		}
+		return tmpBetrag
 	}
 
 	var offenerBetrag: Int {
@@ -63,13 +67,13 @@ class Person: Identifiable, Codable, Hashable {
 		return str
 	}
 
-	init(name: String, email: String?, notes: String, bestellungen: [UUID : Int], extraFields: [String : String], verwaltung: Verwaltung) {
+	init(name: String, email: String?, verwaltung: Verwaltung) {
 		self.id = UUID()
 		self.name = name
 		self.email = email
-		self.notes = notes
-		self.bestellungen = bestellungen
-		self.extraFields = extraFields
+		self.notes = ""
+		self.bestellungen = [:]
+		self.extraFields = [:]
 		self.formID = verwaltung.generateFormId()
 		self.verwaltung = verwaltung
 	}

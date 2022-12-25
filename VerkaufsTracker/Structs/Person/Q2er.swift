@@ -17,7 +17,7 @@ class Q2er: Person {
 	init(vorname: String, nachname: String, email: String?, notes: String, bestellungen: [UUID : Int], extraFields: [String : String], verwaltung: Verwaltung) {
 		self.vorname = vorname
 		self.nachname = nachname
-		super.init(name: "", email: email, notes: notes, bestellungen: bestellungen, extraFields: extraFields, verwaltung: verwaltung)
+		super.init(name: "", email: email, verwaltung: verwaltung)
 	}
 
 	private enum CodingKeys: String , CodingKey {case vorname, nachname}
