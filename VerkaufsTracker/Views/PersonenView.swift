@@ -29,9 +29,18 @@ struct PersonenView: View {
 	}
 
 	@State var gruppenTyp: GruppenTypen = ._Alle
+	@State var searchQuery: String = ""
 
 	var body: some View {
-		Text("Suchen") // TODO: searchbar
+		HStack {
+			TextField("filtern", text: $searchQuery)
+				.padding()
+			Button(action: {
+				searchQuery = ""
+			}) {
+				Image(systemName: "xmark")
+			}
+		}
 		HStack {
 			Picker("a", selection: $gruppenTyp) {
 				Text("Alle").tag(GruppenTypen._Alle)
@@ -41,7 +50,10 @@ struct PersonenView: View {
 
 		}
 		List {
-			ForEach(verwaltung.personen.filter({type(of: $0) == gruppenTyp.type || gruppenTyp == ._Alle}), id: \.self) { person in
+			ForEach(verwaltung.personen
+				.filter({type(of: $0) == gruppenTyp.type || gruppenTyp == ._Alle})
+				.filter({searchQuery == "" || $0.searchableText.contains(searchQuery.uppercased())}),
+					id: \.self) { person in
 				Button(action: {
 					selectedPerson = person
 				}) {

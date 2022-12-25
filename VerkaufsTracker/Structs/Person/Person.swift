@@ -40,6 +40,15 @@ class Person: Identifiable, Codable, Hashable {
 	var formID: String
 	var name: String
 
+	var searchableText: String {
+		var str = email ?? ""
+		str += notes
+		str += formID
+		str += name
+		str = str.uppercased()
+		return str
+	}
+
 	init(name: String, email: String?, notes: String, bestellungen: [UUID : Int], extraFields: [String : String], verwaltung: Verwaltung) {
 		self.id = UUID()
 		self.name = name
