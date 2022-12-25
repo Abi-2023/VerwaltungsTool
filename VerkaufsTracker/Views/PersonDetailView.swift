@@ -9,7 +9,9 @@ import SwiftUI
 
 struct PersonDetailView: View {
 	@Binding var person: Person?
-	@State private var formEmailConfirmationShown = false
+//	@State private var formEmailConfirmationShown = false
+	@Binding var selectedPersonen: [Person]
+	@Binding var state: AppState
 
 
 	var body: some View {
@@ -30,19 +32,21 @@ struct PersonDetailView: View {
 			Text(p.notes)
 
 			Button(role: .destructive, action: {
-				formEmailConfirmationShown = true
+//				formEmailConfirmationShown = true
+				selectedPersonen = [p]
+				state = .aktionen
 			}) {
-				Text("Form Email senden")
+				Text("Aktionen")
 			}
-			.confirmationDialog(
-				"Email versenden?",
-				 isPresented: $formEmailConfirmationShown
-			) {
-				Button("Ja, senden!") {
-					let mm = EmailManager()
-					mm.sendMail(mail: p.generateFormEmail()!)
-				}
-			}
+//			.confirmationDialog(
+//				"Email versenden?",
+//				 isPresented: $formEmailConfirmationShown
+//			) {
+//				Button("Ja, senden!") {
+//					let mm = EmailManager()
+//					mm.sendMail(mail: p.generateFormEmail()!)
+//				}
+//			}
 
 			Text("zuzahlender Betrag: \(p.zuzahlenderBetrag)")
 			Text("gezahlter Betrag: \(p.gezahlterBetrag)")

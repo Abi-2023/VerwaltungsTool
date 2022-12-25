@@ -28,7 +28,7 @@ struct VerkaufsTrackerApp: App {
 				VStack{
 					switch state {
 					case .personenView:
-						PersonenView(verwaltung: verwaltung, selectMode: $selectMode, selectedPersonen: $selectedPersonen)
+						PersonenView(verwaltung: verwaltung, state: $state, selectMode: $selectMode, selectedPersonen: $selectedPersonen)
 					case .debug:
 						ContentView(verwaltung: verwaltung)
 					case .aktionen:

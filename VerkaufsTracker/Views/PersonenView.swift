@@ -9,6 +9,7 @@ import SwiftUI
 
 struct PersonenView: View {
 	@ObservedObject var verwaltung: Verwaltung
+	@Binding var state: AppState
 	@State var selectedPerson: Person?
 
 	enum GruppenTypen: String {
@@ -51,6 +52,7 @@ struct PersonenView: View {
 
 		Button(action: {
 			selectMode.toggle()
+			selectedPersonen = []
 		}) {
 			Text(selectMode ? "clear selection" : "auswählen")
 		}
@@ -89,7 +91,7 @@ struct PersonenView: View {
 				}
 			}
 			.sheet(item: $selectedPerson) { _ in
-				PersonDetailView(person: $selectedPerson)
+				PersonDetailView(person: $selectedPerson, selectedPersonen: $selectedPersonen, state: $state)
 					.interactiveDismissDisabled(true)
 			}
 
