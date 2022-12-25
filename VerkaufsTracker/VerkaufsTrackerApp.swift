@@ -43,7 +43,9 @@ struct VerkaufsTrackerApp: App {
 				}
 			}.onAppear {
 				let person = Q2er(vorname: "Benedict", nachname: "***REMOVED***", email: "***REMOVED***", notes: "", bestellungen: [:], extraFields: [:], verwaltung: verwaltung)
+				person.wuenschBestellungen[.ball_ticket] = 400;
 				let person2 = Q2er(vorname: "***REMOVED***", nachname: "***REMOVED***", email: "***REMOVED***", notes: "", bestellungen: [:], extraFields: [:], verwaltung: verwaltung)
+				person2.wuenschBestellungen[.ball_ticket] = 400;
 				verwaltung.personen.append(person)
 				verwaltung.personen.append(person2)
 			}

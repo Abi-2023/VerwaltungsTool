@@ -68,6 +68,12 @@ struct ContentView: View {
 			Text("send mail with ticket")
 		}
 
+		Button(action: {
+			verwaltung.verteileItems()
+		}) {
+			Text("Verteile Items")
+		}
+
 #if canImport(CodeScanner)
 		Button(action: {
 			isShowingScanner = true

@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Item: Codable{
+enum Item: Codable, CaseIterable{
 	case ball_ticket, after_show_ticket, pulli, buch
 
 	// in cents
@@ -26,6 +26,15 @@ enum Item: Codable{
 			Item.after_show_ticket: "After Show Ticker",
 			Item.pulli: "Pulli",
 			Item.buch: "Buch"
+		][self]!
+	}
+
+	var verfuegbar: Int {
+		return [
+			Item.ball_ticket: 600,
+			Item.after_show_ticket: 200,
+			Item.pulli: Int.max,
+			Item.buch: Int.max
 		][self]!
 	}
 }

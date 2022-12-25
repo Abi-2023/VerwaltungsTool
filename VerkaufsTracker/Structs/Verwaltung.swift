@@ -40,4 +40,23 @@ class Verwaltung: ObservableObject, Codable {
 			}
 		}
 	}
+
+	func verteileItems() {
+		for item in Item.allCases {
+			var round = 0
+			var aktuell_verfuegbar = item.verfuegbar
+
+			var personenDieWollen = personen
+			while (!personenDieWollen.isEmpty && aktuell_verfuegbar > 0) {
+				for person in personenDieWollen {
+					person.bestellungen[item] = round
+				}
+
+				round += 1
+				aktuell_verfuegbar = item.verfuegbar - personen.map({$0.bestellungen[item]!}).reduce(0, +)
+				personenDieWollen = personen.filter({$0.wuenschBestellungen[item] ?? 0 > $0.bestellungen[item]!})
+				personenDieWollen = Array(personenDieWollen.shuffled().prefix(upTo: min(aktuell_verfuegbar, personenDieWollen.count)))
+			}
+		}
+	}
 }
