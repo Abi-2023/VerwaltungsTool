@@ -43,9 +43,29 @@ struct PersonDetailView: View {
 					mm.sendMail(mail: p.generateFormEmail()!)
 				}
 			}
+
+			Text("zuzahlender Betrag: \(p.zuzahlenderBetrag)")
+			Text("gezahlter Betrag: \(p.gezahlterBetrag)")
+			Text("offener Betrag: \(p.offenerBetrag)")
+
+			BestellungsUebersicht(p: p)
+
+
 			// TODO: einfügen
 //			var bestellungen: [UUID: Int]
 //			var extraFields: [String: String]
+		}
+	}
+}
+
+struct BestellungsUebersicht: View{
+	let p: Person
+
+	var body: some View {
+		VStack {
+			ForEach(Array(p.bestellungen.keys).sorted(by: {$0.displayName < $1.displayName}), id: \.self) { item in
+				Text("\(item.displayName): \(p.bestellungen[item] ?? 0)")
+			}
 		}
 	}
 }
