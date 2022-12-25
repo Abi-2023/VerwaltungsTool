@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftSMTP
 #if canImport(CodeScanner)
 import CodeScanner
 #endif
@@ -31,7 +32,6 @@ struct ContentView: View {
 
 			print(image)
 		}
-
 		if let image2 = image {
 			Image(uiImage: image2)
 				.resizable()
@@ -39,6 +39,34 @@ struct ContentView: View {
 			//				.foregroundColor(.blue)
 			//				.background(.red)
 				.scaledToFit()
+		}
+
+		Button(action: {
+			let t = Ticket(owner: verwaltung.personen.first!)
+			let ticketPdfData = exportTicketToPDF(ticket: t)
+
+			let dataAttachment = Attachment(
+				data: ticketPdfData,
+				mime: "application/pdf",
+				name: "ticket.pdf",
+				// send as a standalone attachment
+				inline: false
+			)
+
+			let mail = Mail(
+				from: EmailManager.senderMail,
+				to: [Mail.User(name: "Bene123", email: "***REMOVED***")],
+				subject: "Check out this image and JSON file!",
+				// The attachments we created earlier
+				attachments: [dataAttachment]
+			)
+
+			let mailer = EmailManager()
+			mailer.sendMail(mail: mail)
+
+
+		}) {
+			Text("send mail with ticket")
 		}
 
 #if canImport(CodeScanner)
