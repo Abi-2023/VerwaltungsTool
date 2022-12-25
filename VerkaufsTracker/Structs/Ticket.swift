@@ -23,12 +23,10 @@ class Ticket {
 }
 
 func exportTicketToPDF(ticket: Ticket) -> Data {
-	let pageSize = CGSize(width: 1754, height: 1240)
+	let pageSize = CGSize(width: 500, height: 1000)
 
 	// View to render on PDF
-	let renderView = ContentView(verwaltung: Verwaltung())
-		.scaleEffect(1.2)
-		.background(Color.white)
+	let renderView = TicketRenderer(ticket: ticket)
 	let myUIHostingController = UIHostingController(rootView: renderView)
 	myUIHostingController.view.frame = CGRect(origin: .zero, size: pageSize)
 	myUIHostingController.view.backgroundColor = UIColor.white

@@ -27,8 +27,7 @@ struct ContentView: View {
 		.padding()
 		.onAppear {
 			let x2 = VerifyTicket()
-			var x = QrCodeImage()
-			image = x.generateQRCode(from: "abc")
+			image = generateQRCode(from: "abc")
 
 			print(image)
 		}
@@ -89,25 +88,4 @@ struct ContentView: View {
 		// more code to come
 	}
 #endif
-}
-
-struct QrCodeImage {
-	let context = CIContext()
-
-	func generateQRCode(from text: String) -> UIImage {
-		var qrImage = UIImage(systemName: "xmark.circle") ?? UIImage()
-		let data = Data(text.utf8)
-		let filter = CIFilter(name: "CIQRCodeGenerator")!
-		filter.setValue(data, forKey: "inputMessage")
-
-		let transform = CGAffineTransform(scaleX: 20, y: 20)
-		if let outputImage = filter.outputImage?.transformed(by: transform) {
-			if let image = context.createCGImage(
-				outputImage,
-				from: outputImage.extent) {
-				qrImage = UIImage(cgImage: image)
-			}
-		}
-		return qrImage
-	}
 }
