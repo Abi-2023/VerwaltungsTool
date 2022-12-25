@@ -35,6 +35,11 @@ class Person: Identifiable, Codable, Hashable {
 
 	var email: String?
 	var notes: String
+
+	// was die Person gerne haben würde
+	var wuenschBestellungen: [Item: Int]
+
+	// was der Person zugesichert wurde
 	var bestellungen: [Item: Int]
 	var extraFields: [String: String]
 	var formID: String
@@ -73,6 +78,7 @@ class Person: Identifiable, Codable, Hashable {
 		self.email = email
 		self.notes = ""
 		self.bestellungen = [:]
+		self.wuenschBestellungen = [:]
 		self.extraFields = [:]
 		self.formID = verwaltung.generateFormId()
 		self.verwaltung = verwaltung

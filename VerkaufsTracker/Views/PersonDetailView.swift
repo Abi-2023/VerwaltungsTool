@@ -63,6 +63,12 @@ struct BestellungsUebersicht: View{
 
 	var body: some View {
 		VStack {
+			Text("Wünsche: ")
+			ForEach(Array(p.wuenschBestellungen.keys).sorted(by: {$0.displayName < $1.displayName}), id: \.self) { item in
+				Text("\(item.displayName): \(p.wuenschBestellungen[item] ?? 0)")
+			}
+
+			Text("Bestellungen(zugesichert): ")
 			ForEach(Array(p.bestellungen.keys).sorted(by: {$0.displayName < $1.displayName}), id: \.self) { item in
 				Text("\(item.displayName): \(p.bestellungen[item] ?? 0)")
 			}
