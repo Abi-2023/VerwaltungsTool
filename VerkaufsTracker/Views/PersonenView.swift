@@ -59,11 +59,21 @@ struct PersonenView: View {
 			Text(selectMode ? "clear selection" : "auswählen")
 		}
 
-		List {
-			let displayedPersonen = verwaltung.personen
-				.filter({type(of: $0) == gruppenTyp.type || gruppenTyp == ._Alle})
-				.filter({searchQuery == "" || $0.searchableText.contains(searchQuery.uppercased())})
+		let displayedPersonen = verwaltung.personen
+			.filter({type(of: $0) == gruppenTyp.type || gruppenTyp == ._Alle})
+			.filter({searchQuery == "" || $0.searchableText.contains(searchQuery.uppercased())})
 
+		if(selectMode) {
+			Button(action: {
+				displayedPersonen.forEach({ person in
+					selectedPersonen.toggle(e: person)
+				})
+			}) {
+				Text("Alle")
+			}
+		}
+
+		List {
 			ForEach(displayedPersonen, id: \.self) { person in
 				HStack{
 					if selectMode {
