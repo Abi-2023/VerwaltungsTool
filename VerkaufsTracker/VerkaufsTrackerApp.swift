@@ -37,6 +37,8 @@ struct VerkaufsTrackerApp: App {
 						} else {
 							PersonenActionView(verwaltung: verwaltung, selectedPersonen: $selectedPersonen)
 						}
+					case .stats:
+						StatsView(verwaltung: verwaltung)
 					default:
 						ContentView(verwaltung: verwaltung)
 					}
