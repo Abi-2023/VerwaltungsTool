@@ -15,8 +15,40 @@ struct CloudWrapper: Codable {
 extension Verwaltung {
 
 	func fetchFromCloud() {
-//		let sealedBox = try! ChaChaPoly.SealedBox(combined: encryptedData)
-//		let decryptedData = try! ChaChaPoly.open(sealedBox, using: key)
+
+		let url = URL(string: "\(SECRETS.FB_DB_URL)/\(SECRETS.FB_SCOPE)/test.json")!
+		let request = URLRequest(url: url)
+
+		let task = URLSession.shared.dataTask(with: request) { data, response, error in
+			print(error ?? "")
+			if let httpResponse = response as? HTTPURLResponse {
+				let responseCode = httpResponse.statusCode
+				print(responseCode)
+				guard let data = data else { return }
+
+				if responseCode == 200 {
+					//TODO: verabeiten
+					let decoder = JSONDecoder()
+					do {
+						let wrapper = try decoder.decode(CloudWrapper.self, from: data)
+						let encryptedData = wrapper.data
+						let sealedBox = try ChaChaPoly.SealedBox(combined: encryptedData)
+						let decryptedData = try ChaChaPoly.open(sealedBox, using: SECRETS.FB_EncryptionKey)
+						let neueVerwaltung = try decoder.decode(Verwaltung.self, from: decryptedData)
+
+						print(neueVerwaltung)
+					} catch {
+						print(error)
+						print("fehler beim decoden")
+					}
+				} else {
+					print("error while fetching data")
+					let result = String(data: data, encoding: .utf8)!
+					print(result)
+				}
+			}
+		}
+		task.resume()
 	}
 
 	func uploadToCloud() {
@@ -24,7 +56,7 @@ extension Verwaltung {
 			let encoder = JSONEncoder()
 			let data = try encoder.encode(self)
 			let encryptedBox = try! ChaChaPoly.seal(data, using: SECRETS.FB_EncryptionKey)
-			let encryptedData = encryptedBox.ciphertext
+			let encryptedData = encryptedBox.combined
 
 			let url = URL(string: "\(SECRETS.FB_DB_URL)/\(SECRETS.FB_SCOPE)/test.json")!
 			var request = URLRequest(url: url)

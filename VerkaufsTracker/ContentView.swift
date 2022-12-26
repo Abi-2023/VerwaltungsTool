@@ -80,6 +80,12 @@ struct ContentView: View {
 			Text("Upload")
 		}
 
+		Button(action: {
+			verwaltung.fetchFromCloud()
+		}) {
+			Text("fetch")
+		}
+
 #if canImport(CodeScanner)
 		Button(action: {
 			isShowingScanner = true
