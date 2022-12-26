@@ -8,17 +8,24 @@
 import Foundation
 
 class Verwaltung: ObservableObject, Codable {
-	required init(from decoder: Decoder) throws {
-
-	}
-
-	func encode(to encoder: Encoder) throws {
-		
-	}
-
 
 	@Published var personen: [Person] = []
 	@Published var transaktionen: [Transaktion] = []
+
+	enum CodingKeys: CodingKey { case personen, transaktionen}
+
+	required init(from decoder: Decoder) throws {
+		let container = try decoder.container(keyedBy: CodingKeys.self)
+		personen = try container.decode(type(of: personen), forKey: .personen)
+		transaktionen = try container.decode(type(of: transaktionen), forKey: .transaktionen)
+	}
+
+	func encode(to encoder: Encoder) throws {
+		var container = encoder.container(keyedBy: CodingKeys.self)
+		try container.encode(personen, forKey: .personen)
+		try container.encode(transaktionen, forKey: .transaktionen)
+	}
+
 
 	init() {
 		

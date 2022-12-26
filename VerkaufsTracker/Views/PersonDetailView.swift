@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct PersonDetailView: View {
+	let verwaltung: Verwaltung
 	@Binding var person: Person?
 //	@State private var formEmailConfirmationShown = false
 	@Binding var selectedPersonen: [Person]
@@ -49,8 +50,8 @@ struct PersonDetailView: View {
 //			}
 
 			Text("zuzahlender Betrag: \(p.zuzahlenderBetrag)")
-			Text("gezahlter Betrag: \(p.gezahlterBetrag)")
-			Text("offener Betrag: \(p.offenerBetrag)")
+			Text("gezahlter Betrag: \(p.gezahlterBetrag(v: verwaltung))")
+			Text("offener Betrag: \(p.offenerBetrag(v: verwaltung))")
 
 			BestellungsUebersicht(p: p)
 

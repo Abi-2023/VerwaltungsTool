@@ -46,8 +46,8 @@ class Person: Identifiable, Codable, Hashable {
 	var name: String
 	var formName: String {name}
 
-	var gezahlterBetrag: Int {
-		return verwaltung.transaktionen.filter({$0.personId == self.id}).map({$0.betrag}).reduce(0, +)
+	func gezahlterBetrag(v: Verwaltung) -> Int {
+		return v.transaktionen.filter({$0.personId == self.id}).map({$0.betrag}).reduce(0, +)
 	}
 
 	var zuzahlenderBetrag: Int {
@@ -58,11 +58,9 @@ class Person: Identifiable, Codable, Hashable {
 		return tmpBetrag
 	}
 
-	var offenerBetrag: Int {
-		return zuzahlenderBetrag - gezahlterBetrag
+	func offenerBetrag(v: Verwaltung) -> Int {
+		return zuzahlenderBetrag - gezahlterBetrag(v: v)
 	}
-
-	unowned let verwaltung: Verwaltung
 
 	var searchableText: String {
 		var str = email ?? ""
@@ -82,7 +80,6 @@ class Person: Identifiable, Codable, Hashable {
 		self.wuenschBestellungen = [:]
 		self.extraFields = [:]
 		self.formID = verwaltung.generateFormId()
-		self.verwaltung = verwaltung
 	}
 
 	func generateFormEmail() -> Mail? {

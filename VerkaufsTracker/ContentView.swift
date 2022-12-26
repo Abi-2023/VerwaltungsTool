@@ -14,7 +14,7 @@ import CodeScanner
 struct ContentView: View {
 	@State private var isShowingScanner = false
 	@State var image: UIImage?
-	@State var verwaltung: Verwaltung
+	@ObservedObject var verwaltung: Verwaltung
 
 
 	var body: some View {
@@ -72,6 +72,12 @@ struct ContentView: View {
 			verwaltung.verteileItems()
 		}) {
 			Text("Verteile Items")
+		}
+
+		Button(action: {
+			verwaltung.uploadToCloud()
+		}) {
+			Text("Upload")
 		}
 
 #if canImport(CodeScanner)

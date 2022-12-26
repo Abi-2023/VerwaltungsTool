@@ -91,7 +91,7 @@ struct PersonenView: View {
 				}
 			}
 			.sheet(item: $selectedPerson) { _ in
-				PersonDetailView(person: $selectedPerson, selectedPersonen: $selectedPersonen, state: $state)
+				PersonDetailView(verwaltung: verwaltung, person: $selectedPerson, selectedPersonen: $selectedPersonen, state: $state)
 					.interactiveDismissDisabled(true)
 			}
 
