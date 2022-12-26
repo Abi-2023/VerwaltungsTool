@@ -19,7 +19,7 @@ struct AktionLogView: View {
 
 		if(ao.finished) {
 			Button(action: {
-				ao.aktiv = false
+				ao.clear()
 			}) {
 				Text("fertig")
 			}

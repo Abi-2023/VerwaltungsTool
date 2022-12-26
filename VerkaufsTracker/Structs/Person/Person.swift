@@ -44,6 +44,7 @@ class Person: Identifiable, Codable, Hashable {
 	var extraFields: [String: String]
 	var formID: String
 	var name: String
+	var formName: String {name}
 
 	var gezahlterBetrag: Int {
 		return verwaltung.transaktionen.filter({$0.personId == self.id}).map({$0.betrag}).reduce(0, +)

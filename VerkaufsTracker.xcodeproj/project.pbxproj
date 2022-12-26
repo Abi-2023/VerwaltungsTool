@@ -17,6 +17,7 @@
 		8F8521F12959DB0600854E16 /* AktionObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8521F02959DB0600854E16 /* AktionObserver.swift */; };
 		8F8521F32959DB5500854E16 /* sendFormEmails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8521F22959DB5500854E16 /* sendFormEmails.swift */; };
 		8F8521F52959E27400854E16 /* AktionLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8521F42959E27400854E16 /* AktionLogView.swift */; };
+		8F8521F72959E49200854E16 /* fetchFromGoogleForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8521F62959E49200854E16 /* fetchFromGoogleForm.swift */; };
 		8FA603942948CE99001CC2D2 /* VerkaufsTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA603932948CE99001CC2D2 /* VerkaufsTrackerApp.swift */; };
 		8FA603962948CE99001CC2D2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA603952948CE99001CC2D2 /* ContentView.swift */; };
 		8FA603982948CE9A001CC2D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8FA603972948CE9A001CC2D2 /* Assets.xcassets */; };
@@ -49,6 +50,7 @@
 		8F8521F02959DB0600854E16 /* AktionObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AktionObserver.swift; sourceTree = "<group>"; };
 		8F8521F22959DB5500854E16 /* sendFormEmails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sendFormEmails.swift; sourceTree = "<group>"; };
 		8F8521F42959E27400854E16 /* AktionLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AktionLogView.swift; sourceTree = "<group>"; };
+		8F8521F62959E49200854E16 /* fetchFromGoogleForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fetchFromGoogleForm.swift; sourceTree = "<group>"; };
 		8FA603902948CE99001CC2D2 /* VerkaufsTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VerkaufsTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FA603932948CE99001CC2D2 /* VerkaufsTrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerkaufsTrackerApp.swift; sourceTree = "<group>"; };
 		8FA603952948CE99001CC2D2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 				8FE0073E2958857400E1B355 /* Ticket.swift */,
 				8F8521F02959DB0600854E16 /* AktionObserver.swift */,
 				8F8521F22959DB5500854E16 /* sendFormEmails.swift */,
+				8F8521F62959E49200854E16 /* fetchFromGoogleForm.swift */,
 			);
 			path = Structs;
 			sourceTree = "<group>";
@@ -267,6 +270,7 @@
 				8FBE08082958D9CE0076AC2D /* AktionenView.swift in Sources */,
 				8F2B6710294F998100C8FA2C /* PersonenView.swift in Sources */,
 				8F8521F12959DB0600854E16 /* AktionObserver.swift in Sources */,
+				8F8521F72959E49200854E16 /* fetchFromGoogleForm.swift in Sources */,
 				8FA603A62948D02E001CC2D2 /* Item.swift in Sources */,
 				8FD6455F294D014700D746F8 /* secrets.swift in Sources */,
 				8FBE080A2958DA6A0076AC2D /* PersonenActionView.swift in Sources */,

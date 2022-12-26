@@ -13,6 +13,7 @@ class Q2er: Person {
 	var vorname: String
 	var nachname: String
 	override var name: String { get {"\(vorname) \(nachname)"} set {}}
+	override var formName: String {"\(vorname) \(nachname.first ?? "?"). "}
 
 	init(vorname: String, nachname: String, email: String?, notes: String, bestellungen: [UUID : Int], extraFields: [String : String], verwaltung: Verwaltung) {
 		self.vorname = vorname
@@ -57,7 +58,7 @@ class Q2er: Person {
 
 		let subject = "Abi-Umfrage"
 
-		let formName = "\(vorname) \(nachname.first ?? "?"). ".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "Name"
+		let formName = formName.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "Name"
 		let formUrl = "***REMOVED***/viewform?usp=pp_url&entry.382473335=\(formID)&entry.2014446974=\(formName)"
 
 		let content = """

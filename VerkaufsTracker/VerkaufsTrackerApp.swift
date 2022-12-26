@@ -37,7 +37,7 @@ struct VerkaufsTrackerApp: App {
 							ContentView(verwaltung: verwaltung)
 						case .aktionen:
 							if selectedPersonen.isEmpty {
-								AktionenView(verwaltung: verwaltung, selectedPersonen: $selectedPersonen)
+								AktionenView(verwaltung: verwaltung, selectedPersonen: $selectedPersonen, aktionObserver: aktionObserver)
 							} else {
 								PersonenActionView(verwaltung: verwaltung, selectedPersonen: $selectedPersonen, aktionObserver: aktionObserver	)
 							}

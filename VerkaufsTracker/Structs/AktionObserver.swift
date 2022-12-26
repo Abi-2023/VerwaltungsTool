@@ -45,6 +45,13 @@ class AktionObserver: ObservableObject {
 		}
 	}
 
+	func clear() {
+		prompt = ""
+		log = ""
+		aktiv = false
+		finished = false
+	}
+
 }
 
 class Aktion {
