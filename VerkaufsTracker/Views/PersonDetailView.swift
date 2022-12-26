@@ -30,6 +30,8 @@ struct PersonDetailView: View {
 			}
 			Text(p.email ?? "keine Email hinterlegt")
 
+			Text("FormId: \(p.formID)")
+
 			Text(p.notes)
 
 			Button(role: .destructive, action: {

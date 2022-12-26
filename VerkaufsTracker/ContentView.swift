@@ -32,12 +32,12 @@ struct ContentView: View {
 			print(image)
 		}
 		if let image2 = image {
-			Image(uiImage: image2)
-				.resizable()
-			//				.scaleEffect(2)
-			//				.foregroundColor(.blue)
-			//				.background(.red)
-				.scaledToFit()
+//			Image(uiImage: image2)
+//				.resizable()
+//			//				.scaleEffect(2)
+//			//				.foregroundColor(.blue)
+//			//				.background(.red)
+//				.scaledToFit()
 		}
 
 		Button(action: {
