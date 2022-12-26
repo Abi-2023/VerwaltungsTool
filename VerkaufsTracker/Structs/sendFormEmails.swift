@@ -10,13 +10,18 @@ import SwiftSMTP
 
 extension Aktion {
 
-	static func sendFormEmails(personen: [Person], observer: AktionObserver) {
+	//resend: wenn Email bereits gesendet wurde wird bei false nicht nochmal gesendet
+	static func sendFormEmails(personen: [Person], observer: AktionObserver, resend: Bool = false) {
 		observer.activate()
 		observer.log("start generating emails...")
 		observer.setPrompt("GeneratingEmails")
 		var emailQueue: [(person: Person, mail: Mail)] = []
 
 		for person in personen {
+			if person.extraFields["sendFormEmail", default: "0"] == "1" && !resend {
+				observer.log("skipping \(person.name) (already send)")
+				continue
+			}
 			let mail = person.generateFormEmail()
 			if let mail = mail {
 				emailQueue.append((person, mail))
