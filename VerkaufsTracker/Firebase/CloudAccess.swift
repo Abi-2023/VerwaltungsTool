@@ -18,6 +18,7 @@ extension Verwaltung {
 
 		let url = URL(string: "\(SECRETS.FB_DB_URL)/\(SECRETS.FB_SCOPE)/test.json")!
 		let request = URLRequest(url: url)
+		cloud = .waiting
 
 		let task = URLSession.shared.dataTask(with: request) { data, response, error in
 			print(error ?? "")
@@ -37,9 +38,15 @@ extension Verwaltung {
 						let neueVerwaltung = try decoder.decode(Verwaltung.self, from: decryptedData)
 
 						print(neueVerwaltung)
+						DispatchQueue.main.sync {
+							self.personen = neueVerwaltung.personen
+							self.transaktionen = neueVerwaltung.transaktionen
+							self.cloud = .synced
+						}
 					} catch {
 						print(error)
 						print("fehler beim decoden")
+						self.cloud = .fail
 					}
 				} else {
 					print("error while fetching data")
