@@ -13,5 +13,8 @@ struct StatsView: View {
 		Text("Statistiken")
 		let wunschTickets = verwaltung.personen.map({$0.wuenschBestellungen[.ball_ticket] ?? 0}).reduce(0, +)
 		Text("gewünschte Tickets: \(wunschTickets) / \(Item.ball_ticket.verfuegbar) (\((Int(Float(wunschTickets) / Float(Item.ball_ticket.verfuegbar)*100)))%)")
+
+		let formSubmitted = verwaltung.personen.filter({$0.extraFields["sendFormEmail", default: ""] == "1"}).count
+		Text("gewünschte Tickets: \(formSubmitted) / \(verwaltung.personen.count) (\((Int(Float(formSubmitted) / Float(verwaltung.personen.count)*100)))%)")
 	}
 }
