@@ -69,12 +69,6 @@ struct ContentView: View {
 		}
 
 		Button(action: {
-			verwaltung.verteileItems()
-		}) {
-			Text("Verteile Items")
-		}
-
-		Button(action: {
 			verwaltung.uploadToCloud()
 		}) {
 			Text("Upload")
