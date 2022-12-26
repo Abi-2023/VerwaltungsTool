@@ -32,7 +32,7 @@ struct PersonDetailView: View {
 
 			Text("FormId: \(p.formID)")
 
-			Text(p.notes)
+//			Text(p.notes) //TODO: anzeigen
 
 			Button(role: .destructive, action: {
 //				formEmailConfirmationShown = true
@@ -56,6 +56,8 @@ struct PersonDetailView: View {
 			Text("offener Betrag: \(p.offenerBetrag(v: verwaltung))")
 
 			BestellungsUebersicht(p: p)
+			Divider()
+			ExtraFields(p: p)
 
 
 			// TODO: einfügen
@@ -74,10 +76,24 @@ struct BestellungsUebersicht: View{
 			ForEach(Array(p.wuenschBestellungen.keys).sorted(by: {$0.displayName < $1.displayName}), id: \.self) { item in
 				Text("\(item.displayName): \(p.wuenschBestellungen[item] ?? 0)")
 			}
-
+			Divider()
 			Text("Bestellungen(zugesichert): ")
 			ForEach(Array(p.bestellungen.keys).sorted(by: {$0.displayName < $1.displayName}), id: \.self) { item in
 				Text("\(item.displayName): \(p.bestellungen[item] ?? 0)")
+			}
+		}
+	}
+}
+
+
+struct ExtraFields: View{
+	let p: Person
+
+	var body: some View {
+		VStack {
+			Text("Extra Felder: ")
+			ForEach(Array(p.extraFields.keys).sorted(by: {$0 < $1}), id: \.self) { item in
+				Text("\(item): \(p.extraFields[item] ?? "????")")
 			}
 		}
 	}
