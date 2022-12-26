@@ -10,7 +10,8 @@ import SwiftSMTP
 
 extension Aktion {
 
-	func sendFormEmails(personen: [Person], observer: AktionObserver) {
+	static func sendFormEmails(personen: [Person], observer: AktionObserver) {
+		observer.activate()
 		observer.log("start generating emails...")
 		observer.setPrompt("GeneratingEmails")
 		var emailQueue: [(person: Person, mail: Mail)] = []
@@ -50,5 +51,6 @@ extension Aktion {
 		}
 		observer.setPrompt("finished")
 		observer.log("finished sending")
+		observer.finish()
 	}
 }

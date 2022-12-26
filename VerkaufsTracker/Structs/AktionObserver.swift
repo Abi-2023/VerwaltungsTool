@@ -11,6 +11,8 @@ class AktionObserver: ObservableObject {
 
 	@Published var prompt = ""
 	@Published var log = ""
+	@Published var aktiv = false
+	@Published var finished = false
 
 	func log(_ message: String) {
 		DispatchQueue.main.sync {
@@ -22,6 +24,24 @@ class AktionObserver: ObservableObject {
 	func setPrompt(_ message: String) {
 		DispatchQueue.main.sync {
 			prompt = message
+		}
+	}
+
+	func activate() {
+		DispatchQueue.main.sync {
+			aktiv = true
+		}
+	}
+
+	func deactivate() {
+		DispatchQueue.main.sync {
+			aktiv = false
+		}
+	}
+
+	func finish() {
+		DispatchQueue.main.sync {
+			finished = true
 		}
 	}
 

@@ -21,29 +21,34 @@ struct VerkaufsTrackerApp: App {
 			selectedPersonen = []
 		}
 	}
+	@ObservedObject var aktionObserver: AktionObserver = AktionObserver()
 
 	var body: some Scene {
 		WindowGroup {
 			GeometryReader { reader in
 				VStack{
-					switch state {
-					case .personenView:
-						PersonenView(verwaltung: verwaltung, state: $state, selectMode: $selectMode, selectedPersonen: $selectedPersonen)
-					case .debug:
-						ContentView(verwaltung: verwaltung)
-					case .aktionen:
-						if selectedPersonen.isEmpty {
-							AktionenView(verwaltung: verwaltung, selectedPersonen: $selectedPersonen)
-						} else {
-							PersonenActionView(verwaltung: verwaltung, selectedPersonen: $selectedPersonen)
+					if aktionObserver.aktiv {
+						AktionLogView(ao: aktionObserver)
+					} else {
+						switch state {
+						case .personenView:
+							PersonenView(verwaltung: verwaltung, state: $state, selectMode: $selectMode, selectedPersonen: $selectedPersonen)
+						case .debug:
+							ContentView(verwaltung: verwaltung)
+						case .aktionen:
+							if selectedPersonen.isEmpty {
+								AktionenView(verwaltung: verwaltung, selectedPersonen: $selectedPersonen)
+							} else {
+								PersonenActionView(verwaltung: verwaltung, selectedPersonen: $selectedPersonen, aktionObserver: aktionObserver	)
+							}
+						case .stats:
+							StatsView(verwaltung: verwaltung)
+						default:
+							ContentView(verwaltung: verwaltung)
 						}
-					case .stats:
-						StatsView(verwaltung: verwaltung)
-					default:
-						ContentView(verwaltung: verwaltung)
+						Spacer()
+						Navbar(appState: $state, width: reader.size.width)
 					}
-					Spacer()
-					Navbar(appState: $state, width: reader.size.width)
 				}.onAppear {
 					let person = Q2er(vorname: "Benedict", nachname: "***REMOVED***", email: "***REMOVED***", notes: "", bestellungen: [:], extraFields: [:], verwaltung: verwaltung)
 					person.wuenschBestellungen[.ball_ticket] = 400;
