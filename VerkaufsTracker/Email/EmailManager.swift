@@ -39,12 +39,16 @@ class EmailManager {
 		sendMail(mail: mail)
 	}
 
-	func sendMail(mail: Mail) {
+	func sendMail(mail: Mail, callback: ((Error?) -> ())? = nil) {
 		smtp.send(mail) { (error) in
-			if let error = error {
-				print(error)
+			if let callback = callback {
+				callback(error)
 			} else {
-				print("Email erfolgreich versendet")
+				if let error = error {
+					print(error)
+				} else {
+					print("Email erfolgreich versendet")
+				}
 			}
 		}
 	}
