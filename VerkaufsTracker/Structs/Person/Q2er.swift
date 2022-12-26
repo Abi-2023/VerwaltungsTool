@@ -26,8 +26,14 @@ class Q2er: Person {
 		let container = try decoder.container(keyedBy: CodingKeys.self)
 		vorname = try container.decode(String.self, forKey: .vorname)
 		nachname = try container.decode(String.self, forKey: .nachname)
-		let superDecoder = try container.superDecoder()
-		try super.init(from: superDecoder)
+		try super.init(from: decoder)
+	}
+
+	override func encode(to encoder: Encoder) throws {
+		var container = encoder.container(keyedBy: CodingKeys.self)
+		try super.encode(to: encoder)
+		try container.encode(vorname, forKey: .vorname)
+		try container.encode(nachname, forKey: .nachname)
 	}
 
 	static func == (lhs: Q2er, rhs: Q2er) -> Bool {

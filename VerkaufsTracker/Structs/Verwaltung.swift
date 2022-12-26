@@ -7,22 +7,42 @@
 
 import Foundation
 
+struct PersonenWrapper: Codable{
+	var andere: [Person] = []
+	var q2er: [Q2er] = []
+	var lehrer: [Lehrer] = []
+}
+
 class Verwaltung: ObservableObject, Codable {
 
 	@Published var personen: [Person] = []
 	@Published var transaktionen: [Transaktion] = []
 
-	enum CodingKeys: CodingKey { case personen, transaktionen}
+	enum CodingKeys: CodingKey { case personenWrapper, transaktionen}
 
 	required init(from decoder: Decoder) throws {
 		let container = try decoder.container(keyedBy: CodingKeys.self)
-		personen = try container.decode(type(of: personen), forKey: .personen)
+		let wrapper = try container.decode(PersonenWrapper.self, forKey: .personenWrapper)
+		personen = wrapper.andere + wrapper.lehrer + wrapper.q2er
 		transaktionen = try container.decode(type(of: transaktionen), forKey: .transaktionen)
 	}
 
 	func encode(to encoder: Encoder) throws {
 		var container = encoder.container(keyedBy: CodingKeys.self)
-		try container.encode(personen, forKey: .personen)
+		var wrapper = PersonenWrapper()
+
+		for person in personen {
+			switch person {
+			case is Q2er:
+				wrapper.q2er.append(person as! Q2er)
+			case is Lehrer:
+				wrapper.lehrer.append(person as! Lehrer)
+			default:
+				wrapper.andere.append(person)
+			}
+		}
+
+		try container.encode(wrapper, forKey: .personenWrapper)
 		try container.encode(transaktionen, forKey: .transaktionen)
 	}
 
