@@ -13,6 +13,7 @@
 		8F2B6712294F9C7F00C8FA2C /* PersonDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F2B6711294F9C7F00C8FA2C /* PersonDetailView.swift */; };
 		8F68425529550B1600557BB6 /* CloudAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F68425429550B1600557BB6 /* CloudAccess.swift */; };
 		8F68425729550BC300557BB6 /* Verwaltung.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F68425629550BC300557BB6 /* Verwaltung.swift */; };
+		8F68A58A295B1CD900CAFAD6 /* CloudAvailability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F68A589295B1CD900CAFAD6 /* CloudAvailability.swift */; };
 		8F7FB049294E4297005F4551 /* FormularMail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7FB048294E4297005F4551 /* FormularMail.swift */; };
 		8F8521F12959DB0600854E16 /* AktionObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8521F02959DB0600854E16 /* AktionObserver.swift */; };
 		8F8521F32959DB5500854E16 /* sendFormEmails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8521F22959DB5500854E16 /* sendFormEmails.swift */; };
@@ -47,6 +48,7 @@
 		8F2B6711294F9C7F00C8FA2C /* PersonDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonDetailView.swift; sourceTree = "<group>"; };
 		8F68425429550B1600557BB6 /* CloudAccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudAccess.swift; sourceTree = "<group>"; };
 		8F68425629550BC300557BB6 /* Verwaltung.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Verwaltung.swift; sourceTree = "<group>"; };
+		8F68A589295B1CD900CAFAD6 /* CloudAvailability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudAvailability.swift; sourceTree = "<group>"; };
 		8F7FB048294E4297005F4551 /* FormularMail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormularMail.swift; sourceTree = "<group>"; };
 		8F8521F02959DB0600854E16 /* AktionObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AktionObserver.swift; sourceTree = "<group>"; };
 		8F8521F22959DB5500854E16 /* sendFormEmails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sendFormEmails.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				8F68425429550B1600557BB6 /* CloudAccess.swift */,
+				8F68A589295B1CD900CAFAD6 /* CloudAvailability.swift */,
 			);
 			path = Firebase;
 			sourceTree = "<group>";
@@ -280,6 +283,7 @@
 				8F8521F32959DB5500854E16 /* sendFormEmails.swift in Sources */,
 				8F7FB049294E4297005F4551 /* FormularMail.swift in Sources */,
 				8F68425529550B1600557BB6 /* CloudAccess.swift in Sources */,
+				8F68A58A295B1CD900CAFAD6 /* CloudAvailability.swift in Sources */,
 				8FD6455C294CFD7C00D746F8 /* EmailManager.swift in Sources */,
 				8FA603A42948CFA5001CC2D2 /* Person.swift in Sources */,
 				8F128AF5294D1BF5002D3801 /* TicketCodes.swift in Sources */,
