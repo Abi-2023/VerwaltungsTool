@@ -87,7 +87,7 @@ extension Verwaltung {
 			let encryptedBox = try! ChaChaPoly.seal(data, using: SECRETS.FB_EncryptionKey)
 			let encryptedData = encryptedBox.combined
 
-			let url = URL(string: "\(SECRETS.FB_DB_URL)/\(SECRETS.FB_SCOPE)/test.json")!
+			let url = URL(string: "\(SECRETS.FB_DB_URL)/\(SECRETS.FB_SCOPE)/test.json?print=silent")!
 			var request = URLRequest(url: url)
 			request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 			request.httpMethod = "PUT"
@@ -100,7 +100,7 @@ extension Verwaltung {
 					let responseCode = httpResponse.statusCode
 					print(responseCode)
 
-					if responseCode == 200 {
+					if responseCode == 200 || responseCode == 204{
 						print("successfully uploaded data")
 					} else {
 						print("error while uploading data")

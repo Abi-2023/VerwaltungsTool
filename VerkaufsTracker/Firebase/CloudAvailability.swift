@@ -70,7 +70,7 @@ struct CloudStatus: Codable {
 			}
 			let data = try encoder.encode(status)
 
-			let url = URL(string: "\(SECRETS.FB_DB_URL)/\(SECRETS.FB_SCOPE)/status.json")!
+			let url = URL(string: "\(SECRETS.FB_DB_URL)/\(SECRETS.FB_SCOPE)/status.json?print=silent")!
 			var request = URLRequest(url: url)
 			request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 			request.httpMethod = "PUT"
@@ -82,7 +82,7 @@ struct CloudStatus: Codable {
 					let responseCode = httpResponse.statusCode
 					print(responseCode)
 
-					if responseCode == 200 {
+					if responseCode == 200 || responseCode == 204{
 						print("successfullyUploadedCloudStatus")
 					} else {
 						print("error while updating cloudStatus")
