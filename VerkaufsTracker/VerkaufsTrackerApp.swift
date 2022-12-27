@@ -27,7 +27,7 @@ struct VerkaufsTrackerApp: App {
 		WindowGroup {
 			GeometryReader { reader in
 				VStack{
-					if verwaltung.cloud != .synced {
+					if verwaltung.cloud != .connected {
 						CloudView(v: verwaltung)
 					}else if aktionObserver.aktiv{
 						AktionLogView(ao: aktionObserver)

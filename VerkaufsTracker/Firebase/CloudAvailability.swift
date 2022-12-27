@@ -7,6 +7,10 @@
 
 import Foundation
 
+enum CloudState: String{
+	case error, disconnected, connected, denied, connecting
+}
+
 struct CloudStatus: Codable {
 	var lastConnection: Date = .now
 	var connectedUser: String? = CloudStatus.deviceId()
@@ -41,11 +45,10 @@ struct CloudStatus: Codable {
 					do {
 						let cloudStatus = try decoder.decode(CloudStatus.self, from: data)
 						completion(cloudStatus)
-
+						return
 					} catch {
 						print(error)
 						print("fehler beim decoden")
-						return
 					}
 				} else {
 					print("error while fetching cloud status")
@@ -58,17 +61,20 @@ struct CloudStatus: Codable {
 		task.resume()
 	}
 
-	static func setOwnToServer() {
+	static func setOwnToServer(active: Bool = true) {
 		do {
 			let encoder = JSONEncoder()
-			let data = try encoder.encode(CloudStatus())
+			var status = CloudStatus()
+			if !active {
+				status.connectedUser = nil
+			}
+			let data = try encoder.encode(status)
 
 			let url = URL(string: "\(SECRETS.FB_DB_URL)/\(SECRETS.FB_SCOPE)/status.json")!
 			var request = URLRequest(url: url)
 			request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 			request.httpMethod = "PUT"
-			let wrapper = CloudWrapper(data: data)
-			request.httpBody = try encoder.encode(wrapper)
+			request.httpBody = data
 
 			let task = URLSession.shared.dataTask(with: request) { data, response, error in
 				print(error ?? "")
@@ -91,5 +97,12 @@ struct CloudStatus: Codable {
 			print(error)
 			print("fehler beim cloud status update")
 		}
+	}
+}
+
+extension Verwaltung {
+	func disconnectFromServer() {
+		CloudStatus.setOwnToServer(active: false)
+		cloud = .disconnected
 	}
 }

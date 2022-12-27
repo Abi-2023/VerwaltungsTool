@@ -75,9 +75,15 @@ struct ContentView: View {
 		}
 
 		Button(action: {
-			verwaltung.fetchFromCloud()
+			verwaltung.connectToCloud()
 		}) {
 			Text("fetch")
+		}
+
+		Button(action: {
+			verwaltung.disconnectFromServer()
+		}) {
+			Text("disconnect")
 		}
 
 #if canImport(CodeScanner)

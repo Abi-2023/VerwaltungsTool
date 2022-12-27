@@ -13,13 +13,9 @@ struct PersonenWrapper: Codable{
 	var lehrer: [Lehrer] = []
 }
 
-enum CloudState: String{
-	case fail, waiting, synced, empty
-}
-
 class Verwaltung: ObservableObject, Codable {
 
-	@Published var cloud: CloudState = .empty
+	@Published var cloud: CloudState = .disconnected
 
 	@Published var personen: [Person] = []
 	@Published var transaktionen: [Transaktion] = []

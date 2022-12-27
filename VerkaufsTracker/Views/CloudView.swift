@@ -14,7 +14,7 @@ struct CloudView: View {
 		Text("\(v.cloud.rawValue)")
 
 		Button(action: {
-			v.fetchFromCloud()
+			v.connectToCloud()
 		}) {
 			Text("sync")
 		}

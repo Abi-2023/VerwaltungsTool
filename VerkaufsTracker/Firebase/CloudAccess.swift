@@ -14,11 +14,32 @@ struct CloudWrapper: Codable {
 
 extension Verwaltung {
 
-	func fetchFromCloud() {
+	func connectToCloud() {
+		CloudStatus.serverStatus(completion: { status in
+			if let status {
+				if status.allowedToInteract() {
+					self.fetchFromCloud()
+				} else {
+					DispatchQueue.main.async {
+						self.cloud = .denied
+					}
+				}
+			} else {
+				CloudStatus.setOwnToServer()
+				DispatchQueue.main.async {
+					self.cloud = .error
+				}
+			}
+		})
+	}
+
+	fileprivate func fetchFromCloud() {
 
 		let url = URL(string: "\(SECRETS.FB_DB_URL)/\(SECRETS.FB_SCOPE)/test.json")!
 		let request = URLRequest(url: url)
-		cloud = .waiting
+		DispatchQueue.main.async {
+			self.cloud = .connecting
+		}
 
 		let task = URLSession.shared.dataTask(with: request) { data, response, error in
 			print(error ?? "")
@@ -38,15 +59,16 @@ extension Verwaltung {
 						let neueVerwaltung = try decoder.decode(Verwaltung.self, from: decryptedData)
 
 						print(neueVerwaltung)
+						CloudStatus.setOwnToServer()
 						DispatchQueue.main.sync {
 							self.personen = neueVerwaltung.personen
 							self.transaktionen = neueVerwaltung.transaktionen
-							self.cloud = .synced
+							self.cloud = .connected
 						}
 					} catch {
 						print(error)
 						print("fehler beim decoden")
-						self.cloud = .fail
+						self.cloud = .error
 					}
 				} else {
 					print("error while fetching data")
