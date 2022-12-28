@@ -15,6 +15,7 @@
 		8F68425729550BC300557BB6 /* Verwaltung.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F68425629550BC300557BB6 /* Verwaltung.swift */; };
 		8F68A58A295B1CD900CAFAD6 /* CloudAvailability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F68A589295B1CD900CAFAD6 /* CloudAvailability.swift */; };
 		8F794F2C295CD8C1007B16EB /* Aktion_sendTickets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F794F2B295CD8C1007B16EB /* Aktion_sendTickets.swift */; };
+		8F794F31295CF22F007B16EB /* Aktion_ImportTransaktionen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F794F30295CF22F007B16EB /* Aktion_ImportTransaktionen.swift */; };
 		8F7FB049294E4297005F4551 /* FormularMail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7FB048294E4297005F4551 /* FormularMail.swift */; };
 		8F8521F12959DB0600854E16 /* AktionObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8521F02959DB0600854E16 /* AktionObserver.swift */; };
 		8F8521F32959DB5500854E16 /* sendFormEmails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8521F22959DB5500854E16 /* sendFormEmails.swift */; };
@@ -51,6 +52,7 @@
 		8F68425629550BC300557BB6 /* Verwaltung.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Verwaltung.swift; sourceTree = "<group>"; };
 		8F68A589295B1CD900CAFAD6 /* CloudAvailability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudAvailability.swift; sourceTree = "<group>"; };
 		8F794F2B295CD8C1007B16EB /* Aktion_sendTickets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aktion_sendTickets.swift; sourceTree = "<group>"; };
+		8F794F30295CF22F007B16EB /* Aktion_ImportTransaktionen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aktion_ImportTransaktionen.swift; sourceTree = "<group>"; };
 		8F7FB048294E4297005F4551 /* FormularMail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormularMail.swift; sourceTree = "<group>"; };
 		8F8521F02959DB0600854E16 /* AktionObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AktionObserver.swift; sourceTree = "<group>"; };
 		8F8521F22959DB5500854E16 /* sendFormEmails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sendFormEmails.swift; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 				8FE0073C295880E700E1B355 /* Extensions.swift */,
 				8FE0074029589B1E00E1B355 /* TicketRenderer.swift */,
 				8F794F2B295CD8C1007B16EB /* Aktion_sendTickets.swift */,
+				8F794F30295CF22F007B16EB /* Aktion_ImportTransaktionen.swift */,
 			);
 			path = VerkaufsTracker;
 			sourceTree = "<group>";
@@ -276,6 +279,7 @@
 			files = (
 				8FBE080C2958ECDE0076AC2D /* StatsView.swift in Sources */,
 				8FD69E4529565A55001F4787 /* Lehrer.swift in Sources */,
+				8F794F31295CF22F007B16EB /* Aktion_ImportTransaktionen.swift in Sources */,
 				8FBE08082958D9CE0076AC2D /* AktionenView.swift in Sources */,
 				8F2B6710294F998100C8FA2C /* PersonenView.swift in Sources */,
 				8F8521F12959DB0600854E16 /* AktionObserver.swift in Sources */,

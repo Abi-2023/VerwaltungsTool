@@ -25,6 +25,16 @@ struct AktionenView: View {
 				Text("fill out from google forms")
 			}.buttonStyle(.bordered)
 
+
+			Button(action: {
+				DispatchQueue.global(qos: .default).async {
+					Aktion.fetchTransaktionen(verwaltung: verwaltung, ao: aktionObserver)
+				}
+			}) {
+				Text("Fetch Transaktionen")
+			}.buttonStyle(.bordered)
+
+
 			Button(role: .cancel,action: {
 				if unlockVerteileItems {
 					verwaltung.verteileItems()

@@ -27,4 +27,8 @@ class Transaktion: Codable, Hashable {
 	let betrag: Int
 	let personId: UUID
 
+	init(betrag: Int, personId: UUID) {
+		self.betrag = betrag
+		self.personId = personId
+	}
 }
