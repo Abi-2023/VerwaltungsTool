@@ -42,6 +42,7 @@ class Person: Identifiable, Codable, Hashable {
 	// was der Person zugesichert wurde
 	var bestellungen: [Item: Int]
 	var extraFields: [String: String]
+	var tickets: [Ticket] = []
 	var formID: String
 	var name: String
 	var formName: String {name}
@@ -83,6 +84,13 @@ class Person: Identifiable, Codable, Hashable {
 	}
 
 	func generateFormEmail() -> Mail? {
+		return nil
+	}
+
+	var mailUser: Mail.User? {
+		if let email {
+			return Mail.User(name: name, email: email)
+		}
 		return nil
 	}
 }

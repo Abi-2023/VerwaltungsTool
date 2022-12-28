@@ -7,18 +7,31 @@
 
 import Foundation
 import SwiftUI
+import SwiftSMTP
 
-class Ticket {
+class Ticket: Codable {
 	let id: String
-	let versendet: Bool
-	let aftershow: Bool // ob das Ticket für die after show ist
-	unowned let owner: Person
+	var versendet: Bool
+	let itemType: Item // ob das Ticket für die after show ist
+	let owner: UUID
 
-	init(owner: Person, aftershow: Bool = false) {
+	init(owner: Person, type: Item) {
 		id = UUID().uuidString
 		versendet = false
-		self.aftershow = aftershow
-		self.owner = owner
+		self.itemType = type
+		self.owner = owner.id
+	}
+
+	func generateAttatchment() -> Attachment{
+		let ticketPdfData = exportTicketToPDF(ticket: self)
+		// TODO: PDF komprimieren
+		let dataAttachment = Attachment(
+			data: ticketPdfData,
+			mime: "application/pdf",
+			name: "ticket.pdf",
+			inline: false
+		)
+		return dataAttachment
 	}
 }
 

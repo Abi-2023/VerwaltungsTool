@@ -50,6 +50,7 @@ struct VerkaufsTrackerApp: App {
 						Navbar(appState: $state, width: reader.size.width)
 					}
 				}.onAppear {
+//					verwaltung.cloud = .connected
 //					let person = Q2er(vorname: "Benedict", nachname: "***REMOVED***", email: "***REMOVED***", notes: "", bestellungen: [:], extraFields: [:], verwaltung: verwaltung)
 //					person.wuenschBestellungen[.ball_ticket] = 400;
 //					let person2 = Q2er(vorname: "***REMOVED***", nachname: "***REMOVED***", email: "***REMOVED***", notes: "", bestellungen: [:], extraFields: [:], verwaltung: verwaltung)

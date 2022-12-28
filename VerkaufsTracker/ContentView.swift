@@ -41,7 +41,7 @@ struct ContentView: View {
 		}
 
 		Button(action: {
-			let t = Ticket(owner: verwaltung.personen.first!)
+			let t = Ticket(owner: verwaltung.personen.first!, type: .ball_ticket)
 			let ticketPdfData = exportTicketToPDF(ticket: t)
 
 			let dataAttachment = Attachment(

@@ -89,7 +89,7 @@ class Q2er: Person {
 
 
 		return Mail(from: EmailManager.senderMail,
-					to: [Mail.User(name: name, email: email!)],
+					to: [mailUser!], //TODO: maybe handle optional
 					subject: subject,
 					text: content)
 	}
