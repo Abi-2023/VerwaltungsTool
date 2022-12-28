@@ -12,8 +12,14 @@ struct PersonenActionView: View {
 	@Binding var selectedPersonen: [Person]
 	@State var aktionObserver: AktionObserver
 
+	//FORM
 	@State var resendForm = false
-	@State var unlockSend = false
+	@State var unlockSendForm = false
+
+	// Tickets
+	@State var resendTicket = false
+	@State var nurVollTicket = true
+	@State var unlockSendTicket = false
 
 	var body: some View {
 		VStack(spacing: 20){
@@ -27,17 +33,34 @@ struct PersonenActionView: View {
 			HStack {
 				Toggle("resend", isOn: $resendForm)
 				Button(role: .destructive, action: {
-					if unlockSend {
+					if unlockSendForm {
 						DispatchQueue.global(qos: .default).async {
 							Aktion.sendFormEmails(personen: selectedPersonen, observer: aktionObserver, resend: resendForm)
 						}
 					} else {
-						unlockSend = true
+						unlockSendForm = true
 					}
 				}) {
 					Text("Send Form Email")
 				}
-				.unlockedStyle(unlockSend)
+				.unlockedStyle(unlockSendForm)
+			}
+
+			HStack {
+				Toggle("resend", isOn: $resendTicket)
+				Toggle("nur Voll", isOn: $nurVollTicket)
+				Button(role: .destructive, action: {
+					if unlockSendTicket {
+						DispatchQueue.global(qos: .default).async {
+							Aktion.sendeTickets(personen: selectedPersonen, verwaltung: verwaltung, ao: aktionObserver, resend: resendTicket, nurVoll: nurVollTicket)
+						}
+					} else {
+						unlockSendTicket = true
+					}
+				}) {
+					Text("Sende Tickets")
+				}
+				.unlockedStyle(unlockSendTicket)
 			}
 		}.padding()
 	}
