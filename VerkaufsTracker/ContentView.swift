@@ -42,16 +42,7 @@ struct ContentView: View {
 
 		Button(action: {
 			let t = Ticket(owner: verwaltung.personen.first!, type: .ball_ticket)
-			let ticketPdfData = exportTicketToPDF(ticket: t)
-
-			let dataAttachment = Attachment(
-				data: ticketPdfData,
-				mime: "application/pdf",
-				name: "ticket.pdf",
-				// send as a standalone attachment
-				inline: false
-			)
-
+			let dataAttachment = t.generateAttatchment()
 			let mail = Mail(
 				from: EmailManager.senderMail,
 				to: [Mail.User(name: "Bene123", email: "***REMOVED***")],
