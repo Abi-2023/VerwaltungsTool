@@ -57,7 +57,7 @@ class AktionObserver: ObservableObject {
 		log("Upload Log: \(logId)")
 
 		do {
-			let data = try "\"\(log.data(using: .utf8)!.encrypted().base64EncodedString())\"".data(using: .utf8)
+			 let data = try "\"\(log.data(using: .utf8)!.encrypted().base64EncodedString())\"".data(using: .utf8)
 
 			let url = URL(string: "\(SECRETS.FB_DB_URL)/\(SECRETS.FB_SCOPE)/logs/\(logId).json?print=silent")!
 			var request = URLRequest(url: url)

@@ -17,6 +17,10 @@
 		8F794F2C295CD8C1007B16EB /* Aktion_sendTickets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F794F2B295CD8C1007B16EB /* Aktion_sendTickets.swift */; };
 		8F794F31295CF22F007B16EB /* Aktion_ImportTransaktionen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F794F30295CF22F007B16EB /* Aktion_ImportTransaktionen.swift */; };
 		8F7FB049294E4297005F4551 /* FormularMail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7FB048294E4297005F4551 /* FormularMail.swift */; };
+		8F7FB843295E3AD6001EC0C0 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7FB842295E3AD6001EC0C0 /* main.swift */; };
+		8F7FB848295E3AFC001EC0C0 /* secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD6455E294D014700D746F8 /* secrets.swift */; };
+		8F7FB849295E3B2F001EC0C0 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE0073C295880E700E1B355 /* Extensions.swift */; };
+		8F7FB84A295E3B36001EC0C0 /* Crypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F99E9AE295E2845003B79DD /* Crypto.swift */; };
 		8F8521F12959DB0600854E16 /* AktionObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8521F02959DB0600854E16 /* AktionObserver.swift */; };
 		8F8521F32959DB5500854E16 /* sendFormEmails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8521F22959DB5500854E16 /* sendFormEmails.swift */; };
 		8F8521F52959E27400854E16 /* AktionLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8521F42959E27400854E16 /* AktionLogView.swift */; };
@@ -45,6 +49,18 @@
 		8FE0074129589B1E00E1B355 /* TicketRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE0074029589B1E00E1B355 /* TicketRenderer.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		8F7FB83E295E3AD6001EC0C0 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		8F128AF3294D0C74002D3801 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8F128AF4294D1BF5002D3801 /* TicketCodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketCodes.swift; sourceTree = "<group>"; };
@@ -56,6 +72,9 @@
 		8F794F2B295CD8C1007B16EB /* Aktion_sendTickets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aktion_sendTickets.swift; sourceTree = "<group>"; };
 		8F794F30295CF22F007B16EB /* Aktion_ImportTransaktionen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aktion_ImportTransaktionen.swift; sourceTree = "<group>"; };
 		8F7FB048294E4297005F4551 /* FormularMail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormularMail.swift; sourceTree = "<group>"; };
+		8F7FB840295E3AD6001EC0C0 /* ReadLog */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ReadLog; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F7FB842295E3AD6001EC0C0 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		8F7FB847295E3AEB001EC0C0 /* ReadLog.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ReadLog.entitlements; sourceTree = "<group>"; };
 		8F8521F02959DB0600854E16 /* AktionObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AktionObserver.swift; sourceTree = "<group>"; };
 		8F8521F22959DB5500854E16 /* sendFormEmails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sendFormEmails.swift; sourceTree = "<group>"; };
 		8F8521F42959E27400854E16 /* AktionLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AktionLogView.swift; sourceTree = "<group>"; };
@@ -86,6 +105,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		8F7FB83D295E3AD6001EC0C0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8FA6038D2948CE99001CC2D2 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -130,11 +156,21 @@
 			path = Email;
 			sourceTree = "<group>";
 		};
+		8F7FB841295E3AD6001EC0C0 /* ReadLog */ = {
+			isa = PBXGroup;
+			children = (
+				8F7FB847295E3AEB001EC0C0 /* ReadLog.entitlements */,
+				8F7FB842295E3AD6001EC0C0 /* main.swift */,
+			);
+			path = ReadLog;
+			sourceTree = "<group>";
+		};
 		8FA603872948CE99001CC2D2 = {
 			isa = PBXGroup;
 			children = (
 				8FBE08052958D6D00076AC2D /* Navbar.swift */,
 				8FA603922948CE99001CC2D2 /* VerkaufsTracker */,
+				8F7FB841295E3AD6001EC0C0 /* ReadLog */,
 				8FA603912948CE99001CC2D2 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -143,6 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				8FA603902948CE99001CC2D2 /* VerkaufsTracker.app */,
+				8F7FB840295E3AD6001EC0C0 /* ReadLog */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -208,6 +245,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		8F7FB83F295E3AD6001EC0C0 /* ReadLog */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8F7FB846295E3AD6001EC0C0 /* Build configuration list for PBXNativeTarget "ReadLog" */;
+			buildPhases = (
+				8F7FB83C295E3AD6001EC0C0 /* Sources */,
+				8F7FB83D295E3AD6001EC0C0 /* Frameworks */,
+				8F7FB83E295E3AD6001EC0C0 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ReadLog;
+			productName = ReadLog;
+			productReference = 8F7FB840295E3AD6001EC0C0 /* ReadLog */;
+			productType = "com.apple.product-type.tool";
+		};
 		8FA6038F2948CE99001CC2D2 /* VerkaufsTracker */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8FA6039F2948CE9A001CC2D2 /* Build configuration list for PBXNativeTarget "VerkaufsTracker" */;
@@ -239,6 +293,9 @@
 				LastSwiftUpdateCheck = 1400;
 				LastUpgradeCheck = 1400;
 				TargetAttributes = {
+					8F7FB83F295E3AD6001EC0C0 = {
+						CreatedOnToolsVersion = 14.0.1;
+					};
 					8FA6038F2948CE99001CC2D2 = {
 						CreatedOnToolsVersion = 14.0.1;
 					};
@@ -262,6 +319,7 @@
 			projectRoot = "";
 			targets = (
 				8FA6038F2948CE99001CC2D2 /* VerkaufsTracker */,
+				8F7FB83F295E3AD6001EC0C0 /* ReadLog */,
 			);
 		};
 /* End PBXProject section */
@@ -279,6 +337,17 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		8F7FB83C295E3AD6001EC0C0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8F7FB84A295E3B36001EC0C0 /* Crypto.swift in Sources */,
+				8F7FB843295E3AD6001EC0C0 /* main.swift in Sources */,
+				8F7FB849295E3B2F001EC0C0 /* Extensions.swift in Sources */,
+				8F7FB848295E3AFC001EC0C0 /* secrets.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8FA6038C2948CE99001CC2D2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -321,6 +390,36 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		8F7FB844295E3AD6001EC0C0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = ReadLog/ReadLog.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = NO;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				PRODUCT_BUNDLE_IDENTIFIER = bene.verkaufstracker.readlog;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		8F7FB845295E3AD6001EC0C0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = ReadLog/ReadLog.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = NO;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				PRODUCT_BUNDLE_IDENTIFIER = bene.verkaufstracker.readlog;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 		8FA6039D2948CE9A001CC2D2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -519,6 +618,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		8F7FB846295E3AD6001EC0C0 /* Build configuration list for PBXNativeTarget "ReadLog" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8F7FB844295E3AD6001EC0C0 /* Debug */,
+				8F7FB845295E3AD6001EC0C0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		8FA6038B2948CE99001CC2D2 /* Build configuration list for PBXProject "VerkaufsTracker" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
