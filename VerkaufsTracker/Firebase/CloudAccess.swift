@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import CryptoKit
 
 struct CloudWrapper: Codable {
 	let data: Data
@@ -53,9 +52,7 @@ extension Verwaltung {
 					let decoder = JSONDecoder()
 					do {
 						let wrapper = try decoder.decode(CloudWrapper.self, from: data)
-						let encryptedData = wrapper.data
-						let sealedBox = try ChaChaPoly.SealedBox(combined: encryptedData)
-						let decryptedData = try ChaChaPoly.open(sealedBox, using: SECRETS.FB_EncryptionKey)
+						let decryptedData = try wrapper.data.decrypted()
 						let neueVerwaltung = try decoder.decode(Verwaltung.self, from: decryptedData)
 
 						print(neueVerwaltung)
@@ -84,8 +81,7 @@ extension Verwaltung {
 		do {
 			let encoder = JSONEncoder()
 			let data = try encoder.encode(self)
-			let encryptedBox = try! ChaChaPoly.seal(data, using: SECRETS.FB_EncryptionKey)
-			let encryptedData = encryptedBox.combined
+			let encryptedData = try data.encrypted()
 
 			let url = URL(string: "\(SECRETS.FB_DB_URL)/\(SECRETS.FB_SCOPE)/test.json?print=silent")!
 			var request = URLRequest(url: url)
