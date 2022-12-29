@@ -21,6 +21,9 @@ struct PersonenActionView: View {
 	@State var nurVollTicket = true
 	@State var unlockSendTicket = false
 
+	// Fülle
+	@State var unlockFuelleTickets = false
+
 	var body: some View {
 		VStack(spacing: 20){
 			Text("\(selectedPersonen.count) Personen ausgewählt")
@@ -45,6 +48,20 @@ struct PersonenActionView: View {
 				}
 				.unlockedStyle(unlockSendForm)
 			}
+
+			Button(role: .cancel,action: {
+				if unlockFuelleTickets {
+					DispatchQueue.global(qos: .default).async {
+						Aktion.fuelleTickets(veraltung: verwaltung, personen: selectedPersonen, ao: aktionObserver)
+					}
+					unlockFuelleTickets = false
+				} else {
+					unlockFuelleTickets = true
+				}
+			}) {
+				Text("Fülle Tickets")
+			}
+			.unlockedStyle(unlockFuelleTickets)
 
 			HStack {
 				Toggle("resend", isOn: $resendTicket)

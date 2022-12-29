@@ -14,12 +14,14 @@ class Ticket: Codable {
 	var versendet: Bool
 	let itemType: Item // ob das Ticket für die after show ist
 	let owner: UUID
+	let nth: Int
 
-	init(owner: Person, type: Item) {
+	init(owner: Person, type: Item, nth: Int) {
 		id = UUID().uuidString
 		versendet = false
 		self.itemType = type
 		self.owner = owner.id
+		self.nth = nth
 	}
 
 	func generateAttatchment() -> Attachment{

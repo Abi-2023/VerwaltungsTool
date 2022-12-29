@@ -33,7 +33,7 @@ struct TicketRenderer: View {
 struct TicketRenderer_Previews: PreviewProvider {
 
 	static var previews: some View {
-		TicketRenderer(ticket: Ticket(owner: Q2er(vorname: "Benedict", nachname: "***REMOVED***", email: "benedicts@icloud,com", notes: "", bestellungen: [:], extraFields: [:], verwaltung: Verwaltung()), type: .ball_ticket))
+		TicketRenderer(ticket: Ticket(owner: Q2er(vorname: "Benedict", nachname: "***REMOVED***", email: "benedicts@icloud,com", notes: "", bestellungen: [:], extraFields: [:], verwaltung: Verwaltung()), type: .ball_ticket, nth: 0))
 			.previewLayout(.fixed(width: /*@START_MENU_TOKEN@*/500.0/*@END_MENU_TOKEN@*/, height: 1000))
 			.frame(width: 500, height: 1000)
 	}

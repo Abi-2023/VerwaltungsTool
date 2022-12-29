@@ -22,6 +22,7 @@
 		8F8521F52959E27400854E16 /* AktionLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8521F42959E27400854E16 /* AktionLogView.swift */; };
 		8F8521F72959E49200854E16 /* fetchFromGoogleForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8521F62959E49200854E16 /* fetchFromGoogleForm.swift */; };
 		8F8521F9295A2B2100854E16 /* CloudView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8521F8295A2B2100854E16 /* CloudView.swift */; };
+		8F99E9AD295E15E9003B79DD /* Aktion_FuelleTickets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F99E9AC295E15E9003B79DD /* Aktion_FuelleTickets.swift */; };
 		8FA603942948CE99001CC2D2 /* VerkaufsTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA603932948CE99001CC2D2 /* VerkaufsTrackerApp.swift */; };
 		8FA603962948CE99001CC2D2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA603952948CE99001CC2D2 /* ContentView.swift */; };
 		8FA603982948CE9A001CC2D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8FA603972948CE9A001CC2D2 /* Assets.xcassets */; };
@@ -59,6 +60,7 @@
 		8F8521F42959E27400854E16 /* AktionLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AktionLogView.swift; sourceTree = "<group>"; };
 		8F8521F62959E49200854E16 /* fetchFromGoogleForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fetchFromGoogleForm.swift; sourceTree = "<group>"; };
 		8F8521F8295A2B2100854E16 /* CloudView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudView.swift; sourceTree = "<group>"; };
+		8F99E9AC295E15E9003B79DD /* Aktion_FuelleTickets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aktion_FuelleTickets.swift; sourceTree = "<group>"; };
 		8FA603902948CE99001CC2D2 /* VerkaufsTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VerkaufsTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FA603932948CE99001CC2D2 /* VerkaufsTrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerkaufsTrackerApp.swift; sourceTree = "<group>"; };
 		8FA603952948CE99001CC2D2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 				8FE0074029589B1E00E1B355 /* TicketRenderer.swift */,
 				8F794F2B295CD8C1007B16EB /* Aktion_sendTickets.swift */,
 				8F794F30295CF22F007B16EB /* Aktion_ImportTransaktionen.swift */,
+				8F99E9AC295E15E9003B79DD /* Aktion_FuelleTickets.swift */,
 			);
 			path = VerkaufsTracker;
 			sourceTree = "<group>";
@@ -279,6 +282,7 @@
 			files = (
 				8FBE080C2958ECDE0076AC2D /* StatsView.swift in Sources */,
 				8FD69E4529565A55001F4787 /* Lehrer.swift in Sources */,
+				8F99E9AD295E15E9003B79DD /* Aktion_FuelleTickets.swift in Sources */,
 				8F794F31295CF22F007B16EB /* Aktion_ImportTransaktionen.swift in Sources */,
 				8FBE08082958D9CE0076AC2D /* AktionenView.swift in Sources */,
 				8F2B6710294F998100C8FA2C /* PersonenView.swift in Sources */,

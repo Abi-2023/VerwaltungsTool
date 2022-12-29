@@ -41,7 +41,7 @@ struct ContentView: View {
 		}
 
 		Button(action: {
-			let t = Ticket(owner: verwaltung.personen.first!, type: .ball_ticket)
+			let t = Ticket(owner: verwaltung.personen.first!, type: .ball_ticket, nth: 0)
 			let dataAttachment = t.generateAttatchment()
 			let mail = Mail(
 				from: EmailManager.senderMail,
