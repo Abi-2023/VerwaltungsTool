@@ -34,6 +34,7 @@ struct PersonDetailView: View {
 								//formEmailConfirmationShown = true
 								selectedPersonen = [p]
 								state = .aktionen
+								person = nil
 							}) {
 								Text("Aktionen").font(.body.weight(.regular))
 							}
