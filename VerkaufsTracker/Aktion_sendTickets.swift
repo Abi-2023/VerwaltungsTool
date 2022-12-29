@@ -38,7 +38,7 @@ extension Aktion {
 	// TODO: maybe vor dem run hier auffüllen
 	// aber unsicher, ob man das getrennt braucht
 	static public func sendeTickets(personen: [Person], verwaltung v: Verwaltung, ao: AktionObserver, resend: Bool, nurVoll: Bool) {
-		ao.activate()
+		ao.activate(name: "sende Ticket")
 
 		// MARK: - generiere Emails
 		ao.log("start generating emails...")

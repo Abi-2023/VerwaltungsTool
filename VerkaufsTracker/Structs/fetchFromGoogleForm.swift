@@ -10,7 +10,7 @@ import Foundation
 extension Aktion {
 
 	static func fetchFromGoogleForm(verwaltung v: Verwaltung, ao: AktionObserver) {
-		ao.activate()
+		ao.activate(name: "Fetch Umfrageergebnisse")
 
 		func processEntry(entry e: [String]) -> Bool{
 			let id = e[safe: 1]

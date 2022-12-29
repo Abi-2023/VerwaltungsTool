@@ -11,7 +11,7 @@ extension Aktion {
 	static let ticketTypen: [Item] = [.ball_ticket, .after_show_ticket]
 
 	public static func fuelleTickets(veraltung v: Verwaltung, personen: [Person], ao: AktionObserver, unbezahlte: Bool = false) {
-		ao.activate()
+		ao.activate(name: "Fülle Tickets")
 		ao.setPrompt("Fülle Tickets")
 		var i = 0
 		ao.log("fülle tickets")

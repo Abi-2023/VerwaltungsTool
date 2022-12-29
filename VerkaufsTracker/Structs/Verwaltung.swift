@@ -19,6 +19,7 @@ class Verwaltung: ObservableObject, Codable {
 
 	@Published var personen: [Person] = []
 	@Published var transaktionen: [Transaktion] = []
+	var logs: Int? = 0
 
 	enum CodingKeys: CodingKey { case personenWrapper, transaktionen}
 

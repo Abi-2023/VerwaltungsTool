@@ -12,7 +12,7 @@ extension Aktion {
 
 	//resend: wenn Email bereits gesendet wurde wird bei false nicht nochmal gesendet
 	static func sendFormEmails(personen: [Person], observer: AktionObserver, resend: Bool = false) {
-		observer.activate()
+		observer.activate(name: "sende Form Emails")
 		observer.log("start generating emails...")
 		observer.setPrompt("GeneratingEmails")
 		var emailQueue: [(person: Person, mail: Mail)] = []
