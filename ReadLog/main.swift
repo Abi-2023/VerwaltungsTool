@@ -7,29 +7,9 @@
 
 import Foundation
 
-let logId = "1-34"
+let logId = "2-44"
 
 print("fetch log for \(logId)")
-
-extension Data {
-	/// Same as ``Data(base64Encoded:)``, but adds padding automatically
-	/// (if missing, instead of returning `nil`).
-	public static func fromBase64(_ encoded: String) -> Data? {
-		// Prefixes padding-character(s) (if needed).
-		var encoded = encoded;
-		let remainder = encoded.count % 4
-		if remainder > 0 {
-			encoded = encoded.padding(
-				toLength: encoded.count + 4 - remainder,
-				withPad: "=", startingAt: 0);
-		}
-
-		// Finally, decode.
-		return Data(base64Encoded: encoded);
-	}
-}
-
-
 
 let url = URL(string: "\(SECRETS.FB_DB_URL)/\(SECRETS.FB_SCOPE)/logs/\(logId).json")!
 let request = URLRequest(url: url)
@@ -43,8 +23,6 @@ let task = URLSession.shared.dataTask(with: request) { data, response, error in
 		guard let data = data else { return }
 
 		if responseCode == 200 {
-			//TODO: verabeiten
-			let decoder = JSONDecoder()
 			do {
 				let encryptedString = Data.fromBase64((String(data: data, encoding: .utf8) ?? "").replacingOccurrences(of: "\"", with: ""))
 				let decryptedData = try encryptedString?.decrypted()
@@ -66,6 +44,5 @@ let task = URLSession.shared.dataTask(with: request) { data, response, error in
 	wait.leave()
 }
 task.resume()
-
 wait.wait()
 
