@@ -50,7 +50,7 @@ extension Aktion {
 		}
 
 
-		let wait = DispatchSemaphore(value: 0)
+		let wait = DispatchGroup()
 
 		let ranges: [String] = [
 			"'Formularantworten 1'!B2:C500",
@@ -58,6 +58,8 @@ extension Aktion {
 			"Manuell!A2:B500",
 		]
 		for range in ranges {
+			ao.log("---\(range)")
+			wait.enter()
 			let URL_TO_DATA = URL(string: "https://sheets.googleapis.com/v4/spreadsheets/\(SECRETS.TRANSAKTIONEN_ID)/values:batchGet?key=\(SECRETS.FORM_ApiKey)&ranges=\(range)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!
 			ao.log("make Api Call to google forms")
 			let task = URLSession.shared.dataTask(with: URL_TO_DATA) {(data, response, error) in
@@ -77,7 +79,7 @@ extension Aktion {
 
 					ao.log("\(success)/\(dict.count) entries from range \(String(range.prefix(5))) are valid")
 
-					wait.signal()
+					wait.leave()
 				}else{
 					print("fehler bei der Api antwort")
 					ao.log("fehler bei der API Antwort")
@@ -86,12 +88,11 @@ extension Aktion {
 			}
 
 			task.resume()
-		}
-
-		let timeoutResult = wait.wait(timeout: .now() + 10)
-		if(timeoutResult == .timedOut){
-			ao.log("timout")
-			print("timeout")
+			let timeoutResult = wait.wait(timeout: .now() + 10)
+			if(timeoutResult == .timedOut){
+				ao.log("timout")
+				print("timeout")
+			}
 		}
 		ao.log("finish")
 		ao.finish()
