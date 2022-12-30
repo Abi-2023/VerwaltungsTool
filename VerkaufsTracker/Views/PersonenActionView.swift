@@ -40,6 +40,7 @@ struct PersonenActionView: View {
 						DispatchQueue.global(qos: .default).async {
 							Aktion.sendFormEmails(personen: selectedPersonen, observer: aktionObserver, resend: resendForm)
 						}
+						unlockSendForm = false
 					} else {
 						unlockSendForm = true
 					}
@@ -71,6 +72,7 @@ struct PersonenActionView: View {
 						DispatchQueue.global(qos: .default).async {
 							Aktion.sendeTickets(personen: selectedPersonen, verwaltung: verwaltung, ao: aktionObserver, resend: resendTicket, nurVoll: nurVollTicket)
 						}
+						unlockSendTicket = false
 					} else {
 						unlockSendTicket = true
 					}
