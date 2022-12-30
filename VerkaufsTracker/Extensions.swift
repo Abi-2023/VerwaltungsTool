@@ -43,3 +43,12 @@ extension SymmetricKey {
 		}
 	}
 }
+
+extension Int {
+	var geldStr: String {
+		let cents = self % 100
+		let euro = (self - cents) / 100
+		let extra = cents % 10 == 0 ? "0" : ""
+		return "\(euro),\(abs(cents))\(extra) €"
+	}
+}

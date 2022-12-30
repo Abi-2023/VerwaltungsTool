@@ -55,23 +55,23 @@ struct PersonDetailView: View {
 							HStack{
 								Text("Zuzahlender Betrag")
 								Spacer()
-								Text(p.zuzahlenderBetrag.formatted(.currency(code: "EUR")))
+								Text(p.zuzahlenderBetrag.geldStr)
 									.bold()
 							}
 
 							HStack{
 								Text("Gezahlter Betrag")
 								Spacer()
-								Text(p.gezahlterBetrag(v: verwaltung).formatted(.currency(code: "EUR")))
+								Text(p.gezahlterBetrag(v: verwaltung).geldStr)
 									.bold()
 							}
 
 							HStack{
 								Text("Offener Betrag")
 								Spacer()
-								Text(p.offenerBetrag(v: verwaltung).formatted(.currency(code: "EUR"))).underline()
+								Text(p.offenerBetrag(v: verwaltung).geldStr).underline()
 									.bold()
-									.foregroundColor(p.offenerBetrag(v: verwaltung) != 0 ? .red : .green)
+									.foregroundColor(p.offenerBetrag(v: verwaltung) == 0 ? .green : p.offenerBetrag(v: verwaltung) > 0 ? .red : .orange)
 							}
 						}
 
