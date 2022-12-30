@@ -13,114 +13,116 @@ struct PersonDetailView: View {
 	//	@State private var formEmailConfirmationShown = false
 	@Binding var selectedPersonen: [Person]
 	@Binding var state: AppState
-	@State var notes: String = ""
+	@State var notesTmp: String = ""
+	@State var showTextSaveButton = false
 
 	var body: some View {
 		ZStack{
 			if let p = person {
-				ScrollView(showsIndicators: false){
-					VStack(alignment: .leading, spacing: 20){
-						VStack(alignment: .leading, spacing: 0){
-							//title bar
-							HStack{
-								if type(of: p) == Q2er.self {
-									HStack{
-										Text((p as! Q2er).vorname)
-										Text((p as! Q2er).nachname)
+				ScrollViewReader { reader in
+					ScrollView(showsIndicators: false){
+						VStack(alignment: .leading, spacing: 20){
+							VStack(alignment: .leading, spacing: 0){
+								//title bar
+								HStack{
+									if type(of: p) == Q2er.self {
+										HStack{
+											Text((p as! Q2er).vorname)
+											Text((p as! Q2er).nachname)
+										}
+									} else {
+										Text(p.name)
 									}
-								} else {
-									Text(p.name)
+									Spacer()
+									Button(action: {person = nil}, label: {
+										Image(systemName: "xmark")
+									}).font(.body.weight(.regular))
+								}.font(.title.weight(.bold))
+
+
+								Text(p.email ?? "Keine Email hinterlegt")
+									.font(.body)
+								Text("Google-Form-ID: \(p.formID)")
+									.font(.body)
+							}
+
+							Button("Aktionen"){
+								//formEmailConfirmationShown = true
+								selectedPersonen = [p]
+								state = .aktionen
+								person = nil
+							}
+
+							VStack(spacing: 5){
+								HStack{
+									Text("Zuzahlender Betrag")
+									Spacer()
+									Text(p.zuzahlenderBetrag.geldStr)
+										.bold()
 								}
-								Spacer()
-								Button(action: {person = nil}, label: {
-									Image(systemName: "xmark")
-								}).font(.body.weight(.regular))
-							}.font(.title.weight(.bold))
 
-
-							Text(p.email ?? "Keine Email hinterlegt")
-								.font(.body)
-							Text("Google-Form-ID: \(p.formID)")
-								.font(.body)
-						}
-						
-						Button("Aktionen"){
-							//formEmailConfirmationShown = true
-							selectedPersonen = [p]
-							state = .aktionen
-							person = nil
-						}
-
-						VStack(spacing: 5){
-							HStack{
-								Text("Zuzahlender Betrag")
-								Spacer()
-								Text(p.zuzahlenderBetrag.geldStr)
-									.bold()
-							}
-
-							HStack{
-								Text("Gezahlter Betrag")
-								Spacer()
-								Text(p.gezahlterBetrag(v: verwaltung).geldStr)
-									.bold()
-							}
-
-							HStack{
-								Text("Offener Betrag")
-								Spacer()
-								Text(p.offenerBetrag(v: verwaltung).geldStr).underline()
-									.bold()
-									.foregroundColor(p.offenerBetrag(v: verwaltung) == 0 ? .green : p.offenerBetrag(v: verwaltung) > 0 ? .red : .orange)
-							}
-						}
-
-
-
-
-						//            .confirmationDialog(
-						//                "Email versenden?",
-						//                 isPresented: $formEmailConfirmationShown
-						//            ) {
-						//                Button("Ja, senden!") {
-						//                    let mm = EmailManager()
-						//                    mm.sendMail(mail: p.generateFormEmail()!)
-						//                }
-						//            }
-						BestellungsUebersicht(p: p)
-						Divider()
-						ExtraFields(p: p)
-
-
-						// TODO: einfügen
-						//            var bestellungen: [UUID: Int]
-						//            var extraFields: [String: String]
-						
-						Divider()
-						
-						VStack(spacing: 5) {
-							HStack{
-								Text("Notizen")
-									.font(.title2.bold())
-								Spacer()
-							}
-							
-							TextEditor(text: $notes)
-								.frame(height: 200)
-								.border(.gray)
-								.onChange(of: notes){ _ in
-									p.notes = notes
+								HStack{
+									Text("Gezahlter Betrag")
+									Spacer()
+									Text(p.gezahlterBetrag(v: verwaltung).geldStr)
+										.bold()
 								}
-							
+
+								HStack{
+									Text("Offener Betrag")
+									Spacer()
+									Text(p.offenerBetrag(v: verwaltung).geldStr).underline()
+										.bold()
+										.foregroundColor(p.offenerBetrag(v: verwaltung) == 0 ? .green : p.offenerBetrag(v: verwaltung) > 0 ? .red : .orange)
+								}
+							}
+							BestellungsUebersicht(p: p)
+							Divider()
+							ExtraFields(p: p)
+
+							Divider()
+
+							VStack(spacing: 5) {
+								HStack{
+									Text("Notizen")
+										.font(.title2.bold())
+									Spacer()
+									if showTextSaveButton {
+										Button(action: {
+											showTextSaveButton = false
+											UIApplication.shared.endEditing()
+										}) {
+											Text("fertig")
+										}
+									}
+								}
+
+								TextEditor(text: $notesTmp)
+									.frame(height: 200)
+									.border(.gray)
+									.onChange(of: notesTmp){ _ in
+										p.notes = notesTmp
+									}
+									.onTapGesture {
+										DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+											reader.scrollTo("notizen", anchor: .bottom)
+											showTextSaveButton = true
+										}
+									}
+									.onAppear {
+										notesTmp = p.notes
+									}
+									.id("notizen")
+
 								
+							}
+
+							Spacer()
 						}
-						
-						Spacer()
 					}
 				}
 			}
-		}
-		.padding()
+		}.padding()
 	}
 }
 
@@ -176,3 +178,13 @@ struct ExtraFields: View{
 		}
 	}
 }
+
+//            .confirmationDialog(
+//                "Email versenden?",
+//                 isPresented: $formEmailConfirmationShown
+//            ) {
+//                Button("Ja, senden!") {
+//                    let mm = EmailManager()
+//                    mm.sendMail(mail: p.generateFormEmail()!)
+//                }
+//            }
