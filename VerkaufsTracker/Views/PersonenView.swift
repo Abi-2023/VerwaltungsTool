@@ -45,6 +45,7 @@ struct PersonenView: View {
 				.textFieldStyle(.roundedBorder)
 			Button(action: {
 				searchQuery = ""
+				UIApplication.shared.endEditing()
 			}) {
 				Image(systemName: "xmark")
 			}
