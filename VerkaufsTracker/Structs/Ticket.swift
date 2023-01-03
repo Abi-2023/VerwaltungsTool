@@ -26,11 +26,14 @@ class Ticket: Codable {
 
 	func generateAttatchment(verwaltung v: Verwaltung) -> Attachment{
 		let ticketPdfData = exportTicketToPDFData(verwaltung: v)
+		let nameMap = [Item.ball_ticket : "ball_ticket", Item.after_show_ticket : "after_show_ticket"]
+		let ticketName = "\(nameMap[itemType, default: "unbekannt"])\(nth).pdf"
+
 		// TODO: PDF komprimieren
 		let dataAttachment = Attachment(
 			data: ticketPdfData,
 			mime: "application/pdf",
-			name: "ticket.pdf",
+			name: ticketName,
 			inline: false
 		)
 		return dataAttachment
