@@ -13,7 +13,6 @@ import CodeScanner
 
 struct ContentView: View {
 	@State private var isShowingScanner = false
-	@State var image: UIImage?
 	@ObservedObject var verwaltung: Verwaltung
 
 
@@ -25,20 +24,7 @@ struct ContentView: View {
 			Text("Hello, world!")
 		}
 		.padding()
-		.onAppear {
-			let x2 = VerifyTicket()
-			image = generateQRCode(from: "abc")
 
-			print(image)
-		}
-		if let image2 = image {
-//			Image(uiImage: image2)
-//				.resizable()
-//			//				.scaleEffect(2)
-//			//				.foregroundColor(.blue)
-//			//				.background(.red)
-//				.scaledToFit()
-		}
 
 		Button(action: {
 			let t = Ticket(owner: verwaltung.personen.first!, type: .ball_ticket, nth: 0)
@@ -75,7 +61,16 @@ struct ContentView: View {
 			verwaltung.disconnectFromServer()
 		}) {
 			Text("disconnect")
-		}
+		}.padding()
+
+
+		Button(action: {
+			let str = PDFRenderer().renderTicket(ticket: Ticket(owner: Person(name: "Benedict", email: "***REMOVED***", verwaltung: Verwaltung()), type: .ball_ticket, nth: 1))
+			let renderer = CustomPrintPageRenderer()
+			renderer.exportHTMLContentToPDF(HTMLContent: str!)
+		}) {
+			Text("render ticket")
+		}.padding()
 
 #if canImport(CodeScanner)
 		Button(action: {

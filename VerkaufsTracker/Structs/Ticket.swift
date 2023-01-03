@@ -38,37 +38,8 @@ class Ticket: Codable {
 }
 
 func exportTicketToPDF(ticket: Ticket) -> Data {
-	let pageSize = CGSize(width: 500, height: 1000)
-
-	// View to render on PDF
-	let renderView = TicketRenderer(ticket: ticket)
-	let myUIHostingController = UIHostingController(rootView: renderView)
-	myUIHostingController.view.frame = CGRect(origin: .zero, size: pageSize)
-	myUIHostingController.view.backgroundColor = UIColor.white
-
-
-	// Render the view behind all other views
-	let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
-	let window = windowScene?.windows.first
-	guard let rootVC = window?.rootViewController else {
-		print("ERROR: Could not find root ViewController.")
-		return Data() // TODO: throw
-	}
-	rootVC.addChild(myUIHostingController)
-	// at: 0 -> draws behind all other views
-	// at: UIApplication.shared.windows.count -> draw in front
-	rootVC.view.insertSubview(myUIHostingController.view, at: 0)
-
-
-	// Render the PDF
-	let pdfRenderer = UIGraphicsPDFRenderer(bounds: CGRect(origin: .zero, size: pageSize))
-			let pdfData = pdfRenderer.pdfData(actions: { (context) in
-				context.beginPage()
-				myUIHostingController.view.layer.render(in: context.cgContext)
-			})
-		myUIHostingController.removeFromParent()
-		myUIHostingController.view.removeFromSuperview()
-	return pdfData
+	fatalError("not implemented")
+//	return pdfData
 }
 
 func exportToPDFAndOpenDialog(ticket: Ticket) {
