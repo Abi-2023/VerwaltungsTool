@@ -16,7 +16,7 @@ extension Aktion {
 		var i = 0
 		ao.log("fülle tickets")
 		for person in personen {
-			if person.offenerBetrag(v: v) < 0 || unbezahlte {
+			if person.offenerBetrag(v: v) <= 0 || unbezahlte {
 				// Person hat bezahlt
 				for itemType in Aktion.ticketTypen {
 					let anzahlTickets = person.tickets.filter({$0.itemType == itemType}).count
