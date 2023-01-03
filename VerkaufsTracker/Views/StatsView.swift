@@ -6,58 +6,83 @@
 //
 
 import SwiftUI
+import Charts
 
 struct StatsView: View {
 	let verwaltung: Verwaltung
+	
+	let column: [GridItem] = Array(repeating: GridItem(), count: 2)
+	
 	var body: some View {
-		VStack(alignment: .leading, spacing: 20){
-			Text("Statistiken").font(.largeTitle.bold())
-			HStack(spacing: 150){
-				let wunschTickets = verwaltung.personen.map({$0.wuenschBestellungen[.ball_ticket] ?? 0}).reduce(0, +)
-				
-				VStack(alignment: .center){
-					Text("Gewünschte Tickets").font(.title.bold())
-					Pie(slices: [(Double(wunschTickets), .blue), (Double(Item.ball_ticket.verfuegbar-wunschTickets), .red)])
-					VStack(alignment: .leading, spacing: 0){
-						HStack(alignment: .center){
-							Circle().fill(.blue).frame(width: 10, height: 10)
-							Text("Belegte Tickets:")
-							Spacer()
-							Text("\(wunschTickets)/\(Item.ball_ticket.verfuegbar) (\((Int(Float(wunschTickets) / Float(Item.ball_ticket.verfuegbar)*100)))%)").bold()
-						}
-						HStack{
-							Circle().fill(.red).frame(width: 10, height: 10)
-							Text("Freie Tickets:")
-							Spacer()
-							Text("\(Item.ball_ticket.verfuegbar - wunschTickets)/\(Item.ball_ticket.verfuegbar) (\((Int(Float(Item.ball_ticket.verfuegbar-wunschTickets) / Float(Item.ball_ticket.verfuegbar)*100)))%)").bold()
-						}
-					}
-				}
-								
-				let formSubmitted = verwaltung.personen.filter({$0.extraFields["hatFormEingetragen", default: ""] == "1"}).count
-				
-				VStack(alignment: .center){
-					Text("Formular ausgefüllt").font(.title.bold())
-					Pie(slices: [(Double(formSubmitted), .blue), (Double(verwaltung.personen.count-formSubmitted), .red)])
-					VStack(alignment: .leading, spacing: 0){
-						HStack(alignment: .center){
-							Circle().fill(.blue).frame(width: 10, height: 10)
-							Text("Formular ausgefüllt:")
-							Spacer()
-							Text("\(formSubmitted)/\(verwaltung.personen.count) (\((Int(Float(formSubmitted) / Float(verwaltung.personen.count)*100)))%)").bold()
-						}
-						HStack{
-							Circle().fill(.red).frame(width: 10, height: 10)
-							Text("Formular nicht ausgefüllt:")
-							Spacer()
-							Text("\(verwaltung.personen.count - formSubmitted)/\(verwaltung.personen.count) (\((Int(Float(verwaltung.personen.count-formSubmitted) / Float(verwaltung.personen.count)*100)))%)").bold()
-						}
-					}
+		ScrollView(showsIndicators: false){
+			VStack(spacing: 30){
+				Text("Statistiken").font(.largeTitle.bold())
+				LazyVGrid(columns: column){
+					let wunschTickets = verwaltung.personen.map({$0.wuenschBestellungen[.ball_ticket] ?? 0}).reduce(0, +)
+					PieChart(title: "Ball-Tickets", statement: "Belegte Tickets", counterStatement: "Freie Tickets", value: wunschTickets, capacityValue: Item.ball_ticket.verfuegbar)
+					
+					let wunschTicketsASP = verwaltung.personen.map({$0.wuenschBestellungen[.after_show_ticket] ?? 0}).reduce(0, +)
+					PieChart(title: "ASP-Tickets", statement: "Belegte Tickets", counterStatement: "Freie Tickets", value: wunschTicketsASP, capacityValue: Item.after_show_ticket.verfuegbar)
+					
+					let wunschTicketsBuch = verwaltung.personen.map({$0.wuenschBestellungen[.buch] ?? 0}).reduce(0, +)
+					PieChart(title: "Buch", statement: "Reserviert", counterStatement: "Frei", value: wunschTicketsBuch, capacityValue: Item.buch.verfuegbar)
+					
+					let wunschTicketsPulli = verwaltung.personen.map({$0.wuenschBestellungen[.pulli] ?? 0}).reduce(0, +)
+					PieChart(title: "Pulli", statement: "Reserviert", counterStatement: "Frei", value: wunschTicketsPulli, capacityValue: Item.pulli.verfuegbar)
+						
+					let formSubmitted = verwaltung.personen.filter({$0.extraFields["hatFormEingetragen", default: ""] == "1"}).count
+					PieChart(title: "Formularteilnahme", statement: "Formular ausgefüllt", counterStatement: "Formular ausstehend", value: formSubmitted, capacityValue: verwaltung.personen.count)
 				}
 			}
 		}.padding()
 	}
 }
+
+struct PieChart: View{
+	let title: String
+	let statement: String
+	let counterStatement: String
+	let value: Int
+	let capacityValue: Int
+	
+	var statementPercentage: String {
+		let v = Float(value)
+		let cV = Float(capacityValue)
+		let percentage = v/cV * 100
+		let string = String(format: "%0.1f",percentage)
+		return string
+	}
+	
+	var counterStatementPercentage: String {
+		let v = Float(capacityValue-value)
+		let cV = Float(capacityValue)
+		let percentage = v/cV * 100
+		let string = String(format: "%0.1f",percentage)
+		return string
+	}
+	
+	var body: some View{
+		VStack(alignment: .center){
+			Text(title).font(.title.bold())
+			Pie(slices: [(Double(value), .blue), (Double(capacityValue-value), .red)])
+			VStack(alignment: .leading, spacing: 0){
+				HStack(alignment: .center){
+					Circle().fill(.blue).frame(width: 10, height: 10)
+					Text(statement)
+					Spacer()
+					Text("\(value)/\(capacityValue) (\(statementPercentage)%)").bold()
+				}
+				HStack{
+					Circle().fill(.red).frame(width: 10, height: 10)
+					Text(counterStatement)
+					Spacer()
+					Text("\(capacityValue - value)/\(capacityValue) (\(counterStatementPercentage)%)").bold()
+				}
+			}
+		}.padding()
+	}
+}
+
 
 struct Pie: View {
 
