@@ -46,6 +46,11 @@ extension Aktion {
 		var emailQueue: [(person: Person, mail: Mail)] = []
 
 		for person in personen {
+			if person.tickets.isEmpty{
+				ao.log("skipping: \(person.name) (keine Tickets)")
+				continue
+			}
+
 			if person.tickets.allSatisfy({$0.versendet}) && !resend{
 				ao.log("skipping: \(person.name) (alle schon gesendet)")
 				continue
