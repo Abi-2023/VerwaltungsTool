@@ -62,7 +62,7 @@ class Q2er: Person {
 
 	override func generateFormEmail() -> Mail{
 
-		let subject = "Abi-Umfrage"
+		let subject = "Abi Wunschabgabe"
 
 		let formName = formName.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "Name"
 		let formUrl = "***REMOVED***/viewform?usp=pp_url&entry.382473335=\(formID)&entry.2014446974=\(formName)"
