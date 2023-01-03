@@ -24,8 +24,8 @@ class Ticket: Codable {
 		self.nth = nth
 	}
 
-	func generateAttatchment() -> Attachment{
-		let ticketPdfData = exportTicketToPDF(ticket: self)
+	func generateAttatchment(verwaltung v: Verwaltung) -> Attachment{
+		let ticketPdfData = exportTicketToPDFData(verwaltung: v)
 		// TODO: PDF komprimieren
 		let dataAttachment = Attachment(
 			data: ticketPdfData,
@@ -35,15 +35,18 @@ class Ticket: Codable {
 		)
 		return dataAttachment
 	}
+
+	func exportTicketToPDFData(verwaltung v: Verwaltung) -> Data {
+		let renderer = CustomPrintPageRenderer()
+		let pdfData = renderer.exportHTMLContentToPDFData(HTMLContent: self.ticketHTML(verwaltung: v))
+
+		return pdfData
+	}
+
 }
 
-func exportTicketToPDF(ticket: Ticket) -> Data {
-	fatalError("not implemented")
-//	return pdfData
-}
-
-func exportToPDFAndOpenDialog(ticket: Ticket) {
-	let pdfData = exportTicketToPDF(ticket: ticket)
+func exportToPDFAndOpenDialog(ticket: Ticket, verwaltung: Verwaltung) {
+	let pdfData = ticket.exportTicketToPDFData(verwaltung: verwaltung)
 	let activityViewController = UIActivityViewController(activityItems: [pdfData],
 														  applicationActivities: nil)
 

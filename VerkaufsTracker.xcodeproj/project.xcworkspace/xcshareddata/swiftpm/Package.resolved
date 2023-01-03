@@ -55,6 +55,15 @@
       }
     },
     {
+      "identity" : "swift-qrcode-generator",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/fwcd/swift-qrcode-generator.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "5891c4f87abb86fc71e394672119a897068662c0"
+      }
+    },
+    {
       "identity" : "swift-smtp",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Kitura/Swift-SMTP",

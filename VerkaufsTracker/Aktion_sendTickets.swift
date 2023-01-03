@@ -11,11 +11,11 @@ import SwiftSMTP
 
 extension Aktion {
 
-	fileprivate static func generateTicketEmailForPerson(p: Person) -> Mail? {
+	fileprivate static func generateTicketEmailForPerson(p: Person, v: Verwaltung) -> Mail? {
 		var attachments: [Attachment] = []
 
 		for ticket in p.tickets {
-			attachments.append(ticket.generateAttatchment())
+			attachments.append(ticket.generateAttatchment(verwaltung: v))
 		}
 
 		guard let mailUser = p.mailUser else {
@@ -71,11 +71,17 @@ extension Aktion {
 				ao.log("skipping: \(person.name) (nicht voll generiert)")
 			}
 
-			if let mail = generateTicketEmailForPerson(p: person) {
-				emailQueue.append((person, mail))
-			} else {
-				ao.log("Could not generateEmail for \(person.name)")
+			let workerGroup = DispatchGroup()
+			workerGroup.enter()
+			DispatchQueue.main.async {
+				if let mail = generateTicketEmailForPerson(p: person, v: v) {
+					emailQueue.append((person, mail))
+				} else {
+					ao.log("Could not generateEmail for \(person.name)")
+				}
+				workerGroup.leave()
 			}
+			workerGroup.wait()
 		}
 
 

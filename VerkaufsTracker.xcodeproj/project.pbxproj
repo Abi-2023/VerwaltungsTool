@@ -16,6 +16,7 @@
 		8F68A58A295B1CD900CAFAD6 /* CloudAvailability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F68A589295B1CD900CAFAD6 /* CloudAvailability.swift */; };
 		8F794F2C295CD8C1007B16EB /* Aktion_sendTickets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F794F2B295CD8C1007B16EB /* Aktion_sendTickets.swift */; };
 		8F794F31295CF22F007B16EB /* Aktion_ImportTransaktionen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F794F30295CF22F007B16EB /* Aktion_ImportTransaktionen.swift */; };
+		8F7B13E7296337A600B04F9D /* QRCodeGenerator in Frameworks */ = {isa = PBXBuildFile; productRef = 8F7B13E6296337A600B04F9D /* QRCodeGenerator */; };
 		8F7FB049294E4297005F4551 /* FormularMail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7FB048294E4297005F4551 /* FormularMail.swift */; };
 		8F7FB843295E3AD6001EC0C0 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7FB842295E3AD6001EC0C0 /* main.swift */; };
 		8F7FB848295E3AFC001EC0C0 /* secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD6455E294D014700D746F8 /* secrets.swift */; };
@@ -117,6 +118,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8F128AF2294D0BCA002D3801 /* CodeScanner in Frameworks */,
+				8F7B13E7296337A600B04F9D /* QRCodeGenerator in Frameworks */,
 				8FD6455A294CFD6E00D746F8 /* SwiftSMTP in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -278,6 +280,7 @@
 			packageProductDependencies = (
 				8FD64559294CFD6E00D746F8 /* SwiftSMTP */,
 				8F128AF1294D0BCA002D3801 /* CodeScanner */,
+				8F7B13E6296337A600B04F9D /* QRCodeGenerator */,
 			);
 			productName = VerkaufsTracker;
 			productReference = 8FA603902948CE99001CC2D2 /* VerkaufsTracker.app */;
@@ -313,6 +316,7 @@
 			packageReferences = (
 				8FD64558294CFD6E00D746F8 /* XCRemoteSwiftPackageReference "Swift-SMTP" */,
 				8F128AF0294D0BCA002D3801 /* XCRemoteSwiftPackageReference "CodeScanner" */,
+				8F7B13E5296337A600B04F9D /* XCRemoteSwiftPackageReference "swift-qrcode-generator" */,
 			);
 			productRefGroup = 8FA603912948CE99001CC2D2 /* Products */;
 			projectDirPath = "";
@@ -535,6 +539,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = VerkaufsTracker/VerkaufsTracker.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"VerkaufsTracker/Preview Content\"";
@@ -560,7 +565,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 12.3;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = benede.VerkaufsTracker;
+				PRODUCT_BUNDLE_IDENTIFIER = benede.VerkaufsTracker.2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
@@ -578,6 +583,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = VerkaufsTracker/VerkaufsTracker.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"VerkaufsTracker/Preview Content\"";
@@ -603,7 +609,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 12.3;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = benede.VerkaufsTracker;
+				PRODUCT_BUNDLE_IDENTIFIER = benede.VerkaufsTracker.2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
@@ -656,6 +662,14 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		8F7B13E5296337A600B04F9D /* XCRemoteSwiftPackageReference "swift-qrcode-generator" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/fwcd/swift-qrcode-generator.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		8FD64558294CFD6E00D746F8 /* XCRemoteSwiftPackageReference "Swift-SMTP" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Kitura/Swift-SMTP";
@@ -671,6 +685,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8F128AF0294D0BCA002D3801 /* XCRemoteSwiftPackageReference "CodeScanner" */;
 			productName = CodeScanner;
+		};
+		8F7B13E6296337A600B04F9D /* QRCodeGenerator */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8F7B13E5296337A600B04F9D /* XCRemoteSwiftPackageReference "swift-qrcode-generator" */;
+			productName = QRCodeGenerator;
 		};
 		8FD64559294CFD6E00D746F8 /* SwiftSMTP */ = {
 			isa = XCSwiftPackageProductDependency;

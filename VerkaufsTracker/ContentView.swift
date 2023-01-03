@@ -28,7 +28,7 @@ struct ContentView: View {
 
 		Button(action: {
 			let t = Ticket(owner: verwaltung.personen.first!, type: .ball_ticket, nth: 0)
-			let dataAttachment = t.generateAttatchment()
+			let dataAttachment = t.generateAttatchment(verwaltung: verwaltung)
 			let mail = Mail(
 				from: EmailManager.senderMail,
 				to: [Mail.User(name: "Bene123", email: "***REMOVED***")],
@@ -65,9 +65,9 @@ struct ContentView: View {
 
 
 		Button(action: {
-			let str = PDFRenderer().renderTicket(ticket: Ticket(owner: Person(name: "Benedict", email: "***REMOVED***", verwaltung: Verwaltung()), type: .ball_ticket, nth: 1))
-			let renderer = CustomPrintPageRenderer()
-			renderer.exportHTMLContentToPDF(HTMLContent: str!)
+//			let str = PDFRenderer().renderTicket(ticket: Ticket(owner: Person(name: "Benedict", email: "***REMOVED***", verwaltung: Verwaltung()), type: .ball_ticket, nth: 1))
+//			let renderer = CustomPrintPageRenderer()
+//			renderer.exportHTMLContentToPDF(HTMLContent: str!)
 		}) {
 			Text("render ticket")
 		}.padding()
