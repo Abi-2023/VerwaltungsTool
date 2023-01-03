@@ -8,7 +8,7 @@
 import SwiftUI
 
 enum AppState {
-	case personenView, stats, aktionen, debug
+	case personenView, stats, aktionen, debug, scanner
 }
 
 @main
@@ -31,12 +31,16 @@ struct VerkaufsTrackerApp: App {
 						CloudView(v: verwaltung)
 					}else if aktionObserver.aktiv{
 						AktionLogView(ao: aktionObserver)
+					} else if state == .scanner{
+#if canImport(CodeScanner)
+						ScannerView(verwaltung: verwaltung, state: $state)
+#endif
 					} else {
 						switch state {
 						case .personenView:
 							PersonenView(verwaltung: verwaltung, state: $state, selectMode: $selectMode, selectedPersonen: $selectedPersonen)
 						case .debug:
-							ContentView(verwaltung: verwaltung)
+							ContentView(verwaltung: verwaltung, state: $state)
 						case .aktionen:
 							if selectedPersonen.isEmpty {
 								AktionenView(verwaltung: verwaltung, selectedPersonen: $selectedPersonen, aktionObserver: aktionObserver)
@@ -45,6 +49,8 @@ struct VerkaufsTrackerApp: App {
 							}
 						case .stats:
 							StatsView(verwaltung: verwaltung)
+						default:
+							Text("error")
 						}
 						Spacer()
 						Navbar(appState: $state, width: reader.size.width)

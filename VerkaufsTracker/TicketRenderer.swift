@@ -13,7 +13,7 @@ import QRCodeGenerator
 extension Ticket {
 	func ticketHTML(verwaltung v: Verwaltung) -> String {
 		let vt = VerifyTicket()
-		let qrText = vt.signatureForId(id: self.id)
+		let qrText = vt.createToken(ticketId: self.id)
 
 		let qr = try! QRCode.encode(text: qrText, ecl: .medium)
 		let svg = qr.toSVGString(border: 10, width: 600, foreground: "#FFF", background: "#00000000")

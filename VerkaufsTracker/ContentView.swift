@@ -7,13 +7,10 @@
 
 import SwiftUI
 import SwiftSMTP
-#if canImport(CodeScanner)
-import CodeScanner
-#endif
 
 struct ContentView: View {
-	@State private var isShowingScanner = false
 	@ObservedObject var verwaltung: Verwaltung
+	@Binding var state: AppState
 
 
 	var body: some View {
@@ -24,8 +21,8 @@ struct ContentView: View {
 			Text("Hello, world!")
 		}
 		.padding()
-
-
+		
+		
 		Button(action: {
 			let t = Ticket(owner: verwaltung.personen.first!, type: .ball_ticket, nth: 0)
 			let dataAttachment = t.generateAttatchment(verwaltung: verwaltung)
@@ -36,60 +33,49 @@ struct ContentView: View {
 				// The attachments we created earlier
 				attachments: [dataAttachment]
 			)
-
+			
 			let mailer = EmailManager()
 			mailer.sendMail(mail: mail)
-
-
+			
+			
 		}) {
 			Text("send mail with ticket")
 		}
-
+		
 		Button(action: {
 			verwaltung.uploadToCloud()
 		}) {
 			Text("Upload")
 		}
-
+		
 		Button(action: {
 			verwaltung.connectToCloud()
 		}) {
 			Text("fetch")
 		}
-
+		
 		Button(action: {
 			verwaltung.disconnectFromServer()
 		}) {
 			Text("disconnect")
 		}.padding()
-
-
+		
+		
 		Button(action: {
-//			let str = PDFRenderer().renderTicket(ticket: Ticket(owner: Person(name: "Benedict", email: "***REMOVED***", verwaltung: Verwaltung()), type: .ball_ticket, nth: 1))
-//			let renderer = CustomPrintPageRenderer()
-//			renderer.exportHTMLContentToPDF(HTMLContent: str!)
+			//			let str = PDFRenderer().renderTicket(ticket: Ticket(owner: Person(name: "Benedict", email: "***REMOVED***", verwaltung: Verwaltung()), type: .ball_ticket, nth: 1))
+			//			let renderer = CustomPrintPageRenderer()
+			//			renderer.exportHTMLContentToPDF(HTMLContent: str!)
 		}) {
 			Text("render ticket")
 		}.padding()
-
+		
 #if canImport(CodeScanner)
 		Button(action: {
-			isShowingScanner = true
+			state = .scanner
 		}) {
-			Text("Scan")
-		}
-		.sheet(isPresented: $isShowingScanner) {
-			CodeScannerView(codeTypes: [.qr], completion: handleScan)
+			Text("Scanner")
 		}
 		.padding()
 #endif
 	}
-#if canImport(CodeScanner)
-	func handleScan(result: Result<ScanResult, ScanError>) {
-		isShowingScanner = false
-
-		print(result)
-		// more code to come
-	}
-#endif
 }
