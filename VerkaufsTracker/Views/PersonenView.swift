@@ -33,6 +33,7 @@ struct PersonenView: View {
 	@State var searchQuery: String = ""
 	@Binding var selectMode: Bool
 	@Binding var selectedPersonen: [Person]
+    @State var selectedAllPersonen: Bool = false
 
 	@State var showFilterShortcut = false
 	@State var zeigeAusgewaelte = false
@@ -115,7 +116,26 @@ struct PersonenView: View {
 					Button(action: {
 						selectedPerson = person
 					}) {
-						Text(person.name)
+                        HStack {
+                            Text(person.name)
+                                .foregroundColor(person.zuzahlenderBetrag == 0 ? .gray : person.offenerBetrag(v: verwaltung) <= 0 ? .green : .red)
+                            
+                            Spacer()
+                            
+                            
+                            if(person.extraFields[extraFields(rawValue: "sendFormEmail")!] != "0" && person.extraFields[extraFields(rawValue: "hatFormEingetragen")!] != "0" &&
+                               person.offenerBetrag(v: verwaltung) <= 0 &&  person.zuzahlenderBetrag != 0){
+                                Image(systemName: "checkmark.circle").foregroundColor(.green)
+                            } else {
+                                if(person.extraFields[extraFields(rawValue: "sendFormEmail")!] != nil){
+                                    Image(systemName: "paperplane")
+                                }
+                                
+                                if(person.extraFields[extraFields(rawValue: "hatFormEingetragen")!] != nil){
+                                    Image(systemName: "doc")
+                                }
+                            }
+                        }
 					}
 					.buttonStyle(.borderless)
 
