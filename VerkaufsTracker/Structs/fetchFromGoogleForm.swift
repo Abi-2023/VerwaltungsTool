@@ -12,44 +12,61 @@ extension Aktion {
 	static func fetchFromGoogleForm(verwaltung v: Verwaltung, ao: AktionObserver) {
 		ao.activate(name: "Fetch Umfrageergebnisse")
 
-		func processEntry(entry e: [String]) -> Bool{
+		var valid = 0
+		var deleted = 0
+
+		func processEntry(entry e: [String]) {
 			let id = e[safe: 1]
 			let name = e[safe: 2]
-			let ballTickets = Int(e[safe: 3] ?? "")
-			let afterShowTickets = Int(e[safe: 4] ?? "")
+			let ballTickets = Int(e[safe: 4] ?? "")
+			let afterShowTickets = Int(e[safe: 5] ?? "")
+			let pulli_xs = Int(e[safe: 6] ?? "")
+			let pulli_s = Int(e[safe: 7] ?? "")
+			let pulli_m = Int(e[safe: 8] ?? "")
+			let pulli_l = Int(e[safe: 9] ?? "")
+			let pulli_xl = Int(e[safe: 10] ?? "")
+			let buch = Int(e[safe: 11] ?? "")
 
-			if id == nil || name == nil || ballTickets == nil || afterShowTickets == nil {
-				ao.log("error parsing entry: \(id ?? "?"), \(name ?? "?"), \(ballTickets ?? -1), \(afterShowTickets ?? -1)")
-				return false
+			if id == "-" {
+				deleted += 1
+				return
+			}
+
+			if id == nil || name == nil || ballTickets == nil || afterShowTickets == nil || pulli_xs == nil || pulli_s == nil || pulli_m == nil || pulli_l == nil || pulli_xl == nil || buch == nil {
+				ao.log("error parsing entry: \(e[safe: 0] ?? "?") \(id ?? "?"), \(name ?? "?")")
+				return
 			}
 
 			guard let person = v.personen.first(where: {$0.formID == id}) else {
-				ao.log("keine Person mit folgender ID gefunden: \(id ?? "?"), \(name ?? "?")")
-				return false
+				ao.log("keine Person mit folgender ID gefunden: \(e[safe: 0] ?? "?") \(id ?? "?"), \(name ?? "?")")
+				return
 			}
 
 			if name!.replacingOccurrences(of: " ", with: "") != person.formName.replacingOccurrences(of: " ", with: "") {
-				ao.log("name und ID passen nicht: \(id ?? "?"), \(name ?? "?")")
-				return false
+				ao.log("name und ID passen nicht: \(e[safe: 0] ?? "?") \(id ?? "?"), \(name ?? "?")")
+				return
 			}
 
-			if ballTickets! < 0 || ballTickets! > 10 || afterShowTickets! < 0 || afterShowTickets! > 10 {
-				ao.log("Anzahl kann nicht stimmen: \(id ?? "?"), \(name ?? "?"), \(ballTickets ?? -1), \(afterShowTickets ?? -1)")
-				return false
+			if ballTickets! < 0 || afterShowTickets! < 0 || pulli_xs! < 0 || pulli_s! < 0 || pulli_m! < 0 || pulli_l! < 0 || pulli_xl! < 0 || buch! < 0 || ballTickets! > 10 || afterShowTickets! > 10 || pulli_xs! > 3 || pulli_s! > 3 || pulli_m! > 3 || pulli_l! > 3 || pulli_xl! > 3 || buch! > 5 {
+				ao.log("Anzahl kann nicht stimmen: \(e[safe: 0] ?? "?") \(id ?? "?"), \(name ?? "?")")
+				return
 			}
 
 			//person gefunden
 			person.wuenschBestellungen[.ball_ticket] = ballTickets!
 			person.wuenschBestellungen[.after_show_ticket] = afterShowTickets!
+			person.wuenschBestellungen[.buch] = buch!
+			person.wuenschBestellungen[.pulli] = pulli_xs! + pulli_s! + pulli_m! + pulli_l! + pulli_xl!
+
 			person.extraFields["hatFormEingetragen"] = "1"
 			ao.log("Für \(person.name) eingetragen")
-			return true
+			valid += 1
 		}
 
 
 		let wait = DispatchSemaphore(value: 0)
 
-		let range = "A2:G500"
+		let range = "A2:L500"
 		let URL_TO_DATA = URL(string: "https://sheets.googleapis.com/v4/spreadsheets/\(SECRETS.FORM_ID)/values:batchGet?key=\(SECRETS.FORM_ApiKey)&ranges=\(range)")!
 		ao.log("make Api Call to google forms")
 		let task = URLSession.shared.dataTask(with: URL_TO_DATA) {(data, response, error) in
@@ -60,14 +77,12 @@ extension Aktion {
 			if(result.contains("valueRanges")){
 				let dict = ((((result.convertToDictionary()!["valueRanges"]! as! [Any])[0]) as! [String: Any]) ["values"]) as! [[String]]
 				ao.log("fetched \(dict.count) entries")
-				var success = 0
 				for entry in dict {
-					if processEntry(entry: entry) {
-						success += 1
-					}
+					processEntry(entry: entry)
 				}
 
-				ao.log("\(success)/\(dict.count) entries are valid")
+				ao.log("\(deleted) disabled")
+				ao.log("\(valid)/\(dict.count - deleted) entries are valid")
 
 				wait.signal()
 			}else{
