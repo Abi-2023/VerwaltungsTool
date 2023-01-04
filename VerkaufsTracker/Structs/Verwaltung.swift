@@ -32,8 +32,8 @@ class Verwaltung: ObservableObject, Codable {
 		personen = wrapper.andere + wrapper.lehrer + wrapper.q2er
 		transaktionen = try container.decode(type(of: transaktionen), forKey: .transaktionen)
 
-		lastFetchForm = try container.decode(type(of: lastFetchForm), forKey: .lastFetchForm)
-		lastFetchTransaktionen = try container.decode(type(of: lastFetchTransaktionen), forKey: .lastFetchTransaktionen)
+		lastFetchForm = try? container.decode(type(of: lastFetchForm), forKey: .lastFetchForm)
+		lastFetchTransaktionen = try? container.decode(type(of: lastFetchTransaktionen), forKey: .lastFetchTransaktionen)
 	}
 
 	func encode(to encoder: Encoder) throws {
