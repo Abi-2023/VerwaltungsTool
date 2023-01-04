@@ -18,7 +18,7 @@ extension Aktion {
 		var emailQueue: [(person: Person, mail: Mail)] = []
 
 		for person in personen {
-			if person.extraFields["sendFormEmail", default: "0"] == "1" && !resend {
+			if person.extraFields[.sendFormEmail, default: "0"] == "1" && !resend {
 				observer.log("skipping \(person.name) (already send)")
 				continue
 			}
@@ -46,7 +46,7 @@ extension Aktion {
 					mail.person.notes += "\nFehler bei Form-Email \(Date.now.formatted(.dateTime))"
 				} else {
 					observer.log("send email to: \(mail.person.name)")
-					mail.person.extraFields["sendFormEmail"] = "1"
+					mail.person.extraFields[.sendFormEmail] = "1"
 					mail.person.notes += "\nForm-Email gesendet \(Date.now.formatted(.dateTime))"
 				}
 				workerGroup.leave()

@@ -8,6 +8,10 @@
 import Foundation
 import SwiftSMTP
 
+enum extraFields: String, Codable {
+	case sendFormEmail, hatFormEingetragen
+}
+
 class Person: Identifiable, Codable, Hashable {
 	static func == (lhs: Person, rhs: Person) -> Bool {
 		lhs.id == rhs.id &&
@@ -41,7 +45,7 @@ class Person: Identifiable, Codable, Hashable {
 
 	// was der Person zugesichert wurde
 	var bestellungen: [Item: Int]
-	var extraFields: [String: String]
+	var extraFields: [extraFields: String]
 	var tickets: [Ticket] = []
 	var formID: String
 	var name: String

@@ -172,8 +172,8 @@ struct ExtraFields: View{
 					.font(.title2.bold())
 				Spacer()
 			}
-			ForEach(Array(p.extraFields.keys).sorted(by: {$0 < $1}), id: \.self) { item in
-				Text("\(item): \(p.extraFields[item] ?? "????")")
+			ForEach(Array(p.extraFields.keys).sorted(by: {$0.rawValue < $1.rawValue}), id: \.self) { item in
+				Text("\(item.rawValue): \(p.extraFields[item] ?? "????")")
 			}
 		}
 	}

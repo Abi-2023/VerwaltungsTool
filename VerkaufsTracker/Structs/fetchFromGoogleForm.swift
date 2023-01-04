@@ -58,7 +58,7 @@ extension Aktion {
 			person.wuenschBestellungen[.buch] = buch!
 			person.wuenschBestellungen[.pulli] = pulli_xs! + pulli_s! + pulli_m! + pulli_l! + pulli_xl!
 
-			person.extraFields["hatFormEingetragen"] = "1"
+			person.extraFields[.hatFormEingetragen] = "1"
 			ao.log("Für \(person.name) eingetragen")
 			valid += 1
 		}

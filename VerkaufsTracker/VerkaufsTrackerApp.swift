@@ -59,9 +59,10 @@ struct VerkaufsTrackerApp: App {
 					aktionObserver.verwaltung = verwaltung
 //					verwaltung.cloud = .connected
 //					let person = Q2er(vorname: "Benedict", nachname: "***REMOVED***", email: "***REMOVED***", notes: "", bestellungen: [:], extraFields: [:], verwaltung: verwaltung)
-//					person.wuenschBestellungen[.ball_ticket] = 400;
+//					person.formID = "C1Q55"
+//
 //					let person2 = Q2er(vorname: "***REMOVED***", nachname: "***REMOVED***", email: "***REMOVED***", notes: "", bestellungen: [:], extraFields: [:], verwaltung: verwaltung)
-//					person2.wuenschBestellungen[.ball_ticket] = 400;
+//					person2.formID = "E1WS3"
 //					verwaltung.personen.append(person)
 //					verwaltung.personen.append(person2)
 				}
