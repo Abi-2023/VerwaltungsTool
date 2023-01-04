@@ -64,10 +64,14 @@ struct PersonenView: View {
                 }) {
                     Text("Alle auswählen")
                 }
-            }
-            
-            Spacer()
-            
+                Spacer()
+                if(!selectedPersonen.isEmpty){
+                    Button("Aktionen"){
+                        state = .aktionen
+                    }
+                }
+                Spacer()
+            }           
             Button(action: {
                 selectMode.toggle()
                 selectedPersonen = []
