@@ -77,7 +77,7 @@ struct PieCharts: View{
             
         let wunschTicketsASP = verwaltung.personen.map({$0.wuenschBestellungen[.after_show_ticket] ?? 0}).reduce(0, +)
         PieChart(title: "ASP-Tickets", statement: "Belegte Tickets", counterStatement: "Freie Tickets", value: wunschTicketsASP, capacityValue: Item.after_show_ticket.verfuegbar)
-        /*
+                /*
          PIE CHARTS
          let wunschBuch = verwaltung.personen.map({$0.wuenschBestellungen[.buch] ?? 0}).reduce(0, +)
          PieChart(title: "Buch", statement: "Reserviert", counterStatement: "Frei", value: wunschBuch, capacityValue: Item.buch.verfuegbar)
