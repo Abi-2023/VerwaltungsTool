@@ -11,28 +11,81 @@ import Charts
 struct StatsView: View {
 	let verwaltung: Verwaltung
 	
-	let column: [GridItem] = Array(repeating: GridItem(), count: 3)
+	let rowPhone: [GridItem] = Array(repeating: GridItem(), count: 1)
+    let columnStandard: [GridItem] = Array(repeating: GridItem(), count: 3)
 	
 	var body: some View {
 		ScrollView(showsIndicators: false){
-			VStack(spacing: 30){
-				Text("Statistiken").font(.largeTitle.weight(.heavy))
-				Text("Google-Formular").font(.title.bold())
-				LazyVGrid(columns: column){
-					let wunschTickets = verwaltung.personen.map({$0.wuenschBestellungen[.ball_ticket] ?? 0}).reduce(0, +)
-					PieChart(title: "Ball-Tickets", statement: "Belegte Tickets", counterStatement: "Freie Tickets", value: wunschTickets, capacityValue: Item.ball_ticket.verfuegbar)
-					
-					let wunschTicketsASP = verwaltung.personen.map({$0.wuenschBestellungen[.after_show_ticket] ?? 0}).reduce(0, +)
-					PieChart(title: "ASP-Tickets", statement: "Belegte Tickets", counterStatement: "Freie Tickets", value: wunschTicketsASP, capacityValue: Item.after_show_ticket.verfuegbar)
-						
-					let formSubmitted = verwaltung.personen.filter({$0.extraFields[.hatFormEingetragen, default: ""] == "1"}).count
-					PieChart(title: "Formularteilnahme", statement: "Formular ausgefüllt", counterStatement: "Formular ausstehend", value: formSubmitted, capacityValue: verwaltung.personen.count)
-				}
-			}
-			Text("Pulli: \(verwaltung.personen.map({$0.wuenschBestellungen[.pulli] ?? 0}).reduce(0, +))")
-			Text("Buch: \(verwaltung.personen.map({$0.wuenschBestellungen[.buch] ?? 0}).reduce(0, +))")
+            VStack(spacing: 30){
+                Text("Statistiken").font(.largeTitle.weight(.heavy))
+                
+                VStack(spacing: 15){
+                    Text("Google-Formular").font(.title.bold())
+                    
+                    if UIDevice.current.userInterfaceIdiom == .phone{
+                        TabView{
+                            PieCharts(verwaltung: verwaltung).padding(.bottom, 30)
+                            VStack{
+                                HStack{
+                                    Circle().fill(.blue).frame(width: 10, height: 10)
+                                    Text("Pulli")
+                                    Spacer()
+                                    Text("\(verwaltung.personen.map({$0.wuenschBestellungen[.pulli] ?? 0}).reduce(0, +))")
+                                }
+                                
+                                HStack{
+                                    Circle().fill(.cyan).frame(width: 10, height: 10)
+                                    Text("Buch")
+                                    Spacer()
+                                    Text("\(verwaltung.personen.map({$0.wuenschBestellungen[.buch] ?? 0}).reduce(0, +))")
+                                }
+                                Spacer()
+                            }
+                        }.tabViewStyle(PageTabViewStyle())
+                            .frame(height: 450)
+                    } else {
+                        LazyVGrid(columns: columnStandard){
+                            PieCharts(verwaltung: verwaltung)
+                        }
+                        VStack(spacing: 0){
+                            HStack{
+                                Circle().fill(.blue).frame(width: 10, height: 10)
+                                Text("Pulli: \(verwaltung.personen.map({$0.wuenschBestellungen[.pulli] ?? 0}).reduce(0, +))")
+                            }
+                            
+                            HStack{
+                                Circle().fill(.cyan).frame(width: 10, height: 10)
+                                Text("Buch: \(verwaltung.personen.map({$0.wuenschBestellungen[.buch] ?? 0}).reduce(0, +))")
+                            }
+                            Spacer()
+                        }
+                    }
+                }
+            }
 		}.padding()
 	}
+}
+
+struct PieCharts: View{
+    let verwaltung: Verwaltung
+    var body: some View{
+        let formSubmitted = verwaltung.personen.filter({$0.extraFields[.hatFormEingetragen, default: ""] == "1"}).count
+        PieChart(title: "Formularteilnahme", statement: "Formular ausgefüllt", counterStatement: "Formular ausstehend", value: formSubmitted, capacityValue: verwaltung.personen.count)
+        
+        let wunschTickets = verwaltung.personen.map({$0.wuenschBestellungen[.ball_ticket] ?? 0}).reduce(0, +)
+            PieChart(title: "Ball-Tickets", statement: "Belegte Tickets", counterStatement: "Freie Tickets", value: wunschTickets, capacityValue: Item.ball_ticket.verfuegbar)
+            
+        let wunschTicketsASP = verwaltung.personen.map({$0.wuenschBestellungen[.after_show_ticket] ?? 0}).reduce(0, +)
+        PieChart(title: "ASP-Tickets", statement: "Belegte Tickets", counterStatement: "Freie Tickets", value: wunschTicketsASP, capacityValue: Item.after_show_ticket.verfuegbar)
+        /*
+         PIE CHARTS
+         let wunschBuch = verwaltung.personen.map({$0.wuenschBestellungen[.buch] ?? 0}).reduce(0, +)
+         PieChart(title: "Buch", statement: "Reserviert", counterStatement: "Frei", value: wunschBuch, capacityValue: Item.buch.verfuegbar)
+
+         let wunschPulli = verwaltung.personen.map({$0.wuenschBestellungen[.pulli] ?? 0}).reduce(0, +)
+         PieChart(title: "Pulli", statement: "Reserviert", counterStatement: "Frei", value: wunschPulli, capacityValue: Item.pulli.verfuegbar)
+         */
+    }
 }
 
 struct PieChart: View{
