@@ -47,7 +47,7 @@ struct PersonenActionView: View {
 					HStack(spacing: 10) {
 						Toggle(isOn: $resendForm, label: {
 							VStack(alignment: .leading, spacing: 10){
-								Text("An: Sende an alle ungeachtet, ob jemand die Mail (Einladung zur Wunschangabe) schon bekommen hat oder nicht")
+								Text("An: Sende an alle, ungeachtet, ob jemand die Mail (Einladung zur Wunschangabe) schon bekommen hat oder nicht")
 									.foregroundColor(resendForm ? .blue : .gray)
 								Text("Aus: Sende nur an die Personen, die die Mail (Einladung zur Wunschangabe) noch nicht bekommen haben")
 									.foregroundColor(!resendForm ? .blue : .gray)
@@ -74,7 +74,7 @@ struct PersonenActionView: View {
 						VStack(alignment: .leading, spacing: 30){
 							Toggle(isOn: $resendTicket, label: {
 								VStack(alignment: .leading, spacing: 10){
-									Text("An: Sende an alle ungeachtet, ob jemand die Mail (Tickets) schon bekommen hat oder nicht")
+									Text("An: Sende an alle, ungeachtet, ob jemand die Mail (Tickets) schon bekommen hat oder nicht")
 										.foregroundColor(resendTicket ? .blue : .gray)
 									Text("Aus: Sende nur an die Personen, die die Mail (Tickets) noch nicht bekommen haben")
 										.foregroundColor(!resendTicket ? .blue : .gray)
@@ -85,7 +85,7 @@ struct PersonenActionView: View {
 								VStack(alignment: .leading, spacing: 10){
 									Text("An: Sende die Mail ab, nur wenn alle Tickets aufgeteilt, eingeplant und bezahlt sind")
 										.foregroundColor(nurVollTicket ? .blue : .gray)
-									Text("Aus: Sende die Mail ab, ungeachtet ob alle Tickets aufgeteilt, eingeplant und bezahlt sind")
+									Text("Aus: Sende die Mail ab, ungeachtet, ob alle Tickets aufgeteilt, eingeplant und bezahlt sind")
 										.foregroundColor(!nurVollTicket ? .blue : .gray)
 								}
 							}).frame(width: geo.size.width/10*7.5)
