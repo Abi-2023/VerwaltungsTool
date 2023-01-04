@@ -16,24 +16,38 @@ struct AktionenView: View {
 
 	var body: some View {
 		VStack(spacing: 20){
-			Text("Und los")
-			Button(action: {
-				DispatchQueue.global(qos: .default).async {
-					Aktion.fetchFromGoogleForm(verwaltung: verwaltung, ao: aktionObserver)
-				}
-			}) {
-				Text("fill out from google forms")
-			}.buttonStyle(.bordered)
-
-
-			Button(action: {
-				DispatchQueue.global(qos: .default).async {
-					Aktion.fetchTransaktionen(verwaltung: verwaltung, ao: aktionObserver)
-				}
-			}) {
-				Text("Fetch Transaktionen")
-			}.buttonStyle(.bordered)
-
+            Text("Aktionen").font(.largeTitle.weight(.heavy))
+            HStack{
+                Button(action: {
+                    DispatchQueue.global(qos: .default).async {
+                        Aktion.fetchFromGoogleForm(verwaltung: verwaltung, ao: aktionObserver)
+                    }
+                }) {
+                    Text("Fetch Google Form")
+                }.buttonStyle(.bordered)
+                Spacer()
+                if verwaltung.lastFetchForm != nil{
+                    Text("\(verwaltung.lastFetchForm!.formatted(.dateTime))")
+                } else {
+                   Text("Keine Daten")
+                }
+            }
+            
+            HStack{
+                Button(action: {
+                    DispatchQueue.global(qos: .default).async {
+                        Aktion.fetchTransaktionen(verwaltung: verwaltung, ao: aktionObserver)
+                    }
+                }) {
+                    Text("Fetch Transaktionen")
+                }.buttonStyle(.bordered)
+                Spacer()
+                if verwaltung.lastFetchTransaktionen != nil{
+                    Text("\(verwaltung.lastFetchTransaktionen!.formatted(.dateTime))")
+                } else {
+                   Text("Keine Daten")
+                }
+            }
 
 			Button(role: .cancel,action: {
 				if unlockVerteileItems {
@@ -46,6 +60,6 @@ struct AktionenView: View {
 				Text("Verteile Items")
 			}
 			.unlockedStyle(unlockVerteileItems)
-		}
+        }.padding()
 	}
 }
