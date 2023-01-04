@@ -24,7 +24,7 @@ struct StatsView: View {
                     
                     if UIDevice.current.userInterfaceIdiom == .phone{
                         TabView{
-                            PieCharts(verwaltung: verwaltung).padding(.bottom, 30)
+                            WunschPieCharts(verwaltung: verwaltung).padding(.bottom, 30)
                             VStack{
                                 HStack{
                                     Circle().fill(.blue).frame(width: 10, height: 10)
@@ -45,7 +45,7 @@ struct StatsView: View {
                             .frame(height: 450)
                     } else {
                         LazyVGrid(columns: columnStandard){
-                            PieCharts(verwaltung: verwaltung)
+                            WunschPieCharts(verwaltung: verwaltung)
                         }
                         VStack(spacing: 0){
                             HStack{
@@ -61,12 +61,27 @@ struct StatsView: View {
                         }
                     }
                 }
+                
+                VStack(spacing: 15){
+                    Text("Bestellungen").font(.title.bold())
+                    
+                    if UIDevice.current.userInterfaceIdiom == .phone{
+                        TabView{
+                            BestellungenPieCharts(verwaltung: verwaltung).padding(.bottom, 30)
+                        }.tabViewStyle(PageTabViewStyle())
+                            .frame(height: 450)
+                    } else {
+                        LazyVGrid(columns: columnStandard){
+                            BestellungenPieCharts(verwaltung: verwaltung)
+                        }
+                    }
+                }
             }
 		}.padding()
 	}
 }
 
-struct PieCharts: View{
+struct WunschPieCharts: View{
     let verwaltung: Verwaltung
     var body: some View{
         let formSubmitted = verwaltung.personen.filter({$0.extraFields[.hatFormEingetragen, default: ""] == "1"}).count
@@ -85,6 +100,53 @@ struct PieCharts: View{
          let wunschPulli = verwaltung.personen.map({$0.wuenschBestellungen[.pulli] ?? 0}).reduce(0, +)
          PieChart(title: "Pulli", statement: "Reserviert", counterStatement: "Frei", value: wunschPulli, capacityValue: Item.pulli.verfuegbar)
          */
+    }
+}
+
+struct BestellungenPieCharts: View{
+    let verwaltung: Verwaltung
+    
+    var anzahlGezahlterPersonen: Int {
+        var array: [Person] = []
+        for person in verwaltung.personen{
+            if person.zuzahlenderBetrag != 0 && person.offenerBetrag(v: verwaltung) == 0{
+                array.append(person)
+            }
+        }
+        return array.count
+    }
+    
+    var anzahlBestellungPersonen: Int {
+        var array: [Person] = []
+        for person in verwaltung.personen{
+            if person.zuzahlenderBetrag != 0{
+                array.append(person)
+            }
+        }
+        return array.count
+    }
+    
+    var anzahlGezahltGeld: Int{
+        var summe: Int = 0
+        for person in verwaltung.personen{
+            summe += person.gezahlterBetrag(v: verwaltung)
+        }
+        return summe / 100
+    }
+    
+    var anzahlBestellungGeld: Int{
+        var summe: Int = 0
+        for person in verwaltung.personen{
+            summe += person.zuzahlenderBetrag
+        }
+        return summe / 100
+    }
+    
+    
+    var body: some View{
+        PieChart(title: "Gezahlt/Bestellungen (Betrag)", statement: "Gezahlt", counterStatement: "Ausstehend", value: anzahlGezahltGeld, capacityValue: anzahlBestellungGeld)
+        
+        PieChart(title: "Vollständig gezahlte Personen", statement: "Gezahlt", counterStatement: "Ausstehend", value: anzahlGezahlterPersonen, capacityValue: anzahlBestellungPersonen)
     }
 }
 
@@ -114,7 +176,7 @@ struct PieChart: View{
 	var body: some View{
 		VStack(alignment: .center){
 			Text(title).font(.title2.bold())
-			Pie(slices: [(Double(value), .blue), (Double(capacityValue-value), .red)])
+			Pie(slices: [(Double(value), .blue, Double(statementPercentage)), (Double(capacityValue-value), .red, Double(counterStatementPercentage))])
 			VStack(alignment: .leading, spacing: 0){
 				HStack(alignment: .center){
 					Circle().fill(.blue).frame(width: 10, height: 10)
@@ -136,7 +198,7 @@ struct PieChart: View{
 
 struct Pie: View {
 
-    @State var slices: [(Double, Color)]
+    @State var slices: [(Double, Color, Double?)]
 
     var body: some View {
         Canvas { context, size in
@@ -146,17 +208,31 @@ struct Pie: View {
             pieContext.rotate(by: .degrees(-90))
             let radius = min(size.width, size.height) * 0.48
             var startAngle = Angle.zero
-            for (value, color) in slices {
-                let angle = Angle(degrees: 360 * (value / total))
-                let endAngle = startAngle + angle
-                let path = Path { p in
-                    p.move(to: .zero)
-                    p.addArc(center: .zero, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: false)
-                    p.closeSubpath()
+            var reached100 = false
+            for (value, color, percentage) in slices {
+                if percentage ?? 0 >= 100{
+                    reached100 = true
+                    let angle = Angle(degrees: 360)
+                    let endAngle = startAngle + angle
+                    let path = Path { p in
+                        p.move(to: .zero)
+                        p.addArc(center: .zero, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: false)
+                        p.closeSubpath()
+                    }
+                    pieContext.fill(path, with: .color(color))
+                } else {
+                    if !reached100{
+                        let angle = Angle(degrees: 360 * (value / total))
+                        let endAngle = startAngle + angle
+                        let path = Path { p in
+                            p.move(to: .zero)
+                            p.addArc(center: .zero, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: false)
+                            p.closeSubpath()
+                        }
+                        pieContext.fill(path, with: .color(color))
+                        startAngle = endAngle
+                    }
                 }
-                pieContext.fill(path, with: .color(color))
-
-                startAngle = endAngle
             }
         }
         .aspectRatio(1, contentMode: .fit)
