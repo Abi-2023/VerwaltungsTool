@@ -19,15 +19,21 @@ class Verwaltung: ObservableObject, Codable {
 
 	@Published var personen: [Person] = []
 	@Published var transaktionen: [Transaktion] = []
+
+	@Published var lastFetchForm: Date?
+	@Published var lastFetchTransaktionen: Date?
 	var logs: Int? = 0
 
-	enum CodingKeys: CodingKey { case personenWrapper, transaktionen}
+	enum CodingKeys: CodingKey { case personenWrapper, transaktionen, lastFetchForm, lastFetchTransaktionen}
 
 	required init(from decoder: Decoder) throws {
 		let container = try decoder.container(keyedBy: CodingKeys.self)
 		let wrapper = try container.decode(PersonenWrapper.self, forKey: .personenWrapper)
 		personen = wrapper.andere + wrapper.lehrer + wrapper.q2er
 		transaktionen = try container.decode(type(of: transaktionen), forKey: .transaktionen)
+
+		lastFetchForm = try container.decode(type(of: lastFetchForm), forKey: .lastFetchForm)
+		lastFetchTransaktionen = try container.decode(type(of: lastFetchTransaktionen), forKey: .lastFetchTransaktionen)
 	}
 
 	func encode(to encoder: Encoder) throws {
@@ -47,6 +53,8 @@ class Verwaltung: ObservableObject, Codable {
 
 		try container.encode(wrapper, forKey: .personenWrapper)
 		try container.encode(transaktionen, forKey: .transaktionen)
+		try container.encode(lastFetchForm, forKey: .lastFetchForm)
+		try container.encode(lastFetchTransaktionen, forKey: .lastFetchTransaktionen)
 	}
 
 

@@ -78,6 +78,7 @@ extension Aktion {
 					}
 
 					ao.log("\(success)/\(dict.count) entries from range \(String(range.prefix(5))) are valid")
+					v.lastFetchTransaktionen = .now
 
 					wait.leave()
 				}else{

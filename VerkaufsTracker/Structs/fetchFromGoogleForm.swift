@@ -83,6 +83,7 @@ extension Aktion {
 
 				ao.log("\(deleted) disabled")
 				ao.log("\(valid)/\(dict.count - deleted) entries are valid")
+				v.lastFetchForm = .now
 
 				wait.signal()
 			}else{
