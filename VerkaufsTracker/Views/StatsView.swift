@@ -11,12 +11,13 @@ import Charts
 struct StatsView: View {
 	let verwaltung: Verwaltung
 	
-	let column: [GridItem] = Array(repeating: GridItem(), count: 2)
+	let column: [GridItem] = Array(repeating: GridItem(), count: 3)
 	
 	var body: some View {
 		ScrollView(showsIndicators: false){
 			VStack(spacing: 30){
-				Text("Statistiken").font(.largeTitle.bold())
+				Text("Statistiken").font(.largeTitle.weight(.heavy))
+				Text("Google-Formular").font(.title.bold())
 				LazyVGrid(columns: column){
 					let wunschTickets = verwaltung.personen.map({$0.wuenschBestellungen[.ball_ticket] ?? 0}).reduce(0, +)
 					PieChart(title: "Ball-Tickets", statement: "Belegte Tickets", counterStatement: "Freie Tickets", value: wunschTickets, capacityValue: Item.ball_ticket.verfuegbar)
@@ -63,7 +64,7 @@ struct PieChart: View{
 	
 	var body: some View{
 		VStack(alignment: .center){
-			Text(title).font(.title.bold())
+			Text(title).font(.title2.bold())
 			Pie(slices: [(Double(value), .blue), (Double(capacityValue-value), .red)])
 			VStack(alignment: .leading, spacing: 0){
 				HStack(alignment: .center){
