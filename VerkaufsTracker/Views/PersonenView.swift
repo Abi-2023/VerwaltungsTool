@@ -41,7 +41,7 @@ struct PersonenView: View {
 				Text("Q2").tag(GruppenTypen._Q2er)
 				Text("Lehrer").tag(GruppenTypen._Lehrer)
 			}
-			TextField("filtern", text: $searchQuery)
+			TextField("Filtern", text: $searchQuery)
 				.textFieldStyle(.roundedBorder)
 			Button(action: {
 				searchQuery = ""
@@ -50,28 +50,32 @@ struct PersonenView: View {
 				Image(systemName: "xmark")
 			}
 		}.padding()
+        
+        let displayedPersonen = verwaltung.personen
+            .filter({type(of: $0) == gruppenTyp.type || gruppenTyp == ._Alle})
+            .filter({searchQuery == "" || $0.searchableText.contains(searchQuery.uppercased())})
+        
+        HStack{
+            if(selectMode) {
+                Button(action: {
+                    displayedPersonen.forEach({ person in
+                        selectedPersonen.toggle(e: person)
+                    })
+                }) {
+                    Text("Alle auswählen")
+                }
+            }
+            
+            Spacer()
+            
+            Button(action: {
+                selectMode.toggle()
+                selectedPersonen = []
+            }) {
+                Text(selectMode ? "Auswahl löschen" : "Auswählen")
+            }
 
-		Button(action: {
-			selectMode.toggle()
-			selectedPersonen = []
-		}) {
-			Text(selectMode ? "clear selection" : "auswählen")
-		}
-
-		let displayedPersonen = verwaltung.personen
-			.filter({type(of: $0) == gruppenTyp.type || gruppenTyp == ._Alle})
-			.filter({searchQuery == "" || $0.searchableText.contains(searchQuery.uppercased())})
-
-		if(selectMode) {
-			Button(action: {
-				displayedPersonen.forEach({ person in
-					selectedPersonen.toggle(e: person)
-				})
-			}) {
-				Text("Alle")
-			}
-		}
-
+        }.padding([.leading, .trailing])
 		List {
 			ForEach(displayedPersonen, id: \.self) { person in
 				HStack{
@@ -79,7 +83,7 @@ struct PersonenView: View {
 						Button(action: {
 							selectedPersonen.toggle(e: person)
 						}) {
-							Image(systemName: selectedPersonen.contains(person) ? "x.circle" : "circle")
+							Image(systemName: selectedPersonen.contains(person) ? "checkmark.circle.fill" : "circle")
 						}
 					}
 					Button(action: {
@@ -97,7 +101,7 @@ struct PersonenView: View {
 			}
 
 			if(displayedPersonen.isEmpty) {
-				Text("keine Person gefunden")
+				Text("Keine Person gefunden")
 			}
 		}
 	}
