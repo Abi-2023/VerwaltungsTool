@@ -118,7 +118,7 @@ struct PersonenView: View {
 					}) {
 						HStack {
 							Text(person.name)
-								.foregroundColor(person.zuzahlenderBetrag == 0 ? .gray : person.offenerBetrag(v: verwaltung) <= 0 ? .green : .red)
+								.foregroundColor(person.zuzahlenderBetrag == 0 ? .primary : person.offenerBetrag(v: verwaltung) <= 0 ? .green : .red)
 
 							Spacer()
 
