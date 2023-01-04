@@ -194,6 +194,20 @@ struct FilterView: View {
 				}
 			}
 
+			HStack {
+				Button(action: {
+					selectedPersonen = alleInGruppe.filter({!$0.tickets.isEmpty && $0.tickets.allSatisfy({$0.versendet})})
+				}) {
+					Text("generierte Tickets gesendet")
+				}
+				Spacer()
+				Button(action: {
+					selectedPersonen = alleInGruppe.filter({!$0.tickets.isEmpty && !$0.tickets.allSatisfy({$0.versendet})})
+				}) {
+					Text("nicht alle generierte Tickets gesendet")
+				}
+			}
+
 			Spacer()
 		}
 		.padding()
