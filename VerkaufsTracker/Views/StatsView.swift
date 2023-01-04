@@ -24,17 +24,13 @@ struct StatsView: View {
 					
 					let wunschTicketsASP = verwaltung.personen.map({$0.wuenschBestellungen[.after_show_ticket] ?? 0}).reduce(0, +)
 					PieChart(title: "ASP-Tickets", statement: "Belegte Tickets", counterStatement: "Freie Tickets", value: wunschTicketsASP, capacityValue: Item.after_show_ticket.verfuegbar)
-					
-					let wunschTicketsBuch = verwaltung.personen.map({$0.wuenschBestellungen[.buch] ?? 0}).reduce(0, +)
-					PieChart(title: "Buch", statement: "Reserviert", counterStatement: "Frei", value: wunschTicketsBuch, capacityValue: Item.buch.verfuegbar)
-					
-					let wunschTicketsPulli = verwaltung.personen.map({$0.wuenschBestellungen[.pulli] ?? 0}).reduce(0, +)
-					PieChart(title: "Pulli", statement: "Reserviert", counterStatement: "Frei", value: wunschTicketsPulli, capacityValue: Item.pulli.verfuegbar)
 						
 					let formSubmitted = verwaltung.personen.filter({$0.extraFields["hatFormEingetragen", default: ""] == "1"}).count
 					PieChart(title: "Formularteilnahme", statement: "Formular ausgefüllt", counterStatement: "Formular ausstehend", value: formSubmitted, capacityValue: verwaltung.personen.count)
 				}
 			}
+			Text("Pulli: \(verwaltung.personen.map({$0.wuenschBestellungen[.pulli] ?? 0}).reduce(0, +))")
+			Text("Buch: \(verwaltung.personen.map({$0.wuenschBestellungen[.buch] ?? 0}).reduce(0, +))")
 		}.padding()
 	}
 }
