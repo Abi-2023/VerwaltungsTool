@@ -37,7 +37,7 @@ struct PersonDetailView: View {
 									Button(action: {person = nil}, label: {
 										Image(systemName: "xmark")
 									}).font(.body.weight(.regular))
-								}.font(.title.weight(.bold))
+								}.font(.largeTitle.weight(.bold))
 
 
 								Text(p.email ?? "Keine Email hinterlegt")
@@ -92,7 +92,7 @@ struct PersonDetailView: View {
 											showTextSaveButton = false
 											UIApplication.shared.endEditing()
 										}) {
-											Text("fertig")
+											Text("Fertig")
 										}
 									}
 								}

@@ -169,8 +169,16 @@ struct FilterView: View {
 		VStack(spacing: 20){
 			let alleInGruppe = verwaltung.personen.filter({type(of: $0) == gruppenTyp.type || gruppenTyp == ._Alle})
 
-			Text("Filter")
-				.font(.largeTitle.bold())
+            HStack{
+                Text("Filter")
+                    .font(.largeTitle.bold())
+                Spacer()
+                Button(action: {
+                    showFilterShortcut = false
+                }, label: {
+                    Image(systemName: "xmark")
+                })
+            }
 
 			Picker("", selection: $gruppenTyp) {
 				FilterButton("Alle").tag(GruppenTypen._Alle)

@@ -22,8 +22,8 @@ enum Item: Codable, CaseIterable{
 
 	var displayName: String {
 		return [
-			Item.ball_ticket: "Ball Ticket",
-			Item.after_show_ticket: "After Show Ticker",
+			Item.ball_ticket: "Ball-Ticket",
+			Item.after_show_ticket: "After-Show-Party-Ticket",
 			Item.pulli: "Pulli",
 			Item.buch: "Buch"
 		][self]!
