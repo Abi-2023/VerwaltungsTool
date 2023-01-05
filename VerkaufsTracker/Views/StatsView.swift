@@ -124,10 +124,10 @@ struct BestellungenPieCharts: View{
 
 		Chart {
 			let data: [Position] = [
-				.init(name: "Eingenommen", betrag: Double(verwaltung.insgGezahlt - verwaltung.zuVielGezahlt) / 100, color: "Musste"),
-				.init(name: "Eingenommen", betrag: Double(verwaltung.zuVielGezahlt) / 100, color: "Zu viel"),
-				.init(name: "Insg", betrag: Double(verwaltung.insgGezahlt - verwaltung.zuVielGezahlt) / 100, color: "Beglichen"),
-				.init(name: "Insg", betrag: Double(verwaltung.offenerBetrag) / 100, color: "Offen"),
+				.init(name: "Bezahlung/Spende", betrag: Double(verwaltung.insgGezahlt - verwaltung.zuVielGezahlt) / 100, color: "Bezahlung"),
+				.init(name: "Bezahlung/Spende", betrag: Double(verwaltung.zuVielGezahlt) / 100, color: "Spende"),
+				.init(name: "Offen/Beglichen", betrag: Double(verwaltung.insgGezahlt - verwaltung.zuVielGezahlt) / 100, color: "Beglichen"),
+				.init(name: "Offen/Beglichen", betrag: Double(verwaltung.offenerBetrag) / 100, color: "Offen"),
 			]
 			ForEach(data) { pos in
 				BarMark(
@@ -137,7 +137,7 @@ struct BestellungenPieCharts: View{
 				.foregroundStyle(by: .value("Beschreibung", pos.color))
 			}
 		}.chartForegroundStyleScale([
-			"Musste": .blue, "Zu viel": .purple, "Offen": .red, "Beglichen": .green
+			"Bezahlung": .blue, "Spende": .purple, "Offen": .red, "Beglichen": .green
 		])
 		.padding()
 
