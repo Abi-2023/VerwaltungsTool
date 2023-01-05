@@ -10,7 +10,7 @@ import SwiftSMTP
 
 extension Q2er {
 	internal func generateBezahlEmailInternal(ao: AktionObserver? = nil) -> Mail? {
-		let subject = "Abi Bezahlung"
+		let subject = "Deine Bestellungen für die Abi-Feierlichkeiten"
 
 		// TODO: Text überschreiben
 		let textContent = """
