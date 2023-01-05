@@ -25,6 +25,7 @@ struct PersonenActionView: View {
 	@State var unlockFuelleTickets = false
 
 	// BEZAHL
+	@State var resendBezahl = false
 	@State var unlockSendBezahl = false
 
 	var body: some View {
@@ -125,18 +126,18 @@ struct PersonenActionView: View {
 
 					Divider()
 					VStack(spacing: 20) {
-						Toggle(isOn: $resendForm, label: {
+						Toggle(isOn: $resendBezahl, label: {
 							VStack(alignment: .leading, spacing: 0){
 								Text("An: Sende an alle")
-									.foregroundColor(resendForm ? .blue : .gray)
+									.foregroundColor(resendBezahl ? .blue : .gray)
 								Text("Aus: Sende, wenn noch nicht bekommen")
-									.foregroundColor(!resendForm ? .blue : .gray)
+									.foregroundColor(!resendBezahl ? .blue : .gray)
 							}.font(.footnote)
 						})
 						Button(role: .destructive, action: {
 							if unlockSendBezahl {
 								DispatchQueue.global(qos: .default).async {
-									Aktion.sendBezahlEmails(personen: selectedPersonen, observer: aktionObserver, resend: resendForm)
+									Aktion.sendBezahlEmails(personen: selectedPersonen, observer: aktionObserver, resend: resendBezahl)
 								}
 								unlockSendBezahl = false
 							} else {
