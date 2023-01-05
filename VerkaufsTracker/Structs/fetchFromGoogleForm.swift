@@ -70,45 +70,49 @@ extension Aktion {
 		}
 
 
-		let wait = DispatchGroup()
+		for range in ["SCHUELER!A2:L500", "LEHRER!A2:L500"] {
+			valid = 0
+			deleted = 0
 
-		let range = "A2:L500"
-		let URL_TO_DATA = URL(string: "https://sheets.googleapis.com/v4/spreadsheets/\(SECRETS.FORM_ID)/values:batchGet?key=\(SECRETS.FORM_ApiKey)&ranges=\(range)")!
-		ao.log("make Api Call to google forms")
-		wait.enter()
-		let task = URLSession.shared.dataTask(with: URL_TO_DATA) {(data, response, error) in
-			guard let data = data else { return }
-			ao.log("responded")
+			let wait = DispatchGroup()
 
-			let result = String(data: data, encoding: .utf8)!
-			if(result.contains("valueRanges")){
-				let dict = ((((result.convertToDictionary()!["valueRanges"]! as! [Any])[0]) as! [String: Any]) ["values"]) as! [[String]]
-				ao.log("fetched \(dict.count) entries")
-				for entry in dict {
-					processEntry(entry: entry)
+			let URL_TO_DATA = URL(string: "https://sheets.googleapis.com/v4/spreadsheets/\(SECRETS.FORM_ID)/values:batchGet?key=\(SECRETS.FORM_ApiKey)&ranges=\(range)")!
+			ao.log("make Api Call: \(range.prefix(6))")
+			wait.enter()
+			let task = URLSession.shared.dataTask(with: URL_TO_DATA) {(data, response, error) in
+				guard let data = data else { return }
+				ao.log("responded")
+
+				let result = String(data: data, encoding: .utf8)!
+				if(result.contains("valueRanges")){
+					let dict = ((((result.convertToDictionary()!["valueRanges"]! as! [Any])[0]) as! [String: Any]) ["values"]) as! [[String]]
+					ao.log("fetched \(dict.count) entries")
+					for entry in dict {
+						processEntry(entry: entry)
+					}
+
+					ao.log("\(deleted) disabled")
+					ao.log("\(valid)/\(dict.count - deleted) entries are valid")
+					DispatchQueue.main.async {
+						v.lastFetchForm = .now
+					}
+
+					wait.leave()
+				}else{
+					print("fehler bei der Api antwort")
+					ao.log("fehler bei der API Antwort")
+					print(result)
 				}
-
-				ao.log("\(deleted) disabled")
-				ao.log("\(valid)/\(dict.count - deleted) entries are valid")
-				DispatchQueue.main.async {
-					v.lastFetchForm = .now
-				}
-
-				wait.leave()
-			}else{
-				print("fehler bei der Api antwort")
-				ao.log("fehler bei der API Antwort")
-				print(result)
 			}
-		}
 
-		task.resume()
+			task.resume()
 
-		let timeoutResult = wait.wait(timeout: .now() + 10)
-		if(timeoutResult == .timedOut){
-			ao.log("timout")
-			task.cancel()
-			print("timeout")
+			let timeoutResult = wait.wait(timeout: .now() + 10)
+			if(timeoutResult == .timedOut){
+				ao.log("timout")
+				task.cancel()
+				print("timeout")
+			}
 		}
 		ao.log("finish")
 		ao.finish()
