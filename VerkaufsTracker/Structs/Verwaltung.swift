@@ -99,4 +99,31 @@ class Verwaltung: ObservableObject, Codable {
 			}
 		}
 	}
+
+
+
+	var offenePersonen: Int {
+		personen.filter({$0.offenerBetrag(v: self) > 0}).count
+	}
+
+	var gezahltePersonen: Int {
+		personenMitBestellung - offenePersonen
+	}
+
+	var personenMitBestellung: Int {
+		personen.filter({$0.zuzahlenderBetrag != 0}).count
+	}
+
+	var offenerBetrag: Int {
+		personen.map({max(0, $0.offenerBetrag(v: self))}).reduce(0, +)
+	}
+
+	var insgGezahlt: Int {
+		transaktionen.map({$0.betrag}).reduce(0, +)
+	}
+
+	var zuVielGezahlt: Int {
+		personen.map({$0.offenerBetrag(v: self) < 0 ? abs($0.offenerBetrag(v: self)) : 0}).reduce(0, +)
+	}
+
 }

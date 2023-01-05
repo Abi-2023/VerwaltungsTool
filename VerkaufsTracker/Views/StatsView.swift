@@ -63,7 +63,7 @@ struct StatsView: View {
 				}
 
 				VStack(spacing: 15){
-					Text("Bestellungen").font(.title.bold())
+					Text("Zahlungen").font(.title.bold())
 
 					if UIDevice.current.userInterfaceIdiom == .phone{
 						TabView{
@@ -103,50 +103,45 @@ struct WunschPieCharts: View{
 	}
 }
 
+struct Position: Identifiable {
+	var name: String
+	var betrag: Double
+	var id = UUID()
+	var color: String
+}
+
 struct BestellungenPieCharts: View{
 	let verwaltung: Verwaltung
 
-	var anzahlGezahlterPersonen: Int {
-		var array: [Person] = []
-		for person in verwaltung.personen{
-			if person.zuzahlenderBetrag != 0 && person.offenerBetrag(v: verwaltung) == 0{
-				array.append(person)
-			}
-		}
-		return array.count
-	}
-
-	var anzahlBestellungPersonen: Int {
-		var array: [Person] = []
-		for person in verwaltung.personen{
-			if person.zuzahlenderBetrag != 0{
-				array.append(person)
-			}
-		}
-		return array.count
-	}
-
-	var anzahlGezahltGeld: Int{
-		var summe: Int = 0
-		for person in verwaltung.personen{
-			summe += person.gezahlterBetrag(v: verwaltung)
-		}
-		return summe / 100
-	}
 
 	var anzahlBestellungGeld: Int{
-		var summe: Int = 0
-		for person in verwaltung.personen{
-			summe += person.zuzahlenderBetrag
-		}
-		return summe / 100
+		verwaltung.offenerBetrag + verwaltung.insgGezahlt - verwaltung.zuVielGezahlt
 	}
 
 
 	var body: some View{
-		PieChart(title: "Gezahlt/Bestellungen (Betrag)", statement: "Gezahlt", counterStatement: "Ausstehend", value: anzahlGezahltGeld, capacityValue: anzahlBestellungGeld)
+		//		PieChart(title: "Gezahlt/Bestellungen (Betrag)", statement: "Offen", counterStatement: "Gezahlt", value: verwaltung.offenerBetrag, capacityValue: anzahlBestellungGeld)
 
-		PieChart(title: "Vollständig gezahlte Personen", statement: "Gezahlt", counterStatement: "Ausstehend", value: anzahlGezahlterPersonen, capacityValue: anzahlBestellungPersonen)
+		Chart {
+			let data: [Position] = [
+				.init(name: "Eingenommen", betrag: Double(verwaltung.insgGezahlt - verwaltung.zuVielGezahlt) / 100, color: "Musste"),
+				.init(name: "Eingenommen", betrag: Double(verwaltung.zuVielGezahlt) / 100, color: "Zu viel"),
+				.init(name: "Insg", betrag: Double(verwaltung.insgGezahlt - verwaltung.zuVielGezahlt) / 100, color: "Beglichen"),
+				.init(name: "Insg", betrag: Double(verwaltung.offenerBetrag) / 100, color: "Offen"),
+			]
+			ForEach(data) { pos in
+				BarMark(
+					x: .value("Shape Type", pos.name),
+					y: .value("Total Count", pos.betrag)
+				)
+				.foregroundStyle(by: .value("Beschreibung", pos.color))
+			}
+		}.chartForegroundStyleScale([
+			"Musste": .blue, "Zu viel": .purple, "Offen": .red, "Beglichen": .green
+		])
+		.padding()
+
+		PieChart(title: "Vollständig gezahlte Personen", statement: "Gezahlt", counterStatement: "Ausstehend", value: verwaltung.gezahltePersonen, capacityValue: verwaltung.personenMitBestellung)
 	}
 }
 
