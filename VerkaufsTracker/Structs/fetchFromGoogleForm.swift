@@ -70,11 +70,12 @@ extension Aktion {
 		}
 
 
-		let wait = DispatchSemaphore(value: 0)
+		let wait = DispatchGroup()
 
 		let range = "A2:L500"
 		let URL_TO_DATA = URL(string: "https://sheets.googleapis.com/v4/spreadsheets/\(SECRETS.FORM_ID)/values:batchGet?key=\(SECRETS.FORM_ApiKey)&ranges=\(range)")!
 		ao.log("make Api Call to google forms")
+		wait.enter()
 		let task = URLSession.shared.dataTask(with: URL_TO_DATA) {(data, response, error) in
 			guard let data = data else { return }
 			ao.log("responded")
@@ -89,9 +90,11 @@ extension Aktion {
 
 				ao.log("\(deleted) disabled")
 				ao.log("\(valid)/\(dict.count - deleted) entries are valid")
-				v.lastFetchForm = .now
+				DispatchQueue.main.async {
+					v.lastFetchForm = .now
+				}
 
-				wait.signal()
+				wait.leave()
 			}else{
 				print("fehler bei der Api antwort")
 				ao.log("fehler bei der API Antwort")
@@ -101,9 +104,10 @@ extension Aktion {
 
 		task.resume()
 
-		let timeoutResult = wait.wait(timeout: .now() + 2)
+		let timeoutResult = wait.wait(timeout: .now() + 10)
 		if(timeoutResult == .timedOut){
 			ao.log("timout")
+			task.cancel()
 			print("timeout")
 		}
 		ao.log("finish")
