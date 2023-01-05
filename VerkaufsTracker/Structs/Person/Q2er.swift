@@ -102,6 +102,10 @@ class Q2er: Person {
 		)
 	}
 
+	func generateBezahlEmail(ao: AktionObserver? = nil) -> Mail? {
+		return generateBezahlEmailInternal(ao: ao)
+	}
+
 	override func generateBezahlEmail() -> Mail? {
 		return generateBezahlEmailInternal()
 	}

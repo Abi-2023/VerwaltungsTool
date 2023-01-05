@@ -46,6 +46,7 @@
 		8FD69E4329565A4D001F4787 /* Q2er.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD69E4229565A4D001F4787 /* Q2er.swift */; };
 		8FD69E4529565A55001F4787 /* Lehrer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD69E4429565A55001F4787 /* Lehrer.swift */; };
 		8FD9C4EF2967143600E78ACB /* Q2er_GenerateBezahlEmail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD9C4EE2967143600E78ACB /* Q2er_GenerateBezahlEmail.swift */; };
+		8FD9C4F12967427B00E78ACB /* Aktion_sendeBezahlEmail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD9C4F02967427B00E78ACB /* Aktion_sendeBezahlEmail.swift */; };
 		8FE0073D295880E700E1B355 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE0073C295880E700E1B355 /* Extensions.swift */; };
 		8FE0073F2958857400E1B355 /* Ticket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE0073E2958857400E1B355 /* Ticket.swift */; };
 		8FE0074129589B1E00E1B355 /* TicketRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE0074029589B1E00E1B355 /* TicketRenderer.swift */; };
@@ -103,6 +104,7 @@
 		8FD69E4229565A4D001F4787 /* Q2er.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Q2er.swift; sourceTree = "<group>"; };
 		8FD69E4429565A55001F4787 /* Lehrer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lehrer.swift; sourceTree = "<group>"; };
 		8FD9C4EE2967143600E78ACB /* Q2er_GenerateBezahlEmail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Q2er_GenerateBezahlEmail.swift; sourceTree = "<group>"; };
+		8FD9C4F02967427B00E78ACB /* Aktion_sendeBezahlEmail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aktion_sendeBezahlEmail.swift; sourceTree = "<group>"; };
 		8FE0073C295880E700E1B355 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		8FE0073E2958857400E1B355 /* Ticket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ticket.swift; sourceTree = "<group>"; };
 		8FE0074029589B1E00E1B355 /* TicketRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketRenderer.swift; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 				8F794F30295CF22F007B16EB /* Aktion_ImportTransaktionen.swift */,
 				8F99E9AC295E15E9003B79DD /* Aktion_FuelleTickets.swift */,
 				8F99E9AE295E2845003B79DD /* Crypto.swift */,
+				8FD9C4F02967427B00E78ACB /* Aktion_sendeBezahlEmail.swift */,
 			);
 			path = VerkaufsTracker;
 			sourceTree = "<group>";
@@ -367,6 +370,7 @@
 				8F99E9AD295E15E9003B79DD /* Aktion_FuelleTickets.swift in Sources */,
 				8F794F31295CF22F007B16EB /* Aktion_ImportTransaktionen.swift in Sources */,
 				8FBE08082958D9CE0076AC2D /* AktionenView.swift in Sources */,
+				8FD9C4F12967427B00E78ACB /* Aktion_sendeBezahlEmail.swift in Sources */,
 				8F2B6710294F998100C8FA2C /* PersonenView.swift in Sources */,
 				8F8521F12959DB0600854E16 /* AktionObserver.swift in Sources */,
 				8F8521F72959E49200854E16 /* fetchFromGoogleForm.swift in Sources */,
