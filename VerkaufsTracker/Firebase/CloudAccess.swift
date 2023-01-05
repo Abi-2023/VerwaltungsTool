@@ -54,12 +54,16 @@ extension Verwaltung {
 						let wrapper = try decoder.decode(CloudWrapper.self, from: data)
 						let decryptedData = try wrapper.data.decrypted()
 						let neueVerwaltung = try decoder.decode(Verwaltung.self, from: decryptedData)
+						print(neueVerwaltung.lastFetchForm)
 
 						print(neueVerwaltung)
 						CloudStatus.setOwnToServer()
 						DispatchQueue.main.sync {
 							self.personen = neueVerwaltung.personen
 							self.transaktionen = neueVerwaltung.transaktionen
+							self.lastFetchForm = neueVerwaltung.lastFetchForm
+							self.logs = neueVerwaltung.logs
+							self.lastFetchTransaktionen = neueVerwaltung.lastFetchTransaktionen
 							self.cloud = .connected
 						}
 					} catch {

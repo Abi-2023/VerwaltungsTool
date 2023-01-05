@@ -68,6 +68,14 @@ struct ContentView: View {
 		}) {
 			Text("render ticket")
 		}.padding()
+
+		Button(action: {
+			let m = verwaltung.personen.first(where: {$0.name.contains("Benedict")})!.generateBezahlEmail()
+			let sender = EmailManager()
+			sender.sendMail(mail: m!)
+		}) {
+			Text("send bezahl")
+		}.padding()
 		
 #if canImport(CodeScanner)
 		Button(action: {

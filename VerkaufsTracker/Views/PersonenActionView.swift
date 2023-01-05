@@ -24,6 +24,9 @@ struct PersonenActionView: View {
 	// Fülle
 	@State var unlockFuelleTickets = false
 
+	// BEZAHL
+	@State var unlockSendBezahl = false
+
 	var body: some View {
 		if UIDevice.current.userInterfaceIdiom == .phone{
 			ZStack{
@@ -118,6 +121,31 @@ struct PersonenActionView: View {
 							Text("Fülle Tickets")
 						}
 						.unlockedStyle(unlockFuelleTickets)
+					}
+
+					Divider()
+					VStack(spacing: 20) {
+						Toggle(isOn: $resendForm, label: {
+							VStack(alignment: .leading, spacing: 0){
+								Text("An: Sende an alle")
+									.foregroundColor(resendForm ? .blue : .gray)
+								Text("Aus: Sende, wenn noch nicht bekommen")
+									.foregroundColor(!resendForm ? .blue : .gray)
+							}.font(.footnote)
+						})
+						Button(role: .destructive, action: {
+							if unlockSendBezahl {
+								DispatchQueue.global(qos: .default).async {
+									Aktion.sendBezahlEmails(personen: selectedPersonen, observer: aktionObserver, resend: resendForm)
+								}
+								unlockSendBezahl = false
+							} else {
+								unlockSendBezahl = true
+							}
+						}) {
+							Text("Sende Bezahl")
+						}
+						.unlockedStyle(unlockSendBezahl)
 					}
 				}
 			}.padding()

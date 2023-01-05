@@ -9,7 +9,7 @@ import Foundation
 import SwiftSMTP
 
 enum extraFields: String, Codable {
-	case sendFormEmail, hatFormEingetragen
+	case sendFormEmail, hatFormEingetragen, pulli_xs, pulli_s, pulli_l, pulli_m, pulli_xl, sendBezahlEmail
 }
 
 class Person: Identifiable, Codable, Hashable {
@@ -55,10 +55,14 @@ class Person: Identifiable, Codable, Hashable {
 		return v.transaktionen.filter({$0.personId == self.id}).map({$0.betrag}).reduce(0, +)
 	}
 
+	func preisFuerItem(item: Item, count: Int) -> Int {
+		return item.preis * count
+	}
+
 	var zuzahlenderBetrag: Int {
 		var tmpBetrag = 0
 		for item in bestellungen {
-			tmpBetrag += item.key.preis * item.value
+			tmpBetrag += preisFuerItem(item: item.key, count: item.value)
 		}
 		return tmpBetrag
 	}
@@ -95,6 +99,10 @@ class Person: Identifiable, Codable, Hashable {
 		if let email {
 			return Mail.User(name: name, email: email)
 		}
+		return nil
+	}
+
+	func generateBezahlEmail() -> Mail? {
 		return nil
 	}
 }
