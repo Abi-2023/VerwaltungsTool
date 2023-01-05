@@ -20,9 +20,9 @@ class Verwaltung: ObservableObject, Codable {
 	@Published var personen: [Person] = []
 	@Published var transaktionen: [Transaktion] = []
 
-	@Published var lastFetchForm: Date?
-	@Published var lastFetchTransaktionen: Date?
-	var logs: Int? = 0
+	@Published var lastFetchForm: Date = Date(timeIntervalSince1970: 0) { didSet {print("set last \(lastFetchForm)")}}
+	@Published var lastFetchTransaktionen: Date = Date(timeIntervalSince1970: 0)
+	var logs: Int = 0
 
 	enum CodingKeys: CodingKey { case personenWrapper, transaktionen, lastFetchForm, lastFetchTransaktionen, logs}
 
@@ -32,9 +32,9 @@ class Verwaltung: ObservableObject, Codable {
 		personen = wrapper.andere + wrapper.lehrer + wrapper.q2er
 		transaktionen = try container.decode(type(of: transaktionen), forKey: .transaktionen)
 
-		logs = try? container.decode(Int.self, forKey: .logs)
-		lastFetchForm = try? container.decode(Date.self, forKey: .lastFetchForm)
-		lastFetchTransaktionen = try? container.decode(Date.self, forKey: .lastFetchTransaktionen)
+		self.logs = try container.decode(Int.self, forKey: .logs)
+		self.lastFetchForm = try container.decode(type(of: lastFetchForm), forKey: .lastFetchForm)
+		self.lastFetchTransaktionen = try container.decode(type(of: lastFetchTransaktionen), forKey: .lastFetchTransaktionen)
 	}
 
 	func encode(to encoder: Encoder) throws {
@@ -61,7 +61,7 @@ class Verwaltung: ObservableObject, Codable {
 
 
 	init() {
-		
+		print("neue Verwaltugn")
 	}
 
 	func generateFormId() -> String{
