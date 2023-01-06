@@ -102,19 +102,17 @@ struct PersonenView: View {
 					}
 				}
 			}.font(.callout)
-			Divider()
 		}.padding([.leading, .trailing, .top])
 
 		List {
 			ForEach(displayedPersonen, id: \.self) { person in
 				HStack{
 					if selectMode {
-						Button(action: {}){
-							HStack{
-								Image(systemName: selectedPersonen.contains(person) ? "checkmark.circle.fill" : "circle")
-								PersonRowItem(verwaltung: verwaltung, person: person)
-							}
-						}
+						HStack{
+                            Image(systemName: selectedPersonen.contains(person) ? "checkmark.circle.fill" : "circle")
+                                .foregroundColor(.blue)
+                            PersonRowItem(verwaltung: verwaltung, person: person)
+                        }
 						.simultaneousGesture(LongPressGesture().onEnded { _ in
 							selectedPerson = person
 						})
@@ -156,10 +154,10 @@ struct PersonRowItem: View{
 				Image(systemName: "checkmark.circle").foregroundColor(.green)
 			} else {
 				if(person.extraFields[extraFields(rawValue: "sendFormEmail")!] != nil){
-					Image(systemName: "paperplane")
+					Image(systemName: "paperplane").foregroundColor(.blue)
 				}
 				if(person.extraFields[extraFields(rawValue: "hatFormEingetragen")!] != nil){
-					Image(systemName: "doc")
+					Image(systemName: "doc").foregroundColor(.blue)
 				}
 			}
 		}
