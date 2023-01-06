@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+#if canImport(Charts)
 import Charts
 
 struct StatsView: View {
@@ -224,3 +225,12 @@ struct Pie: View {
 		.aspectRatio(1, contentMode: .fit)
 	}
 }
+#else
+
+struct StatsView: View {
+    let verwaltung: Verwaltung
+    var body: some View {
+        Text("Statistiken nicht verfügbar")
+    }
+}
+#endif
