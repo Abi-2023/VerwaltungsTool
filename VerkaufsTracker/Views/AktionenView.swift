@@ -44,7 +44,7 @@ struct AktionenView: View {
 
 			Button(role: .cancel,action: {
 				if unlockVerteileItems {
-					verwaltung.verteileItems()
+					Aktion.verteileItems(verwaltung: verwaltung, ao: aktionObserver)
 					unlockVerteileItems = false
 				} else {
 					unlockVerteileItems = true

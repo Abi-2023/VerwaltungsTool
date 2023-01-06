@@ -54,6 +54,7 @@
 		8FFBA2FD296819BA005E5A57 /* TicketGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFBA2FC296819BA005E5A57 /* TicketGenerator.swift */; };
 		8FFBA2FF29681A8E005E5A57 /* Email_Q2_Ticket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFBA2FE29681A8E005E5A57 /* Email_Q2_Ticket.swift */; };
 		8FFBA30129681B9E005E5A57 /* Codable_Verwaltung.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFBA30029681B9E005E5A57 /* Codable_Verwaltung.swift */; };
+		8FFBA30329681DC5005E5A57 /* Aktion_verteileItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFBA30229681DC5005E5A57 /* Aktion_verteileItems.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -116,6 +117,7 @@
 		8FFBA2FC296819BA005E5A57 /* TicketGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketGenerator.swift; sourceTree = "<group>"; };
 		8FFBA2FE29681A8E005E5A57 /* Email_Q2_Ticket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Email_Q2_Ticket.swift; sourceTree = "<group>"; };
 		8FFBA30029681B9E005E5A57 /* Codable_Verwaltung.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Codable_Verwaltung.swift; sourceTree = "<group>"; };
+		8FFBA30229681DC5005E5A57 /* Aktion_verteileItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aktion_verteileItems.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -263,6 +265,7 @@
 				8F794F30295CF22F007B16EB /* Aktion_ImportTransaktionen.swift */,
 				8F99E9AC295E15E9003B79DD /* Aktion_FuelleTickets.swift */,
 				8FD9C4F02967427B00E78ACB /* Aktion_sendeBezahlEmail.swift */,
+				8FFBA30229681DC5005E5A57 /* Aktion_verteileItems.swift */,
 			);
 			path = Aktionen;
 			sourceTree = "<group>";
@@ -411,6 +414,7 @@
 				8F8521F72959E49200854E16 /* Aktion_fetchFromGoogleForm.swift in Sources */,
 				8F99E9AF295E2845003B79DD /* Crypto.swift in Sources */,
 				8FD9C4EF2967143600E78ACB /* Email_Q2_Bezahl.swift in Sources */,
+				8FFBA30329681DC5005E5A57 /* Aktion_verteileItems.swift in Sources */,
 				8FFBA30129681B9E005E5A57 /* Codable_Verwaltung.swift in Sources */,
 				8FEB26142964B8550032FDE8 /* ScannerView.swift in Sources */,
 				8FA603A62948D02E001CC2D2 /* Item.swift in Sources */,
