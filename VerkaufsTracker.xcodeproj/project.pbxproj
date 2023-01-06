@@ -55,6 +55,7 @@
 		8FFBA2FF29681A8E005E5A57 /* Email_Q2_Ticket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFBA2FE29681A8E005E5A57 /* Email_Q2_Ticket.swift */; };
 		8FFBA30129681B9E005E5A57 /* Codable_Verwaltung.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFBA30029681B9E005E5A57 /* Codable_Verwaltung.swift */; };
 		8FFBA30329681DC5005E5A57 /* Aktion_verteileItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFBA30229681DC5005E5A57 /* Aktion_verteileItems.swift */; };
+		8FFBA30629689210005E5A57 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFBA30529689210005E5A57 /* Assets.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -118,6 +119,7 @@
 		8FFBA2FE29681A8E005E5A57 /* Email_Q2_Ticket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Email_Q2_Ticket.swift; sourceTree = "<group>"; };
 		8FFBA30029681B9E005E5A57 /* Codable_Verwaltung.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Codable_Verwaltung.swift; sourceTree = "<group>"; };
 		8FFBA30229681DC5005E5A57 /* Aktion_verteileItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aktion_verteileItems.swift; sourceTree = "<group>"; };
+		8FFBA30529689210005E5A57 /* Assets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -273,6 +275,7 @@
 		8FFBA2F8296817A9005E5A57 /* TicketGenerator */ = {
 			isa = PBXGroup;
 			children = (
+				8FFBA30529689210005E5A57 /* Assets.swift */,
 				8F99E9AE295E2845003B79DD /* Crypto.swift */,
 				8F128AF4294D1BF5002D3801 /* TicketCodes.swift */,
 				8FE0074029589B1E00E1B355 /* TicketRenderer.swift */,
@@ -426,6 +429,7 @@
 				8F68425529550B1600557BB6 /* CloudAccess.swift in Sources */,
 				8FFBA2FB2968188A005E5A57 /* Email_Q2_Form.swift in Sources */,
 				8F68A58A295B1CD900CAFAD6 /* CloudAvailability.swift in Sources */,
+				8FFBA30629689210005E5A57 /* Assets.swift in Sources */,
 				8FD6455C294CFD7C00D746F8 /* EmailManager.swift in Sources */,
 				8FA603A42948CFA5001CC2D2 /* Person.swift in Sources */,
 				8F128AF5294D1BF5002D3801 /* TicketCodes.swift in Sources */,

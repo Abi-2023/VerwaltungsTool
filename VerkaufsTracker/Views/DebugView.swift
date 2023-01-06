@@ -62,9 +62,9 @@ struct DebugView: View {
 		
 		
 		Button(action: {
-			//			let str = PDFRenderer().renderTicket(ticket: Ticket(owner: Person(name: "Benedict", email: "***REMOVED***", verwaltung: Verwaltung()), type: .ball_ticket, nth: 1))
-			//			let renderer = CustomPrintPageRenderer()
-			//			renderer.exportHTMLContentToPDF(HTMLContent: str!)
+			let str =  Ticket(owner: Person(name: "Benedict", email: "***REMOVED***", verwaltung: Verwaltung()), type: .after_show_ticket, nth: 1).ticketHTML(verwaltung: verwaltung)
+			let renderer = CustomPrintPageRenderer()
+			renderer.exportHTMLContentToPDF(HTMLContent: str)
 		}) {
 			Text("render ticket")
 		}.padding()
