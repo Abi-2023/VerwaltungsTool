@@ -18,6 +18,8 @@ class Verwaltung: ObservableObject {
 	@Published var lastFetchTransaktionen: Date = Date(timeIntervalSince1970: 0)
 	@Published var finalPrice = true
 	@Published var verteilungDeaktiviert = false
+
+	@Published var cloudStatus: CloudStatus? = nil
 	var logs: Int = 0
 
 

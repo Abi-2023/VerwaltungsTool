@@ -21,12 +21,14 @@ extension Verwaltung {
 				} else {
 					DispatchQueue.main.async {
 						self.cloud = .denied
+						self.cloudStatus = status
 					}
 				}
 			} else {
 				CloudStatus.setOwnToServer()
 				DispatchQueue.main.async {
 					self.cloud = .error
+					self.cloudStatus = status
 				}
 			}
 		})

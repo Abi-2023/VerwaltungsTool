@@ -45,6 +45,7 @@ enum CloudState: String{
 struct CloudStatus: Codable {
 	var lastConnection: Date = .now
 	var connectedUser: String? = CloudStatus.deviceId()
+	var lastConnectionName: String? = CloudStatus.deviceName()
 
 	func allowedToInteract() -> Bool {
 		return connectedUser == nil || connectedUser == CloudStatus.deviceId() || abs(lastConnection.timeIntervalSinceNow) > 15*60 //15 minuten
@@ -128,6 +129,16 @@ struct CloudStatus: Codable {
 			print(error)
 			print("fehler beim cloud status update")
 		}
+	}
+
+	static func deviceName() -> String? {
+		let defaults = UserDefaults()
+		return defaults.string(forKey: "DEV_Name")
+	}
+
+	static func setDeviceName(name: String) {
+		let defaults = UserDefaults()
+		defaults.set(name, forKey: "DEV_Name")
 	}
 }
 
