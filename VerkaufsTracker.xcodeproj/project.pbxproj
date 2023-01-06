@@ -56,6 +56,9 @@
 		8FFBA30129681B9E005E5A57 /* Codable_Verwaltung.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFBA30029681B9E005E5A57 /* Codable_Verwaltung.swift */; };
 		8FFBA30329681DC5005E5A57 /* Aktion_verteileItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFBA30229681DC5005E5A57 /* Aktion_verteileItems.swift */; };
 		8FFBA30629689210005E5A57 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFBA30529689210005E5A57 /* Assets.swift */; };
+		8FFBA30829689493005E5A57 /* Email_LE_Form.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFBA30729689493005E5A57 /* Email_LE_Form.swift */; };
+		8FFBA30A296894A1005E5A57 /* Email_LE_Bezahl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFBA309296894A1005E5A57 /* Email_LE_Bezahl.swift */; };
+		8FFBA30C296894B1005E5A57 /* Email_LE_Ticket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFBA30B296894B1005E5A57 /* Email_LE_Ticket.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -120,6 +123,9 @@
 		8FFBA30029681B9E005E5A57 /* Codable_Verwaltung.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Codable_Verwaltung.swift; sourceTree = "<group>"; };
 		8FFBA30229681DC5005E5A57 /* Aktion_verteileItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aktion_verteileItems.swift; sourceTree = "<group>"; };
 		8FFBA30529689210005E5A57 /* Assets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
+		8FFBA30729689493005E5A57 /* Email_LE_Form.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Email_LE_Form.swift; sourceTree = "<group>"; };
+		8FFBA309296894A1005E5A57 /* Email_LE_Bezahl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Email_LE_Bezahl.swift; sourceTree = "<group>"; };
+		8FFBA30B296894B1005E5A57 /* Email_LE_Ticket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Email_LE_Ticket.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -290,6 +296,9 @@
 				8FD9C4EE2967143600E78ACB /* Email_Q2_Bezahl.swift */,
 				8FFBA2FA2968188A005E5A57 /* Email_Q2_Form.swift */,
 				8FFBA2FE29681A8E005E5A57 /* Email_Q2_Ticket.swift */,
+				8FFBA30729689493005E5A57 /* Email_LE_Form.swift */,
+				8FFBA309296894A1005E5A57 /* Email_LE_Bezahl.swift */,
+				8FFBA30B296894B1005E5A57 /* Email_LE_Ticket.swift */,
 			);
 			path = EmailsGenerieren;
 			sourceTree = "<group>";
@@ -413,6 +422,7 @@
 				8FBE08082958D9CE0076AC2D /* AktionenView.swift in Sources */,
 				8FD9C4F12967427B00E78ACB /* Aktion_sendeBezahlEmail.swift in Sources */,
 				8F2B6710294F998100C8FA2C /* PersonenView.swift in Sources */,
+				8FFBA30A296894A1005E5A57 /* Email_LE_Bezahl.swift in Sources */,
 				8F8521F12959DB0600854E16 /* AktionObserver.swift in Sources */,
 				8F8521F72959E49200854E16 /* Aktion_fetchFromGoogleForm.swift in Sources */,
 				8F99E9AF295E2845003B79DD /* Crypto.swift in Sources */,
@@ -427,6 +437,7 @@
 				8F8521F32959DB5500854E16 /* Aktion_sendFormEmails.swift in Sources */,
 				8F7FB049294E4297005F4551 /* FormularMail.swift in Sources */,
 				8F68425529550B1600557BB6 /* CloudAccess.swift in Sources */,
+				8FFBA30C296894B1005E5A57 /* Email_LE_Ticket.swift in Sources */,
 				8FFBA2FB2968188A005E5A57 /* Email_Q2_Form.swift in Sources */,
 				8F68A58A295B1CD900CAFAD6 /* CloudAvailability.swift in Sources */,
 				8FFBA30629689210005E5A57 /* Assets.swift in Sources */,
@@ -446,6 +457,7 @@
 				8FD69E4329565A4D001F4787 /* Q2er.swift in Sources */,
 				8FA603942948CE99001CC2D2 /* VerkaufsTrackerApp.swift in Sources */,
 				8F68425729550BC300557BB6 /* Verwaltung.swift in Sources */,
+				8FFBA30829689493005E5A57 /* Email_LE_Form.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

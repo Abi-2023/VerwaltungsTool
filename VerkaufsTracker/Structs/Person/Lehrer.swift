@@ -33,4 +33,16 @@ class Lehrer: Person {
 		hasher.combine(formID)
 		hasher.combine(name)
 	}
+
+	override func generateFormEmail(ao: AktionObserver? = nil) -> Mail? {
+		return generateFormEmailInternal(ao: ao)
+	}
+
+//	override func generateBezahlEmail(ao: AktionObserver? = nil) -> Mail? {
+//		return generateBezahlEmailInternal(ao: ao)
+//	}
+//
+//	override func generateTicketEmail(v: Verwaltung, ao: AktionObserver? = nil) -> Mail? {
+//		return generateTicketEmailInternal(v: v, ao: ao)
+//	}
 }
