@@ -22,7 +22,7 @@ extension Aktion {
 				observer.log("skipping \(person.name) (already send)")
 				continue
 			}
-			let mail = person.generateFormEmail()
+			let mail = person.generateFormEmail(ao: observer)
 			if let mail = mail {
 				emailQueue.append((person, mail))
 			} else {

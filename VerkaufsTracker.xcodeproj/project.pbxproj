@@ -50,6 +50,7 @@
 		8FE0073F2958857400E1B355 /* Ticket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE0073E2958857400E1B355 /* Ticket.swift */; };
 		8FE0074129589B1E00E1B355 /* TicketRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE0074029589B1E00E1B355 /* TicketRenderer.swift */; };
 		8FEB26142964B8550032FDE8 /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FEB26132964B8550032FDE8 /* ScannerView.swift */; };
+		8FFBA2FB2968188A005E5A57 /* Email_Q2_Form.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFBA2FA2968188A005E5A57 /* Email_Q2_Form.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -108,6 +109,7 @@
 		8FE0073E2958857400E1B355 /* Ticket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ticket.swift; sourceTree = "<group>"; };
 		8FE0074029589B1E00E1B355 /* TicketRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketRenderer.swift; sourceTree = "<group>"; };
 		8FEB26132964B8550032FDE8 /* ScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
+		8FFBA2FA2968188A005E5A57 /* Email_Q2_Form.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Email_Q2_Form.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -272,6 +274,7 @@
 			isa = PBXGroup;
 			children = (
 				8FD9C4EE2967143600E78ACB /* Email_Q2_Bezahl.swift */,
+				8FFBA2FA2968188A005E5A57 /* Email_Q2_Form.swift */,
 			);
 			path = EmailsGenerieren;
 			sourceTree = "<group>";
@@ -406,6 +409,7 @@
 				8F8521F32959DB5500854E16 /* Aktion_sendFormEmails.swift in Sources */,
 				8F7FB049294E4297005F4551 /* FormularMail.swift in Sources */,
 				8F68425529550B1600557BB6 /* CloudAccess.swift in Sources */,
+				8FFBA2FB2968188A005E5A57 /* Email_Q2_Form.swift in Sources */,
 				8F68A58A295B1CD900CAFAD6 /* CloudAvailability.swift in Sources */,
 				8FD6455C294CFD7C00D746F8 /* EmailManager.swift in Sources */,
 				8FA603A42948CFA5001CC2D2 /* Person.swift in Sources */,

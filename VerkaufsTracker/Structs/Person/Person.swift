@@ -91,7 +91,7 @@ class Person: Identifiable, Codable, Hashable {
 		self.formID = verwaltung.generateFormId()
 	}
 
-	func generateFormEmail() -> Mail? {
+	func generateFormEmail(ao: AktionObserver? = nil) -> Mail? {
 		return nil
 	}
 

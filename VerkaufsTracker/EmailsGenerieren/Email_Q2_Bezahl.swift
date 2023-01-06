@@ -10,6 +10,11 @@ import SwiftSMTP
 
 extension Q2er {
 	internal func generateBezahlEmailInternal(ao: AktionObserver? = nil) -> Mail? {
+		guard let mailUser = mailUser else {
+			ao?.log("err: \(name); no mail user")
+			return nil
+		}
+		
 		let subject = "Deine Bestellungen für die Abi-Feierlichkeiten"
 
 		// TODO: Text überschreiben
@@ -146,7 +151,7 @@ extension Q2er {
 		let htmlAttachment = Attachment(htmlContent: htmlTemplate)
 
 		return Mail(from: EmailManager.senderMail,
-					to: [mailUser!], //TODO: maybe handle optional
+					to: [mailUser], //TODO: maybe handle optional
 					subject: subject,
 					text: textContent,
 					attachments: [htmlAttachment]
