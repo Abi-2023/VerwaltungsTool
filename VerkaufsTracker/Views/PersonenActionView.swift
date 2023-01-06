@@ -136,7 +136,7 @@ struct PersonenActionView: View {
 							Divider()
 							
 							VStack(spacing: 20){
-								Text("Kalkuliere die Wünsche mit den vorhandenen Kapazitäten").font(.footnote)
+								Text("Generiere die Tickets").font(.footnote)
 									.foregroundColor(.gray).multilineTextAlignment(.center)
 								Button(role: .destructive,action: {
 									if unlockFuelleTickets {
@@ -148,7 +148,7 @@ struct PersonenActionView: View {
 										unlockFuelleTickets = true
 									}
 								}) {
-									Text("Kalkuliere Tickets")
+									Text("Generiere Tickets")
 								}
 								.unlockedStyle(unlockFuelleTickets)
 							}
@@ -280,9 +280,9 @@ struct PersonenActionView: View {
                             HStack(spacing: 10) {
                                 Toggle(isOn: $resendForm, label: {
                                     VStack(alignment: .leading, spacing: 10){
-                                        Text("An: Sende an alle, ungeachtet, ob jemand die Mail (Einladung zur Wunschangabe) schon bekommen hat oder nicht")
+                                        Text("An: Sende an alle, ungeachtet, ob jemand die Mail schon bekommen hat oder nicht")
                                             .foregroundColor(resendForm ? .blue : .gray)
-                                        Text("Aus: Sende nur an die Personen, die die Mail (Einladung zur Wunschangabe) noch nicht bekommen haben")
+                                        Text("Aus: Sende nur an die Personen, die die Mail noch nicht bekommen haben")
                                             .foregroundColor(!resendForm ? .blue : .gray)
                                     }
                                 }).frame(width: geo.size.width/10*8)
@@ -310,9 +310,9 @@ struct PersonenActionView: View {
                             HStack(spacing: 10){
                                 Toggle(isOn: $resendBezahl, label: {
                                     VStack(alignment: .leading, spacing: 0){
-                                        Text("An: Sende an alle")
+                                        Text("An: Sende an alle, ungeachtet, ob jemand die Mail schon bekommen hat oder nicht")
                                             .foregroundColor(resendBezahl ? .blue : .gray)
-                                        Text("Aus: Sende, wenn noch nicht bekommen")
+                                        Text("Aus: Sende nur an die Personen, die die Mail noch nicht bekommen haben")
                                             .foregroundColor(!resendBezahl ? .blue : .gray)
                                     }
                                 }).frame(width: geo.size.width/10*8)
@@ -338,7 +338,7 @@ struct PersonenActionView: View {
                         VStack(spacing: 30){
                             HStack(spacing: 10){
                                 HStack{
-                                    Text("Kalkuliere die Wünsche mit den vorhandenen Kapazitäten").foregroundColor(.gray).multilineTextAlignment(.leading)
+                                    Text("Generiere die Tickets").foregroundColor(.gray).multilineTextAlignment(.leading)
                                     Spacer()
                                 }.frame(width: geo.size.width/10*8)
                                 Spacer()
@@ -352,7 +352,7 @@ struct PersonenActionView: View {
                                         unlockFuelleTickets = true
                                     }
                                 }) {
-                                    Text("Kalkuliere Tickets")
+                                    Text("Generiere Tickets")
                                 }
                                 .unlockedStyle(unlockFuelleTickets)
                             }
@@ -365,18 +365,18 @@ struct PersonenActionView: View {
                                 VStack(alignment: .leading, spacing: 30){
                                     Toggle(isOn: $resendTicket, label: {
                                         VStack(alignment: .leading, spacing: 10){
-                                            Text("An: Sende an alle, ungeachtet, ob jemand die Mail (Tickets) schon bekommen hat oder nicht")
+                                            Text("An: Sende an alle, ungeachtet, ob jemand die Mail schon bekommen hat oder nicht")
                                                 .foregroundColor(resendTicket ? .blue : .gray)
-                                            Text("Aus: Sende nur an die Personen, die die Mail (Tickets) noch nicht bekommen haben")
+                                            Text("Aus: Sende nur an die Personen, die die Mail noch nicht bekommen haben")
                                                 .foregroundColor(!resendTicket ? .blue : .gray)
                                         }
                                     }).frame(width: geo.size.width/10*8)
                                     Divider()
                                     Toggle(isOn: $nurVollTicket, label: {
                                         VStack(alignment: .leading, spacing: 10){
-                                            Text("An: Sende die Mail ab, nur wenn alle Tickets aufgeteilt, eingeplant und bezahlt sind")
+                                            Text("An: Sende die Mail ab, nur wenn alle Tickets generiert sind")
                                                 .foregroundColor(nurVollTicket ? .blue : .gray)
-                                            Text("Aus: Sende die Mail ab, ungeachtet, ob alle Tickets aufgeteilt, eingeplant und bezahlt sind")
+                                            Text("Aus: Sende die Mail ab, ungeachtet, ob alle Tickets generiert sind oder nicht")
                                                 .foregroundColor(!nurVollTicket ? .blue : .gray)
                                         }
                                     }).frame(width: geo.size.width/10*8)
