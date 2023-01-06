@@ -136,7 +136,7 @@ struct CloudStatus: Codable {
 		return defaults.string(forKey: "DEV_Name")
 	}
 
-	static func setDeviceName(name: String) {
+	static func setDeviceName(name: String?) {
 		let defaults = UserDefaults()
 		defaults.set(name, forKey: "DEV_Name")
 	}

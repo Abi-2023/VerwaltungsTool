@@ -53,6 +53,13 @@ struct DebugView: View {
 		}) {
 			Text("fetch")
 		}
+
+		Button(action: {
+			CloudStatus.setDeviceName(name: nil)
+			verwaltung.cloud = .disconnected
+		}) {
+			Text("Reset Name")
+		}
 		
 		Button(action: {
 			verwaltung.disconnectFromServer()
