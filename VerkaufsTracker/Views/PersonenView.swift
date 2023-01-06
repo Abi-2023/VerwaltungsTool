@@ -109,14 +109,18 @@ struct PersonenView: View {
 			ForEach(displayedPersonen, id: \.self) { person in
 				HStack{
 					if selectMode {
-						Button(action: {
-							selectedPersonen.toggle(e: person)
-						}) {
+						Button(action: {}){
 							HStack{
 								Image(systemName: selectedPersonen.contains(person) ? "checkmark.circle.fill" : "circle")
 								PersonRowItem(verwaltung: verwaltung, person: person)
 							}
-						}.buttonStyle(.borderless)
+						}
+						.simultaneousGesture(LongPressGesture().onEnded { _ in
+							selectedPerson = person
+						})
+						.simultaneousGesture(TapGesture().onEnded {
+							selectedPersonen.toggle(e: person)
+						})
 					} else {
 						Button(action: {
 							selectedPerson = person
