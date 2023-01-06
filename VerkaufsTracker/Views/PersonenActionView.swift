@@ -48,105 +48,108 @@ struct PersonenActionView: View {
 						}
 					}
 					Divider()
-					VStack(spacing: 20) {
-						Toggle(isOn: $resendForm, label: {
-							VStack(alignment: .leading, spacing: 0){
-								Text("An: Sende an alle")
-									.foregroundColor(resendForm ? .blue : .gray)
-								Text("Aus: Sende, wenn noch nicht bekommen")
-									.foregroundColor(!resendForm ? .blue : .gray)
-							}.font(.footnote)
-						})
-						Button(role: .destructive, action: {
-							if unlockSendForm {
-								DispatchQueue.global(qos: .default).async {
-									Aktion.sendFormEmails(personen: selectedPersonen, observer: aktionObserver, resend: resendForm)
+                    
+					ScrollView(showsIndicators: false){
+						VStack(spacing: 20) {
+							Toggle(isOn: $resendForm, label: {
+								VStack(alignment: .leading, spacing: 0){
+									Text("An: Sende an alle")
+										.foregroundColor(resendForm ? .blue : .gray)
+									Text("Aus: Sende, wenn noch nicht bekommen")
+										.foregroundColor(!resendForm ? .blue : .gray)
+								}.font(.footnote)
+							})
+							Button(role: .destructive, action: {
+								if unlockSendForm {
+									DispatchQueue.global(qos: .default).async {
+										Aktion.sendFormEmails(personen: selectedPersonen, observer: aktionObserver, resend: resendForm)
+									}
+									unlockSendForm = false
+								} else {
+									unlockSendForm = true
 								}
-								unlockSendForm = false
-							} else {
-								unlockSendForm = true
+							}) {
+								Text("Sende Formular")
 							}
-						}) {
-							Text("Sende Formular")
+							.unlockedStyle(unlockSendForm)
 						}
-						.unlockedStyle(unlockSendForm)
-					}
-					
-					Divider()
-					
-					VStack(spacing: 20) {
-						Toggle(isOn: $resendTicket, label: {
-							VStack(alignment: .leading, spacing: 0){
-								Text("An: Sende an alle")
-									.foregroundColor(resendTicket ? .blue : .gray)
-								Text("Aus: Sende, wenn noch nicht bekommen")
-									.foregroundColor(!resendTicket ? .blue : .gray)
-							}
-						}).font(.footnote)
-						Toggle(isOn: $nurVollTicket, label: {
-							VStack(alignment: .leading, spacing: 0){
-								Text("An: Sende, wenn alles fertig ist (Ticket)")
-									.foregroundColor(nurVollTicket ? .blue : .gray)
-								Text("Aus: Sende auch, alles nicht fertig ist (Ticket)")
-									.foregroundColor(!nurVollTicket ? .blue : .gray)
-                            }
-						}).font(.footnote)
-						Button(role: .destructive, action: {
-							if unlockSendTicket {
-								DispatchQueue.global(qos: .default).async {
-									Aktion.sendeTickets(personen: selectedPersonen, verwaltung: verwaltung, ao: aktionObserver, resend: resendTicket, nurVoll: nurVollTicket)
+						
+						Divider()
+						
+						VStack(spacing: 20) {
+							Toggle(isOn: $resendTicket, label: {
+								VStack(alignment: .leading, spacing: 0){
+									Text("An: Sende an alle")
+										.foregroundColor(resendTicket ? .blue : .gray)
+									Text("Aus: Sende, wenn noch nicht bekommen")
+										.foregroundColor(!resendTicket ? .blue : .gray)
 								}
-								unlockSendTicket = false
-							} else {
-								unlockSendTicket = true
-							}
-						}) {
-							Text("Sende Tickets")
-						}
-						.unlockedStyle(unlockSendTicket)
-					}
-					
-					Divider()
-					
-					VStack(spacing: 20){
-						Button(role: .cancel,action: {
-							if unlockFuelleTickets {
-								DispatchQueue.global(qos: .default).async {
-									Aktion.fuelleTickets(veraltung: verwaltung, personen: selectedPersonen, ao: aktionObserver)
+							}).font(.footnote)
+							Toggle(isOn: $nurVollTicket, label: {
+								VStack(alignment: .leading, spacing: 0){
+									Text("An: Sende, wenn alles fertig ist (Ticket)")
+										.foregroundColor(nurVollTicket ? .blue : .gray)
+									Text("Aus: Sende auch, alles nicht fertig ist (Ticket)")
+										.foregroundColor(!nurVollTicket ? .blue : .gray)
 								}
-								unlockFuelleTickets = false
-							} else {
-								unlockFuelleTickets = true
+							}).font(.footnote)
+							Button(role: .destructive, action: {
+								if unlockSendTicket {
+									DispatchQueue.global(qos: .default).async {
+										Aktion.sendeTickets(personen: selectedPersonen, verwaltung: verwaltung, ao: aktionObserver, resend: resendTicket, nurVoll: nurVollTicket)
+									}
+									unlockSendTicket = false
+								} else {
+									unlockSendTicket = true
+								}
+							}) {
+								Text("Sende Tickets")
 							}
-						}) {
-							Text("Fülle Tickets")
+							.unlockedStyle(unlockSendTicket)
 						}
-						.unlockedStyle(unlockFuelleTickets)
-					}
+						
+						Divider()
+						
+						VStack(spacing: 20){
+							Button(role: .cancel,action: {
+								if unlockFuelleTickets {
+									DispatchQueue.global(qos: .default).async {
+										Aktion.fuelleTickets(veraltung: verwaltung, personen: selectedPersonen, ao: aktionObserver)
+									}
+									unlockFuelleTickets = false
+								} else {
+									unlockFuelleTickets = true
+								}
+							}) {
+								Text("Fülle Tickets")
+							}
+							.unlockedStyle(unlockFuelleTickets)
+						}
 
-					Divider()
-					VStack(spacing: 20) {
-						Toggle(isOn: $resendBezahl, label: {
-							VStack(alignment: .leading, spacing: 0){
-								Text("An: Sende an alle")
-									.foregroundColor(resendBezahl ? .blue : .gray)
-								Text("Aus: Sende, wenn noch nicht bekommen")
-									.foregroundColor(!resendBezahl ? .blue : .gray)
-							}.font(.footnote)
-						})
-						Button(role: .destructive, action: {
-							if unlockSendBezahl {
-								DispatchQueue.global(qos: .default).async {
-									Aktion.sendBezahlEmails(personen: selectedPersonen, observer: aktionObserver, resend: resendBezahl)
+						Divider()
+						VStack(spacing: 20) {
+							Toggle(isOn: $resendBezahl, label: {
+								VStack(alignment: .leading, spacing: 0){
+									Text("An: Sende an alle")
+										.foregroundColor(resendBezahl ? .blue : .gray)
+									Text("Aus: Sende, wenn noch nicht bekommen")
+										.foregroundColor(!resendBezahl ? .blue : .gray)
+								}.font(.footnote)
+							})
+							Button(role: .destructive, action: {
+								if unlockSendBezahl {
+									DispatchQueue.global(qos: .default).async {
+										Aktion.sendBezahlEmails(personen: selectedPersonen, observer: aktionObserver, resend: resendBezahl)
+									}
+									unlockSendBezahl = false
+								} else {
+									unlockSendBezahl = true
 								}
-								unlockSendBezahl = false
-							} else {
-								unlockSendBezahl = true
+							}) {
+								Text("Sende Bezahl")
 							}
-						}) {
-							Text("Sende Bezahl")
+							.unlockedStyle(unlockSendBezahl)
 						}
-						.unlockedStyle(unlockSendBezahl)
 					}
 				}
 			}.padding()
