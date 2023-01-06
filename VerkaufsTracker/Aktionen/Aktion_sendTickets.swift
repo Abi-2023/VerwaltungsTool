@@ -47,6 +47,7 @@ extension Aktion {
 
 			if nurVoll && !vollGeneriert {
 				ao.log("skipping: \(person.name) (nicht voll generiert)")
+				continue
 			}
 
 			let workerGroup = DispatchGroup()
