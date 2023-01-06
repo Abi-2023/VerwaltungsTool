@@ -39,70 +39,72 @@ struct PersonenView: View {
 	@State var zeigeAusgewaelte = false
 
 	var body: some View {
-		HStack {
-
-			Button(action: {
-				selectMode = true
-				showFilterShortcut.toggle()
-			}) {
-				Image(systemName: "line.3.horizontal.decrease.circle")
-			}.sheet(isPresented: $showFilterShortcut) {
-				FilterView(verwaltung: verwaltung, selectedPersonen: $selectedPersonen, gruppenTyp: $gruppenTyp, showFilterShortcut: $showFilterShortcut)
-			}
-
-			TextField("Gebe einen Namen ein", text: $searchQuery)
-				.textFieldStyle(.roundedBorder)
-			Button(action: {
-				searchQuery = ""
-				UIApplication.shared.endEditing()
-			}) {
-				Image(systemName: searchQuery.isEmpty ? "magnifyingglass" : "delete.left")
-			}
-		}.padding()
-
 		let displayedPersonen = zeigeAusgewaelte ? selectedPersonen : verwaltung.personen
 			.filter({type(of: $0) == gruppenTyp.type || gruppenTyp == ._Alle})
 			.filter({searchQuery == "" || $0.searchableText.contains(searchQuery.uppercased())})
-
-		HStack{
-			if(selectMode) {
+		
+		VStack(spacing: 10){
+			Text("Personenübersicht").font(.largeTitle.weight(.heavy))
+			HStack {
 				Button(action: {
-					displayedPersonen.forEach({ person in
-						selectedPersonen.toggle(e: person)
-					})
-					selectedAllPersonen.toggle()
+					selectMode = true
+					showFilterShortcut.toggle()
 				}) {
-					Text(selectedAllPersonen ? "Keine" : "Alle")
+					Image(systemName: "line.3.horizontal.decrease.circle")
+				}.sheet(isPresented: $showFilterShortcut) {
+					FilterView(verwaltung: verwaltung, selectedPersonen: $selectedPersonen, gruppenTyp: $gruppenTyp, showFilterShortcut: $showFilterShortcut)
 				}
-				Spacer()
-				if(!selectedPersonen.isEmpty){
-					Button("Aktionen"){
-						state = .aktionen
+
+				TextField("Gebe einen Namen ein", text: $searchQuery)
+					.textFieldStyle(.roundedBorder)
+				Button(action: {
+					searchQuery = ""
+					UIApplication.shared.endEditing()
+				}) {
+					Image(systemName: searchQuery.isEmpty ? "magnifyingglass" : "delete.left")
+				}
+			}
+			HStack{
+				if(selectMode) {
+					Button(action: {
+						displayedPersonen.forEach({ person in
+							selectedPersonen.toggle(e: person)
+						})
+						selectedAllPersonen.toggle()
+					}) {
+						Text(selectedAllPersonen ? "Keine" : "Alle")
+					}
+					Spacer()
+					if(!selectedPersonen.isEmpty){
+						Button("Aktionen"){
+							state = .aktionen
+						}
+						Spacer()
+					}
+				}
+				if selectMode {
+					Button(action: {
+						zeigeAusgewaelte.toggle()
+					}) {
+						Text(zeigeAusgewaelte ? "Alle anzeigen" : "Ausgewählte zeigen")
 					}
 					Spacer()
 				}
-			}
-			if selectMode {
-				Button(action: {
-					zeigeAusgewaelte.toggle()
-				}) {
-					Text(zeigeAusgewaelte ? "Alle anzeigen" : "Ausgewählte zeigen")
-				}
-				Spacer()
-			}
 
-			Button(action: {
-				selectMode.toggle()
-				selectedPersonen = []
-			}) {
-				if selectMode{
-					Image(systemName: "xmark")
-				} else {
-					Text("Auswählen")
+				Button(action: {
+					selectMode.toggle()
+					selectedPersonen = []
+				}) {
+					if selectMode{
+						Image(systemName: "xmark")
+					} else {
+						Text("Auswählen")
+					}
 				}
-			}
-		}.padding([.leading, .trailing])
-			.font(.callout)
+			}.font(.callout)
+			Divider()
+		}.padding([.leading, .trailing, .top])
+
 		List {
 			ForEach(displayedPersonen, id: \.self) { person in
 				HStack{
@@ -110,35 +112,19 @@ struct PersonenView: View {
 						Button(action: {
 							selectedPersonen.toggle(e: person)
 						}) {
-							Image(systemName: selectedPersonen.contains(person) ? "checkmark.circle.fill" : "circle")
-						}
-					}
-					Button(action: {
-						selectedPerson = person
-					}) {
-						HStack {
-							Text(person.name)
-								.foregroundColor(person.zuzahlenderBetrag == 0 ? .primary : person.offenerBetrag(v: verwaltung) <= 0 ? .green : .red)
-
-							Spacer()
-
-
-							if(person.extraFields[extraFields(rawValue: "sendFormEmail")!] != "0" && person.extraFields[extraFields(rawValue: "hatFormEingetragen")!] != "0" &&
-							   person.offenerBetrag(v: verwaltung) <= 0 &&  person.zuzahlenderBetrag != 0){
-								Image(systemName: "checkmark.circle").foregroundColor(.green)
-							} else {
-								if(person.extraFields[extraFields(rawValue: "sendFormEmail")!] != nil){
-									Image(systemName: "paperplane")
-								}
-
-								if(person.extraFields[extraFields(rawValue: "hatFormEingetragen")!] != nil){
-									Image(systemName: "doc")
-								}
+							HStack{
+								Image(systemName: selectedPersonen.contains(person) ? "checkmark.circle.fill" : "circle")
+								PersonRowItem(verwaltung: verwaltung, person: person)
 							}
+						}.buttonStyle(.borderless)
+					} else {
+						Button(action: {
+							selectedPerson = person
+						}) {
+							PersonRowItem(verwaltung: verwaltung, person: person)
 						}
+						.buttonStyle(.borderless)
 					}
-					.buttonStyle(.borderless)
-
 				}
 			}
 			.sheet(item: $selectedPerson) { _ in
@@ -148,6 +134,29 @@ struct PersonenView: View {
 
 			if(displayedPersonen.isEmpty) {
 				Text("Keine Person gefunden")
+			}
+		}.listStyle(.inset)
+	}
+}
+
+struct PersonRowItem: View{
+	let verwaltung: Verwaltung
+	let person: Person
+	var body: some View{
+		HStack {
+			Text(person.name)
+				.foregroundColor(person.zuzahlenderBetrag == 0 ? .primary : person.offenerBetrag(v: verwaltung) <= 0 ? .green : .red)
+			Spacer()
+			if(person.extraFields[extraFields(rawValue: "sendFormEmail")!] != "0" && person.extraFields[extraFields(rawValue: "hatFormEingetragen")!] != "0" &&
+			   person.offenerBetrag(v: verwaltung) <= 0 &&  person.zuzahlenderBetrag != 0){
+				Image(systemName: "checkmark.circle").foregroundColor(.green)
+			} else {
+				if(person.extraFields[extraFields(rawValue: "sendFormEmail")!] != nil){
+					Image(systemName: "paperplane")
+				}
+				if(person.extraFields[extraFields(rawValue: "hatFormEingetragen")!] != nil){
+					Image(systemName: "doc")
+				}
 			}
 		}
 	}
