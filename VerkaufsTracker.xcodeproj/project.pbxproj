@@ -52,6 +52,7 @@
 		8FEB26142964B8550032FDE8 /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FEB26132964B8550032FDE8 /* ScannerView.swift */; };
 		8FFBA2FB2968188A005E5A57 /* Email_Q2_Form.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFBA2FA2968188A005E5A57 /* Email_Q2_Form.swift */; };
 		8FFBA2FD296819BA005E5A57 /* TicketGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFBA2FC296819BA005E5A57 /* TicketGenerator.swift */; };
+		8FFBA2FF29681A8E005E5A57 /* Email_Q2_Ticket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFBA2FE29681A8E005E5A57 /* Email_Q2_Ticket.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -112,6 +113,7 @@
 		8FEB26132964B8550032FDE8 /* ScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
 		8FFBA2FA2968188A005E5A57 /* Email_Q2_Form.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Email_Q2_Form.swift; sourceTree = "<group>"; };
 		8FFBA2FC296819BA005E5A57 /* TicketGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketGenerator.swift; sourceTree = "<group>"; };
+		8FFBA2FE29681A8E005E5A57 /* Email_Q2_Ticket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Email_Q2_Ticket.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -278,6 +280,7 @@
 			children = (
 				8FD9C4EE2967143600E78ACB /* Email_Q2_Bezahl.swift */,
 				8FFBA2FA2968188A005E5A57 /* Email_Q2_Form.swift */,
+				8FFBA2FE29681A8E005E5A57 /* Email_Q2_Ticket.swift */,
 			);
 			path = EmailsGenerieren;
 			sourceTree = "<group>";
@@ -396,6 +399,7 @@
 				8FBE080C2958ECDE0076AC2D /* StatsView.swift in Sources */,
 				8FD69E4529565A55001F4787 /* Lehrer.swift in Sources */,
 				8F99E9AD295E15E9003B79DD /* Aktion_FuelleTickets.swift in Sources */,
+				8FFBA2FF29681A8E005E5A57 /* Email_Q2_Ticket.swift in Sources */,
 				8F794F31295CF22F007B16EB /* Aktion_ImportTransaktionen.swift in Sources */,
 				8FBE08082958D9CE0076AC2D /* AktionenView.swift in Sources */,
 				8FD9C4F12967427B00E78ACB /* Aktion_sendeBezahlEmail.swift in Sources */,

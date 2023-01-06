@@ -64,12 +64,11 @@ class Q2er: Person {
 		return generateFormEmailInternal(ao: ao)
 	}
 
-	func generateBezahlEmail(ao: AktionObserver? = nil) -> Mail? {
+	override func generateBezahlEmail(ao: AktionObserver? = nil) -> Mail? {
 		return generateBezahlEmailInternal(ao: ao)
 	}
 
-	override func generateBezahlEmail() -> Mail? {
-		return generateBezahlEmailInternal()
+	override func generateTicketEmail(v: Verwaltung, ao: AktionObserver? = nil) -> Mail? {
+		return generateTicketEmailInternal(v: v, ao: ao)
 	}
-
 }

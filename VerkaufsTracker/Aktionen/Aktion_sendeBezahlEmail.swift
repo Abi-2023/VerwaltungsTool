@@ -26,7 +26,7 @@ extension Aktion {
 				observer.log("skipping \(person.name) (keine Bestellung)")
 				continue
 			}
-			let mail = type(of: person) == Q2er.self ? (person as! Q2er).generateBezahlEmail(ao: observer) : person.generateBezahlEmail()
+			let mail = person.generateBezahlEmail(ao: observer)
 			if let mail = mail {
 				emailQueue.append((person, mail))
 			} else {

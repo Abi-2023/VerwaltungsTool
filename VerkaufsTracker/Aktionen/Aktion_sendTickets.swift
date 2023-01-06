@@ -11,28 +11,6 @@ import SwiftSMTP
 
 extension Aktion {
 
-	fileprivate static func generateTicketEmailForPerson(p: Person, v: Verwaltung) -> Mail? {
-		var attachments: [Attachment] = []
-
-		for ticket in p.tickets {
-			attachments.append(ticket.generateAttatchment(verwaltung: v))
-		}
-
-		guard let mailUser = p.mailUser else {
-			return nil
-		}
-
-		let mail = Mail(
-			from: EmailManager.senderMail,
-			to: [mailUser],
-			subject: "Tickets",
-			text: "Hier deine Tickets",
-			attachments: attachments
-		)
-
-		return mail
-	}
-
 	// nurVoll: sendet nur, wenn die anzahl der Tickets gleich der Anzahl der bestellten Tickets ist+
 	// wenn nicht: muss vorher tickets generieren und auffüllen
 	// TODO: maybe vor dem run hier auffüllen
@@ -74,7 +52,7 @@ extension Aktion {
 			let workerGroup = DispatchGroup()
 			workerGroup.enter()
 			DispatchQueue.main.async {
-				if let mail = generateTicketEmailForPerson(p: person, v: v) {
+				if let mail = person.generateTicketEmail(v: v, ao: ao) {
 					emailQueue.append((person, mail))
 				} else {
 					ao.log("Could not generateEmail for \(person.name)")

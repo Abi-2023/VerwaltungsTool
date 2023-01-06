@@ -91,10 +91,6 @@ class Person: Identifiable, Codable, Hashable {
 		self.formID = verwaltung.generateFormId()
 	}
 
-	func generateFormEmail(ao: AktionObserver? = nil) -> Mail? {
-		return nil
-	}
-
 	var mailUser: Mail.User? {
 		if let email {
 			return Mail.User(name: name, email: email)
@@ -102,7 +98,15 @@ class Person: Identifiable, Codable, Hashable {
 		return nil
 	}
 
-	func generateBezahlEmail() -> Mail? {
+	func generateBezahlEmail(ao: AktionObserver? = nil) -> Mail? {
+		return nil
+	}
+
+	func generateFormEmail(ao: AktionObserver? = nil) -> Mail? {
+		return nil
+	}
+
+	func generateTicketEmail(v: Verwaltung, ao: AktionObserver? = nil) -> Mail? {
 		return nil
 	}
 }
