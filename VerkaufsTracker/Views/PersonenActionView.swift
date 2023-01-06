@@ -47,109 +47,115 @@ struct PersonenActionView: View {
 							Text("Auswahl löschen")
 						}
 					}
+					
 					Divider()
                     
 					ScrollView(showsIndicators: false){
 						VStack(spacing: 20) {
-							Toggle(isOn: $resendForm, label: {
-								VStack(alignment: .leading, spacing: 0){
-									Text("An: Sende an alle")
-										.foregroundColor(resendForm ? .blue : .gray)
-									Text("Aus: Sende, wenn noch nicht bekommen")
-										.foregroundColor(!resendForm ? .blue : .gray)
-								}.font(.footnote)
-							})
-							Button(role: .destructive, action: {
-								if unlockSendForm {
-									DispatchQueue.global(qos: .default).async {
-										Aktion.sendFormEmails(personen: selectedPersonen, observer: aktionObserver, resend: resendForm)
+							VStack(spacing: 20) {
+								Toggle(isOn: $resendForm, label: {
+									VStack(alignment: .leading, spacing: 0){
+										Text("An: Sende an alle")
+											.foregroundColor(resendForm ? .blue : .gray)
+										Text("Aus: Sende, wenn noch nicht bekommen")
+											.foregroundColor(!resendForm ? .blue : .gray)
+									}.font(.footnote)
+								})
+								Button(role: .destructive, action: {
+									if unlockSendForm {
+										DispatchQueue.global(qos: .default).async {
+											Aktion.sendFormEmails(personen: selectedPersonen, observer: aktionObserver, resend: resendForm)
+										}
+										unlockSendForm = false
+									} else {
+										unlockSendForm = true
 									}
-									unlockSendForm = false
-								} else {
-									unlockSendForm = true
+								}) {
+									Text("Sende Formular")
 								}
-							}) {
-								Text("Sende Formular")
+								.unlockedStyle(unlockSendForm)
 							}
-							.unlockedStyle(unlockSendForm)
-						}
-						
-						Divider()
-						
-						VStack(spacing: 20) {
-							Toggle(isOn: $resendTicket, label: {
-								VStack(alignment: .leading, spacing: 0){
-									Text("An: Sende an alle")
-										.foregroundColor(resendTicket ? .blue : .gray)
-									Text("Aus: Sende, wenn noch nicht bekommen")
-										.foregroundColor(!resendTicket ? .blue : .gray)
-								}
-							}).font(.footnote)
-							Toggle(isOn: $nurVollTicket, label: {
-								VStack(alignment: .leading, spacing: 0){
-									Text("An: Sende, wenn alles fertig ist (Ticket)")
-										.foregroundColor(nurVollTicket ? .blue : .gray)
-									Text("Aus: Sende auch, alles nicht fertig ist (Ticket)")
-										.foregroundColor(!nurVollTicket ? .blue : .gray)
-								}
-							}).font(.footnote)
-							Button(role: .destructive, action: {
-								if unlockSendTicket {
-									DispatchQueue.global(qos: .default).async {
-										Aktion.sendeTickets(personen: selectedPersonen, verwaltung: verwaltung, ao: aktionObserver, resend: resendTicket, nurVoll: nurVollTicket)
+							
+							Divider()
+							
+							VStack(alignment: .center, spacing: 20){
+								Toggle(isOn: $resendBezahl, label: {
+									VStack(alignment: .leading, spacing: 0){
+										Text("An: Sende an alle")
+											.foregroundColor(resendBezahl ? .blue : .gray)
+										Text("Aus: Sende, wenn noch nicht bekommen")
+											.foregroundColor(!resendBezahl ? .blue : .gray)
+									}.font(.footnote)
+								})
+								Button(role: .destructive, action: {
+									if unlockSendBezahl {
+										DispatchQueue.global(qos: .default).async {
+											Aktion.sendBezahlEmails(personen: selectedPersonen, observer: aktionObserver, resend: resendBezahl)
+										}
+										unlockSendBezahl = false
+									} else {
+										unlockSendBezahl = true
 									}
-									unlockSendTicket = false
-								} else {
-									unlockSendTicket = true
+								}) {
+									Text("Sende Bestellübersicht")
 								}
-							}) {
-								Text("Sende Tickets")
+								.unlockedStyle(unlockSendBezahl)
 							}
-							.unlockedStyle(unlockSendTicket)
-						}
-						
-						Divider()
-						
-						VStack(spacing: 20){
-							Button(role: .cancel,action: {
-								if unlockFuelleTickets {
-									DispatchQueue.global(qos: .default).async {
-										Aktion.fuelleTickets(veraltung: verwaltung, personen: selectedPersonen, ao: aktionObserver)
+							
+							Divider()
+							
+							VStack(spacing: 20){
+								Text("Kalkuliere die Wünsche mit den vorhandenen Kapazitäten").font(.footnote)
+									.foregroundColor(.gray).multilineTextAlignment(.center)
+								Button(role: .destructive,action: {
+									if unlockFuelleTickets {
+										DispatchQueue.global(qos: .default).async {
+											Aktion.fuelleTickets(veraltung: verwaltung, personen: selectedPersonen, ao: aktionObserver)
+										}
+										unlockFuelleTickets = false
+									} else {
+										unlockFuelleTickets = true
 									}
-									unlockFuelleTickets = false
-								} else {
-									unlockFuelleTickets = true
+								}) {
+									Text("Kalkuliere Tickets")
 								}
-							}) {
-								Text("Fülle Tickets")
+								.unlockedStyle(unlockFuelleTickets)
 							}
-							.unlockedStyle(unlockFuelleTickets)
-						}
-
-						Divider()
-						VStack(spacing: 20) {
-							Toggle(isOn: $resendBezahl, label: {
-								VStack(alignment: .leading, spacing: 0){
-									Text("An: Sende an alle")
-										.foregroundColor(resendBezahl ? .blue : .gray)
-									Text("Aus: Sende, wenn noch nicht bekommen")
-										.foregroundColor(!resendBezahl ? .blue : .gray)
-								}.font(.footnote)
-							})
-							Button(role: .destructive, action: {
-								if unlockSendBezahl {
-									DispatchQueue.global(qos: .default).async {
-										Aktion.sendBezahlEmails(personen: selectedPersonen, observer: aktionObserver, resend: resendBezahl)
+							
+							Divider()
+							
+							VStack(spacing: 20) {
+								Toggle(isOn: $resendTicket, label: {
+									VStack(alignment: .leading, spacing: 0){
+										Text("An: Sende an alle")
+											.foregroundColor(resendTicket ? .blue : .gray)
+										Text("Aus: Sende, wenn noch nicht bekommen")
+											.foregroundColor(!resendTicket ? .blue : .gray)
 									}
-									unlockSendBezahl = false
-								} else {
-									unlockSendBezahl = true
+								}).font(.footnote)
+								Toggle(isOn: $nurVollTicket, label: {
+									VStack(alignment: .leading, spacing: 0){
+										Text("An: Sende, wenn alles fertig ist (Ticket)")
+											.foregroundColor(nurVollTicket ? .blue : .gray)
+										Text("Aus: Sende auch, alles nicht fertig ist (Ticket)")
+											.foregroundColor(!nurVollTicket ? .blue : .gray)
+									}
+								}).font(.footnote)
+								Button(role: .destructive, action: {
+									if unlockSendTicket {
+										DispatchQueue.global(qos: .default).async {
+											Aktion.sendeTickets(personen: selectedPersonen, verwaltung: verwaltung, ao: aktionObserver, resend: resendTicket, nurVoll: nurVollTicket)
+										}
+										unlockSendTicket = false
+									} else {
+										unlockSendTicket = true
+									}
+								}) {
+									Text("Sende Tickets")
 								}
-							}) {
-								Text("Sende Bezahl")
+								.unlockedStyle(unlockSendTicket)
 							}
-							.unlockedStyle(unlockSendBezahl)
-						}
+						}.padding(5)
 					}
 				}
 			}.padding()
@@ -173,7 +179,9 @@ struct PersonenActionView: View {
 								Text("Ausgewählte Personen löschen")
 							}
 						}
+						
 						Divider()
+						
 						HStack(spacing: 10) {
 							Toggle(isOn: $resendForm, label: {
 								VStack(alignment: .leading, spacing: 10){
@@ -182,7 +190,7 @@ struct PersonenActionView: View {
 									Text("Aus: Sende nur an die Personen, die die Mail (Einladung zur Wunschangabe) noch nicht bekommen haben")
 										.foregroundColor(!resendForm ? .blue : .gray)
 								}
-							}).frame(width: geo.size.width/10*7.5)
+							}).frame(width: geo.size.width/10*8)
 							Spacer()
 							Button(role: .destructive, action: {
 								if unlockSendForm {
@@ -198,7 +206,58 @@ struct PersonenActionView: View {
 							}
 							.unlockedStyle(unlockSendForm)
 						}
+						
 						Divider()
+						
+						HStack(spacing: 10){
+							Toggle(isOn: $resendBezahl, label: {
+								VStack(alignment: .leading, spacing: 0){
+									Text("An: Sende an alle")
+										.foregroundColor(resendBezahl ? .blue : .gray)
+									Text("Aus: Sende, wenn noch nicht bekommen")
+										.foregroundColor(!resendBezahl ? .blue : .gray)
+								}
+							}).frame(width: geo.size.width/10*8)
+							Spacer()
+							Button(role: .destructive, action: {
+								if unlockSendBezahl {
+									DispatchQueue.global(qos: .default).async {
+										Aktion.sendBezahlEmails(personen: selectedPersonen, observer: aktionObserver, resend: resendBezahl)
+									}
+									unlockSendBezahl = false
+								} else {
+									unlockSendBezahl = true
+								}
+							}) {
+								Text("Sende Übersicht")
+							}
+							.unlockedStyle(unlockSendBezahl)
+						}
+						Divider()
+
+						HStack(spacing: 10){
+							HStack{
+								Text("Kalkuliere die Wünsche mit den vorhandenen Kapazitäten").foregroundColor(.gray).multilineTextAlignment(.leading)
+								Spacer()
+							}.frame(width: geo.size.width/10*8)
+							Spacer()
+							Button(role: .destructive,action: {
+								if unlockFuelleTickets {
+									DispatchQueue.global(qos: .default).async {
+										Aktion.fuelleTickets(veraltung: verwaltung, personen: selectedPersonen, ao: aktionObserver)
+									}
+									unlockFuelleTickets = false
+								} else {
+									unlockFuelleTickets = true
+								}
+							}) {
+								Text("Kalkuliere Tickets")
+							}
+							.unlockedStyle(unlockFuelleTickets)
+						}
+						
+						Divider()
+						
 						
 						HStack(spacing: 10) {
 							VStack(alignment: .leading, spacing: 30){
@@ -209,7 +268,7 @@ struct PersonenActionView: View {
 										Text("Aus: Sende nur an die Personen, die die Mail (Tickets) noch nicht bekommen haben")
 											.foregroundColor(!resendTicket ? .blue : .gray)
 									}
-								}).frame(width: geo.size.width/10*7.5)
+								}).frame(width: geo.size.width/10*8)
 								Divider()
 								Toggle(isOn: $nurVollTicket, label: {
 									VStack(alignment: .leading, spacing: 10){
@@ -218,7 +277,7 @@ struct PersonenActionView: View {
 										Text("Aus: Sende die Mail ab, ungeachtet, ob alle Tickets aufgeteilt, eingeplant und bezahlt sind")
 											.foregroundColor(!nurVollTicket ? .blue : .gray)
 									}
-								}).frame(width: geo.size.width/10*7.5)
+								}).frame(width: geo.size.width/10*8)
 							}
 							Button(role: .destructive, action: {
 								if unlockSendTicket {
@@ -233,24 +292,6 @@ struct PersonenActionView: View {
 								Text("Sende Tickets")
 							}
 							.unlockedStyle(unlockSendTicket)
-						}
-						
-						Divider()
-						
-						VStack(spacing: 20){
-							Button(role: .cancel,action: {
-								if unlockFuelleTickets {
-									DispatchQueue.global(qos: .default).async {
-										Aktion.fuelleTickets(veraltung: verwaltung, personen: selectedPersonen, ao: aktionObserver)
-									}
-									unlockFuelleTickets = false
-								} else {
-									unlockFuelleTickets = true
-								}
-							}) {
-								Text("Fülle Tickets")
-							}
-							.unlockedStyle(unlockFuelleTickets)
 						}
 					}
 				}.padding()
