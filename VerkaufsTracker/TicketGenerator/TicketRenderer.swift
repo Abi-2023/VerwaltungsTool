@@ -143,14 +143,12 @@ extension Ticket {
    <th class="tg-0lax big" colspan="2">Historische ***REMOVED*** ***REMOVED***</th>
   </tr>
   <tr>
-   <td class="tg-0lax title">Datum:</td>
-   <td class="tg-0lax title">Einlass:</td>
+   <td class="tg-0lax title" colspan="2">Datum:</td>
    <td class="tg-0lax" rowspan="2">
    </td>
   </tr>
   <tr>
-   <th class="tg-0lax big">Dienstag, 21.06.2023</th>
-   <th class="tg-0lax big">16:30</th>
+   <th class="tg-0lax big">Dienstag, 21.06.2023 | 16:30</th>
   </tr>
  </tbody>
    </table>
