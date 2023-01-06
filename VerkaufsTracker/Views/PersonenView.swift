@@ -109,11 +109,10 @@ struct PersonenView: View {
 			ForEach(displayedPersonen, id: \.self) { person in
 				HStack{
 					if selectMode {
-						Button(action: {}){
-							HStack{
-								Image(systemName: selectedPersonen.contains(person) ? "checkmark.circle.fill" : "circle")
-								PersonRowItem(verwaltung: verwaltung, person: person)
-							}
+						HStack{
+							Image(systemName: selectedPersonen.contains(person) ? "checkmark.circle.fill" : "circle")
+							PersonRowItem(verwaltung: verwaltung, person: person)
+								.contentShape(Rectangle())
 						}
 						.simultaneousGesture(LongPressGesture().onEnded { _ in
 							selectedPerson = person
