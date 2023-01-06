@@ -45,7 +45,9 @@ struct AktionenView: View {
             HStack{
                 Button(role: .cancel,action: {
                     if unlockVerteileItems {
-                        Aktion.verteileItems(verwaltung: verwaltung, ao: aktionObserver)
+						DispatchQueue.global(qos: .default).async {
+							Aktion.verteileItems(verwaltung: verwaltung, ao: aktionObserver)
+						}
                         unlockVerteileItems = false
                     } else {
                         unlockVerteileItems = true

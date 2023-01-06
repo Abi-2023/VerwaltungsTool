@@ -65,6 +65,8 @@ extension Verwaltung {
 							self.logs = neueVerwaltung.logs
 							self.lastFetchTransaktionen = neueVerwaltung.lastFetchTransaktionen
 							self.cloud = .connected
+							self.verteilungDeaktiviert = neueVerwaltung.verteilungDeaktiviert
+							self.finalPrice = neueVerwaltung.finalPrice
 						}
 					} catch {
 						print(error)

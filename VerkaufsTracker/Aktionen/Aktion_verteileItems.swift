@@ -11,6 +11,13 @@ extension Aktion {
 
 	// TODO: Log im ao
 	static public func verteileItems(verwaltung v: Verwaltung, ao: AktionObserver) {
+		if v.verteilungDeaktiviert {
+			ao.clear()
+			ao.activate(name: "VerteileItems")
+			ao.log("Deaktiviert")
+			ao.finish()
+			return
+		}
 		for item in Item.allCases {
 			var round = 0
 			var aktuell_verfuegbar = item.verfuegbar
@@ -27,5 +34,6 @@ extension Aktion {
 				personenDieWollen = Array(personenDieWollen.shuffled().prefix(upTo: min(aktuell_verfuegbar, personenDieWollen.count)))
 			}
 		}
+		v.verteilungDeaktiviert = true
 	}
 }
