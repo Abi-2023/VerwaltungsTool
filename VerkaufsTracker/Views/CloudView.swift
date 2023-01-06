@@ -29,6 +29,9 @@ struct CloudView: View {
 							TextField("Name", text: $deviceName)
 								.padding(.vertical, 20)
 								.textFieldStyle(.roundedBorder)
+								.onAppear {
+									deviceName = UIDevice.current.name
+								}
 
 
 							Button(action: {
@@ -59,7 +62,7 @@ struct CloudView: View {
 
 							if let cloudStatus = v.cloudStatus {
 								Text("Letzte Verbindung: \(cloudStatus.lastConnection.formatted(.dateTime))")
-								Text("Von Verbindung: \(cloudStatus.lastConnectionName ?? "?")")
+								Text("Von: \(cloudStatus.lastConnectionName ?? "?")")
 							}
 
 							HStack(spacing: 7.5){
