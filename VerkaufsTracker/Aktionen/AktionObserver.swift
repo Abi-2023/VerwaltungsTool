@@ -18,7 +18,7 @@ class AktionObserver: ObservableObject {
 	func log(_ message: String) {
 		DispatchQueue.main.sync {
 			log += "\n"
-			log += message
+			log += ">> " + message
 		}
 	}
 
@@ -30,8 +30,8 @@ class AktionObserver: ObservableObject {
 
 	func activate(name: String) {
 		DispatchQueue.main.sync {
-			log += ">>\(name)<<\n"
-			log += ">>\(Date().description(with: .current))<<"
+			log += ">> \(name)\n"
+			log += ">> \(Date().description(with: .current))"
 			aktiv = true
 		}
 	}
@@ -53,7 +53,6 @@ class AktionObserver: ObservableObject {
 		// uploadData
 		verwaltung?.logs = 1 + (verwaltung?.logs ?? 0)
 		let logId = "\((verwaltung?.logs ?? -1 * 10))-\(Int.random(in: (0...99)))"
-		log("----------------")
 		log("Upload Log: \(logId)")
 
 		do {
@@ -70,9 +69,9 @@ class AktionObserver: ObservableObject {
 					let responseCode = httpResponse.statusCode
 					if responseCode == 200 || responseCode == 204{
 						print("\(responseCode )successfully uploaded log: \(logId)")
-						self.log("erfolgreich hochgeladen")
+						self.log("Successfully uploaded log \(logId)")
 					} else {
-						print("\(responseCode) error while uploading log")
+						print(">> \(responseCode) error while uploading log")
 						self.log("\(responseCode) error while uploading log")
 						guard let data = data else { return }
 						let result = String(data: data, encoding: .utf8)!
@@ -88,7 +87,7 @@ class AktionObserver: ObservableObject {
 		} catch {
 			print(error)
 			print("failed to upload aktion observer logs")
-			self.log("crash while uploading logs")
+			self.log("Crash while uploading logs")
 			DispatchQueue.main.sync {
 				finished = true
 			}
