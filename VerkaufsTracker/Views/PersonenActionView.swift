@@ -131,6 +131,7 @@ struct PersonenActionView: View {
 									Text("Sende Bestellübersicht")
 								}
 								.unlockedStyle(unlockSendBezahl)
+								.disabled(!verwaltung.finalPrice)
 							}
 							
 							Divider()
@@ -151,6 +152,7 @@ struct PersonenActionView: View {
 									Text("Generiere Tickets")
 								}
 								.unlockedStyle(unlockFuelleTickets)
+								.disabled(!verwaltung.finalPrice)
 							}
 							
 							Divider()
@@ -185,6 +187,7 @@ struct PersonenActionView: View {
 									Text("Sende Tickets")
 								}
 								.unlockedStyle(unlockSendTicket)
+								.disabled(!verwaltung.finalPrice)
 							}
                             
                             Divider()
@@ -330,6 +333,7 @@ struct PersonenActionView: View {
                                     Text("Sende Übersicht")
                                 }
                                 .unlockedStyle(unlockSendBezahl)
+								.disabled(!verwaltung.finalPrice)
                             }
                             Divider()
                                 .padding(.bottom, 30)
@@ -355,6 +359,7 @@ struct PersonenActionView: View {
                                     Text("Generiere Tickets")
                                 }
                                 .unlockedStyle(unlockFuelleTickets)
+								.disabled(!verwaltung.finalPrice)
                             }
                             
                             Divider().padding(.bottom, 30)
@@ -394,6 +399,7 @@ struct PersonenActionView: View {
                                     Text("Sende Tickets")
                                 }
                                 .unlockedStyle(unlockSendTicket)
+								.disabled(!verwaltung.finalPrice)
                             }
                             Divider().padding(.bottom, 30)
                         }
