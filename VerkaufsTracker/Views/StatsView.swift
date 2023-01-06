@@ -11,73 +11,63 @@ import Charts
 struct StatsView: View {
 	let verwaltung: Verwaltung
 	
-	let rowPhone: [GridItem] = Array(repeating: GridItem(), count: 1)
-	let columnStandard: [GridItem] = Array(repeating: GridItem(), count: 3)
 	
 	var body: some View {
-		ScrollView(showsIndicators: false){
-			VStack(spacing: 30){
-				Text("Statistiken").font(.largeTitle.weight(.heavy))
-
-				VStack(spacing: 15){
-					Text("Google-Formular").font(.title.bold())
-
-					if UIDevice.current.userInterfaceIdiom == .phone{
-						TabView{
-							WunschPieCharts(verwaltung: verwaltung).padding(.bottom, 30)
-							VStack{
-								HStack{
-									Circle().fill(.blue).frame(width: 10, height: 10)
-									Text("Pulli")
-									Spacer()
-									Text("\(verwaltung.personen.map({$0.wuenschBestellungen[.pulli] ?? 0}).reduce(0, +))")
-								}
-
-								HStack{
-									Circle().fill(.cyan).frame(width: 10, height: 10)
-									Text("Buch")
-									Spacer()
-									Text("\(verwaltung.personen.map({$0.wuenschBestellungen[.buch] ?? 0}).reduce(0, +))")
-								}
-								Spacer()
-							}
-						}.tabViewStyle(PageTabViewStyle())
-							.frame(height: 450)
-					} else {
-						LazyVGrid(columns: columnStandard){
-							WunschPieCharts(verwaltung: verwaltung)
-						}
-						VStack(spacing: 0){
-							HStack{
-								Circle().fill(.blue).frame(width: 10, height: 10)
-								Text("Pulli: \(verwaltung.personen.map({$0.wuenschBestellungen[.pulli] ?? 0}).reduce(0, +))")
-							}
-
-							HStack{
-								Circle().fill(.cyan).frame(width: 10, height: 10)
-								Text("Buch: \(verwaltung.personen.map({$0.wuenschBestellungen[.buch] ?? 0}).reduce(0, +))")
-							}
-							Spacer()
-						}
+		VStack(spacing: 30){
+			Text("Statistiken").font(.largeTitle.weight(.heavy))
+			if UIDevice.current.userInterfaceIdiom == .phone{
+				ScrollView(showsIndicators: false){
+					VStack(spacing: 15){
+						StatsViewComponents(verwaltung: verwaltung)
 					}
 				}
-
-				VStack(spacing: 15){
-					Text("Zahlungen").font(.title.bold())
-
-					if UIDevice.current.userInterfaceIdiom == .phone{
-						TabView{
-							BestellungenPieCharts(verwaltung: verwaltung).padding(.bottom, 30)
-						}.tabViewStyle(PageTabViewStyle())
-							.frame(height: 450)
-					} else {
-						LazyVGrid(columns: columnStandard){
-							BestellungenPieCharts(verwaltung: verwaltung)
-						}
-					}
+			} else {
+				Spacer()
+				HStack{
+					StatsViewComponents(verwaltung: verwaltung)
 				}
+				Spacer()
 			}
 		}.padding()
+	}
+}
+
+struct StatsViewComponents: View{
+	let verwaltung: Verwaltung
+	var body: some View{
+		VStack{
+			Text("Google-Formular").font(.title.bold())
+
+			TabView{
+				WunschPieCharts(verwaltung: verwaltung).padding(.bottom, 30)
+				VStack{
+					HStack{
+						Circle().fill(.blue).frame(width: 10, height: 10)
+						Text("Pulli")
+						Spacer()
+						Text("\(verwaltung.personen.map({$0.wuenschBestellungen[.pulli] ?? 0}).reduce(0, +))")
+					}
+					HStack{
+						Circle().fill(.cyan).frame(width: 10, height: 10)
+						Text("Buch")
+						Spacer()
+						Text("\(verwaltung.personen.map({$0.wuenschBestellungen[.buch] ?? 0}).reduce(0, +))")
+					}
+					Spacer()
+				}
+			}.tabViewStyle(PageTabViewStyle())
+				.frame(height: 450)
+		}
+		
+		Divider()
+		
+		VStack{
+			Text("Zahlungen").font(.title.bold())
+			TabView{
+				BestellungenPieCharts(verwaltung: verwaltung).padding(.bottom, 30)
+			}.tabViewStyle(PageTabViewStyle())
+				.frame(height: 450)
+		}
 	}
 }
 
@@ -103,7 +93,7 @@ struct WunschPieCharts: View{
 	}
 }
 
-struct Position: Identifiable {
+struct BestellungenPosition: Identifiable {
 	var name: String
 	var betrag: Double
 	var id = UUID()
@@ -120,26 +110,27 @@ struct BestellungenPieCharts: View{
 
 
 	var body: some View{
-		//		PieChart(title: "Gezahlt/Bestellungen (Betrag)", statement: "Offen", counterStatement: "Gezahlt", value: verwaltung.offenerBetrag, capacityValue: anzahlBestellungGeld)
-
-		Chart {
-			let data: [Position] = [
-				.init(name: "Bezahlung/Spende", betrag: Double(verwaltung.insgGezahlt - verwaltung.zuVielGezahlt) / 100, color: "Bezahlung"),
-				.init(name: "Bezahlung/Spende", betrag: Double(verwaltung.zuVielGezahlt) / 100, color: "Spende"),
-				.init(name: "Offen/Beglichen", betrag: Double(verwaltung.insgGezahlt - verwaltung.zuVielGezahlt) / 100, color: "Beglichen"),
-				.init(name: "Offen/Beglichen", betrag: Double(verwaltung.offenerBetrag) / 100, color: "Offen"),
-			]
-			ForEach(data) { pos in
-				BarMark(
-					x: .value("Shape Type", pos.name),
-					y: .value("Total Count", pos.betrag)
-				)
-				.foregroundStyle(by: .value("Beschreibung", pos.color))
-			}
-		}.chartForegroundStyleScale([
-			"Bezahlung": .blue, "Spende": .purple, "Offen": .red, "Beglichen": .green
-		])
-		.padding()
+		VStack{
+			Text("Beträge").font(.title2.bold())
+			Chart {
+				let data: [BestellungenPosition] = [
+					.init(name: "Bezahlung/Spende", betrag: Double(verwaltung.insgGezahlt - verwaltung.zuVielGezahlt) / 100, color: "Bezahlung"),
+					.init(name: "Bezahlung/Spende", betrag: Double(verwaltung.zuVielGezahlt) / 100, color: "Spende"),
+					.init(name: "Offen/Beglichen", betrag: Double(verwaltung.insgGezahlt - verwaltung.zuVielGezahlt) / 100, color: "Beglichen"),
+					.init(name: "Offen/Beglichen", betrag: Double(verwaltung.offenerBetrag) / 100, color: "Offen"),
+				]
+				ForEach(data) { pos in
+					BarMark(
+						x: .value("Shape Type", pos.name),
+						y: .value("Total Count", pos.betrag)
+					)
+					.foregroundStyle(by: .value("Beschreibung", pos.color))
+				}
+			}.chartForegroundStyleScale([
+				"Bezahlung": .blue, "Spende": .purple, "Offen": .red, "Beglichen": .green
+			])
+			.padding()
+		}
 
 		PieChart(title: "Vollständig gezahlte Personen", statement: "Gezahlt", counterStatement: "Ausstehend", value: verwaltung.gezahltePersonen, capacityValue: verwaltung.personenMitBestellung)
 	}
