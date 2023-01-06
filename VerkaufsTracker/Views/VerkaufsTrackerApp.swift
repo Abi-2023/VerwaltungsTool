@@ -40,7 +40,7 @@ struct VerkaufsTrackerApp: App {
 						case .personenView:
 							PersonenView(verwaltung: verwaltung, state: $state, selectMode: $selectMode, selectedPersonen: $selectedPersonen)
 						case .debug:
-							ContentView(verwaltung: verwaltung, state: $state)
+							DebugView(verwaltung: verwaltung, state: $state)
 						case .aktionen:
 							if selectedPersonen.isEmpty {
 								AktionenView(verwaltung: verwaltung, selectedPersonen: $selectedPersonen, aktionObserver: aktionObserver)

@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftSMTP
 
-struct ContentView: View {
+struct DebugView: View {
 	@ObservedObject var verwaltung: Verwaltung
 	@Binding var state: AppState
 

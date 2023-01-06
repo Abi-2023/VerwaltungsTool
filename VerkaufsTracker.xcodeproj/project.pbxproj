@@ -21,16 +21,15 @@
 		8F7FB843295E3AD6001EC0C0 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F7FB842295E3AD6001EC0C0 /* main.swift */; };
 		8F7FB848295E3AFC001EC0C0 /* secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD6455E294D014700D746F8 /* secrets.swift */; };
 		8F7FB849295E3B2F001EC0C0 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE0073C295880E700E1B355 /* Extensions.swift */; };
-		8F7FB84A295E3B36001EC0C0 /* Crypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F99E9AE295E2845003B79DD /* Crypto.swift */; };
 		8F8521F12959DB0600854E16 /* AktionObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8521F02959DB0600854E16 /* AktionObserver.swift */; };
-		8F8521F32959DB5500854E16 /* sendFormEmails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8521F22959DB5500854E16 /* sendFormEmails.swift */; };
+		8F8521F32959DB5500854E16 /* Aktion_sendFormEmails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8521F22959DB5500854E16 /* Aktion_sendFormEmails.swift */; };
 		8F8521F52959E27400854E16 /* AktionLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8521F42959E27400854E16 /* AktionLogView.swift */; };
-		8F8521F72959E49200854E16 /* fetchFromGoogleForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8521F62959E49200854E16 /* fetchFromGoogleForm.swift */; };
+		8F8521F72959E49200854E16 /* Aktion_fetchFromGoogleForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8521F62959E49200854E16 /* Aktion_fetchFromGoogleForm.swift */; };
 		8F8521F9295A2B2100854E16 /* CloudView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8521F8295A2B2100854E16 /* CloudView.swift */; };
 		8F99E9AD295E15E9003B79DD /* Aktion_FuelleTickets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F99E9AC295E15E9003B79DD /* Aktion_FuelleTickets.swift */; };
 		8F99E9AF295E2845003B79DD /* Crypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F99E9AE295E2845003B79DD /* Crypto.swift */; };
 		8FA603942948CE99001CC2D2 /* VerkaufsTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA603932948CE99001CC2D2 /* VerkaufsTrackerApp.swift */; };
-		8FA603962948CE99001CC2D2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA603952948CE99001CC2D2 /* ContentView.swift */; };
+		8FA603962948CE99001CC2D2 /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA603952948CE99001CC2D2 /* DebugView.swift */; };
 		8FA603982948CE9A001CC2D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8FA603972948CE9A001CC2D2 /* Assets.xcassets */; };
 		8FA6039C2948CE9A001CC2D2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8FA6039B2948CE9A001CC2D2 /* Preview Assets.xcassets */; };
 		8FA603A42948CFA5001CC2D2 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA603A32948CFA5001CC2D2 /* Person.swift */; };
@@ -45,7 +44,7 @@
 		8FD6455F294D014700D746F8 /* secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD6455E294D014700D746F8 /* secrets.swift */; };
 		8FD69E4329565A4D001F4787 /* Q2er.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD69E4229565A4D001F4787 /* Q2er.swift */; };
 		8FD69E4529565A55001F4787 /* Lehrer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD69E4429565A55001F4787 /* Lehrer.swift */; };
-		8FD9C4EF2967143600E78ACB /* Q2er_GenerateBezahlEmail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD9C4EE2967143600E78ACB /* Q2er_GenerateBezahlEmail.swift */; };
+		8FD9C4EF2967143600E78ACB /* Email_Q2_Bezahl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD9C4EE2967143600E78ACB /* Email_Q2_Bezahl.swift */; };
 		8FD9C4F12967427B00E78ACB /* Aktion_sendeBezahlEmail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD9C4F02967427B00E78ACB /* Aktion_sendeBezahlEmail.swift */; };
 		8FE0073D295880E700E1B355 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE0073C295880E700E1B355 /* Extensions.swift */; };
 		8FE0073F2958857400E1B355 /* Ticket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE0073E2958857400E1B355 /* Ticket.swift */; };
@@ -80,15 +79,15 @@
 		8F7FB842295E3AD6001EC0C0 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		8F7FB847295E3AEB001EC0C0 /* ReadLog.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ReadLog.entitlements; sourceTree = "<group>"; };
 		8F8521F02959DB0600854E16 /* AktionObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AktionObserver.swift; sourceTree = "<group>"; };
-		8F8521F22959DB5500854E16 /* sendFormEmails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sendFormEmails.swift; sourceTree = "<group>"; };
+		8F8521F22959DB5500854E16 /* Aktion_sendFormEmails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aktion_sendFormEmails.swift; sourceTree = "<group>"; };
 		8F8521F42959E27400854E16 /* AktionLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AktionLogView.swift; sourceTree = "<group>"; };
-		8F8521F62959E49200854E16 /* fetchFromGoogleForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fetchFromGoogleForm.swift; sourceTree = "<group>"; };
+		8F8521F62959E49200854E16 /* Aktion_fetchFromGoogleForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aktion_fetchFromGoogleForm.swift; sourceTree = "<group>"; };
 		8F8521F8295A2B2100854E16 /* CloudView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudView.swift; sourceTree = "<group>"; };
 		8F99E9AC295E15E9003B79DD /* Aktion_FuelleTickets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aktion_FuelleTickets.swift; sourceTree = "<group>"; };
 		8F99E9AE295E2845003B79DD /* Crypto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crypto.swift; sourceTree = "<group>"; };
 		8FA603902948CE99001CC2D2 /* VerkaufsTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VerkaufsTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FA603932948CE99001CC2D2 /* VerkaufsTrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerkaufsTrackerApp.swift; sourceTree = "<group>"; };
-		8FA603952948CE99001CC2D2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		8FA603952948CE99001CC2D2 /* DebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugView.swift; sourceTree = "<group>"; };
 		8FA603972948CE9A001CC2D2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8FA603992948CE9A001CC2D2 /* VerkaufsTracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = VerkaufsTracker.entitlements; sourceTree = "<group>"; };
 		8FA6039B2948CE9A001CC2D2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -103,7 +102,7 @@
 		8FD6455E294D014700D746F8 /* secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = secrets.swift; sourceTree = "<group>"; };
 		8FD69E4229565A4D001F4787 /* Q2er.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Q2er.swift; sourceTree = "<group>"; };
 		8FD69E4429565A55001F4787 /* Lehrer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lehrer.swift; sourceTree = "<group>"; };
-		8FD9C4EE2967143600E78ACB /* Q2er_GenerateBezahlEmail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Q2er_GenerateBezahlEmail.swift; sourceTree = "<group>"; };
+		8FD9C4EE2967143600E78ACB /* Email_Q2_Bezahl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Email_Q2_Bezahl.swift; sourceTree = "<group>"; };
 		8FD9C4F02967427B00E78ACB /* Aktion_sendeBezahlEmail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aktion_sendeBezahlEmail.swift; sourceTree = "<group>"; };
 		8FE0073C295880E700E1B355 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		8FE0073E2958857400E1B355 /* Ticket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ticket.swift; sourceTree = "<group>"; };
@@ -135,6 +134,8 @@
 		8F2B670E294F997200C8FA2C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				8FA603932948CE99001CC2D2 /* VerkaufsTrackerApp.swift */,
+				8FA603952948CE99001CC2D2 /* DebugView.swift */,
 				8F2B670F294F998100C8FA2C /* PersonenView.swift */,
 				8F2B6711294F9C7F00C8FA2C /* PersonDetailView.swift */,
 				8FBE08072958D9CE0076AC2D /* AktionenView.swift */,
@@ -142,6 +143,8 @@
 				8FBE080B2958ECDE0076AC2D /* StatsView.swift */,
 				8F8521F42959E27400854E16 /* AktionLogView.swift */,
 				8F8521F8295A2B2100854E16 /* CloudView.swift */,
+				8FEB26132964B8550032FDE8 /* ScannerView.swift */,
+				8FBE08052958D6D00076AC2D /* Navbar.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -176,8 +179,6 @@
 		8FA603872948CE99001CC2D2 = {
 			isa = PBXGroup;
 			children = (
-				8FEB26132964B8550032FDE8 /* ScannerView.swift */,
-				8FBE08052958D6D00076AC2D /* Navbar.swift */,
 				8FA603922948CE99001CC2D2 /* VerkaufsTracker */,
 				8F7FB841295E3AD6001EC0C0 /* ReadLog */,
 				8FA603912948CE99001CC2D2 /* Products */,
@@ -196,25 +197,19 @@
 		8FA603922948CE99001CC2D2 /* VerkaufsTracker */ = {
 			isa = PBXGroup;
 			children = (
+				8FFBA2F9296817DB005E5A57 /* EmailsGenerieren */,
+				8FFBA2F8296817A9005E5A57 /* TicketGenerator */,
+				8FFBA2F72968174C005E5A57 /* Aktionen */,
 				8F68425329550B0B00557BB6 /* Firebase */,
 				8F2B670E294F997200C8FA2C /* Views */,
 				8F7FB047294E4262005F4551 /* Email */,
 				8F128AF3294D0C74002D3801 /* Info.plist */,
 				8FA603A22948CEDC001CC2D2 /* Structs */,
-				8FA603932948CE99001CC2D2 /* VerkaufsTrackerApp.swift */,
-				8FA603952948CE99001CC2D2 /* ContentView.swift */,
 				8FA603972948CE9A001CC2D2 /* Assets.xcassets */,
 				8FA603992948CE9A001CC2D2 /* VerkaufsTracker.entitlements */,
 				8FA6039A2948CE9A001CC2D2 /* Preview Content */,
 				8FD6455E294D014700D746F8 /* secrets.swift */,
-				8F128AF4294D1BF5002D3801 /* TicketCodes.swift */,
 				8FE0073C295880E700E1B355 /* Extensions.swift */,
-				8FE0074029589B1E00E1B355 /* TicketRenderer.swift */,
-				8F794F2B295CD8C1007B16EB /* Aktion_sendTickets.swift */,
-				8F794F30295CF22F007B16EB /* Aktion_ImportTransaktionen.swift */,
-				8F99E9AC295E15E9003B79DD /* Aktion_FuelleTickets.swift */,
-				8F99E9AE295E2845003B79DD /* Crypto.swift */,
-				8FD9C4F02967427B00E78ACB /* Aktion_sendeBezahlEmail.swift */,
 			);
 			path = VerkaufsTracker;
 			sourceTree = "<group>";
@@ -235,9 +230,6 @@
 				8FA603A72948D31B001CC2D2 /* Zahlungen.swift */,
 				8F68425629550BC300557BB6 /* Verwaltung.swift */,
 				8FE0073E2958857400E1B355 /* Ticket.swift */,
-				8F8521F02959DB0600854E16 /* AktionObserver.swift */,
-				8F8521F22959DB5500854E16 /* sendFormEmails.swift */,
-				8F8521F62959E49200854E16 /* fetchFromGoogleForm.swift */,
 			);
 			path = Structs;
 			sourceTree = "<group>";
@@ -248,9 +240,40 @@
 				8FA603A32948CFA5001CC2D2 /* Person.swift */,
 				8FD69E4229565A4D001F4787 /* Q2er.swift */,
 				8FD69E4429565A55001F4787 /* Lehrer.swift */,
-				8FD9C4EE2967143600E78ACB /* Q2er_GenerateBezahlEmail.swift */,
 			);
 			path = Person;
+			sourceTree = "<group>";
+		};
+		8FFBA2F72968174C005E5A57 /* Aktionen */ = {
+			isa = PBXGroup;
+			children = (
+				8F8521F02959DB0600854E16 /* AktionObserver.swift */,
+				8F8521F22959DB5500854E16 /* Aktion_sendFormEmails.swift */,
+				8F8521F62959E49200854E16 /* Aktion_fetchFromGoogleForm.swift */,
+				8F794F2B295CD8C1007B16EB /* Aktion_sendTickets.swift */,
+				8F794F30295CF22F007B16EB /* Aktion_ImportTransaktionen.swift */,
+				8F99E9AC295E15E9003B79DD /* Aktion_FuelleTickets.swift */,
+				8FD9C4F02967427B00E78ACB /* Aktion_sendeBezahlEmail.swift */,
+			);
+			path = Aktionen;
+			sourceTree = "<group>";
+		};
+		8FFBA2F8296817A9005E5A57 /* TicketGenerator */ = {
+			isa = PBXGroup;
+			children = (
+				8F99E9AE295E2845003B79DD /* Crypto.swift */,
+				8F128AF4294D1BF5002D3801 /* TicketCodes.swift */,
+				8FE0074029589B1E00E1B355 /* TicketRenderer.swift */,
+			);
+			path = TicketGenerator;
+			sourceTree = "<group>";
+		};
+		8FFBA2F9296817DB005E5A57 /* EmailsGenerieren */ = {
+			isa = PBXGroup;
+			children = (
+				8FD9C4EE2967143600E78ACB /* Email_Q2_Bezahl.swift */,
+			);
+			path = EmailsGenerieren;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -354,7 +377,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8F7FB84A295E3B36001EC0C0 /* Crypto.swift in Sources */,
 				8F7FB843295E3AD6001EC0C0 /* main.swift in Sources */,
 				8F7FB849295E3B2F001EC0C0 /* Extensions.swift in Sources */,
 				8F7FB848295E3AFC001EC0C0 /* secrets.swift in Sources */,
@@ -373,15 +395,15 @@
 				8FD9C4F12967427B00E78ACB /* Aktion_sendeBezahlEmail.swift in Sources */,
 				8F2B6710294F998100C8FA2C /* PersonenView.swift in Sources */,
 				8F8521F12959DB0600854E16 /* AktionObserver.swift in Sources */,
-				8F8521F72959E49200854E16 /* fetchFromGoogleForm.swift in Sources */,
+				8F8521F72959E49200854E16 /* Aktion_fetchFromGoogleForm.swift in Sources */,
 				8F99E9AF295E2845003B79DD /* Crypto.swift in Sources */,
-				8FD9C4EF2967143600E78ACB /* Q2er_GenerateBezahlEmail.swift in Sources */,
+				8FD9C4EF2967143600E78ACB /* Email_Q2_Bezahl.swift in Sources */,
 				8FEB26142964B8550032FDE8 /* ScannerView.swift in Sources */,
 				8FA603A62948D02E001CC2D2 /* Item.swift in Sources */,
 				8FD6455F294D014700D746F8 /* secrets.swift in Sources */,
 				8FBE080A2958DA6A0076AC2D /* PersonenActionView.swift in Sources */,
 				8F794F2C295CD8C1007B16EB /* Aktion_sendTickets.swift in Sources */,
-				8F8521F32959DB5500854E16 /* sendFormEmails.swift in Sources */,
+				8F8521F32959DB5500854E16 /* Aktion_sendFormEmails.swift in Sources */,
 				8F7FB049294E4297005F4551 /* FormularMail.swift in Sources */,
 				8F68425529550B1600557BB6 /* CloudAccess.swift in Sources */,
 				8F68A58A295B1CD900CAFAD6 /* CloudAvailability.swift in Sources */,
@@ -390,7 +412,7 @@
 				8F128AF5294D1BF5002D3801 /* TicketCodes.swift in Sources */,
 				8FBE08062958D6D00076AC2D /* Navbar.swift in Sources */,
 				8FA603A82948D31B001CC2D2 /* Zahlungen.swift in Sources */,
-				8FA603962948CE99001CC2D2 /* ContentView.swift in Sources */,
+				8FA603962948CE99001CC2D2 /* DebugView.swift in Sources */,
 				8F8521F52959E27400854E16 /* AktionLogView.swift in Sources */,
 				8FE0073D295880E700E1B355 /* Extensions.swift in Sources */,
 				8FE0074129589B1E00E1B355 /* TicketRenderer.swift in Sources */,
