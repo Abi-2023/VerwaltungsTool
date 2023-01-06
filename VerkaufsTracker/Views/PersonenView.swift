@@ -154,11 +154,14 @@ struct PersonRowItem: View{
 				Image(systemName: "checkmark.circle").foregroundColor(.green)
 			} else {
 				if(person.extraFields[extraFields(rawValue: "sendFormEmail")!] != nil){
-					Image(systemName: "paperplane").foregroundColor(.blue)
+					Image(systemName: "doc.badge.arrow.up").foregroundColor(.blue)
 				}
 				if(person.extraFields[extraFields(rawValue: "hatFormEingetragen")!] != nil){
-					Image(systemName: "doc").foregroundColor(.blue)
+					Image(systemName: "doc.append").foregroundColor(.blue)
 				}
+                if(person.extraFields[extraFields(rawValue: "sendBezahlEmail")!] != nil){
+                    Image(systemName: "chart.bar.doc.horizontal").foregroundColor(.blue)
+                }
 			}
 		}
 	}
