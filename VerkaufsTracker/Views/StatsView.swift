@@ -23,11 +23,13 @@ struct StatsView: View {
 					}
 				}
 			} else {
-				Spacer()
-				HStack{
-					StatsViewComponents(verwaltung: verwaltung)
-				}
-				Spacer()
+                ScrollView(showsIndicators: false){
+                    Spacer()
+                    HStack{
+                        StatsViewComponents(verwaltung: verwaltung)
+                    }
+                    Spacer()
+                }
 			}
 		}.padding()
 	}

@@ -41,18 +41,21 @@ struct AktionenView: View {
 
 				Text("\(verwaltung.lastFetchTransaktionen.formatted(.dateTime))")
 			}
-
-			Button(role: .cancel,action: {
-				if unlockVerteileItems {
-					Aktion.verteileItems(verwaltung: verwaltung, ao: aktionObserver)
-					unlockVerteileItems = false
-				} else {
-					unlockVerteileItems = true
-				}
-			}) {
-				Text("Verteile Items")
-			}
-			.unlockedStyle(unlockVerteileItems)
+            
+            HStack{
+                Button(role: .cancel,action: {
+                    if unlockVerteileItems {
+                        Aktion.verteileItems(verwaltung: verwaltung, ao: aktionObserver)
+                        unlockVerteileItems = false
+                    } else {
+                        unlockVerteileItems = true
+                    }
+                }) {
+                    Text("Verteile Items")
+                }
+                .unlockedStyle(unlockVerteileItems)
+                Spacer()
+            }
 		}.padding()
 	}
 }

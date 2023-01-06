@@ -24,7 +24,7 @@ struct PersonDetailView: View {
 						VStack(alignment: .leading, spacing: 20){
 							VStack(alignment: .leading, spacing: 0){
 								//title bar
-								HStack{
+                                HStack(alignment: .top){
 									if type(of: p) == Q2er.self {
 										HStack{
 											Text((p as! Q2er).vorname)
@@ -34,10 +34,10 @@ struct PersonDetailView: View {
 										Text(p.name)
 									}
 									Spacer()
-									Button(action: {person = nil}, label: {
-										Image(systemName: "xmark")
-									}).font(.body.weight(.regular))
-								}.font(.largeTitle.weight(.bold))
+                                    Button("Fertig"){
+                                        person = nil
+                                    }.font(.body.bold())
+								}.font(.title.weight(.bold))
 
 
 								Text(p.email ?? "Keine Email hinterlegt")
