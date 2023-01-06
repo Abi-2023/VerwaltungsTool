@@ -6,9 +6,40 @@
 //
 
 import Foundation
+import SwiftUI
 
 enum CloudState: String{
 	case error, disconnected, connected, denied, connecting
+    
+    var color: Color{
+        switch self{
+        case .error:
+            return .red
+        case .disconnected:
+            return .gray
+        case .connected:
+            return .green
+        case .denied:
+            return .orange
+        case .connecting:
+            return .blue
+        }
+    }
+    
+    var stringGER: String{
+        switch self{
+        case .error:
+            return "Fehler"
+        case .disconnected:
+            return "Nicht verbunden"
+        case .connected:
+            return "Verbunden"
+        case .denied:
+            return "Zugriff verwehrt"
+        case .connecting:
+            return "Verbinde..."
+        }
+    }
 }
 
 struct CloudStatus: Codable {

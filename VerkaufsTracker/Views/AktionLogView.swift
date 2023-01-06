@@ -11,10 +11,10 @@ struct AktionLogView: View {
 	@ObservedObject var ao: AktionObserver
 	var body: some View {
         ZStack{
-			VStack(spacing: 10){
+            VStack(alignment: .leading, spacing: 10){
 				HStack(alignment: .top){
 					VStack(alignment: .leading, spacing: 5){
-						Text("Log").font(.largeTitle.weight(.heavy))
+						Text("Log (Aktionen)").font(.largeTitle.weight(.heavy))
 						Text(ao.prompt).font(.title.bold())
 					}
 					Spacer()
@@ -30,7 +30,6 @@ struct AktionLogView: View {
 				Divider()
 				ScrollView(showsIndicators: false){
 					Text(ao.log)
-					
 					Spacer()
 				}
 			}
