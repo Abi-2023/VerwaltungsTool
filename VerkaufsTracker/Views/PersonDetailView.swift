@@ -130,6 +130,20 @@ struct BestellungsUebersicht: View{
 	let p: Person
 
 	var body: some View {
+        VStack(alignment: .leading, spacing: 5){
+            HStack{
+                Text("Sendestaus")
+                    .font(.title2.bold())
+                Spacer()
+                Text("Zum Absenden")
+                    .foregroundColor(.gray)
+            }
+            
+            ForEach(Array(Item.allCases).sorted(by: {$0.displayName < $1.displayName}), id: \.self){ type in
+                Text("\(type.displayName): \(p.tickets.filter({$0.itemType == type}).count) von \(p.tickets.filter({$0.itemType == type && $0.versendet}).count)")
+            }
+        }
+        
 		Divider()
 		VStack(alignment: .leading, spacing: 5){
 			HStack{
