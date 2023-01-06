@@ -53,7 +53,7 @@ extension Verwaltung {
 					do {
 						let wrapper = try decoder.decode(CloudWrapper.self, from: data)
 						let decryptedData = try wrapper.data.decrypted()
-						let neueVerwaltung = try decoder.decode(Verwaltung.self, from: decryptedData)
+						let neueVerwaltung = try decoder.decode(CodableVerwaltung.self, from: decryptedData)
 						print(neueVerwaltung.lastFetchForm)
 
 						print(neueVerwaltung)
@@ -84,7 +84,7 @@ extension Verwaltung {
 	func uploadToCloud() {
 		do {
 			let encoder = JSONEncoder()
-			let data = try encoder.encode(self)
+			let data = try encoder.encode(CodableVerwaltung(verwaltung: self))
 			let encryptedData = try data.encrypted()
 
 			let url = URL(string: "\(SECRETS.FB_DB_URL)/\(SECRETS.FB_SCOPE)/test.json?print=silent")!

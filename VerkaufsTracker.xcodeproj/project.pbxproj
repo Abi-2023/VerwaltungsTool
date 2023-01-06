@@ -53,6 +53,7 @@
 		8FFBA2FB2968188A005E5A57 /* Email_Q2_Form.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFBA2FA2968188A005E5A57 /* Email_Q2_Form.swift */; };
 		8FFBA2FD296819BA005E5A57 /* TicketGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFBA2FC296819BA005E5A57 /* TicketGenerator.swift */; };
 		8FFBA2FF29681A8E005E5A57 /* Email_Q2_Ticket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFBA2FE29681A8E005E5A57 /* Email_Q2_Ticket.swift */; };
+		8FFBA30129681B9E005E5A57 /* Codable_Verwaltung.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFBA30029681B9E005E5A57 /* Codable_Verwaltung.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -114,6 +115,7 @@
 		8FFBA2FA2968188A005E5A57 /* Email_Q2_Form.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Email_Q2_Form.swift; sourceTree = "<group>"; };
 		8FFBA2FC296819BA005E5A57 /* TicketGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketGenerator.swift; sourceTree = "<group>"; };
 		8FFBA2FE29681A8E005E5A57 /* Email_Q2_Ticket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Email_Q2_Ticket.swift; sourceTree = "<group>"; };
+		8FFBA30029681B9E005E5A57 /* Codable_Verwaltung.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Codable_Verwaltung.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,6 +162,7 @@
 			children = (
 				8F68425429550B1600557BB6 /* CloudAccess.swift */,
 				8F68A589295B1CD900CAFAD6 /* CloudAvailability.swift */,
+				8FFBA30029681B9E005E5A57 /* Codable_Verwaltung.swift */,
 			);
 			path = Firebase;
 			sourceTree = "<group>";
@@ -408,6 +411,7 @@
 				8F8521F72959E49200854E16 /* Aktion_fetchFromGoogleForm.swift in Sources */,
 				8F99E9AF295E2845003B79DD /* Crypto.swift in Sources */,
 				8FD9C4EF2967143600E78ACB /* Email_Q2_Bezahl.swift in Sources */,
+				8FFBA30129681B9E005E5A57 /* Codable_Verwaltung.swift in Sources */,
 				8FEB26142964B8550032FDE8 /* ScannerView.swift in Sources */,
 				8FA603A62948D02E001CC2D2 /* Item.swift in Sources */,
 				8FD6455F294D014700D746F8 /* secrets.swift in Sources */,
