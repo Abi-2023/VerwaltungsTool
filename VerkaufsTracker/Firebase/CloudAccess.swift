@@ -85,7 +85,8 @@ extension Verwaltung {
 		task.resume()
 	}
 
-	func uploadToCloud() {
+	// TODO: AO Log
+	func uploadToCloud(ao: AktionObserver? = nil) {
 		do {
 			let encoder = JSONEncoder()
 			let data = try encoder.encode(CodableVerwaltung(verwaltung: self))

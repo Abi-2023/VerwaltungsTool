@@ -42,8 +42,8 @@ class AktionObserver: ObservableObject {
 		}
 	}
 
-	func finish() {
-		if !SECRETS.AKTION_UploadLogs {
+	func finish(uploadLog: Bool = true) {
+		if !SECRETS.AKTION_UploadLogs || !uploadLog {
 			DispatchQueue.main.sync {
 				self.finished = true
 			}
@@ -96,6 +96,8 @@ class AktionObserver: ObservableObject {
 				finished = true
 			}
 		}
+// TODO: aktivieren und eventuell vor log hochladen
+//		verwaltung?.uploadToCloud()
 	}
 
 	func clear() {
