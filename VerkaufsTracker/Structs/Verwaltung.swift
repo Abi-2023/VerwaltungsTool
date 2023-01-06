@@ -69,4 +69,16 @@ class Verwaltung: ObservableObject {
 		personen.map({$0.offenerBetrag(v: self) < 0 ? abs($0.offenerBetrag(v: self)) : 0}).reduce(0, +)
 	}
 
+	func newTicketCode() -> String {
+		let option = Array("ABCD1234").map({String($0)})
+
+		while true {
+			var code = (0..<6).map({_ in option.randomElement() ?? "A"}).reduce("", +)
+			code.insert(contentsOf: "-", at: String.Index(utf16Offset: 3, in: code))
+			if !personen.flatMap({$0.tickets.map({$0.id})}).contains(code) {
+				return code
+			}
+		}
+	}
+
 }

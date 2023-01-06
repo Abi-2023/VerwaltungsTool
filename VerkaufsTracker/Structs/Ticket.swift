@@ -16,8 +16,8 @@ class Ticket: Codable {
 	let owner: UUID
 	let nth: Int
 	
-	init(owner: Person, type: Item, nth: Int) {
-		id = UUID().uuidString
+	init(owner: Person, type: Item, nth: Int, verwaltung: Verwaltung) {
+		id = verwaltung.newTicketCode()
 		versendet = false
 		self.itemType = type
 		self.owner = owner.id

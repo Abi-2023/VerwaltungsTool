@@ -24,7 +24,7 @@ struct DebugView: View {
 		
 		
 		Button(action: {
-			let t = Ticket(owner: verwaltung.personen.first!, type: .ball_ticket, nth: 0)
+			let t = Ticket(owner: verwaltung.personen.first!, type: .ball_ticket, nth: 0, verwaltung: verwaltung)
 			let dataAttachment = t.generateAttatchment(verwaltung: verwaltung)
 			let mail = Mail(
 				from: EmailManager.senderMail,
@@ -69,7 +69,7 @@ struct DebugView: View {
 		
 		
 		Button(action: {
-			let str =  Ticket(owner: Person(name: "Benedict", email: "***REMOVED***", verwaltung: Verwaltung()), type: .after_show_ticket, nth: 1).ticketHTML(verwaltung: verwaltung)
+			let str =  Ticket(owner: Person(name: "Benedict", email: "***REMOVED***", verwaltung: Verwaltung()), type: .after_show_ticket, nth: 1, verwaltung: verwaltung).ticketHTML(verwaltung: verwaltung)
 			let renderer = CustomPrintPageRenderer()
 			renderer.exportHTMLContentToPDF(HTMLContent: str)
 		}) {

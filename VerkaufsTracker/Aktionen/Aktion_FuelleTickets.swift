@@ -23,7 +23,7 @@ extension Aktion {
 					let diff = person.bestellungen[itemType, default: 0] - anzahlTickets
 					if diff > 0 {
 						for n in (anzahlTickets..<person.bestellungen[itemType, default: 0]) {
-							person.tickets.append(Ticket(owner: person, type: itemType, nth: n+1))
+							person.tickets.append(Ticket(owner: person, type: itemType, nth: n+1, verwaltung: v))
 						}
 						ao.log("Für \(person.name) \(diff) Tickets \(itemType) hinzugefügt")
 						i += diff
