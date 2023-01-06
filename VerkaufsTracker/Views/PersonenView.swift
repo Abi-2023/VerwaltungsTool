@@ -102,7 +102,6 @@ struct PersonenView: View {
 					}
 				}
 			}.font(.callout)
-			Divider()
 		}.padding([.leading, .trailing, .top])
 
 		List {
@@ -155,10 +154,10 @@ struct PersonRowItem: View{
 				Image(systemName: "checkmark.circle").foregroundColor(.green)
 			} else {
 				if(person.extraFields[extraFields(rawValue: "sendFormEmail")!] != nil){
-					Image(systemName: "paperplane")
+					Image(systemName: "paperplane").foregroundColor(.blue)
 				}
 				if(person.extraFields[extraFields(rawValue: "hatFormEingetragen")!] != nil){
-					Image(systemName: "doc")
+					Image(systemName: "doc").foregroundColor(.blue)
 				}
 			}
 		}
