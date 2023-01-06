@@ -18,7 +18,7 @@ class AktionObserver: ObservableObject {
 	func log(_ message: String) {
 		DispatchQueue.main.sync {
 			log += "\n"
-			log += ">> " + message
+			log += "> " + message
 		}
 	}
 
@@ -53,6 +53,7 @@ class AktionObserver: ObservableObject {
 		// uploadData
 		verwaltung?.logs = 1 + (verwaltung?.logs ?? 0)
 		let logId = "\((verwaltung?.logs ?? -1 * 10))-\(Int.random(in: (0...99)))"
+		log("----------------")
 		log("Upload Log: \(logId)")
 
 		do {
