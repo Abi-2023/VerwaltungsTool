@@ -45,7 +45,7 @@ struct StatsViewComponents: View{
 	let verwaltung: Verwaltung
 	var body: some View{
 		VStack{
-			Text("Google-Formular").font(.title.bold())
+			Text("Verteilung").font(.title.bold())
 
 			TabView{
 				WunschPieCharts(verwaltung: verwaltung).padding(.bottom, 30)
@@ -87,6 +87,17 @@ struct StatsViewComponents: View{
 		}
 		
 		Divider()
+
+		Text("Prozess").font(.title.bold())
+
+		Text("Summe nur von den der vorherigen!")
+
+		TabView{
+			SendCharts(verwaltung: verwaltung).padding(.bottom, 30)
+		}.tabViewStyle(PageTabViewStyle())
+			.frame(height: 450)
+
+		Divider()
 		
 		VStack{
 			Text("Zahlungen").font(.title.bold())
@@ -101,8 +112,8 @@ struct StatsViewComponents: View{
 struct WunschPieCharts: View{
 	let verwaltung: Verwaltung
 	var body: some View{
-		let formSubmitted = verwaltung.personen.filter({$0.extraFields[.hatFormEingetragen, default: ""] == "1"}).count
-		PieChart(title: "Formularteilnahme", statement: "Formular ausgefüllt", counterStatement: "Formular ausstehend", value: formSubmitted, capacityValue: verwaltung.personen.count)
+//		let formSubmitted = verwaltung.personen.filter({$0.extraFields[.hatFormEingetragen, default: ""] == "1"}).count
+//		PieChart(title: "Formularteilnahme", statement: "Formular ausgefüllt", counterStatement: "Formular ausstehend", value: formSubmitted, capacityValue: verwaltung.personen.count)
 
 		let wunschTickets = verwaltung.personen.map({$0.wuenschBestellungen[.ball_ticket] ?? 0}).reduce(0, +)
 		PieChart(title: "Ball-Tickets", statement: "Belegte Tickets", counterStatement: "Freie Tickets", value: wunschTickets, capacityValue: Item.ball_ticket.verfuegbar)
@@ -117,6 +128,30 @@ struct WunschPieCharts: View{
 		 let wunschPulli = verwaltung.personen.map({$0.wuenschBestellungen[.pulli] ?? 0}).reduce(0, +)
 		 PieChart(title: "Pulli", statement: "Reserviert", counterStatement: "Frei", value: wunschPulli, capacityValue: Item.pulli.verfuegbar)
 		 */
+	}
+}
+
+
+struct SendCharts: View{
+	let verwaltung: Verwaltung
+	var body: some View{
+		let formEmailSend = verwaltung.personen.filter({$0.extraFields[.sendFormEmail, default: ""] == "1"}).count
+		PieChart(title: "Form E-Mail", statement: "gesendet", counterStatement: "nicht gesendet", value: formEmailSend, capacityValue: verwaltung.personen.count)
+
+		let formSubmitted = verwaltung.personen.filter({$0.extraFields[.hatFormEingetragen, default: ""] == "1"}).count
+		PieChart(title: "Formularteilnahme", statement: "Formular ausgefüllt", counterStatement: "Formular ausstehend", value: formSubmitted, capacityValue: formEmailSend)
+
+		let bezahlSend = verwaltung.personen.filter({$0.extraFields[.sendBezahlEmail, default: ""] == "1"}).count
+		PieChart(title: "Bezahl E-Mail", statement: "gesendet", counterStatement: "nicht gesendet", value: bezahlSend, capacityValue: formSubmitted)
+
+		let bezahlt = verwaltung.gezahltePersonen
+		PieChart(title: "Vollständig gezahlte Personen", statement: "Gezahlt", counterStatement: "Ausstehend", value: bezahlt, capacityValue: bezahlSend)
+
+		let generiert = verwaltung.personen.filter({!$0.tickets.isEmpty && $0.tickets.count == ($0.bestellungen[.ball_ticket, default: 0] + $0.bestellungen[.after_show_ticket, default: 0])}).count
+		PieChart(title: "Vollständig gezahlte Personen", statement: "voll Generiert", counterStatement: "nicht voll Generiert", value: generiert, capacityValue: bezahlSend)
+
+		let ticketSend = verwaltung.personen.filter({$0.extraFields[.hatFormEingetragen, default: ""] == "1"}).count
+		PieChart(title: "Ticket E-Mail", statement: "gesendet", counterStatement: "nicht gesendet", value: ticketSend, capacityValue: generiert)
 	}
 }
 
