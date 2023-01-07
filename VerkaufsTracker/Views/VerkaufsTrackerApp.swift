@@ -8,7 +8,7 @@
 import SwiftUI
 
 enum AppState {
-	case personenView, stats, aktionen, debug, scanner
+	case personenView, stats, aktionen, debug, scanner, dataImport
 }
 
 @main
@@ -35,6 +35,8 @@ struct VerkaufsTrackerApp: App {
 #if canImport(CodeScanner)
 						ScannerView(verwaltung: verwaltung, state: $state)
 #endif
+					} else if state == .dataImport{
+						DataImportView(v: verwaltung, state: $state, ao: aktionObserver)
 					} else {
 						switch state {
 						case .personenView:

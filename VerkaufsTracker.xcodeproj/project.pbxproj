@@ -28,6 +28,7 @@
 		8F8521F9295A2B2100854E16 /* CloudView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8521F8295A2B2100854E16 /* CloudView.swift */; };
 		8F99E9AD295E15E9003B79DD /* Aktion_FuelleTickets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F99E9AC295E15E9003B79DD /* Aktion_FuelleTickets.swift */; };
 		8F99E9AF295E2845003B79DD /* Crypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F99E9AE295E2845003B79DD /* Crypto.swift */; };
+		8FA408002969A73B005BC839 /* DataImportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA407FF2969A73B005BC839 /* DataImportView.swift */; };
 		8FA603942948CE99001CC2D2 /* VerkaufsTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA603932948CE99001CC2D2 /* VerkaufsTrackerApp.swift */; };
 		8FA603962948CE99001CC2D2 /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA603952948CE99001CC2D2 /* DebugView.swift */; };
 		8FA603982948CE9A001CC2D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8FA603972948CE9A001CC2D2 /* Assets.xcassets */; };
@@ -95,6 +96,7 @@
 		8F8521F8295A2B2100854E16 /* CloudView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudView.swift; sourceTree = "<group>"; };
 		8F99E9AC295E15E9003B79DD /* Aktion_FuelleTickets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aktion_FuelleTickets.swift; sourceTree = "<group>"; };
 		8F99E9AE295E2845003B79DD /* Crypto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crypto.swift; sourceTree = "<group>"; };
+		8FA407FF2969A73B005BC839 /* DataImportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataImportView.swift; sourceTree = "<group>"; };
 		8FA603902948CE99001CC2D2 /* VerkaufsTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VerkaufsTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FA603932948CE99001CC2D2 /* VerkaufsTrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerkaufsTrackerApp.swift; sourceTree = "<group>"; };
 		8FA603952948CE99001CC2D2 /* DebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugView.swift; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 				8F8521F8295A2B2100854E16 /* CloudView.swift */,
 				8FEB26132964B8550032FDE8 /* ScannerView.swift */,
 				8FBE08052958D6D00076AC2D /* Navbar.swift */,
+				8FA407FF2969A73B005BC839 /* DataImportView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -416,6 +419,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8FA408002969A73B005BC839 /* DataImportView.swift in Sources */,
 				8FBE080C2958ECDE0076AC2D /* StatsView.swift in Sources */,
 				8FD69E4529565A55001F4787 /* Lehrer.swift in Sources */,
 				8F99E9AD295E15E9003B79DD /* Aktion_FuelleTickets.swift in Sources */,

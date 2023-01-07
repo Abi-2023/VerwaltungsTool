@@ -66,6 +66,12 @@ struct DebugView: View {
 		}) {
 			Text("disconnect")
 		}.padding()
+
+		Button(action: {
+			state = .dataImport
+		}) {
+			Text("import")
+		}.padding()
 		
 		
 		Button(action: {
