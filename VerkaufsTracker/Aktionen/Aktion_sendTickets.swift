@@ -56,7 +56,9 @@ extension Aktion {
 				if let mail = person.generateTicketEmail(v: v, ao: ao) {
 					emailQueue.append((person, mail))
 				} else {
-					ao.log("Could not generateEmail for \(person.name)")
+					DispatchQueue.global().async {
+						ao.log("Could not generateEmail for \(person.name)")
+					}
 				}
 				workerGroup.leave()
 			}

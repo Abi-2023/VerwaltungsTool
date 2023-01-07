@@ -42,7 +42,7 @@ class Lehrer: Person {
 		return generateBezahlEmailInternal(ao: ao)
 	}
 
-//	override func generateTicketEmail(v: Verwaltung, ao: AktionObserver? = nil) -> Mail? {
-//		return generateTicketEmailInternal(v: v, ao: ao)
-//	}
+	override func generateTicketEmail(v: Verwaltung, ao: AktionObserver? = nil) -> Mail? {
+		return generateTicketEmailInternal(v: v, ao: ao)
+	}
 }
