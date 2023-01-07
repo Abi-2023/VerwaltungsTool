@@ -46,7 +46,7 @@ struct StatsViewComponents: View{
 	var body: some View{
 		VStack{
 			Text("Google-Formular").font(.title.bold())
-			
+
 			TabView{
 				WunschPieCharts(verwaltung: verwaltung).padding(.bottom, 30)
 				VStack{
@@ -103,17 +103,17 @@ struct WunschPieCharts: View{
 	var body: some View{
 		let formSubmitted = verwaltung.personen.filter({$0.extraFields[.hatFormEingetragen, default: ""] == "1"}).count
 		PieChart(title: "Formularteilnahme", statement: "Formular ausgefüllt", counterStatement: "Formular ausstehend", value: formSubmitted, capacityValue: verwaltung.personen.count)
-		
+
 		let wunschTickets = verwaltung.personen.map({$0.wuenschBestellungen[.ball_ticket] ?? 0}).reduce(0, +)
 		PieChart(title: "Ball-Tickets", statement: "Belegte Tickets", counterStatement: "Freie Tickets", value: wunschTickets, capacityValue: Item.ball_ticket.verfuegbar)
-		
+
 		let wunschTicketsASP = verwaltung.personen.map({$0.wuenschBestellungen[.after_show_ticket] ?? 0}).reduce(0, +)
 		PieChart(title: "ASP-Tickets", statement: "Belegte Tickets", counterStatement: "Freie Tickets", value: wunschTicketsASP, capacityValue: Item.after_show_ticket.verfuegbar)
 		/*
 		 PIE CHARTS
 		 let wunschBuch = verwaltung.personen.map({$0.wuenschBestellungen[.buch] ?? 0}).reduce(0, +)
 		 PieChart(title: "Buch", statement: "Reserviert", counterStatement: "Frei", value: wunschBuch, capacityValue: Item.buch.verfuegbar)
-		 
+
 		 let wunschPulli = verwaltung.personen.map({$0.wuenschBestellungen[.pulli] ?? 0}).reduce(0, +)
 		 PieChart(title: "Pulli", statement: "Reserviert", counterStatement: "Frei", value: wunschPulli, capacityValue: Item.pulli.verfuegbar)
 		 */
@@ -129,13 +129,13 @@ struct BestellungenPosition: Identifiable {
 
 struct BestellungenPieCharts: View{
 	let verwaltung: Verwaltung
-	
-	
+
+
 	var anzahlBestellungGeld: Int{
 		verwaltung.offenerBetrag + verwaltung.insgGezahlt - verwaltung.zuVielGezahlt
 	}
-	
-	
+
+
 	var body: some View{
 		VStack{
 			Text("Beträge").font(.title2.bold())
@@ -158,7 +158,7 @@ struct BestellungenPieCharts: View{
 			])
 			.padding()
 		}
-		
+
 		PieChart(title: "Vollständig gezahlte Personen", statement: "Gezahlt", counterStatement: "Ausstehend", value: verwaltung.gezahltePersonen, capacityValue: verwaltung.personenMitBestellung)
 	}
 }
@@ -210,9 +210,9 @@ struct PieChart: View{
 
 
 struct Pie: View {
-	
+
 	@State var slices: [(Double, Color, Double?)]
-	
+
 	var body: some View {
 		Canvas { context, size in
 			let total = slices.reduce(0) { $0 + $1.0 }
