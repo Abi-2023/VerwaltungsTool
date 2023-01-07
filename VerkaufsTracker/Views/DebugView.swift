@@ -14,89 +14,62 @@ struct DebugView: View {
 
 
 	var body: some View {
-		VStack {
-			Image(systemName: "globe")
-				.imageScale(.large)
-				.foregroundColor(.accentColor)
-			Text("Hello, world!")
-		}
-		.padding()
-		
-		
-		Button(action: {
-			let t = Ticket(owner: verwaltung.personen.first!, type: .ball_ticket, nth: 0, verwaltung: verwaltung)
-			let dataAttachment = t.generateAttatchment(verwaltung: verwaltung)
-			let mail = Mail(
-				from: EmailManager.senderMail,
-				to: [Mail.User(name: "Bene123", email: "***REMOVED***")],
-				subject: "Check out this image and JSON file!",
-				// The attachments we created earlier
-				attachments: [dataAttachment]
-			)
-			
-			let mailer = EmailManager()
-			mailer.sendMail(mail: mail)
-			
-			
-		}) {
-			Text("send mail with ticket")
-		}
-		
-		Button(action: {
-			verwaltung.uploadToCloud()
-		}) {
-			Text("Upload")
-		}
-		
-		Button(action: {
-			verwaltung.connectToCloud()
-		}) {
-			Text("fetch")
-		}
+		VStack (spacing: 15){
+			Text("Debug Optionen")
+				.font(.largeTitle.weight(.heavy))
 
-		Button(action: {
-			CloudStatus.setDeviceName(name: nil)
-			verwaltung.cloud = .disconnected
-		}) {
-			Text("Reset Name")
-		}
-		
-		Button(action: {
-			verwaltung.disconnectFromServer()
-		}) {
-			Text("disconnect")
-		}.padding()
+			Button(action: {
+				verwaltung.uploadToCloud()
+			}) {
+				Text("Upload")
+			}
 
-		Button(action: {
-			state = .dataImport
-		}) {
-			Text("import")
-		}.padding()
-		
-		
-		Button(action: {
-			let str =  Ticket(owner: Person(name: "Benedict", email: "***REMOVED***", verwaltung: Verwaltung()), type: .after_show_ticket, nth: 1, verwaltung: verwaltung).ticketHTML(verwaltung: verwaltung)
-			let renderer = CustomPrintPageRenderer()
-			renderer.exportHTMLContentToPDF(HTMLContent: str)
-		}) {
-			Text("render ticket")
-		}.padding()
+			Button(action: {
+				verwaltung.disconnectFromServer()
+			}) {
+				Text("disconnect")
+			}
 
-		Button(action: {
-			let m = verwaltung.personen.first(where: {$0.name.contains("Benedict")})!.generateBezahlEmail()
-			let sender = EmailManager()
-			sender.sendMail(mail: m!)
-		}) {
-			Text("send bezahl")
-		}.padding()
-		
+			Button(action: {
+				CloudStatus.setDeviceName(name: nil)
+				verwaltung.cloud = .disconnected
+			}) {
+				Text("Reset Name")
+			}
+
+			Divider()
+
+			Button(action: {
+				state = .dataImport
+			}) {
+				Text("import (Vorsicht!)")
+			}
+
+
+			Button(action: {
+				let str =  Ticket(owner: Person(name: "Benedict", email: "***REMOVED***", verwaltung: Verwaltung()), type: .after_show_ticket, nth: 1, verwaltung: verwaltung).ticketHTML(verwaltung: verwaltung)
+				let renderer = CustomPrintPageRenderer()
+				renderer.exportHTMLContentToPDF(HTMLContent: str)
+			}) {
+				Text("render ticket")
+			}
+
+			Button(action: {
+				//			let m = verwaltung.personen.first(where: {$0.name.contains("Benedict")})!.generateBezahlEmail()
+				//			let sender = EmailManager()
+				//			sender.sendMail(mail: m!)
+			}) {
+				Text("Button1")
+			}
+
 #if canImport(CodeScanner)
-		Button(action: {
-			state = .scanner
-		}) {
-			Text("Scanner")
+			Button(action: {
+				state = .scanner
+			}) {
+				Text("Scanner")
+			}
+#endif
 		}
 		.padding()
-#endif
 	}
 }
