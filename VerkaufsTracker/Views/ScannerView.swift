@@ -78,7 +78,8 @@ struct ScannerView: View {
 						if let ticket {
 							Text(ticket.itemType.displayName + " \(ticket.nth)").font(.title2.bold())
 							Text(verwaltung.personen.first(where: {$0.id == ticket.owner})?.name ?? "Unbekannt").font(.title2.bold())
-							Text("ID: " + ticket.id).font(.title3)
+							Text("ID: " + ticket.id)
+                                .padding(.top, 15)
 							Spacer()
 						}
 						
@@ -148,7 +149,9 @@ struct ScannerView: View {
 							}.padding()
 						}.padding()
 					}
+                    Spacer()
 				}
+                Spacer()
 			}
         }
 		
