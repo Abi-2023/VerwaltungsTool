@@ -50,18 +50,7 @@ struct StatsViewComponents: View{
 			TabView{
 				WunschPieCharts(verwaltung: verwaltung).padding(.bottom, 30)
 				VStack{
-					HStack{
-						Circle().fill(.blue).frame(width: 10, height: 10)
-						Text("Pulli")
-						Spacer()
-						Text("\(verwaltung.personen.map({$0.wuenschBestellungen[.pulli] ?? 0}).reduce(0, +))")
-					}
-					HStack{
-						Circle().fill(.cyan).frame(width: 10, height: 10)
-						Text("Buch")
-						Spacer()
-						Text("\(verwaltung.personen.map({$0.wuenschBestellungen[.buch] ?? 0}).reduce(0, +))")
-					}
+                    Text("Pulligrößen und Buch").font(.title2.bold())
 					Chart {
 						let data: [Groese] = [
 							.init(name: "XS", betrag: verwaltung.personen.compactMap({Int($0.extraFields[.pulli_xs, default: "0"]) ?? 0}).reduce(0, +)),
@@ -76,9 +65,23 @@ struct StatsViewComponents: View{
 								y: .value("Total Count", pos.betrag)
 							)
 						}
-					}
-					.padding()
-				}
+                    }.frame(height: 300)
+                    VStack(spacing : 0){
+                        HStack{
+                            Circle().fill(.blue).frame(width: 10, height: 10)
+                            Text("Pulli")
+                            Spacer()
+                            Text("\(verwaltung.personen.map({$0.wuenschBestellungen[.pulli] ?? 0}).reduce(0, +))")
+                        }
+                        HStack{
+                            Circle().fill(.cyan).frame(width: 10, height: 10)
+                            Text("Buch")
+                            Spacer()
+                            Text("\(verwaltung.personen.map({$0.wuenschBestellungen[.buch] ?? 0}).reduce(0, +))")
+                        }
+                    }
+                    Spacer()
+                }.frame(height: 350)
 			}.tabViewStyle(PageTabViewStyle())
 				.frame(height: 450)
 		}
