@@ -35,7 +35,7 @@ extension Aktion {
 			}
 
 			var vollGeneriert = true
-			for itemType in Item.allCases {
+			for itemType in [Item.ball_ticket, .after_show_ticket] {
 				let anzahlTickets = person.tickets.filter({$0.itemType == itemType}).count
 				if anzahlTickets < person.bestellungen[itemType, default: 0] {
 					vollGeneriert = false
