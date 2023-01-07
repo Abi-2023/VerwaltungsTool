@@ -58,6 +58,17 @@ struct AktionenView: View {
                 .unlockedStyle(unlockVerteileItems)
                 Spacer()
             }
+
+			HStack{
+				Button(role: .cancel,action: {
+					DispatchQueue.global(qos: .default).async {
+						Aktion.valid(v: verwaltung, ao: aktionObserver)
+					}
+				}) {
+					Text("Prüfe auf Fehler")
+				}
+				Spacer()
+			}
 		}.padding()
 	}
 }
