@@ -202,28 +202,6 @@ struct FilterView: View {
 
 			LazyVGrid(columns: Array(repeating: GridItem(), count: 2)){
 				Button(action: {
-					selectedPersonen = alleInGruppe.filter({$0.extraFields[.hatFormEingetragen, default: ""] == "1"})
-				}) {
-					FilterButton("Form abgegeben")
-				}
-				Button(action: {
-					selectedPersonen = alleInGruppe.filter({$0.extraFields[.hatFormEingetragen, default: ""] != "1"})
-				}) {
-					FilterButton("Form noch nicht abgegeben")
-				}
-
-				Button(action: {
-					selectedPersonen = alleInGruppe.filter({$0.offenerBetrag(v: verwaltung) <= 0})
-				}) {
-					FilterButton("Bezahlt")
-				}
-				Button(action: {
-					selectedPersonen = alleInGruppe.filter({$0.offenerBetrag(v: verwaltung) > 0})
-				}) {
-					FilterButton("Noch nicht bezahlt")
-				}
-
-				Button(action: {
 					selectedPersonen = alleInGruppe.filter({$0.extraFields[.sendFormEmail, default: ""] == "1"})
 				}) {
 					FilterButton("Form-Mail bereits gesendet")
@@ -232,6 +210,17 @@ struct FilterView: View {
 					selectedPersonen = alleInGruppe.filter({$0.extraFields[.sendFormEmail, default: ""] != "1"})
 				}) {
 					FilterButton("Form-Mail noch nicht gesendet")
+				}
+
+				Button(action: {
+					selectedPersonen = alleInGruppe.filter({$0.extraFields[.hatFormEingetragen, default: ""] == "1"})
+				}) {
+					FilterButton("Form abgegeben")
+				}
+				Button(action: {
+					selectedPersonen = alleInGruppe.filter({$0.extraFields[.hatFormEingetragen, default: ""] != "1"})
+				}) {
+					FilterButton("Form noch nicht abgegeben")
 				}
 
 				Button(action: {
@@ -246,6 +235,29 @@ struct FilterView: View {
 				}
 
 				Button(action: {
+					selectedPersonen = alleInGruppe.filter({$0.offenerBetrag(v: verwaltung) <= 0})
+				}) {
+					FilterButton("Bezahlt")
+				}
+				Button(action: {
+					selectedPersonen = alleInGruppe.filter({$0.offenerBetrag(v: verwaltung) > 0})
+				}) {
+					FilterButton("Noch nicht bezahlt")
+				}
+
+//				Button(action: {
+//					selectedPersonen = alleInGruppe.filter({!$0.tickets.isEmpty && $0.tickets.count == ($0.bestellungen[.ball_ticket, default: 0] + $0.bestellungen[.after_show_ticket, default: 0])})
+//				}) {
+//					FilterButton("hat Tickets und generiert")
+//				}
+//				Button(action: {
+//					selectedPersonen = alleInGruppe.filter({!$0.tickets.isEmpty && $0.tickets.count != ($0.bestellungen[.ball_ticket, default: 0] + $0.bestellungen[.after_show_ticket, default: 0])})
+//				}) {
+//					FilterButton("hat nicht generierte Tickets")
+//				}
+
+
+				Button(action: {
 					selectedPersonen = alleInGruppe.filter({!$0.tickets.isEmpty && $0.tickets.allSatisfy({$0.versendet})})
 				}) {
 					FilterButton("Generierte Tickets gesendet")
@@ -254,17 +266,6 @@ struct FilterView: View {
 					selectedPersonen = alleInGruppe.filter({!$0.tickets.isEmpty && !$0.tickets.allSatisfy({$0.versendet})})
 				}) {
 					FilterButton("Nicht alle generierte Tickets gesendet")
-				}
-
-				Button(action: {
-					selectedPersonen = alleInGruppe.filter({!$0.tickets.isEmpty && $0.tickets.count == ($0.bestellungen[.ball_ticket, default: 0] + $0.bestellungen[.after_show_ticket, default: 0])})
-				}) {
-					FilterButton("hat Tickets und generiert")
-				}
-				Button(action: {
-					selectedPersonen = alleInGruppe.filter({!$0.tickets.isEmpty && $0.tickets.count != ($0.bestellungen[.ball_ticket, default: 0] + $0.bestellungen[.after_show_ticket, default: 0])})
-				}) {
-					FilterButton("hat nicht generierte Tickets")
 				}
 			}
 			Spacer()
