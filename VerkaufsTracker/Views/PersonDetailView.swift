@@ -132,7 +132,7 @@ struct BestellungsUebersicht: View{
 	var body: some View {
         VStack(alignment: .leading, spacing: 5){
             HStack{
-                Text("Sendestaus")
+                Text("Sendestatus")
                     .font(.title2.bold())
                 Spacer()
                 Text("Zum Absenden")
