@@ -35,6 +35,12 @@ struct StatsView: View {
 	}
 }
 
+struct Groese: Identifiable {
+	var name: String
+	var betrag: Int
+	var id = UUID()
+}
+
 struct StatsViewComponents: View{
 	let verwaltung: Verwaltung
 	var body: some View{
@@ -56,7 +62,22 @@ struct StatsViewComponents: View{
 						Spacer()
 						Text("\(verwaltung.personen.map({$0.wuenschBestellungen[.buch] ?? 0}).reduce(0, +))")
 					}
-					Spacer()
+					Chart {
+						let data: [Groese] = [
+							.init(name: "XS", betrag: verwaltung.personen.compactMap({Int($0.extraFields[.pulli_xs, default: "0"]) ?? 0}).reduce(0, +)),
+							.init(name: "S", betrag: verwaltung.personen.compactMap({Int($0.extraFields[.pulli_s, default: "0"]) ?? 0}).reduce(0, +)),
+							.init(name: "M", betrag: verwaltung.personen.compactMap({Int($0.extraFields[.pulli_m, default: "0"]) ?? 0}).reduce(0, +)),
+							.init(name: "L", betrag: verwaltung.personen.compactMap({Int($0.extraFields[.pulli_l, default: "0"]) ?? 0}).reduce(0, +)),
+							.init(name: "XL", betrag: verwaltung.personen.compactMap({Int($0.extraFields[.pulli_xl, default: "0"]) ?? 0}).reduce(0, +)),
+						]
+						ForEach(data) { pos in
+							BarMark(
+								x: .value("Shape Type", pos.name),
+								y: .value("Total Count", pos.betrag)
+							)
+						}
+					}
+					.padding()
 				}
 			}.tabViewStyle(PageTabViewStyle())
 				.frame(height: 450)
