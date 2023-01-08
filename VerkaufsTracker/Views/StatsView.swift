@@ -88,14 +88,13 @@ struct StatsViewComponents: View{
 		
 		Divider()
 
-		Text("Prozess").font(.title.bold())
-
-		Text("Summe nur von den der vorherigen!")
-
-		TabView{
-			SendCharts(verwaltung: verwaltung).padding(.bottom, 30)
-		}.tabViewStyle(PageTabViewStyle())
-			.frame(height: 450)
+		VStack{
+			Text("Prozess").font(.title.bold())
+			TabView{
+				SendCharts(verwaltung: verwaltung).padding(.bottom, 30)
+			}.tabViewStyle(PageTabViewStyle())
+				.frame(height: 450)
+		}
 
 		Divider()
 		
@@ -136,22 +135,22 @@ struct SendCharts: View{
 	let verwaltung: Verwaltung
 	var body: some View{
 		let formEmailSend = verwaltung.personen.filter({$0.extraFields[.sendFormEmail, default: ""] == "1"}).count
-		PieChart(title: "Form E-Mail", statement: "gesendet", counterStatement: "nicht gesendet", value: formEmailSend, capacityValue: verwaltung.personen.count)
+		PieChart(title: "Formular E-Mail-Sendestatus", statement: "Gesendet", counterStatement: "Nicht gesendet", value: formEmailSend, capacityValue: verwaltung.personen.count)
 
 		let formSubmitted = verwaltung.personen.filter({$0.extraFields[.hatFormEingetragen, default: ""] == "1"}).count
 		PieChart(title: "Formularteilnahme", statement: "Formular ausgefüllt", counterStatement: "Formular ausstehend", value: formSubmitted, capacityValue: formEmailSend)
 
 		let bezahlSend = verwaltung.personen.filter({$0.extraFields[.sendBezahlEmail, default: ""] == "1"}).count
-		PieChart(title: "Bezahl E-Mail", statement: "gesendet", counterStatement: "nicht gesendet", value: bezahlSend, capacityValue: formSubmitted)
+		PieChart(title: "Bezahlübersicht E-Mail-Sendestatus", statement: "Gesendet", counterStatement: "Nicht gesendet", value: bezahlSend, capacityValue: formSubmitted)
 
 		let bezahlt = verwaltung.gezahltePersonen
 		PieChart(title: "Vollständig gezahlte Personen", statement: "Gezahlt", counterStatement: "Ausstehend", value: bezahlt, capacityValue: bezahlSend)
 
 		let generiert = verwaltung.personen.filter({!$0.tickets.isEmpty && $0.tickets.count == ($0.bestellungen[.ball_ticket, default: 0] + $0.bestellungen[.after_show_ticket, default: 0])}).count
-		PieChart(title: "Vollständig gezahlte Personen", statement: "voll Generiert", counterStatement: "nicht voll Generiert", value: generiert, capacityValue: bezahlSend)
+		PieChart(title: "Vollständig für Personen generiert ", statement: "Voll generiert", counterStatement: "Nicht voll generiert", value: generiert, capacityValue: bezahlSend)
 
 		let ticketSend = verwaltung.personen.filter({$0.extraFields[.hatFormEingetragen, default: ""] == "1"}).count
-		PieChart(title: "Ticket E-Mail", statement: "gesendet", counterStatement: "nicht gesendet", value: ticketSend, capacityValue: generiert)
+		PieChart(title: "Ticket E-Mail-Sendestatus", statement: "Gesendet", counterStatement: "Nicht gesendet", value: ticketSend, capacityValue: generiert)
 	}
 }
 
@@ -223,7 +222,7 @@ struct PieChart: View{
 	
 	var body: some View{
 		VStack(alignment: .center){
-			Text(title).font(.title2.bold())
+			Text(title).font(.title2.bold()).multilineTextAlignment(.center)
 			Pie(slices: [(Double(value), .blue, Double(statementPercentage)), (Double(capacityValue-value), .red, Double(counterStatementPercentage))])
 			VStack(alignment: .leading, spacing: 0){
 				HStack(alignment: .center){
