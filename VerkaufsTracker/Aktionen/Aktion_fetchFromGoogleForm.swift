@@ -11,6 +11,13 @@ extension Aktion {
 
 	static func fetchFromGoogleForm(verwaltung v: Verwaltung, ao: AktionObserver) {
 		ao.activate(name: "Fetch Umfrageergebnisse")
+		if v.verteilungDeaktiviert && !SECRETS.TEST_MODE {
+			ao.clear()
+			ao.activate(name: "Fetch Umfrageergebnisse")
+			ao.log("Deaktiviert")
+			ao.finish()
+			return
+		}
 
 		var valid = 0
 		var deleted = 0

@@ -11,7 +11,7 @@ extension Aktion {
 
 	// TODO: Log im ao
 	static public func verteileItems(verwaltung v: Verwaltung, ao: AktionObserver) {
-		if v.verteilungDeaktiviert {
+		if v.verteilungDeaktiviert && !SECRETS.TEST_MODE {
 			ao.clear()
 			ao.activate(name: "VerteileItems")
 			ao.log("Deaktiviert")
