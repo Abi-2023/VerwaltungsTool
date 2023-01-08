@@ -10,7 +10,7 @@ import SwiftSMTP
 
 extension Lehrer {
 	internal func generateTicketEmailInternal(v: Verwaltung, ao: AktionObserver? = nil) -> Mail? {
-		let subject = "Ihre Abi Bestellungen"
+		let subject = "Ihre Bestellung für die Abi-Feierlichkeiten"
 
 		var extraText = ""
 		let buecher = bestellungen[.buch, default: 0]
