@@ -15,7 +15,7 @@ extension Lehrer {
 			ao?.log("err: \(name); no mail user")
 			return nil
 		}
-		let subject = "Einladung zu den Abi-Feierlichkeiten der Q2"
+		let subject = "Ihre Einladung zu den Abi-Feierlichkeiten der Q2"
 
 		let formName = formName.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "Name"
 		let formUrl = "***REMOVED***/viewform?usp=pp_url&entry.514969491=\(formID)&entry.843812046=\(formName)"

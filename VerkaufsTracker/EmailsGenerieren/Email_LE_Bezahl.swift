@@ -15,7 +15,7 @@ extension Lehrer {
 			return nil
 		}
 
-		let subject = "Ihre Bestellung für die Abi-Feierlichkeiten"
+		let subject = "Ihre Bestellung für die Abi-Feierlichkeiten der Q2"
 
 		// TODO: Text überschreiben
 		let textContent = """
