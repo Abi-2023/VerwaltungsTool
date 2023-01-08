@@ -628,7 +628,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = VerkaufsTracker/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Abi Tracker";
+				INFOPLIST_KEY_CFBundleDisplayName = "Abi-Tracker";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Benötigt Zugriff, um QR-Codes zu scannen.";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -672,7 +672,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = VerkaufsTracker/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Abi Tracker";
+				INFOPLIST_KEY_CFBundleDisplayName = "Abi-Tracker";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Benötigt Zugriff, um QR-Codes zu scannen.";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
