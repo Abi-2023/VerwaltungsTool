@@ -11,7 +11,7 @@ import SwiftSMTP
 
 extension Q2er {
 	internal func generateTicketEmailInternal(v: Verwaltung, ao: AktionObserver? = nil) -> Mail? {
-		let subject = "Deine Abi Bestellungen"
+		let subject = "Deine Bestellungen für die Abi-Feierlichkeiten"
 
 		var extraText = ""
 		let buecher = bestellungen[.buch, default: 0]
@@ -42,7 +42,7 @@ extension Q2er {
 
   Wir wünschen dir, deiner Familie und deinen Freunden einen schönen Abiball sowie einen guten Weg zum Abitur,
 
-  Viele Grüße
+  Viele Grüße,
   Dein Orga Team
 
   """
@@ -179,7 +179,7 @@ extension Q2er {
 					</tr>
 					<tr>
 					  <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-						<div style="font-family:Helvetica;font-size:16px;line-height:1;text-align:left;color:white;">deine Zahlung für die Abi-Feierlichkeiten ist bei uns eingegangen. <br></br>Hiermit senden wir dir deine Tickets für den Abiball und die anschließende After-Show-Party. \(extraText) <br></br> Bitte beachte, das jedes Ticket am Abend des Abiballs nur einmal eingelöst werden kann. Die Tickets sind nummeriert, damit du sie nicht verwechselst. <br></br> Der Abiball findet am Dienstag, den 21.06.2023 in der <a style="color: #0082ED" href="***REMOVED***">***REMOVED*** ***REMOVED*** ***REMOVED***</a> statt. Der Einlass beginnt um 16:30. <br></br> Bitte denk daran, dass auf dem Gelände der ***REMOVED*** die <a style="color: #0082ED" href="***REMOVED***/de/meta-pages/hausordnung/">Hausordnung</a> gilt. <br></br> Wir wünschen dir, deiner Familie und deinen Freunden einen schönen Abiball sowie einen guten Weg zum Abitur. <br></br>Viele Grüße<br></br> Dein Orga Team</div>
+						<div style="font-family:Helvetica;font-size:16px;line-height:1;text-align:left;color:white;">deine Zahlung für die Abi-Feierlichkeiten ist bei uns eingegangen. <br></br>Hiermit senden wir dir deine Tickets für den Abiball und die anschließende After-Show-Party. \(extraText) <br></br> Bitte beachte, das jedes Ticket am Abend des Abiballs nur einmal eingelöst werden kann. Die Tickets sind nummeriert, damit du sie nicht verwechselst. <br></br> Der Abiball findet am Dienstag, den 21.06.2023 in der <a style="color: #0082ED" href="***REMOVED***">***REMOVED*** ***REMOVED*** ***REMOVED***</a> statt. Der Einlass beginnt um 16:30. <br></br> Bitte denk daran, dass auf dem Gelände der ***REMOVED*** die <a style="color: #0082ED" href="***REMOVED***/de/meta-pages/hausordnung/">Hausordnung</a> gilt. <br></br> Wir wünschen dir, deiner Familie und deinen Freunden einen schönen Abiball sowie einen guten Weg zum Abitur. <br></br>Viele Grüße,<br></br><br></br>Dein Orga Team</div>
 					  </td>
 					</tr>
 					<tr>
