@@ -96,8 +96,7 @@ class AktionObserver: ObservableObject {
 				finished = true
 			}
 		}
-// TODO: aktivieren und eventuell vor log hochladen
-//		verwaltung?.uploadToCloud()
+		verwaltung?.uploadToCloud()
 	}
 
 	func clear() {
