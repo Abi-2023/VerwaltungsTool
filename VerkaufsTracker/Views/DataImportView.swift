@@ -88,7 +88,7 @@ extension Aktion {
 		ao.log("start Import")
 		ao.setPrompt("Import")
 
-		let lines = data.replacingOccurrences(of: "\r\n", with: "\n").split(separator: "\n")
+		let lines = data.replacingOccurrences(of: "\r\n", with: "\n").replacingOccurrences(of: "\r", with: "\n").split(separator: "\n")
 
 		var i = 0
 
@@ -98,15 +98,15 @@ extension Aktion {
 				ao.log("err: \(line)")
 				continue
 			}
-			guard let vorname = lineElements[safe: 0] else {
+			guard let vorname = lineElements[safe: 2] else {
 				ao.log("err: \(line)")
 				continue
 			}
-			guard let nachname = lineElements[safe: 0] else {
+			guard let nachname = lineElements[safe: 1] else {
 				ao.log("err: \(line)")
 				continue
 			}
-			guard let geschlecht = lineElements[safe: 1] else {
+			guard let geschlecht = lineElements[safe: 3] else {
 				ao.log("err: \(line)")
 				continue
 			}
