@@ -47,7 +47,7 @@ extension Q2er {
 		let htmlAttachment = Attachment(htmlContent: htmlMail)
 
 		return Mail(from: EmailManager.senderMail,
-					to: [mailUser], //TODO: maybe handle optional
+					to: [mailUser],
 					subject: subject,
 					text: textContent,
 					attachments: [htmlAttachment]

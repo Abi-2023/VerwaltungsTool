@@ -9,7 +9,6 @@ import Foundation
 import SwiftSMTP
 
 extension Lehrer {
-	//TODO: Anpassen
 	internal func generateFormEmailInternal(ao: AktionObserver? = nil) -> Mail? {
 		guard let mailUser = mailUser else {
 			ao?.log("err: \(name); no mail user")
@@ -65,7 +64,7 @@ extension Lehrer {
 		let htmlAttachment = Attachment(htmlContent: htmlMail)
 
 		return Mail(from: EmailManager.senderMail,
-					to: [mailUser], //TODO: maybe handle optional
+					to: [mailUser],
 					subject: subject,
 					text: textContent,
 					attachments: [htmlAttachment]
