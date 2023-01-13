@@ -23,9 +23,7 @@ class Lehrer: Person {
 		self.nachname = nachname
 		self.kuerzel = kuerzel
 		self.weiblich = weiblich
-		// TODO: richtige Email
-		//\(kuerzel)@st-anna.de
-		super.init(name: "", email: "***REMOVED***", verwaltung: v)
+		super.init(name: "", email: "\(kuerzel)@st-anna.de", verwaltung: v)
 	}
 
 	private enum CodingKeys: String , CodingKey {case vorname, nachname, kuerzel, weiblich}
