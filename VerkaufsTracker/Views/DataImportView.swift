@@ -94,15 +94,33 @@ extension Aktion {
 
 		for line in lines {
 			let lineElements = line.split(separator: ";")
-			guard let name = lineElements[safe: 0] else {
+			guard let kuerzel = lineElements[safe: 0] else {
 				ao.log("err: \(line)")
 				continue
 			}
-			guard let email = lineElements[safe: 1] else {
+			guard let vorname = lineElements[safe: 0] else {
 				ao.log("err: \(line)")
 				continue
 			}
-			let person = Lehrer(name: String(name), email: String(email), verwaltung: v)
+			guard let nachname = lineElements[safe: 0] else {
+				ao.log("err: \(line)")
+				continue
+			}
+			guard let geschlecht = lineElements[safe: 1] else {
+				ao.log("err: \(line)")
+				continue
+			}
+
+			let weiblich: Bool;
+			if geschlecht == "w" {
+				weiblich = true
+			} else if geschlecht == "m" {
+				weiblich = false
+			} else {
+				return
+			}
+
+			let person = Lehrer(vorname: String(vorname), nachname: String(nachname), kuerzel: String(kuerzel), weiblich: weiblich, v: v)
 			v.personen.append(person)
 			ao.log("+ \(person.name) | \(person.email ?? "-")")
 			i += 1
