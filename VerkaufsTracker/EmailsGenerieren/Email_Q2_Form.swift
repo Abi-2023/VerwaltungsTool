@@ -17,7 +17,7 @@ extension Q2er {
 		let subject = "Wunschabgabe für Deine Abi-Feierlichkeiten"
 
 		let formName = formName.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "Name"
-		let formUrl = "***REMOVED***/viewform?usp=pp_url&entry.382473335=\(formID)&entry.2014446974=\(formName)"
+		let formUrl = "***REMOVED***/viewform?usp=pp_url&entry.382473335=\(formID)&entry.2014446974=\(formName)&entry.775619804=0&entry.1196141815=0&entry.1974245158=0&entry.1884780541=0&entry.760621424=0"
 
 		let textContent = """
    Hallo \(vorname),

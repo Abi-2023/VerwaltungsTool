@@ -17,7 +17,7 @@ extension Lehrer {
 		let subject = "Ihre Einladung zu den Abi-Feierlichkeiten der Q2"
 
 		let formName = formName.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "Name"
-		let formUrl = "***REMOVED***/viewform?usp=pp_url&entry.514969491=\(formID)&entry.843812046=\(formName)"
+		let formUrl = "***REMOVED***/viewform?usp=pp_url&entry.514969491=\(formID)&entry.843812046=\(formName)&entry.827820194=0&entry.1757090896=0&entry.1728612605=0&entry.1468053126=0&entry.299688454=0"
 
 		let anrede = "\(weiblich ? "Sehr geehrte Frau" : "Sehr geehrter Herr") \(nachname)"
 
