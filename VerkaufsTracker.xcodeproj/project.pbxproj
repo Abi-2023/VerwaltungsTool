@@ -29,6 +29,7 @@
 		8F8521F9295A2B2100854E16 /* CloudView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8521F8295A2B2100854E16 /* CloudView.swift */; };
 		8F99E9AD295E15E9003B79DD /* Aktion_FuelleTickets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F99E9AC295E15E9003B79DD /* Aktion_FuelleTickets.swift */; };
 		8F99E9AF295E2845003B79DD /* Crypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F99E9AE295E2845003B79DD /* Crypto.swift */; };
+		8FA1C123297D7CE90049EB21 /* SwiftCSV in Frameworks */ = {isa = PBXBuildFile; productRef = 8FA1C122297D7CE90049EB21 /* SwiftCSV */; };
 		8FA408002969A73B005BC839 /* DataImportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA407FF2969A73B005BC839 /* DataImportView.swift */; };
 		8FA408022969D4CE005BC839 /* Aktion_Valid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA408012969D4CE005BC839 /* Aktion_Valid.swift */; };
 		8FA603942948CE99001CC2D2 /* VerkaufsTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA603932948CE99001CC2D2 /* VerkaufsTrackerApp.swift */; };
@@ -152,6 +153,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8F128AF2294D0BCA002D3801 /* CodeScanner in Frameworks */,
+				8FA1C123297D7CE90049EB21 /* SwiftCSV in Frameworks */,
 				8F7B13E7296337A600B04F9D /* QRCodeGenerator in Frameworks */,
 				8FD6455A294CFD6E00D746F8 /* SwiftSMTP in Frameworks */,
 			);
@@ -356,6 +358,7 @@
 				8FD64559294CFD6E00D746F8 /* SwiftSMTP */,
 				8F128AF1294D0BCA002D3801 /* CodeScanner */,
 				8F7B13E6296337A600B04F9D /* QRCodeGenerator */,
+				8FA1C122297D7CE90049EB21 /* SwiftCSV */,
 			);
 			productName = VerkaufsTracker;
 			productReference = 8FA603902948CE99001CC2D2 /* VerkaufsTracker.app */;
@@ -392,6 +395,7 @@
 				8FD64558294CFD6E00D746F8 /* XCRemoteSwiftPackageReference "Swift-SMTP" */,
 				8F128AF0294D0BCA002D3801 /* XCRemoteSwiftPackageReference "CodeScanner" */,
 				8F7B13E5296337A600B04F9D /* XCRemoteSwiftPackageReference "swift-qrcode-generator" */,
+				8FA1C121297D7CE90049EB21 /* XCRemoteSwiftPackageReference "SwiftCSV" */,
 			);
 			productRefGroup = 8FA603912948CE99001CC2D2 /* Products */;
 			projectDirPath = "";
@@ -762,6 +766,14 @@
 				kind = branch;
 			};
 		};
+		8FA1C121297D7CE90049EB21 /* XCRemoteSwiftPackageReference "SwiftCSV" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/swiftcsv/SwiftCSV.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		8FD64558294CFD6E00D746F8 /* XCRemoteSwiftPackageReference "Swift-SMTP" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Kitura/Swift-SMTP";
@@ -782,6 +794,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8F7B13E5296337A600B04F9D /* XCRemoteSwiftPackageReference "swift-qrcode-generator" */;
 			productName = QRCodeGenerator;
+		};
+		8FA1C122297D7CE90049EB21 /* SwiftCSV */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8FA1C121297D7CE90049EB21 /* XCRemoteSwiftPackageReference "SwiftCSV" */;
+			productName = SwiftCSV;
 		};
 		8FD64559294CFD6E00D746F8 /* SwiftSMTP */ = {
 			isa = XCSwiftPackageProductDependency;
