@@ -191,7 +191,7 @@ class ZahlungsVerarbeiter: ObservableObject {
 		}
 		v.verarbeiteteZahlungenHashs.append(eintrag.hash)
 		DispatchQueue.global().async {
-			if uploadZahlung(person: eintrag.erkanntePerson!, betrag: eintrag.erkannterBetrag, notiz: "\(eintrag.hash);") {
+			if uploadZahlung(person: eintrag.erkanntePerson!, betrag: eintrag.erkannterBetrag, notiz: "\(eintrag.hash); \(CloudStatus.deviceName() ?? "?") - \(Date().formatted(.dateTime))") {
 				self.ao.log("Zahlung hinzugefuegt: \(eintrag.erkanntePerson!.name) \(eintrag.betrag) | \(eintrag.hash)")
 			} else {
 				self.ao.log("Zahlung konnte nicht hinzugefuegt werden")
