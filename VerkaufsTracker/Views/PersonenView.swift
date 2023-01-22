@@ -236,12 +236,12 @@ struct FilterView: View {
 					}
 
 					Button(action: {
-						selectedPersonen = alleInGruppe.filter({$0.offenerBetrag(v: verwaltung) <= 0})
+						selectedPersonen = alleInGruppe.filter({$0.offenerBetrag(v: verwaltung) <= 0 && $0.zuzahlenderBetrag > 0})
 					}) {
 						FilterButton("Bezahlt")
 					}
 					Button(action: {
-						selectedPersonen = alleInGruppe.filter({$0.offenerBetrag(v: verwaltung) > 0})
+						selectedPersonen = alleInGruppe.filter({$0.offenerBetrag(v: verwaltung) > 0 && $0.zuzahlenderBetrag > 0})
 					}) {
 						FilterButton("Noch nicht bezahlt")
 					}
