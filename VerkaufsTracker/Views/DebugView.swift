@@ -54,6 +54,14 @@ struct DebugView: View {
 				Text("render ticket")
 			}
 
+
+			Button(action: {
+				let export = PersonenExport(v: verwaltung)
+				export.speicher()
+			}) {
+				Text("SpeicherMap")
+			}
+
 			Button(action: {
 				//			let m = verwaltung.personen.first(where: {$0.name.contains("Benedict")})!.generateBezahlEmail()
 				//			let sender = EmailManager()
