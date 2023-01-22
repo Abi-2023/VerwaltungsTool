@@ -113,12 +113,12 @@ struct PersonenView: View {
 							PersonRowItem(verwaltung: verwaltung, person: person)
 								.contentShape(Rectangle())
 						}
-						.simultaneousGesture(LongPressGesture().onEnded { _ in
-							selectedPerson = person
-						})
-						.simultaneousGesture(TapGesture().onEnded {
+						.onTapGesture {
 							selectedPersonen.toggle(e: person)
-						})
+						}
+						.onLongPressGesture{
+							selectedPerson = person
+						}
 					} else {
 						Button(action: {
 							selectedPerson = person
