@@ -31,7 +31,7 @@ struct ZahlungsImportOptionen: View {
 				{ result in
 					do {
 						guard let file = try result.get().first else {
-							throw MyError.runtimeError("keine Datei ausgewählt")
+							throw MyError.runtimeError("Keine Datei ausgewählt")
 						}
 
 						let data = try Data(contentsOf: file)
@@ -83,7 +83,7 @@ struct ZahlungsImportOptionen: View {
 									.bold()
 									.foregroundColor(.blue)
 							} else {
-								Text("keine person")
+								Text("Keine Person")
 									.bold()
 									.foregroundColor(.blue)
 							}
@@ -95,7 +95,7 @@ struct ZahlungsImportOptionen: View {
 						Button(role: .destructive,action: {
 							zahlungsVerarbeiter.ignorieren()
 						}) {
-							Text("Ignoriern")
+							Text("Ignorieren")
 						}.buttonStyle(.bordered)
 
 						Button(action: {
@@ -114,7 +114,7 @@ struct ZahlungsImportOptionen: View {
 					}
 
 				} else {
-					Text("keine weiteren Einträge")
+					Text("Keine weiteren Einträge")
 				}
 
 			}
