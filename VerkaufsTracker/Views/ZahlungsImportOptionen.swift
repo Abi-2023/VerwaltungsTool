@@ -18,6 +18,12 @@ struct ZahlungsImportOptionen: View {
 
 	var body: some View {
 		VStack {
+			Button(action: {
+				zahlungsVerarbeiter.fertig()
+				zahlungsVerarbeiterBind = nil
+			}) {
+				Text("Fertig")
+			}
 			if !zahlungsVerarbeiter.hatImportiert {
 				// MARK: - Import CSV
 				Button(action: {
@@ -46,13 +52,6 @@ struct ZahlungsImportOptionen: View {
 
 				}
 			} else {
-				// MARK: - Personnen auswählen
-				Button(action: {
-					zahlungsVerarbeiter.fertig()
-					zahlungsVerarbeiterBind = nil
-				}) {
-					Text("Fertig")
-				}
 				if let eintrag = zahlungsVerarbeiter.eintraege.first {
 
 
