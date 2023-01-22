@@ -34,9 +34,9 @@ struct VerkaufsTrackerApp: App {
 						AktionLogView(ao: aktionObserver)
 
 						if let zahlungsVerarbeiter {
+							Divider()
 							ZahlungsImportOptionen(zahlungsVerarbeiter: zahlungsVerarbeiter)
 								.padding()
-								.background(.gray)
 						}
 
 					} else if state == .scanner{

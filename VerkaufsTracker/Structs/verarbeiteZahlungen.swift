@@ -46,6 +46,8 @@ class ZahlungsVerarbeiter: ObservableObject {
 	let v: Verwaltung
 	let ao: AktionObserver
 
+	@Published var hatImportiert = false
+
 	init(v: Verwaltung, ao: AktionObserver) {
 		self.v = v
 		self.ao = ao
@@ -61,7 +63,9 @@ class ZahlungsVerarbeiter: ObservableObject {
 				try csv.enumerateAsArray(startAt: 1,rowLimit: nil) { element in
 					self.verarbeiteReihe(arr: element)
 				}
-				
+				DispatchQueue.main.async {
+					self.hatImportiert = true
+				}
 			} catch {
 				print("csv error: \(error)")
 			}
@@ -151,12 +155,10 @@ class ZahlungsVerarbeiter: ObservableObject {
 	}
 
 	func spaeter() {
-
+		eintraege.removeFirst()
 	}
 
 	func hinzufuegen() {
 
 	}
-
-
 }
