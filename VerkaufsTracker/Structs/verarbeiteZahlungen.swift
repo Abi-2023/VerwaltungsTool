@@ -7,23 +7,6 @@
 
 import Foundation
 
-
-class ZahlungsVerarbeiter: ObservableObject {
-
-	let v: Verwaltung
-	let ao: AktionObserver
-
-	init(v: Verwaltung, ao: AktionObserver) {
-		self.v = v
-		self.ao = ao
-		ao.activate(name: "importiere Zahlungen")
-		ao.log("Starte Import")
-		ao.setPrompt("CSV auswählen")
-	}
-
-}
-
-
 // Betrag in cent
 fileprivate func uploadZahlung(person: Person, betrag: Int, notiz: String) -> Bool{
 	let transaktionsQuery = "***REMOVED***viewform?usp=pp_url"
@@ -54,4 +37,20 @@ fileprivate func uploadZahlung(person: Person, betrag: Int, notiz: String) -> Bo
 	}
 	task.resume()
 	return !fehler
+}
+
+
+class ZahlungsVerarbeiter: ObservableObject {
+
+	let v: Verwaltung
+	let ao: AktionObserver
+
+	init(v: Verwaltung, ao: AktionObserver) {
+		self.v = v
+		self.ao = ao
+		ao.activate(name: "importiere Zahlungen")
+		ao.log("Starte Import")
+		ao.setPrompt("CSV auswählen")
+	}
+
 }
