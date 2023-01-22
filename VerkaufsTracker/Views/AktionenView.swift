@@ -84,6 +84,26 @@ struct AktionenView: View {
 				}.buttonStyle(.bordered)
 				Spacer()
 			}
+
+			Divider()
+
+			HStack{
+				Button(action: {
+					verwaltung.uploadToCloud()
+				}) {
+					Text("Upload")
+				}.buttonStyle(.borderedProminent)
+				Spacer()
+			}
+
+			HStack{
+				Button(action: {
+					verwaltung.disconnectFromServer()
+				}) {
+					Text("disconnect")
+				}.buttonStyle(.borderedProminent)
+				Spacer()
+			}
 		}.padding()
 	}
 }

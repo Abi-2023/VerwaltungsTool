@@ -19,17 +19,6 @@ struct DebugView: View {
 			Text("Debug Optionen")
 				.font(.largeTitle.weight(.heavy))
 
-			Button(action: {
-				verwaltung.uploadToCloud()
-			}) {
-				Text("Upload")
-			}
-
-			Button(action: {
-				verwaltung.disconnectFromServer()
-			}) {
-				Text("disconnect")
-			}
 
 			Button(action: {
 				CloudStatus.setDeviceName(name: nil)
