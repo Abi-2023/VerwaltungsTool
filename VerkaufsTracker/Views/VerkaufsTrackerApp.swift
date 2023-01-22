@@ -35,7 +35,7 @@ struct VerkaufsTrackerApp: App {
 
 						if let zahlungsVerarbeiter {
 							Divider()
-							ZahlungsImportOptionen(zahlungsVerarbeiter: zahlungsVerarbeiter)
+							ZahlungsImportOptionen(zahlungsVerarbeiter: zahlungsVerarbeiter, zahlungsVerarbeiterBind: $zahlungsVerarbeiter)
 								.padding()
 						}
 
@@ -53,7 +53,7 @@ struct VerkaufsTrackerApp: App {
 							DebugView(verwaltung: verwaltung, state: $state,zahlungsVerarbeiter: $zahlungsVerarbeiter, ao: aktionObserver)
 						case .aktionen:
 							if selectedPersonen.isEmpty {
-								AktionenView(verwaltung: verwaltung, selectedPersonen: $selectedPersonen, aktionObserver: aktionObserver)
+								AktionenView(verwaltung: verwaltung, selectedPersonen: $selectedPersonen, aktionObserver: aktionObserver, zahlungsVerarbeiter: $zahlungsVerarbeiter)
 							} else {
 								PersonenActionView(verwaltung: verwaltung, selectedPersonen: $selectedPersonen, aktionObserver: aktionObserver	)
 							}

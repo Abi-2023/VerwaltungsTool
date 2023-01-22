@@ -13,7 +13,7 @@ enum MyError: Error {
 
 struct ZahlungsImportOptionen: View {
 	@ObservedObject var zahlungsVerarbeiter: ZahlungsVerarbeiter
-
+	@Binding var zahlungsVerarbeiterBind: ZahlungsVerarbeiter?
 	@State var showDocumentPicker = true
 
 	var body: some View {
@@ -47,7 +47,12 @@ struct ZahlungsImportOptionen: View {
 				}
 			} else {
 				// MARK: - Personnen auswählen
-
+				Button(action: {
+					zahlungsVerarbeiter.fertig()
+					zahlungsVerarbeiterBind = nil
+				}) {
+					Text("Fertig")
+				}
 				if let eintrag = zahlungsVerarbeiter.eintraege.first {
 
 
@@ -58,8 +63,12 @@ struct ZahlungsImportOptionen: View {
 							Text("Datum: \(eintrag.datum)")
 							Text("Text: \(eintrag.buchungstext)")
 							Text("Zweck: \(eintrag.zweck)")
+								.bold()
+								.foregroundColor(.blue)
 							Text("P: \(eintrag.zahlungsPerson)")
 							Text("Betrag: \(eintrag.betrag)")
+								.bold()
+								.foregroundColor(.blue)
 							Text("Info: \(eintrag.info)")
 						}
 						.padding()
@@ -71,8 +80,12 @@ struct ZahlungsImportOptionen: View {
 								.bold()
 							if let person = eintrag.erkanntePerson {
 								Text("Person: \(person.name) - \(person.formID)")
+									.bold()
+									.foregroundColor(.blue)
 							} else {
 								Text("keine person")
+									.bold()
+									.foregroundColor(.blue)
 							}
 							Text("Betrag: \(eintrag.erkannterBetrag.geldStr)")
 						}

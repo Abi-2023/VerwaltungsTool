@@ -8,9 +8,20 @@
 import Foundation
 import SwiftCSV
 
+import CryptoKit
+
+func MD5(string: String) -> String {
+	let digest = Insecure.MD5.hash(data: string.data(using: .utf8) ?? Data())
+
+	return digest.map {
+		String(format: "%02hhx", $0)
+	}.joined()
+}
+
+
 // Betrag in cent
 fileprivate func uploadZahlung(person: Person, betrag: Int, notiz: String) -> Bool{
-	let transaktionsQuery = "***REMOVED***viewform?usp=pp_url"
+	let transaktionsQuery = "***REMOVED***formResponse"
 
 	guard let requestUrl = URL(string: transaktionsQuery) else {
 		print("invalid url")
@@ -21,7 +32,7 @@ fileprivate func uploadZahlung(person: Person, betrag: Int, notiz: String) -> Bo
 	request.httpMethod = "POST"
 
 	// HTTP Request Parameters which will be sent in HTTP Request Body
-	let postString = "entry.635762291=\(person.id)&entry.1349648930=\(betrag)&entry.1884599919=\(notiz.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "FEHLER")"
+	let postString = "entry.635762291=\(person.formID)&entry.1349648930=\(betrag)&entry.1884599919=\(notiz.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "FEHLER")"
 	// Set HTTP Request Body
 	request.httpBody = postString.data(using: String.Encoding.utf8)
 	// Perform HTTP Request
@@ -37,6 +48,7 @@ fileprivate func uploadZahlung(person: Person, betrag: Int, notiz: String) -> Bo
 		workerGroup.leave()
 	}
 	task.resume()
+	workerGroup.wait()
 	return !fehler
 }
 
@@ -51,9 +63,11 @@ class ZahlungsVerarbeiter: ObservableObject {
 	init(v: Verwaltung, ao: AktionObserver) {
 		self.v = v
 		self.ao = ao
-		ao.activate(name: "importiere Zahlungen")
-		ao.log("Starte Import")
-		ao.setPrompt("CSV auswählen")
+		DispatchQueue.global(qos: .userInitiated).async {
+			ao.activate(name: "importiere Zahlungen")
+			ao.log("Starte Import")
+			ao.setPrompt("CSV auswählen")
+		}
 	}
 
 	func verarbeiteCSV(str: String) {
@@ -63,6 +77,10 @@ class ZahlungsVerarbeiter: ObservableObject {
 				try csv.enumerateAsArray(startAt: 1,rowLimit: nil) { element in
 					self.verarbeiteReihe(arr: element)
 				}
+				self.ao.log("\(csv.rows.count) Einträge importiert")
+				self.ao.log("\(csv.rows.count - self.eintraege.count) bereits verarbeitet")
+				self.ao.log("\(self.eintraege.count) noch nicht verarbeitet")
+
 				DispatchQueue.main.async {
 					self.hatImportiert = true
 				}
@@ -73,9 +91,12 @@ class ZahlungsVerarbeiter: ObservableObject {
 	}
 
 	func verarbeiteReihe(arr: [String]) {
-		var hasher = Hasher()
-		hasher.combine(arr)
-		let hash = hasher.finalize()
+		let hash = MD5(string: arr.joined())
+
+		if v.verarbeiteteZahlungenHashs.contains(hash) {
+			return
+		}
+
 		if(arr.count != 17) {
 			ao.log("Spaltenzahl stimmt nicht \(arr.count)")
 			return
@@ -84,7 +105,7 @@ class ZahlungsVerarbeiter: ObservableObject {
 		var kommentar = ""
 
 		var person: Person? = nil
-		if let formId = NSRegularExpression.getMatches(regex: "[ABCDEF][175963][SEFWQX][MNDQS5][W3YJ52]", inputText: arr[4].uppercased()).first {
+		if let formId = NSRegularExpression.getMatches(regex: "([ABCDEF][175963][SEFWQX][MNDQS5][W3YJ52])", inputText: arr[4].uppercased()).first {
 			if let pM = v.personen.first(where: {$0.formID == formId}) {
 				person = pM
 			} else {
@@ -120,7 +141,8 @@ class ZahlungsVerarbeiter: ObservableObject {
 
 		let valid = betrag > 0 && person != nil
 
-		let eintrag = Eintrag(datum: arr[1],
+		let eintrag = Eintrag(hash: hash,
+							  datum: arr[1],
 							  buchungstext: arr[3],
 							  zweck: arr[4],
 							  zahlungsPerson: arr[11],
@@ -134,24 +156,29 @@ class ZahlungsVerarbeiter: ObservableObject {
 	}
 
 	struct Eintrag {
-		var datum: String
-		var buchungstext: String
-		var zweck: String
-		var zahlungsPerson: String
-		var betrag: String
-		var info: String
+		let hash: String
+		let datum: String
+		let buchungstext: String
+		let zweck: String
+		let zahlungsPerson: String
+		let betrag: String
+		let info: String
 
-		var erkanntePerson: Person?
-		var erkannterBetrag: Int
+		let erkanntePerson: Person?
+		let erkannterBetrag: Int
 
-		var kommentar: String
-		var valid: Bool //ob die automatischen werte stimmen könnten
+		let kommentar: String
+		let valid: Bool //ob die automatischen werte stimmen könnten
 	}
 
 	@Published var eintraege: [Eintrag] = []
 
 	func ignorieren() {
-
+		guard let eintrag = eintraege.first else {
+			return
+		}
+		v.verarbeiteteZahlungenHashs.append(eintrag.hash)
+		eintraege.removeFirst()
 	}
 
 	func spaeter() {
@@ -159,6 +186,25 @@ class ZahlungsVerarbeiter: ObservableObject {
 	}
 
 	func hinzufuegen() {
+		guard let eintrag = eintraege.first else {
+			return
+		}
+		v.verarbeiteteZahlungenHashs.append(eintrag.hash)
+		DispatchQueue.global().async {
+			if uploadZahlung(person: eintrag.erkanntePerson!, betrag: eintrag.erkannterBetrag, notiz: "\(eintrag.hash);") {
+				self.ao.log("Zahlung hinzugefuegt: \(eintrag.erkanntePerson!.name) \(eintrag.betrag) | \(eintrag.hash)")
+			} else {
+				self.ao.log("Zahlung konnte nicht hinzugefuegt werden")
+			}
+		}
+		eintraege.removeFirst()
+	}
 
+
+	func fertig() {
+		DispatchQueue.global().async {
+			self.ao.log("beenden")
+			self.ao.finish()
+		}
 	}
 }

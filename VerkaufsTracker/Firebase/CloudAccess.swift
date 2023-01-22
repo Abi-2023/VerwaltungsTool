@@ -69,6 +69,7 @@ extension Verwaltung {
 							self.cloud = .connected
 							self.verteilungDeaktiviert = neueVerwaltung.verteilungDeaktiviert
 							self.finalPrice = neueVerwaltung.finalPrice
+							self.verarbeiteteZahlungenHashs = neueVerwaltung.verarbeiteteZahlungenHashs
 						}
 					} catch {
 						print(error)

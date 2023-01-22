@@ -14,7 +14,7 @@ struct PersonenWrapper: Codable{
 }
 
 class CodableVerwaltung: Verwaltung, Codable {
-	enum CodingKeys: CodingKey { case personenWrapper, transaktionen, lastFetchForm, lastFetchTransaktionen, logs, finalPrice, verteilungDeaktiviert}
+	enum CodingKeys: CodingKey { case personenWrapper, transaktionen, lastFetchForm, lastFetchTransaktionen, logs, finalPrice, verteilungDeaktiviert, verarbeiteteZahlungenHashs}
 
 	init(verwaltung: Verwaltung) {
 		super.init()
@@ -23,6 +23,7 @@ class CodableVerwaltung: Verwaltung, Codable {
 		self.lastFetchForm = verwaltung.lastFetchForm
 		self.logs = verwaltung.logs
 		self.lastFetchTransaktionen = verwaltung.lastFetchTransaktionen
+		self.verarbeiteteZahlungenHashs = verwaltung.verarbeiteteZahlungenHashs
 	}
 
 	required init(from decoder: Decoder) throws {
@@ -38,6 +39,7 @@ class CodableVerwaltung: Verwaltung, Codable {
 
 		self.verteilungDeaktiviert = try container.decode(type(of: verteilungDeaktiviert), forKey: .verteilungDeaktiviert)
 		self.finalPrice = try container.decode(type(of: finalPrice), forKey: .finalPrice)
+		self.verarbeiteteZahlungenHashs = try container.decode(type(of: verarbeiteteZahlungenHashs), forKey: .verarbeiteteZahlungenHashs)
 	}
 
 	public func encode(to encoder: Encoder) throws {
@@ -62,5 +64,6 @@ class CodableVerwaltung: Verwaltung, Codable {
 		try container.encode(verteilungDeaktiviert, forKey: .verteilungDeaktiviert)
 		try container.encode(lastFetchTransaktionen, forKey: .lastFetchTransaktionen)
 		try container.encode(logs, forKey: .logs)
+		try container.encode(verarbeiteteZahlungenHashs, forKey: .verarbeiteteZahlungenHashs)
 	}
 }

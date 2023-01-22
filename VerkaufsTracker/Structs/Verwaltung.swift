@@ -21,6 +21,7 @@ class Verwaltung: ObservableObject {
 
 	@Published var cloudStatus: CloudStatus? = nil
 	var logs: Int = 0
+	var verarbeiteteZahlungenHashs: [String] = []
 
 
 	init() {

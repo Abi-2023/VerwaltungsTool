@@ -53,9 +53,7 @@ extension Aktion {
 		let wait = DispatchGroup()
 
 		let ranges: [String] = [
-			"'Formularantworten 1'!B2:C500",
-			"CSVImport!A2:B500",
-			"Manuell!A2:B500",
+			"'Formularantworten 1'!B2:C500"
 		]
 		for range in ranges {
 			ao.log("---\(range)")
