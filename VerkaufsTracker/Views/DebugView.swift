@@ -47,13 +47,13 @@ struct DebugView: View {
 			}
 
 
-			Button(action: {
-				let str =  Ticket(owner: Person(name: "Benedict", email: "***REMOVED***", verwaltung: Verwaltung()), type: .after_show_ticket, nth: 1, verwaltung: verwaltung).ticketHTML(verwaltung: verwaltung)
-				let renderer = CustomPrintPageRenderer()
-				renderer.exportHTMLContentToPDF(HTMLContent: str)
-			}) {
-				Text("render ticket")
-			}
+//			Button(action: {
+//				let str =  Ticket(owner: Person(name: "Benedict", email: "***REMOVED***", verwaltung: Verwaltung()), type: .after_show_ticket, nth: 1, verwaltung: verwaltung).ticketHTML(verwaltung: verwaltung)
+//				let renderer = CustomPrintPageRenderer()
+//				renderer.exportHTMLContentToPDF(HTMLContent: str)
+//			}) {
+//				Text("render ticket")
+//			}
 
 
 			Button(action: {
@@ -71,7 +71,7 @@ struct DebugView: View {
 				Text("Button1")
 			}
 
-
+			#if targetEnvironment(macCatalyst)
 			Button(action: {
 				DispatchQueue.global(qos: .userInitiated).async {
 					zahlungsVerarbeiter = ZahlungsVerarbeiter(v: verwaltung, ao: ao)
@@ -79,6 +79,7 @@ struct DebugView: View {
 			}) {
 				Text("Zahlung Importieren")
 			}.buttonStyle(.borderedProminent)
+			#endif
 
 #if canImport(CodeScanner)
 			Button(action: {

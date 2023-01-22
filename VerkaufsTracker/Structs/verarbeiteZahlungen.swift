@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftCSV
 
 // Betrag in cent
 fileprivate func uploadZahlung(person: Person, betrag: Int, notiz: String) -> Bool{
@@ -52,5 +53,110 @@ class ZahlungsVerarbeiter: ObservableObject {
 		ao.log("Starte Import")
 		ao.setPrompt("CSV auswählen")
 	}
+
+	func verarbeiteCSV(str: String) {
+		DispatchQueue.global(qos: .default).async {
+			do {
+				let csv = try EnumeratedCSV(string: str, delimiter: .semicolon, loadColumns: false)
+				try csv.enumerateAsArray(startAt: 1,rowLimit: nil) { element in
+					self.verarbeiteReihe(arr: element)
+				}
+				
+			} catch {
+				print("csv error: \(error)")
+			}
+		}
+	}
+
+	func verarbeiteReihe(arr: [String]) {
+		var hasher = Hasher()
+		hasher.combine(arr)
+		let hash = hasher.finalize()
+		if(arr.count != 17) {
+			ao.log("Spaltenzahl stimmt nicht \(arr.count)")
+			return
+		}
+
+		var kommentar = ""
+
+		var person: Person? = nil
+		if let formId = NSRegularExpression.getMatches(regex: "[ABCDEF][175963][SEFWQX][MNDQS5][W3YJ52]", inputText: arr[4].uppercased()).first {
+			if let pM = v.personen.first(where: {$0.formID == formId}) {
+				person = pM
+			} else {
+				// Form id nicht richtig
+				kommentar += "formId nicht gefunden"
+			}
+		} else {
+			// Der Verwendungszwecke enthält keine FormId
+			kommentar += "keine FormId im Zweck"
+		}
+
+
+		if arr[15] != "EUR" {
+			kommentar += "falsche Währung: \(arr[15])"
+		}
+		let betragStr = arr[14]
+		let betrag: Int
+		if betragStr.contains("-") {
+			kommentar += "betragNegativ: \(arr[14])"
+			betrag = -1
+		} else {
+			let split = betragStr.split(separator: ",")
+			let euro = Int(split[0])
+			let cent = Int(split[1])
+
+			if euro != nil && cent != nil {
+				betrag = 100 * euro! + cent!
+			} else {
+				kommentar += "betrag invalide: \(arr[14])"
+				betrag = -1
+			}
+		}
+
+		let valid = betrag > 0 && person != nil
+
+		let eintrag = Eintrag(datum: arr[1],
+							  buchungstext: arr[3],
+							  zweck: arr[4],
+							  zahlungsPerson: arr[11],
+							  betrag: arr[14],
+							  info: arr[16],
+							  erkanntePerson: person,
+							  erkannterBetrag: betrag,
+							  kommentar: kommentar,
+							  valid: valid)
+		self.eintraege.append(eintrag)
+	}
+
+	struct Eintrag {
+		var datum: String
+		var buchungstext: String
+		var zweck: String
+		var zahlungsPerson: String
+		var betrag: String
+		var info: String
+
+		var erkanntePerson: Person?
+		var erkannterBetrag: Int
+
+		var kommentar: String
+		var valid: Bool //ob die automatischen werte stimmen könnten
+	}
+
+	@Published var eintraege: [Eintrag] = []
+
+	func ignorieren() {
+
+	}
+
+	func spaeter() {
+
+	}
+
+	func hinzufuegen() {
+
+	}
+
 
 }

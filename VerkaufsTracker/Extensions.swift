@@ -60,4 +60,53 @@ extension UIApplication {
 		sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
 	}
 }
+
+extension NSRegularExpression {
+	static func getMatches(regex: String, inputText: String) -> [String] {
+
+		guard let regex = try? NSRegularExpression(pattern: regex) else {
+			return []
+		}
+		let results = regex.matches(in: inputText,
+								range: NSRange(inputText.startIndex..., in: inputText))
+
+		let finalResult = results.map { match in
+
+			return (0..<match.numberOfRanges).map { range -> String in
+
+				let rangeBounds = match.range(at: range)
+				guard let range = Range(rangeBounds, in: inputText) else {
+					return ""
+				}
+				return String(inputText[range])
+			}
+		}.filter { !$0.isEmpty }
+
+		var allMatches: [String] = []
+
+		// Iterate over the final result which includes all the matches and groups
+		// We will store all the matching strings
+		for result in finalResult {
+			for (index, resultText) in result.enumerated() {
+
+				// Skip the match. Go to the next elements which represent matching groups
+				if index == 0 {
+					continue
+				}
+				allMatches.append(resultText)
+			}
+		}
+
+		return allMatches
+	}
+
+	convenience init(_ pattern: String) {
+			do {
+				try self.init(pattern: pattern)
+			} catch {
+				preconditionFailure("Illegal regular expression: \(pattern).")
+			}
+		}
+}
+
 #endif

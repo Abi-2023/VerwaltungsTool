@@ -32,6 +32,7 @@ struct ZahlungsImportOptionen: View {
 								throw MyError.runtimeError("Datei konnte nicht gelesen werden")
 							}
 							print(fileStr)
+							zahlungsVerarbeiter.verarbeiteCSV(str: fileStr)
 
 						} catch {
 							print("error: \(error)")
