@@ -11,7 +11,8 @@ import SwiftSMTP
 struct DebugView: View {
 	@ObservedObject var verwaltung: Verwaltung
 	@Binding var state: AppState
-
+	@Binding var zahlungsVerarbeiter: ZahlungsVerarbeiter?
+	@State var ao: AktionObserver
 
 	var body: some View {
 		VStack (spacing: 15){
@@ -69,6 +70,15 @@ struct DebugView: View {
 			}) {
 				Text("Button1")
 			}
+
+
+			Button(action: {
+				DispatchQueue.global(qos: .userInitiated).async {
+					zahlungsVerarbeiter = ZahlungsVerarbeiter(v: verwaltung, ao: ao)
+				}
+			}) {
+				Text("Zahlung Importieren")
+			}.buttonStyle(.borderedProminent)
 
 #if canImport(CodeScanner)
 			Button(action: {

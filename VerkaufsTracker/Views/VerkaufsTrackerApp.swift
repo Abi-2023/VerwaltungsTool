@@ -22,6 +22,7 @@ struct VerkaufsTrackerApp: App {
 		}
 	}
 	@ObservedObject var aktionObserver: AktionObserver = AktionObserver()
+	@State var zahlungsVerarbeiter: ZahlungsVerarbeiter? = nil
 
 	var body: some Scene {
 		WindowGroup {
@@ -31,6 +32,13 @@ struct VerkaufsTrackerApp: App {
 						CloudView(v: verwaltung)
 					}else if aktionObserver.aktiv{
 						AktionLogView(ao: aktionObserver)
+
+						if let zahlungsVerarbeiter {
+							ZahlungsImportOptionen(zahlungsVerarbeiter: zahlungsVerarbeiter)
+								.padding()
+								.background(.gray)
+						}
+
 					} else if state == .scanner{
 #if canImport(CodeScanner)
 						ScannerView(verwaltung: verwaltung, state: $state)
@@ -42,7 +50,7 @@ struct VerkaufsTrackerApp: App {
 						case .personenView:
 							PersonenView(verwaltung: verwaltung, state: $state, selectMode: $selectMode, selectedPersonen: $selectedPersonen)
 						case .debug:
-							DebugView(verwaltung: verwaltung, state: $state)
+							DebugView(verwaltung: verwaltung, state: $state,zahlungsVerarbeiter: $zahlungsVerarbeiter, ao: aktionObserver)
 						case .aktionen:
 							if selectedPersonen.isEmpty {
 								AktionenView(verwaltung: verwaltung, selectedPersonen: $selectedPersonen, aktionObserver: aktionObserver)
