@@ -11,7 +11,7 @@ struct AktionenView: View {
 	@ObservedObject var verwaltung: Verwaltung
 	@Binding var selectedPersonen: [Person]
 	@State var aktionObserver: AktionObserver
-
+	@Binding var zahlungsVerarbeiter: ZahlungsVerarbeiter?
 	@State var unlockVerteileItems = false
 
 	var body: some View {
@@ -30,6 +30,35 @@ struct AktionenView: View {
 			}
 
 			HStack{
+				Button(role: .destructive,action: {
+					if unlockVerteileItems {
+						DispatchQueue.global(qos: .default).async {
+							Aktion.verteileItems(verwaltung: verwaltung, ao: aktionObserver)
+						}
+						unlockVerteileItems = false
+					} else {
+						unlockVerteileItems = true
+					}
+				}) {
+					Text("Verteile Items")
+				}
+				.unlockedStyle(unlockVerteileItems)
+				.disabled(true)
+				Spacer()
+			}
+
+			HStack {
+#if targetEnvironment(macCatalyst)
+				Button(action: {
+					zahlungsVerarbeiter = ZahlungsVerarbeiter(v: verwaltung, ao: aktionObserver)
+				}) {
+					Text("Zahlung Importieren")
+				}.buttonStyle(.bordered)
+#endif
+				Spacer()
+			}
+
+			HStack{
 				Button(action: {
 					DispatchQueue.global(qos: .default).async {
 						Aktion.fetchTransaktionen(verwaltung: verwaltung, ao: aktionObserver)
@@ -41,24 +70,10 @@ struct AktionenView: View {
 
 				Text("\(verwaltung.lastFetchTransaktionen.formatted(.dateTime))")
 			}
-            
-            HStack{
-                Button(role: .cancel,action: {
-                    if unlockVerteileItems {
-						DispatchQueue.global(qos: .default).async {
-							Aktion.verteileItems(verwaltung: verwaltung, ao: aktionObserver)
-						}
-                        unlockVerteileItems = false
-                    } else {
-                        unlockVerteileItems = true
-                    }
-                }) {
-                    Text("Verteile Items")
-                }
-                .unlockedStyle(unlockVerteileItems)
-                Spacer()
-            }
 
+
+			Divider()
+			
 			HStack{
 				Button(role: .cancel,action: {
 					DispatchQueue.global(qos: .default).async {
@@ -66,7 +81,7 @@ struct AktionenView: View {
 					}
 				}) {
 					Text("Prüfe auf Fehler")
-				}
+				}.buttonStyle(.bordered)
 				Spacer()
 			}
 		}.padding()

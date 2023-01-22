@@ -71,16 +71,6 @@ struct DebugView: View {
 				Text("Button1")
 			}
 
-			#if targetEnvironment(macCatalyst)
-			Button(action: {
-				DispatchQueue.global(qos: .userInitiated).async {
-					zahlungsVerarbeiter = ZahlungsVerarbeiter(v: verwaltung, ao: ao)
-				}
-			}) {
-				Text("Zahlung Importieren")
-			}.buttonStyle(.borderedProminent)
-			#endif
-
 #if canImport(CodeScanner)
 			Button(action: {
 				state = .scanner
