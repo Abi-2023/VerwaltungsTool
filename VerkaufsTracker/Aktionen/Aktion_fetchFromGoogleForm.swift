@@ -71,6 +71,10 @@ extension Aktion {
 			person.extraFields[.pulli_l] = String(pulli_l!)
 			person.extraFields[.pulli_xl] = String(pulli_xl!)
 
+			if(type(of: person) == Q2er.self) {
+				person.extraFields[.Lied] = e[safe: 3]
+			}
+
 			person.extraFields[.hatFormEingetragen] = "1"
 			ao.log("Für \(person.name) eingetragen")
 			valid += 1
