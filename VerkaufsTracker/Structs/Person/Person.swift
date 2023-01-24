@@ -9,7 +9,7 @@ import Foundation
 import SwiftSMTP
 
 enum extraFields: String, Codable {
-	case sendFormEmail, hatFormEingetragen, pulli_xs, pulli_s, pulli_l, pulli_m, pulli_xl, sendBezahlEmail
+	case sendFormEmail, hatFormEingetragen, pulli_xs, pulli_s, pulli_l, pulli_m, pulli_xl, sendBezahlEmail, sendAngekommenEmail
 }
 
 class Person: Identifiable, Codable, Hashable {
@@ -103,6 +103,10 @@ class Person: Identifiable, Codable, Hashable {
 	}
 
 	func generateFormEmail(ao: AktionObserver? = nil) -> Mail? {
+		return nil
+	}
+
+	func generateAngekommenEmail(v: Verwaltung, ao: AktionObserver? = nil) -> Mail? {
 		return nil
 	}
 
