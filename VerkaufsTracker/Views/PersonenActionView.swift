@@ -137,6 +137,35 @@ struct PersonenActionView: View {
 								.unlockedStyle(unlockSendBezahl)
 								.disabled(!verwaltung.finalPrice)
 							}
+
+							VStack(spacing: 30){
+								HStack(spacing: 10) {
+									Toggle(isOn: $resendAngekommen, label: {
+										VStack(alignment: .leading, spacing: 10){
+											Text("An: Sende an alle, ungeachtet, ob jemand die Mail schon bekommen hat oder nicht")
+												.foregroundColor(resendAngekommen ? .blue : .gray)
+											Text("Aus: Sende nur an die Personen, die die Mail noch nicht bekommen haben")
+												.foregroundColor(!resendAngekommen ? .blue : .gray)
+										}
+									})
+									Spacer()
+									Button(role: .destructive, action: {
+										if unlockSendAngekommen {
+											DispatchQueue.global(qos: .default).async {
+												Aktion.sendeAngekommen(personen: selectedPersonen, verwaltung: verwaltung, ao: aktionObserver, resend: resendAngekommen)
+											}
+											unlockSendAngekommen = false
+										} else {
+											unlockSendAngekommen = true
+										}
+									}) {
+										Text("Sende Angekommen")
+									}
+									.unlockedStyle(unlockSendAngekommen)
+								}
+								Divider()
+									.padding(.bottom, 30)
+							}
 							
 							Divider()
 							
