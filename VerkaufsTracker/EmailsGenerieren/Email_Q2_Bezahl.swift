@@ -85,7 +85,7 @@ extension Q2er {
 				if pulli_l != 0 {
 					let GK = "L"
 					tableContent += """
-<tr><td style="padding: 0 15px 0 0;" align="left"></td><td style="padding: 0 " align="left"><i>\(pulli_xl)x \(pulliGRPosition.replacingOccurrences(of: "§", with: GK))</i></td><th style="padding: 0 0 0 15px;"align="right"></th></tr>
+<tr><td style="padding: 0 15px 0 0;" align="left"></td><td style="padding: 0 " align="left"><i>\(pulli_l)x \(pulliGRPosition.replacingOccurrences(of: "§", with: GK))</i></td><th style="padding: 0 0 0 15px;"align="right"></th></tr>
 """
 				}
 
