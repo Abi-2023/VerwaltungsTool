@@ -27,10 +27,6 @@ extension Lehrer {
 			extraText = "Außerdem werden Sie noch \(pulliText) erhalten."
 		}
 
-		// TODO: Text erstellen
-		let alternativeText = """
-  """
-
 
 
 
@@ -211,7 +207,6 @@ extension Lehrer {
 			from: EmailManager.senderMail,
 			to: [mailUser],
 			subject: subject,
-			text: alternativeText,
 			attachments: attachments
 		)
 

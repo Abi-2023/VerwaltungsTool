@@ -17,16 +17,6 @@ extension Q2er {
 		
 		let subject = "Deine Bestellungen für die Abi-Feierlichkeiten"
 
-		// TODO: Text überschreiben
-		let textContent = """
-   Hallo \(vorname),
-
-   Viele Grüße,
-   das Orga-Team
-
-   [Diese Email wurde automatisch generiert und versendet.]
-   """
-
 		var tableContent = ""
 
 		for itemType in [Item.ball_ticket, .after_show_ticket, .buch, .pulli] {
@@ -45,7 +35,6 @@ extension Q2er {
 
 
 			if itemType == .pulli {
-				// TODO: haben wir unendlich pullis also ist wunsche == bestellung
 
 				let pulli_xs = Int(self.extraFields[.pulli_xs] ?? "0") ?? 0
 				let pulli_s = Int(self.extraFields[.pulli_s] ?? "0") ?? 0
@@ -99,8 +88,6 @@ extension Q2er {
 		}
 
 		var zusatzText = "<br></br> Leider müssen wir dir mitteilen, dass aufgrund der begrenzten Kapatzitäten der ***REMOVED*** nicht genug Tickets verfügbar waren, damit Du Deine gesammte Wunschanzahl erhälst."
-
-		// TODO: wenn wir nicht unendlich pullis bücher haben
 		
 		if wuenschBestellungen[.ball_ticket, default: 0] != bestellungen[.ball_ticket, default: 0] {
 			if wuenschBestellungen[.after_show_ticket, default: 0] != bestellungen[.after_show_ticket, default: 0] {
@@ -120,7 +107,6 @@ extension Q2er {
 
 
 
-		// TODO: fix dark mode
 		let htmlTemplate = """
  <!doctype html><html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office"><head><title></title><!--[if !mso]><!--><meta http-equiv="X-UA-Compatible" content="IE=edge"><!--<![endif]--><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark"/><meta name="supported-color-schemes" content="light dark"/> <style type="text/css"> @media (prefers-color-scheme: dark){.darkmode{background-color: #111111;}.darkmode h1, .darkmode p, .darkmode span, .darkmode a{color: #ffffff;}}</style><style type="text/css">#outlook a { padding:0; }
 		   body { margin:0;padding:0;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%; }
@@ -177,7 +163,6 @@ extension Q2er {
 		return Mail(from: EmailManager.senderMail,
 					to: [mailUser],
 					subject: subject,
-					text: textContent,
 					attachments: [htmlAttachment]
 		)
 	}

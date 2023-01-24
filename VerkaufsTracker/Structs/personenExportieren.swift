@@ -17,7 +17,7 @@ struct PersonenExport: Codable {
 
 		let id: String
 		let name: String
-		var tickets: Int //TODO: zurück zu let
+		var tickets: Int
 		var wuensche: [String]
 
 		init(id: String, name: String, tickets: Int) {

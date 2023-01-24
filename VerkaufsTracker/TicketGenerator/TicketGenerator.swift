@@ -15,7 +15,6 @@ extension Ticket {
 		let nameMap = [Item.ball_ticket : "ball_ticket", Item.after_show_ticket : "after_show_ticket"]
 		let ticketName = "\(nameMap[itemType, default: "unbekannt"])\(nth).pdf"
 
-		// TODO: PDF komprimieren
 		let dataAttachment = Attachment(
 			data: ticketPdfData,
 			mime: "application/pdf",

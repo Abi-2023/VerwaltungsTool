@@ -13,8 +13,6 @@ extension Aktion {
 
 	// nurVoll: sendet nur, wenn die anzahl der Tickets gleich der Anzahl der bestellten Tickets ist+
 	// wenn nicht: muss vorher tickets generieren und auffüllen
-	// TODO: maybe vor dem run hier auffüllen
-	// aber unsicher, ob man das getrennt braucht
 	static public func sendeTickets(personen: [Person], verwaltung v: Verwaltung, ao: AktionObserver, resend: Bool, nurVoll: Bool) {
 		ao.activate(name: "sende Ticket")
 

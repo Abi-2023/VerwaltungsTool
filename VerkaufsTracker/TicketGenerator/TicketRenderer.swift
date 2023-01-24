@@ -11,8 +11,6 @@ import UIKit
 import QRCodeGenerator
 
 extension Ticket {
-	// TODO: ao und Unbekannt / nicht ball oder asp
-	// TODO: Einlasszeit
 	func ticketHTML(verwaltung v: Verwaltung) -> String {
 		let vt = VerifyTicket()
 		let qrText = vt.createToken(ticketId: self.id)

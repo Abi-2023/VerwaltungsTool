@@ -50,7 +50,6 @@ extension Verwaltung {
 				guard let data = data else { return }
 
 				if responseCode == 200 {
-					//TODO: verabeiten
 					let decoder = JSONDecoder()
 					do {
 						let wrapper = try decoder.decode(CloudWrapper.self, from: data)
@@ -86,7 +85,6 @@ extension Verwaltung {
 		task.resume()
 	}
 
-	// TODO: AO Log
 	func uploadToCloud(ao: AktionObserver? = nil) {
 		do {
 			let encoder = JSONEncoder()

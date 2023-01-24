@@ -8,8 +8,6 @@
 import Foundation
 
 extension Aktion {
-
-	// TODO: schöner machen und bessere logs
 	static func fetchTransaktionen(verwaltung v: Verwaltung, ao: AktionObserver) {
 		ao.activate(name: "fetch Transaktionen")
 		ao.log("clear Transaktionsdata")

@@ -31,7 +31,6 @@ enum Item: Codable, CaseIterable{
 		][self]!
 	}
 
-	// TODO: Echte Preise
 	var rechnungsPosition: String {
 		return [
 			Item.ball_ticket: "Ball Ticket (\(preis/100)€)",

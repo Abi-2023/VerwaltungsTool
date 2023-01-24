@@ -17,10 +17,6 @@ extension Lehrer {
 
 		let subject = "Ihre Bestellung für die Abi-Feierlichkeiten der Q2"
 
-		// TODO: Text überschreiben
-		let textContent = """
-   """
-
 		var tableContent = ""
 
 		for itemType in [Item.ball_ticket, .after_show_ticket, .buch, .pulli] {
@@ -39,8 +35,6 @@ extension Lehrer {
 
 
 			if itemType == .pulli {
-				// TODO: haben wir unendlich pullis also ist wunsche == bestellung
-
 				let pulli_xs = Int(self.extraFields[.pulli_xs] ?? "0") ?? 0
 				let pulli_s = Int(self.extraFields[.pulli_s] ?? "0") ?? 0
 				let pulli_m = Int(self.extraFields[.pulli_m] ?? "0") ?? 0
@@ -94,8 +88,6 @@ extension Lehrer {
 
 		var zusatzText = "<br></br> Leider müssen wir Ihnen mitteilen, dass aufgrund der begrenzten Kapatzitäten der ***REMOVED*** nicht genug Tickets verfügbar waren, um jedem Wunsch gerecht zu werden. "
 
-		// TODO: wenn wir nicht unendlich pullis bücher haben
-
 		if wuenschBestellungen[.ball_ticket, default: 0] != bestellungen[.ball_ticket, default: 0] {
 			if wuenschBestellungen[.after_show_ticket, default: 0] != bestellungen[.after_show_ticket, default: 0] {
 				// BEIDE
@@ -114,7 +106,6 @@ extension Lehrer {
 
 
 
-		// TODO: fix dark mode
 		let htmlTemplate = """
  <!doctype html><html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office"><head><title></title><!--[if !mso]><!--><meta http-equiv="X-UA-Compatible" content="IE=edge"><!--<![endif]--><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark"/><meta name="supported-color-schemes" content="light dark"/> <style type="text/css"> @media (prefers-color-scheme: dark){.darkmode{background-color: #111111;}.darkmode h1, .darkmode p, .darkmode span, .darkmode a{color: #ffffff;}}</style><style type="text/css">#outlook a { padding:0; }
            body { margin:0;padding:0;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%; }
@@ -171,7 +162,6 @@ extension Lehrer {
 		return Mail(from: EmailManager.senderMail,
 					to: [mailUser],
 					subject: subject,
-					text: textContent,
 					attachments: [htmlAttachment]
 		)
 	}
