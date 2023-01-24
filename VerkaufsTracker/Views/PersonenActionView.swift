@@ -252,7 +252,6 @@ struct PersonenActionView: View {
                                 }
                             }
                             
-                            Divider()
 						}.padding(5)
 					}
 				}
