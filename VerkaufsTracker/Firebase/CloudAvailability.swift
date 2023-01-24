@@ -48,7 +48,7 @@ struct CloudStatus: Codable {
 	var lastConnectionName: String? = CloudStatus.deviceName()
 
 	func allowedToInteract() -> Bool {
-		return connectedUser == nil || connectedUser == CloudStatus.deviceId() || lastConnection.timeIntervalSinceNow > 15*60 //15 minuten
+		return connectedUser == nil || connectedUser == CloudStatus.deviceId() || lastConnection.timeIntervalSinceNow < -15*60 //15 minuten
 	}
 
 	static func deviceId() -> String{
