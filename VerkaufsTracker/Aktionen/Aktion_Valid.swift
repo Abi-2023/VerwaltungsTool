@@ -30,8 +30,7 @@ extension Aktion {
 		}
 
 
-		// MARK: - Pulli Größen Richtig
-		// bestellungen <= wünsche
+		// MARK: - bestellungen <= wünsche
 		// nicht zu viele bestellungen wenn unter wünsche
 		for p in v.personen {
 			if p.bestellungen[.pulli, default: 0] != p.wuenschBestellungen[.pulli, default: 0] {
@@ -50,6 +49,16 @@ extension Aktion {
 
 			if p.bestellungen[.after_show_ticket, default: 0] > p.wuenschBestellungen[.after_show_ticket, default: 0] {
 				ao.log("!\(p.name) hat zu viele ASP-Tickets")
+				error = true
+			}
+		}
+
+
+		// MARK: - Innerhalb der Kapazitaetsgrenzen
+		for item in Item.allCases {
+			let bestellungen = v.personen.map({$0.bestellungen[item, default: 0]}).reduce(0, +)
+			if bestellungen > item.verfuegbar {
+				ao.log("\(item.displayName) hat zu viele Bestellungen \(bestellungen) / \(item.verfuegbar)")
 				error = true
 			}
 		}
