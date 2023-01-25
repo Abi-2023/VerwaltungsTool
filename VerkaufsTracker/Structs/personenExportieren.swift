@@ -32,6 +32,9 @@ struct PersonenExport: Codable {
 		self.personen = []
 		for person in v.personen {
 			let tickets = person.tickets.filter({$0.itemType == .ball_ticket}).count
+			if(tickets != person.bestellungen[.ball_ticket, default: 0]) {
+				fatalError("Für: \(person.name) wurden noch nicht alle bestellten Tickets generiert")
+			}
 			self.personen.append(Person(id: person.formID, name: person.name, tickets: tickets))
 		}
 	}
