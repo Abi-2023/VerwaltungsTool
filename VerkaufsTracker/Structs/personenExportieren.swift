@@ -31,8 +31,8 @@ struct PersonenExport: Codable {
 	init(v: Verwaltung) {
 		self.personen = []
 		for person in v.personen {
-			//TODO: tickets = person.tickets.filter({$0.itemType == .ball_ticket}).count
-			self.personen.append(Person(id: person.formID, name: person.name, tickets: Int.random(in: (1...9))))
+			let tickets = person.tickets.filter({$0.itemType == .ball_ticket}).count
+			self.personen.append(Person(id: person.formID, name: person.name, tickets: tickets))
 		}
 	}
 
