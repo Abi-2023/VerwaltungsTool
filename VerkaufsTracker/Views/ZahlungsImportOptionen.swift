@@ -41,11 +41,32 @@ struct ZahlungsImportOptionen: View {
 						}
 
 						let data = try Data(contentsOf: file)
-						guard let fileStr = String(data: data, encoding: .utf8) else {
-							throw MyError.runtimeError("Datei konnte nicht gelesen werden")
+						if let fileStr = String(data: data, encoding: .utf8) {
+							zahlungsVerarbeiter.verarbeiteCSV(str: fileStr)
+							return
 						}
-						zahlungsVerarbeiter.verarbeiteCSV(str: fileStr)
 
+						if let fileStr = String(data: data, encoding: .nonLossyASCII) {
+							zahlungsVerarbeiter.verarbeiteCSV(str: fileStr)
+							return
+						}
+
+						if let fileStr = String(data: data, encoding: .ascii) {
+							zahlungsVerarbeiter.verarbeiteCSV(str: fileStr)
+							return
+						}
+
+						if let fileStr = String(data: data, encoding: .utf16) {
+							zahlungsVerarbeiter.verarbeiteCSV(str: fileStr)
+							return
+						}
+
+						if let fileStr = String(data: data, encoding: .unicode) {
+							zahlungsVerarbeiter.verarbeiteCSV(str: fileStr)
+							return
+						}
+
+						throw MyError.runtimeError("Datei konnte nicht gelesen werden")
 					} catch {
 						print("error: \(error)")
 					}
