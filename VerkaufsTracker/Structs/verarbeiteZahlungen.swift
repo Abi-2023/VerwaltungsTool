@@ -125,7 +125,7 @@ class ZahlungsVerarbeiter: ObservableObject {
 		let betrag: Int
 		if betragStr.contains("-") {
 			kommentar += "betragNegativ: \(arr[14])"
-			betrag = -1
+			betrag = 0
 		} else {
 			let split = betragStr.split(separator: ",")
 			let euro = Int(split[0])
@@ -135,7 +135,7 @@ class ZahlungsVerarbeiter: ObservableObject {
 				betrag = 100 * euro! + cent!
 			} else {
 				kommentar += "betrag invalide: \(arr[14])"
-				betrag = -1
+				betrag = 0
 			}
 		}
 
