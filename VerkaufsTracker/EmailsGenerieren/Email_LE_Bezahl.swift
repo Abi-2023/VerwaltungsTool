@@ -29,7 +29,7 @@ extension Lehrer {
   <tr>
    <td style="padding: 0 15px 0 0;" align="left">\(value)x</td>
    <td style="padding: 0 " align="left">\(itemType.rechnungsPosition)</td>
-   <th style="padding: 0 0 0 15px;"align="right">\(preisFuerItem(item: itemType, count: value).geldStr)</th>
+   <th style="padding: 0 0 0 15px;"align="right">\(Person.preisFuerItem(item: itemType, count: value).geldStr)</th>
   </tr>
   """
 
