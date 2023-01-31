@@ -8,6 +8,7 @@
 import Foundation
 
 let pulliGRPosition = "Pulli §" //§ = Größe z.B. XL
+let bezahlDeadline = "31.03.2023"
 
 enum Item: Codable, CaseIterable{
 	case ball_ticket, after_show_ticket, pulli, buch
