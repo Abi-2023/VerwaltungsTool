@@ -60,6 +60,17 @@ struct DebugView: View {
 				Text("Button1")
 			}
 
+			Button(action: {
+				for item in Item.allCases {
+					print("----\(item.displayName)")
+					for i in (0...10) {
+						print("\(i)x \(Person.preisFuerItem(item: item, count: i).geldStr)")
+					}
+				}
+			}) {
+				Text("Preise Style")
+			}
+
 #if canImport(CodeScanner)
 			Button(action: {
 				state = .scanner

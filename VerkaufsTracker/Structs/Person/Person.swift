@@ -55,14 +55,14 @@ class Person: Identifiable, Codable, Hashable {
 		return v.transaktionen.filter({$0.personId == self.id}).map({$0.betrag}).reduce(0, +)
 	}
 
-	func preisFuerItem(item: Item, count: Int) -> Int {
+	static func preisFuerItem(item: Item, count: Int) -> Int {
 		return item.preis * count
 	}
 
 	var zuzahlenderBetrag: Int {
 		var tmpBetrag = 0
 		for item in bestellungen {
-			tmpBetrag += preisFuerItem(item: item.key, count: item.value)
+			tmpBetrag += Person.preisFuerItem(item: item.key, count: item.value)
 		}
 		return tmpBetrag
 	}
