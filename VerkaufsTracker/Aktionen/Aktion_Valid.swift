@@ -13,6 +13,10 @@ extension Aktion {
 		ao.activate(name: "Validate")
 		ao.setPrompt("Finde Fehler")
 
+		for p in v.personen {
+			print("\(p.name), \(p.formID), \(p.wuenschBestellungen[.ball_ticket, default: 0]), \(p.wuenschBestellungen[.after_show_ticket, default: 0]), \(p.wuenschBestellungen[.buch, default: 0]), , \(p.wuenschBestellungen[.pulli, default: 0]), \(p.extraFields[.pulli_xs, default: "0"]), \(p.extraFields[.pulli_s, default: "0"]), \(p.extraFields[.pulli_m, default: "0"]), \(p.extraFields[.pulli_l, default: "0"]), \(p.extraFields[.pulli_xl, default: "0"])")
+		}
+
 		// MARK: - Pulli Größen Richtig
 		for person in v.personen {
 			let pulli_xs = Int(person.extraFields[.pulli_xs, default: "0"]) ?? 0
