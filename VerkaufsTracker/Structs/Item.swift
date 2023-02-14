@@ -8,7 +8,7 @@
 import Foundation
 
 let pulliGRPosition = "Pulli §" //§ = Größe z.B. XL
-let bezahlDeadline = "31.03.2023"
+let bezahlDeadline = "15.03.2023"
 
 enum Item: Codable, CaseIterable{
 	case ball_ticket, after_show_ticket, pulli, buch
@@ -16,10 +16,10 @@ enum Item: Codable, CaseIterable{
 	// in cents
 	var preis: Int {
 		return [
-			Item.ball_ticket: 5000,
+			Item.ball_ticket: 6000,
 			Item.after_show_ticket: 1000,
-			Item.pulli: 3000,
-			Item.buch: 2000
+			Item.pulli: 3500,
+			Item.buch: 1800
 		][self]!
 	}
 
