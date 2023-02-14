@@ -31,11 +31,13 @@ struct PersonenExport: Codable {
 	init(v: Verwaltung) {
 		self.personen = []
 		for person in v.personen {
-			let tickets = person.tickets.filter({$0.itemType == .ball_ticket}).count
-			if(tickets != person.bestellungen[.ball_ticket, default: 0]) {
-				fatalError("Für: \(person.name) wurden noch nicht alle bestellten Tickets generiert")
+			let tickets = person.wuenschBestellungen[.ball_ticket, default: 0]//tickets.filter({$0.itemType == .ball_ticket}).count
+//			if(tickets != person.bestellungen[.ball_ticket, default: 0]) {
+//				fatalError("Für: \(person.name) wurden noch nicht alle bestellten Tickets generiert")
+//			}
+			if tickets > 0 {
+				self.personen.append(Person(id: person.formID, name: person.name, tickets: tickets))
 			}
-			self.personen.append(Person(id: person.formID, name: person.name, tickets: tickets))
 		}
 	}
 
