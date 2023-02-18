@@ -43,7 +43,7 @@ enum Item: Codable, CaseIterable{
 
 	var verfuegbar: Int {
 		return [
-			Item.ball_ticket: 600,
+			Item.ball_ticket: 550,
 			Item.after_show_ticket: 350,
 			Item.pulli: Int.max,
 			Item.buch: Int.max
