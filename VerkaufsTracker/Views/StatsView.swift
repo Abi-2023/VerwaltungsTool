@@ -14,27 +14,24 @@ struct StatsView: View {
 	
 	
 	var body: some View {
-		if #available(iOS 16, *), ProcessInfo.processInfo.operatingSystemVersion.majorVersion >= 16 {
-
-			VStack(spacing: 30){
-				Text("Statistiken").font(.largeTitle.weight(.heavy))
-				if UIDevice.current.userInterfaceIdiom == .phone{
-					ScrollView(showsIndicators: false){
-						VStack(spacing: 15){
-							StatsViewComponents(verwaltung: verwaltung)
-						}
-					}
-				} else {
-					ScrollView(showsIndicators: false){
-						Spacer()
-						HStack{
-							StatsViewComponents(verwaltung: verwaltung)
-						}
-						Spacer()
+		VStack(spacing: 30){
+			Text("Statistiken").font(.largeTitle.weight(.heavy))
+			if UIDevice.current.userInterfaceIdiom == .phone{
+				ScrollView(showsIndicators: false){
+					VStack(spacing: 15){
+						StatsViewComponents(verwaltung: verwaltung)
 					}
 				}
-			}.padding()
-		}
+			} else {
+				ScrollView(showsIndicators: false){
+					Spacer()
+					HStack{
+						StatsViewComponents(verwaltung: verwaltung)
+					}
+					Spacer()
+				}
+			}
+		}.padding()
 	}
 }
 
