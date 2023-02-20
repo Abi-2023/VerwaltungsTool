@@ -18,6 +18,11 @@ extension Aktion {
 		func processTransaktionsEntry(entry e: [String], range: String) -> Bool{
 			let user_form_id = e[safe: 0]
 			let betrag = e[safe: 1]
+			let notiz = e[safe: 2]
+
+			if notiz ?? "-" == "-" {
+				return true
+			}
 
 			if user_form_id == nil || betrag == nil {
 				ao.log("error parsing entry: \(user_form_id ?? "?"), \(betrag ?? "?"), \(range)")
@@ -51,7 +56,7 @@ extension Aktion {
 		let wait = DispatchGroup()
 
 		let ranges: [String] = [
-			"'Formularantworten 1'!B2:C500"
+			"'Formularantworten 1'!B2:D500"
 		]
 		for range in ranges {
 			ao.log("---\(range)")
