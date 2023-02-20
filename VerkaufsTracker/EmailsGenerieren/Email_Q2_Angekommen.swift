@@ -23,11 +23,11 @@ extension Q2er {
 
 		var extraText = ""
 		if buecher > 0 && pullis > 0 {
-			extraText = "\(buecherText) und \(pulliText) werden bestellt und sobald wie möglich verteilt."
+			extraText = "\(buecherText) und \(pulliText) werden bestellt und so bald wie möglich verteilt."
 		} else if buecher > 0 {
-			extraText = "\(buecherText) \(buecher > 1 ? "werden" : "wird") bestellt und sobald wie möglich verteilt."
+			extraText = "\(buecherText) \(buecher > 1 ? "werden" : "wird") bestellt und so bald wie möglich verteilt."
 		} else if pullis > 0 {
-			extraText = "\(pulliText) \(pullis > 1 ? "werden" : "wird") bestellt und sobald wie möglich verteilt."
+			extraText = "\(pulliText) \(pullis > 1 ? "werden" : "wird") bestellt und so bald wie möglich verteilt."
 		}
 
 		let ball = bestellungen[.ball_ticket, default: 0]
@@ -52,7 +52,7 @@ extension Q2er {
 		}
 
 		if ball >= 1 {
-			ballASPtext += " Wir freuen uns mit Dir am Dienstag, den 21.06.2023, gemeinsam unseren Abschluss zu feiern."
+			ballASPtext += " Wir freuen uns, mit Dir am Dienstag, den 21.06.2023, gemeinsam unseren Abschluss zu feiern."
 		}
 
 		let text = """
