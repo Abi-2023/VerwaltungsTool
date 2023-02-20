@@ -25,6 +25,7 @@ struct AktionenView: View {
 				}) {
 					Text("Fetch Google Form")
 				}.buttonStyle(.bordered)
+                    .disabled(true)
 				Spacer()
 				Text("\(verwaltung.lastFetchForm.formatted(.dateTime))")
 			}
