@@ -193,7 +193,11 @@ struct BestellungenPieCharts: View{
 			}.chartForegroundStyleScale([
 				"Bezahlung": .blue, "Spende": .purple, "Offen": .red, "Beglichen": .green
 			])
-			.padding()
+            VStack{
+                Text("Bezahlt: " + "\(((verwaltung.insgGezahlt - verwaltung.zuVielGezahlt)/100).formatted(.currency(code: "EUR")))")
+                Text("Offen: " + "\((verwaltung.offenerBetrag/100).formatted(.currency(code: "EUR")))")
+            }
+            .padding()
 		}
 
 		PieChart(title: "Vollständig gezahlte Personen", statement: "Gezahlt", counterStatement: "Ausstehend", value: verwaltung.gezahltePersonen, capacityValue: verwaltung.personenMitBestellung)
