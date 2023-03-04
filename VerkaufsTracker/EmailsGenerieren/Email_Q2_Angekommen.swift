@@ -52,7 +52,7 @@ extension Q2er {
 		}
 
 		if ball >= 1 {
-			ballASPtext += " Wir freuen uns, mit Dir am Dienstag, den 21.06.2023, gemeinsam unseren Abschluss zu feiern."
+			ballASPtext += " Wir freuen uns, mit Dir am Mittwoch, den 21.06.2023, gemeinsam unseren Abschluss zu feiern."
 		}
 
 		let text = """

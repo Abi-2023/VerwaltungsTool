@@ -50,7 +50,7 @@ extension Lehrer {
 		}
 
 		if ball >= 1 {
-			ballASPtext += " Wir freuen uns, mit Ihnen am Dienstag, den 21.06.2023, gemeinsam unseren Abschluss feiern zu können."
+			ballASPtext += " Wir freuen uns, mit Ihnen am Mittwoch, den 21.06.2023, gemeinsam unseren Abschluss feiern zu können."
 		}
 
 		let text = """
