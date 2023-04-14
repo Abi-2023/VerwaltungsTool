@@ -146,7 +146,7 @@ extension Ticket {
    </td>
   </tr>
   <tr>
-   <th class="tg-0lax big">Dienstag, 21.06.2023 | 16:30</th>
+   <th class="tg-0lax big">Mittwoch, 21.06.2023 | 17:00</th>
   </tr>
  </tbody>
    </table>
