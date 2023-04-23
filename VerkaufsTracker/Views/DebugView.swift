@@ -36,13 +36,13 @@ struct DebugView: View {
 			}
 
 
-//			Button(action: {
-//				let str =  Ticket(owner: Person(name: "Benedict", email: "***REMOVED***", verwaltung: Verwaltung()), type: .after_show_ticket, nth: 1, verwaltung: verwaltung).ticketHTML(verwaltung: verwaltung)
-//				let renderer = CustomPrintPageRenderer()
-//				renderer.exportHTMLContentToPDF(HTMLContent: str)
-//			}) {
-//				Text("render ticket")
-//			}
+			Button(action: {
+				let str =  Ticket(owner: Person(name: "Benedict Test", email: "***REMOVED***", verwaltung: Verwaltung()), type: .ball_ticket, nth: 1, verwaltung: verwaltung).ticketHTML(verwaltung: verwaltung)
+				let renderer = CustomPrintPageRenderer()
+				renderer.exportHTMLContentToPDF(HTMLContent: str)
+			}) {
+				Text("render ticket")
+			}
 
 
 			Button(action: {

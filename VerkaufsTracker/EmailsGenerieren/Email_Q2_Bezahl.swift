@@ -15,7 +15,7 @@ extension Q2er {
 			return nil
 		}
 		
-		let subject = "Deine Bestellungen für die Abi-Feierlichkeiten"
+		let subject = "Deine aktualisierten Bestellungen für die Abi-Feierlichkeiten"
 
 		var tableContent = ""
 

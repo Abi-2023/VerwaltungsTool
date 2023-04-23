@@ -35,7 +35,7 @@ extension Q2er {
 
 		if ball == 0 && asp > 0{
 			ao?.log("skipping \(name), weil die person ASP ticket hat aber kein Ball ticket")
-			return nil
+			//return nil
 		}
 
 		var ballASPtext = ""
