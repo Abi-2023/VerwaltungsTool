@@ -31,6 +31,8 @@ extension Ticket {
 			"#09B31D" //dunkelgrün
 		][safe: nth] ?? "#09B31D"
 
+		let schulsvg = SchullogoSVG(color: nrColor)
+		print(schulsvg)
 		let nrText = "\(nth)".count == 1 ? "0\(nth)" : "\(nth)"
 		let name = v.personen.first(where: {$0.id == owner})?.name ?? "Unbekannt"
 
@@ -55,6 +57,10 @@ extension Ticket {
 
   <div class="text-layer" style="margin-top: 380px; text-align: center;">
 \(svg)
+  </div>
+
+  <div class="text-layer" style="margin-top: 980px; text-align: center;">
+	\(schulsvg)
   </div>
 
 
@@ -182,6 +188,8 @@ extension Ticket {
 
 </html>
 """
+
+		print(htlmstr)
 		return htlmstr
 	}
 }
