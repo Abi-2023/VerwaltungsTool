@@ -32,7 +32,7 @@ extension Ticket {
 		][safe: nth] ?? "#09B31D"
 
 		let schulsvg = SchullogoSVG(color: nrColor)
-		print(schulsvg)
+		let datumText = \(itemType == .after_show_ticket ? "Donnerstag, 22.06.2023 | 00:30" : "Mittwoch, 21.06.2023 | 17:00")
 		let nrText = "\(nth)".count == 1 ? "0\(nth)" : "\(nth)"
 		let name = v.personen.first(where: {$0.id == owner})?.name ?? "Unbekannt"
 
@@ -152,7 +152,7 @@ extension Ticket {
    </td>
   </tr>
   <tr>
-   <th class="tg-0lax big">Mittwoch, 21.06.2023 | 17:00</th>
+   <th class="tg-0lax big">\(datumText)</th>
   </tr>
  </tbody>
    </table>
