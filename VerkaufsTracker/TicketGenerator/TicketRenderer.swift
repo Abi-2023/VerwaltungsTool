@@ -55,7 +55,7 @@ extension Ticket {
    <p style="color: red;">Hello</p>
   </div> -->
 
-  <div class="text-layer" style="margin-top: 380px; text-align: center;">
+  <div class="text-layer" style="margin-top: 400px; text-align: center;">
 \(svg)
   </div>
 
@@ -117,11 +117,11 @@ extension Ticket {
   text-align: center;
  }
    </style>
-   <table class="tg" style="color: white; table-layout: fixed; width: 600px; font-family: 'DIN Alternate';">
+   <table class="tg" style="margin-top: 20px; color: white; table-layout: fixed; width: 580px; font-family: 'DIN Alternate';">
  <colgroup>
-  <col style="width: 400px">
-  <col style="width: 100px">
-  <col style="width: 100px">
+  <col style="width: 390px">
+  <col style="width: 95px">
+  <col style="width: 95px">
  </colgroup>
  <tbody>
   <tr>
@@ -158,7 +158,7 @@ extension Ticket {
    </table>
   </div>
 
-  <div class="text-layer" style="margin-top: 890px; width: 100vw; text-align: center; font-family: 'DIN Alternate', sans-serif; font-size: 16; color: white">
+  <div class="text-layer" style="margin-top: 910px; width: 100vw; text-align: center; font-family: 'DIN Alternate', sans-serif; font-size: 16; color: white">
  ID: \(id)
 </div>
 
