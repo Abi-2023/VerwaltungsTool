@@ -37,7 +37,10 @@ struct DebugView: View {
 
 
 			Button(action: {
-				let str =  Ticket(owner: Person(name: "Benedict Test", email: "***REMOVED***", verwaltung: Verwaltung()), type: .ball_ticket, nth: 1, verwaltung: verwaltung).ticketHTML(verwaltung: verwaltung)
+				let v2 = Verwaltung()
+				let p = Person(name: "Benedict ***REMOVED***", email: "***REMOVED***", verwaltung: v2)
+				v2.personen.append(p)
+				let str =  Ticket(owner: p, type: .after_show_ticket, nth: 8, verwaltung: v2).ticketHTML(verwaltung: v2)
 				let renderer = CustomPrintPageRenderer()
 				renderer.exportHTMLContentToPDF(HTMLContent: str)
 			}) {
