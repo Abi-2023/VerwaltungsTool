@@ -15,6 +15,7 @@ struct PersonDetailView: View {
 	@Binding var state: AppState
 	@State var notesTmp: String = ""
 	@State var showTextSaveButton = false
+	@State var refreshId = UUID()
 
 	var body: some View {
 		ZStack{
@@ -76,7 +77,7 @@ struct PersonDetailView: View {
 										.foregroundColor(p.offenerBetrag(v: verwaltung) == 0 ? .green : p.offenerBetrag(v: verwaltung) > 0 ? .red : .orange)
 								}
 							}
-							BestellungsUebersicht(p: p)
+							BestellungsUebersicht(refreshId: $refreshId, p: p, verwaltung: verwaltung)
 							Divider()
 							ExtraFields(p: p)
 
@@ -123,11 +124,14 @@ struct PersonDetailView: View {
 				}
 			}
 		}.padding()
+			.id(refreshId)
 	}
 }
 
 struct BestellungsUebersicht: View{
+	@Binding var refreshId: UUID
 	let p: Person
+	let verwaltung: Verwaltung
 
 	var body: some View {
         VStack(alignment: .leading, spacing: 5){
@@ -172,6 +176,46 @@ struct BestellungsUebersicht: View{
 				Text("\(item.displayName): \(p.wuenschBestellungen[item] ?? 0)")
 			}
 		}
+
+		HStack {
+			Button(action: {
+				p.bestellungen[.ball_ticket, default: 0] += 1
+				p.notes += "Ball hinzugefügt\n"
+				refreshId = UUID()
+				verwaltung.uploadToCloud()
+			}) {
+				Text("Ball +1")
+			}
+			Button(action: {
+				p.bestellungen[.ball_ticket, default: 0] -= 1
+				p.notes += "Ball entfernt\n"
+				refreshId = UUID()
+				verwaltung.uploadToCloud()
+			}) {
+				Text("Ball -1")
+			}
+			Spacer()
+			Button(action: {
+				p.bestellungen[.after_show_ticket, default: 0] += 1
+				p.notes += "ASP hinzugefügt\n"
+				refreshId = UUID()
+				verwaltung.uploadToCloud()
+			}) {
+				Text("ASP +1")
+			}
+			Button(action: {
+				p.bestellungen[.after_show_ticket, default: 0] -= 1
+				p.notes += "ASP entfernt\n"
+				refreshId = UUID()
+				verwaltung.uploadToCloud()
+				
+			}) {
+				Text("ASP -1")
+			}
+		}.buttonStyle(.bordered)
+
+
+		Divider()
 	}
 }
 
