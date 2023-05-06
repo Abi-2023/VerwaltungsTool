@@ -161,21 +161,6 @@ struct BestellungsUebersicht: View{
 				Text("\(item.displayName): \(p.bestellungen[item] ?? 0)")
 			}
 		}
-		
-		Divider()
-		VStack(alignment: .leading, spacing: 5) {
-			HStack {
-				Text("Wünsche")
-					.font(.title2.bold())
-				Spacer()
-				Text("Nach Angabe im Google-Formular")
-					.foregroundColor(.gray)
-			}
-
-			ForEach(Array(p.wuenschBestellungen.keys).sorted(by: {$0.displayName < $1.displayName}), id: \.self) { item in
-				Text("\(item.displayName): \(p.wuenschBestellungen[item] ?? 0)")
-			}
-		}
 
 		HStack {
 			Button(action: {

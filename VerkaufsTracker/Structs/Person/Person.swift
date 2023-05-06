@@ -41,7 +41,16 @@ class Person: Identifiable, Codable, Hashable {
 	var notes: String
 
 	// was die Person gerne haben würde
-	var wuenschBestellungen: [Item: Int]
+	var wuenschBestellungen: [Item: Int] {
+		get {
+			print("Achtung Wünsche wird abgefragt")
+			return bestellungen
+		}
+
+		set {
+			fatalError("Wünsche sind nicht mehr änderbar")
+		}
+	}
 
 	// was der Person zugesichert wurde
 	var bestellungen: [Item: Int]
@@ -86,7 +95,6 @@ class Person: Identifiable, Codable, Hashable {
 		self.email = email
 		self.notes = ""
 		self.bestellungen = [:]
-		self.wuenschBestellungen = [:]
 		self.extraFields = [:]
 		self.formID = verwaltung.generateFormId()
 	}
