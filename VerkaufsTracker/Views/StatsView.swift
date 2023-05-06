@@ -116,11 +116,12 @@ struct WunschPieCharts: View{
 //		let formSubmitted = verwaltung.personen.filter({$0.extraFields[.hatFormEingetragen, default: ""] == "1"}).count
 //		PieChart(title: "Formularteilnahme", statement: "Formular ausgefüllt", counterStatement: "Formular ausstehend", value: formSubmitted, capacityValue: verwaltung.personen.count)
 
-		let wunschTickets = verwaltung.personen.map({$0.wuenschBestellungen[.ball_ticket] ?? 0}).reduce(0, +)
-		PieChart(title: "Ball-Tickets", statement: "Belegte Tickets", counterStatement: "Freie Tickets", value: wunschTickets, capacityValue: Item.ball_ticket.verfuegbar)
+		let bestellungenTickets = verwaltung.personen.map({$0.bestellungen[.ball_ticket] ?? 0}).reduce(0, +)
+        
+		PieChart(title: "Ball-Tickets", statement: "Belegte Tickets", counterStatement: "Freie Tickets", value: bestellungenTickets, capacityValue: Item.ball_ticket.verfuegbar)
 
-		let wunschTicketsASP = verwaltung.personen.map({$0.wuenschBestellungen[.after_show_ticket] ?? 0}).reduce(0, +)
-		PieChart(title: "ASP-Tickets", statement: "Belegte Tickets", counterStatement: "Freie Tickets", value: wunschTicketsASP, capacityValue: Item.after_show_ticket.verfuegbar)
+		let bestellungenTicketsASP = verwaltung.personen.map({$0.bestellungen[.after_show_ticket] ?? 0}).reduce(0, +)
+		PieChart(title: "ASP-Tickets", statement: "Belegte Tickets", counterStatement: "Freie Tickets", value: bestellungenTicketsASP, capacityValue: Item.after_show_ticket.verfuegbar)
 		/*
 		 PIE CHARTS
 		 let wunschBuch = verwaltung.personen.map({$0.wuenschBestellungen[.buch] ?? 0}).reduce(0, +)
@@ -151,7 +152,7 @@ struct SendCharts: View{
 		let generiert = verwaltung.personen.filter({!$0.tickets.isEmpty && $0.tickets.count == ($0.bestellungen[.ball_ticket, default: 0] + $0.bestellungen[.after_show_ticket, default: 0])}).count
 		PieChart(title: "Vollständig für Personen generiert ", statement: "Voll generiert", counterStatement: "Nicht voll generiert", value: generiert, capacityValue: bezahlSend)
 
-		let ticketSend = verwaltung.personen.filter({$0.extraFields[.hatFormEingetragen, default: ""] == "1"}).count
+		let ticketSend = verwaltung.personen.filter({$0.extraFields[.hatFormEingetragen, default: ""] == "1"}).count //<- AENDERUNG BEI TICKET-FERTIGSTELLUNG
 		PieChart(title: "Ticket E-Mail-Sendestatus", statement: "Gesendet", counterStatement: "Nicht gesendet", value: ticketSend, capacityValue: generiert)
 	}
 }
@@ -214,7 +215,8 @@ struct PieChart: View{
 	var statementPercentage: String {
 		let v = Float(value)
 		let cV = Float(capacityValue)
-		let percentage = v/cV * 100
+		var percentage = v/cV * 100
+		if percentage < 0{percentage = 0}
 		let string = String(format: "%0.1f",percentage)
 		return string
 	}
@@ -222,9 +224,19 @@ struct PieChart: View{
 	var counterStatementPercentage: String {
 		let v = Float(capacityValue-value)
 		let cV = Float(capacityValue)
-		let percentage = v/cV * 100
+		var percentage = v/cV * 100
+		if percentage < 0{percentage = 0}
 		let string = String(format: "%0.1f",percentage)
 		return string
+	}
+	
+	var counterLabel: String {
+		let x = capacityValue - value
+		if x < 0{
+			return "Keine"
+		} else {
+			return "\(capacityValue - value)/\(capacityValue) (\(counterStatementPercentage)%)"
+		}
 	}
 	
 	var body: some View{
@@ -242,7 +254,7 @@ struct PieChart: View{
 					Circle().fill(.red).frame(width: 10, height: 10)
 					Text(counterStatement)
 					Spacer()
-					Text("\(capacityValue - value)/\(capacityValue) (\(counterStatementPercentage)%)").bold()
+					Text(counterLabel).bold()
 				}
 			}
 		}.padding()
