@@ -16,21 +16,26 @@ struct StatsView: View {
 	var body: some View {
 		VStack(spacing: 30){
 			Text("Statistiken").font(.largeTitle.weight(.heavy))
-			if UIDevice.current.userInterfaceIdiom == .phone{
-				ScrollView(showsIndicators: false){
-					VStack(spacing: 15){
-						StatsViewComponents(verwaltung: verwaltung)
+			if #available(iOS 16, *) {
+				if UIDevice.current.userInterfaceIdiom == .phone{
+					ScrollView(showsIndicators: false){
+						VStack(spacing: 15){
+							StatsViewComponents(verwaltung: verwaltung)
+						}
+					}
+				} else {
+					ScrollView(showsIndicators: false){
+						Spacer()
+						HStack{
+							StatsViewComponents(verwaltung: verwaltung)
+						}
+						Spacer()
 					}
 				}
 			} else {
-				ScrollView(showsIndicators: false){
-					Spacer()
-					HStack{
-						StatsViewComponents(verwaltung: verwaltung)
-					}
-					Spacer()
-				}
+				Text("in der iOS Version nicht verfügbar")
 			}
+
 		}.padding()
 	}
 }
@@ -43,6 +48,7 @@ struct Groese: Identifiable {
 
 
 @available(macCatalyst 16.0, *)
+@available(iOS 16.0, *)
 struct StatsViewComponents: View{
 	let verwaltung: Verwaltung
 	var body: some View{
@@ -165,6 +171,7 @@ struct BestellungenPosition: Identifiable {
 }
 
 @available(macCatalyst 16.0, *)
+@available(iOS 16.0, *)
 struct BestellungenPieCharts: View{
 	let verwaltung: Verwaltung
 
