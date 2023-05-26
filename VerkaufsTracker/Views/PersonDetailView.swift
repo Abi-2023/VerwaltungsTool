@@ -198,6 +198,7 @@ struct BestellungsUebersicht: View{
 				Text("ASP -1")
 			}
 		}.buttonStyle(.bordered)
+			.disabled(true)
 
 
 		Divider()
