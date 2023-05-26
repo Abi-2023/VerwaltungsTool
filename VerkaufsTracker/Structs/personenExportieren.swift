@@ -43,7 +43,7 @@ struct PersonenExport: Codable {
 
 	func speicher() {
 		do {
-			let url = FileManager.default.urls(for: .desktopDirectory, in: .userDomainMask).first!.appendingPathComponent("PersonenMap.json")
+			let url = FileManager.default.urls(for: .desktopDirectory, in: .userDomainMask).first!.appendingPathComponent("PersonenMapTicket.json")
 			let encoder = JSONEncoder()
 
 			let data = try encoder.encode(self)
