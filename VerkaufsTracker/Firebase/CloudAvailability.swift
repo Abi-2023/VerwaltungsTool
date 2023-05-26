@@ -45,7 +45,9 @@ enum CloudState: String{
         }
     }
 }
-
+extension SECRETS {
+	public static let VERSION = 10
+}
 struct CloudStatus: Codable {
 	var lastConnection: Date = .now
 	var connectedUser: String? = CloudStatus.deviceId()
