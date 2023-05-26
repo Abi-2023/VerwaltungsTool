@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 enum CloudState: String{
-	case error, disconnected, connected, denied, connecting
+	case error, disconnected, connected, denied, connecting, version
     
     var color: Color{
         switch self{
@@ -23,6 +23,8 @@ enum CloudState: String{
             return .orange
         case .connecting:
             return .blue
+		case .version:
+			return .purple
         }
     }
     
@@ -38,6 +40,8 @@ enum CloudState: String{
             return "Zugriff verwehrt"
         case .connecting:
             return "Verbinde..."
+		case .version:
+			return "Version nicht aktuell"
         }
     }
 }
@@ -46,9 +50,10 @@ struct CloudStatus: Codable {
 	var lastConnection: Date = .now
 	var connectedUser: String? = CloudStatus.deviceId()
 	var lastConnectionName: String? = CloudStatus.deviceName()
+	var version: Int = SECRETS.VERSION
 
 	func allowedToInteract() -> Bool {
-		return connectedUser == nil || connectedUser == CloudStatus.deviceId() || lastConnection.timeIntervalSinceNow < -15*60 //15 minuten
+		return version == SECRETS.VERSION && (connectedUser == nil || connectedUser == CloudStatus.deviceId() || lastConnection.timeIntervalSinceNow < -15*60 )//15 minuten
 	}
 
 	static func deviceId() -> String{

@@ -16,6 +16,13 @@ extension Verwaltung {
 	func connectToCloud() {
 		CloudStatus.serverStatus(completion: { status in
 			if let status {
+				if status.version != SECRETS.VERSION {
+					DispatchQueue.main.async {
+						self.cloud = .version
+						self.cloudStatus = status
+					}
+					return
+				}
 				if status.allowedToInteract() {
 					self.fetchFromCloud()
 				} else {
