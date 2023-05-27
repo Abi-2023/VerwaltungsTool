@@ -54,7 +54,16 @@ struct VerkaufsTrackerApp: App {
 						case .debug:
 							DebugView(verwaltung: verwaltung, state: $state,zahlungsVerarbeiter: $zahlungsVerarbeiter, ao: aktionObserver)
 						case .aktionen:
-							if selectedPersonen.isEmpty {
+							if verwaltung.scannerMode {
+								VStack {
+									Text("nicht verfügbar im scanner mode")
+									Button(action: {
+										verwaltung.cloud = .disconnected
+									}) {
+										Text("disconnect")
+									}.buttonStyle(.bordered)
+								}
+							} else if selectedPersonen.isEmpty {
 								AktionenView(verwaltung: verwaltung, selectedPersonen: $selectedPersonen, aktionObserver: aktionObserver, zahlungsVerarbeiter: $zahlungsVerarbeiter)
 							} else {
 								PersonenActionView(verwaltung: verwaltung, selectedPersonen: $selectedPersonen, aktionObserver: aktionObserver	)

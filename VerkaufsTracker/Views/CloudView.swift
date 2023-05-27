@@ -87,6 +87,7 @@ struct CloudView: View {
 								let defaults = UserDefaults()
 								defaults.set(true, forKey: "SCANNER_MODE")
 								state = .scanner
+								v.connectToCloud(scannerMode: true)
 							}) {
 								ZStack{
 									RoundedRectangle(cornerRadius: 10).foregroundColor(.purple)
