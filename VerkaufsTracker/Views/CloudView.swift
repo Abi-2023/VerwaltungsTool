@@ -67,6 +67,8 @@ struct CloudView: View {
 									CloudStatus.setDeviceName(name: nil)
 									refreshID = UUID()
 								}
+							Text(CloudStatus.deviceId())
+								.font(.caption)
 
 							if let cloudStatus = v.cloudStatus {
 								Text("Letzte Verbindung: \(cloudStatus.lastConnection.formatted(.dateTime))")
