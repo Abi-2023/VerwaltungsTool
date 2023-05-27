@@ -29,7 +29,7 @@ struct VerkaufsTrackerApp: App {
 			GeometryReader { reader in
 				VStack{
 					if verwaltung.cloud != .connected {
-						CloudView(v: verwaltung)
+						CloudView(v: verwaltung, state: $state)
 					}else if aktionObserver.aktiv{
 						AktionLogView(ao: aktionObserver)
 

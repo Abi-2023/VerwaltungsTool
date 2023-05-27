@@ -12,7 +12,8 @@ struct CloudView: View {
 
 	@State var deviceName = ""
 	@State var refreshID = UUID()
-	
+	@Binding var state: AppState
+
 	var body: some View {
 		ZStack(alignment: .center){
 			if CloudStatus.deviceName() == nil {
@@ -70,7 +71,7 @@ struct CloudView: View {
 								Text("\(v.cloud.stringGER)")
 							}.foregroundColor(v.cloud.color)
 
-
+							Spacer()
 							Button(action: {
 								v.connectToCloud()
 							}) {
@@ -80,6 +81,28 @@ struct CloudView: View {
 									Text("Anmelden")
 										.foregroundColor(.white)
 								}
+							}
+
+							Button(action: {
+								let defaults = UserDefaults()
+								defaults.set(true, forKey: "SCANNER_MODE")
+								state = .scanner
+							}) {
+								ZStack{
+									RoundedRectangle(cornerRadius: 10).foregroundColor(.purple)
+										.frame(width: 150, height: 50)
+									Text("Scanner Modus")
+										.foregroundColor(.white)
+								}
+							}
+
+							Spacer()
+
+							Button(action: {
+								CloudStatus.setDeviceName(name: nil)
+								refreshID = UUID()
+							}) {
+								Text("Name zurücksetzen")
 							}
 						}
 						Spacer()
