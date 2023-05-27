@@ -61,6 +61,13 @@ struct CloudView: View {
 							Text("Produktverwaltung Abi 2023").font(.largeTitle.weight(.heavy))
 								.multilineTextAlignment(.center)
 
+							Text(CloudStatus.deviceName() ?? "Anonym")
+								.font(.caption)
+								.onTapGesture {
+									CloudStatus.setDeviceName(name: nil)
+									refreshID = UUID()
+								}
+
 							if let cloudStatus = v.cloudStatus {
 								Text("Letzte Verbindung: \(cloudStatus.lastConnection.formatted(.dateTime))")
 								Text("Von: \(cloudStatus.lastConnectionName ?? "?")")
@@ -72,16 +79,6 @@ struct CloudView: View {
 							}.foregroundColor(v.cloud.color)
 
 							Spacer()
-							Button(action: {
-								v.connectToCloud()
-							}) {
-								ZStack{
-									RoundedRectangle(cornerRadius: 10).foregroundColor(.blue)
-										.frame(width: 150, height: 50)
-									Text("Anmelden")
-										.foregroundColor(.white)
-								}
-							}
 
 							Button(action: {
 								let defaults = UserDefaults()
@@ -100,11 +97,12 @@ struct CloudView: View {
 							Spacer()
 
 							Button(action: {
-								CloudStatus.setDeviceName(name: nil)
-								refreshID = UUID()
+								v.connectToCloud()
 							}) {
-								Text("Name zurücksetzen")
-							}
+								Text("Anmelden")
+									.foregroundColor(.white)
+							}.buttonStyle(.borderedProminent)
+
 						}
 						Spacer()
 					}
