@@ -111,14 +111,16 @@ struct ScannerView: View {
 							HStack{
 								Text("Ticket-Scanner").font(.largeTitle.weight(.heavy))
 								Spacer()
-                                Button(action: {state = .personenView}, label: {
+
                                     ZStack{
-                                        Circle().fill(.blue)
+                                        Circle().fill(.gray)
                                             .frame(width: 30, height: 30)
                                         Image(systemName: "door.left.hand.open")
                                             .foregroundColor(.white)
-                                    }
-                                })
+								}.onLongPressGesture {
+
+									state = .personenView
+								}
 							}
 
 							CodeScannerView(codeTypes: [.qr]) { response in
