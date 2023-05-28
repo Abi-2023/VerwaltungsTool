@@ -62,6 +62,13 @@ struct DebugView: View {
 			}
 
 			Button(action: {
+				let s = ScanConnector()
+				s.fetchResults()
+			}) {
+				Text("fetchResults")
+			}
+
+			Button(action: {
 				for item in Item.allCases {
 					print("----\(item.displayName)")
 					for i in (0...10) {
