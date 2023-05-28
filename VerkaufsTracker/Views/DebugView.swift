@@ -56,11 +56,9 @@ struct DebugView: View {
 			}
 
 			Button(action: {
-				//			let m = verwaltung.personen.first(where: {$0.name.contains("Benedict")})!.generateBezahlEmail()
-				//			let sender = EmailManager()
-				//			sender.sendMail(mail: m!)
+				ScanConnector().uploadScan()
 			}) {
-				Text("Button1")
+				Text("Register Scan")
 			}
 
 			Button(action: {

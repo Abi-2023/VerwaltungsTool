@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8F128AF2294D0BCA002D3801 /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; platformFilter = ios; productRef = 8F128AF1294D0BCA002D3801 /* CodeScanner */; };
 		8F128AF5294D1BF5002D3801 /* TicketCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F128AF4294D1BF5002D3801 /* TicketCodes.swift */; };
+		8F28FF452A221A8E006135BD /* ScanConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F28FF442A221A8E006135BD /* ScanConnector.swift */; };
 		8F2B6710294F998100C8FA2C /* PersonenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F2B670F294F998100C8FA2C /* PersonenView.swift */; };
 		8F2B6712294F9C7F00C8FA2C /* PersonDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F2B6711294F9C7F00C8FA2C /* PersonDetailView.swift */; };
 		8F2DAE16297F272000B61A22 /* Email_Q2_Angekommen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F2DAE15297F272000B61A22 /* Email_Q2_Angekommen.swift */; };
@@ -88,6 +89,7 @@
 /* Begin PBXFileReference section */
 		8F128AF3294D0C74002D3801 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8F128AF4294D1BF5002D3801 /* TicketCodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketCodes.swift; sourceTree = "<group>"; };
+		8F28FF442A221A8E006135BD /* ScanConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanConnector.swift; sourceTree = "<group>"; };
 		8F2B670F294F998100C8FA2C /* PersonenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonenView.swift; sourceTree = "<group>"; };
 		8F2B6711294F9C7F00C8FA2C /* PersonDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonDetailView.swift; sourceTree = "<group>"; };
 		8F2DAE15297F272000B61A22 /* Email_Q2_Angekommen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Email_Q2_Angekommen.swift; sourceTree = "<group>"; };
@@ -254,6 +256,7 @@
 				8FA6039A2948CE9A001CC2D2 /* Preview Content */,
 				8FD6455E294D014700D746F8 /* secrets.swift */,
 				8FE0073C295880E700E1B355 /* Extensions.swift */,
+				8F28FF442A221A8E006135BD /* ScanConnector.swift */,
 			);
 			path = VerkaufsTracker;
 			sourceTree = "<group>";
@@ -478,6 +481,7 @@
 				8F8521F32959DB5500854E16 /* Aktion_sendFormEmails.swift in Sources */,
 				8F7FB049294E4297005F4551 /* FormularMail.swift in Sources */,
 				8F68425529550B1600557BB6 /* CloudAccess.swift in Sources */,
+				8F28FF452A221A8E006135BD /* ScanConnector.swift in Sources */,
 				8FC643CE297D7530004D3CBB /* verarbeiteZahlungen.swift in Sources */,
 				8FFBA30C296894B1005E5A57 /* Email_LE_Ticket.swift in Sources */,
 				8FFBA2FB2968188A005E5A57 /* Email_Q2_Form.swift in Sources */,
