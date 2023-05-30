@@ -44,6 +44,11 @@ struct VerkaufsTrackerApp: App {
 						ScannerView(verwaltung: verwaltung, state: $state)
 #else
 						Text("scanner nicht verfügbar")
+						Button(action: {
+							state = .debug
+						}) {
+							Text("Stats")
+						}
 #endif
 					} else if state == .dataImport{
 						DataImportView(v: verwaltung, state: $state, ao: aktionObserver)
