@@ -89,6 +89,11 @@ struct ScannerView: View {
 					if let result = result {
 						Text(result.message).font(.largeTitle.weight(.heavy))
 							.foregroundColor(result.colorCode)
+
+						if result == .redeemed {
+							Text(invTime?.timeAgoDisplay() ?? "?")
+							Text(invDevice ?? "?")
+						}
 						Spacer()
 						
 						if let ticket {
@@ -184,6 +189,7 @@ struct ScannerView: View {
 			return
 		}
 
+		ticket = scannedTicket
 		if let recordDetails = scanConnector.ticketEingeloest(ticket: scannedTicket) {
 			result = .redeemed
 			invTime = recordDetails.date
