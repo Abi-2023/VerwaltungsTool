@@ -56,7 +56,7 @@ struct DebugView: View {
 			}
 
 			Button(action: {
-				ScanConnector().uploadScan()
+//				ScanConnector().uploadScan(ticket: <#T##Ticket#>)
 			}) {
 				Text("Register Scan")
 			}

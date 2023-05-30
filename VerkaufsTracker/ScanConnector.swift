@@ -29,7 +29,7 @@ class ScanConnector: ObservableObject {
 		return tmp
 	}
 
-	func uploadScan() {
+	func uploadScan(ticket: Ticket) {
 		do {
 
 
@@ -45,7 +45,7 @@ class ScanConnector: ObservableObject {
    "ID": "\(newRecordID())",
    "Device": "\(CloudStatus.deviceId())",
    "TimeStamp": "\(Date().timeIntervalSince1970)",
-   "TicketId": "abcdef",
+   "TicketId": "\(ticket.id)",
    "Aktiv": true
    }
    }
