@@ -69,3 +69,14 @@ class VerifyTicket{
 		return verwaltung.personen.flatMap({$0.tickets}).first(where: {$0.id == text})
 	}
 }
+
+
+extension ScanConnector {
+	/// Wenn ticket bereits eingelöst wurde, wir die uhrzeit angegeben, an der das ticket eingelöst wurde und von welchem gerät
+	func ticketEingeloest(ticket: Ticket) -> (date: Date?, device: String?)? {
+		guard let record = records.first(where: {$0.ticketId == ticket.id && $0.active}) else {
+			return nil
+		}
+		return (record.timestamp, record.device)
+	}
+}
