@@ -118,6 +118,54 @@ class ScanConnector: ObservableObject {
 		}
 		task.resume()
 	}
+
+	private func generateFetchUrlString() -> String {
+		var idsMitAktiv = ""
+		for record in records {
+			idsMitAktiv += record.id
+			idsMitAktiv += record.active ? "1" : "0"
+		}
+		return "\(SECRETS.TABLE_SCANS)/?filterByFormula=FIND(CONCATENATE({ID},IF({Aktiv}, \"1\", \"0\")) , \"0\(idsMitAktiv)\") = 0".addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+
+	}
+
+	func neueRecordsAbfragen() {
+		let url = URL(string: generateFetchUrlString())!
+		var request = URLRequest(url: url)
+		request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+		request.setValue("Bearer \(SECRETS.AIRTABLE_ACCESS_TOKEN)", forHTTPHeaderField: "Authorization")
+		request.httpMethod = "GET"
+		let task = URLSession.shared.dataTask(with: request) { data, response, error in
+			print(error ?? "")
+			if let httpResponse = response as? HTTPURLResponse {
+				let responseCode = httpResponse.statusCode
+				print(responseCode)
+
+				if data != nil && (responseCode == 200 || responseCode == 204){
+//					print(String(data: data!, encoding: .utf8) ?? "????")
+					let decoder = JSONDecoder()
+					do {
+						let result = try decoder.decode(AirTableScanList.self, from: data!)
+						DispatchQueue.main.async {
+							for r in result.records ?? [] {
+								self.records.append(ScanRecord(record: r))
+							}
+							print("\(result.records?.count ?? 0) neue hinzugefügt")
+						}
+					} catch {
+						print(error)
+						print("fehler beim cloud upload")
+					}
+				} else {
+					print("error while uploading data")
+					guard let data = data else { return }
+					let result = String(data: data, encoding: .utf8)!
+					print(result)
+				}
+			}
+		}
+		task.resume()
+	}
 }
 
 struct ScanRecord {
