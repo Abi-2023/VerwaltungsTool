@@ -125,7 +125,7 @@ class ScanConnector: ObservableObject {
 			idsMitAktiv += record.id
 			idsMitAktiv += record.active ? "1" : "0"
 		}
-		return "\(SECRETS.TABLE_SCANS)/?filterByFormula=FIND(CONCATENATE({ID},IF({Aktiv}, \"1\", \"0\")) , \"0\(idsMitAktiv)\") = 0".addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+		return "\(SECRETS.TABLE_SCANS)/?filterByFormula=FIND(CONCATENATE({ID},IF({Aktiv}, \"1\", \"0\")) , \"0\(idsMitAktiv)\") = 0".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
 
 	}
 
@@ -148,9 +148,16 @@ class ScanConnector: ObservableObject {
 						let result = try decoder.decode(AirTableScanList.self, from: data!)
 						DispatchQueue.main.async {
 							for r in result.records ?? [] {
+								print(self.records.count)
+//								if self.records.contains(where: {$0.id == r.id}) {
+								self.records.removeAll(where: {$0.id == r.fields?.ID ?? ""})
+//								}
+								print(self.records.count)
 								self.records.append(ScanRecord(record: r))
+								print(self.records.count)
+								print("----")
 							}
-							print("\(result.records?.count ?? 0) neue hinzugefügt")
+							print("\(result.records?.count ?? 0) neue hinzugefügt: \(self.records.count)")
 						}
 					} catch {
 						print(error)
@@ -169,6 +176,7 @@ class ScanConnector: ObservableObject {
 }
 
 struct ScanRecord {
+	let airTableId: String
 	let id: String
 	let device: String
 	let timestamp: Date
@@ -176,7 +184,8 @@ struct ScanRecord {
 	let active: Bool
 
 	init(record: Records) {
-		id = record.id ?? "?"
+		airTableId = record.id ?? "?"
+		id = record.fields?.ID ?? "?"
 		device = record.fields?.Device ?? "?"
 		timestamp = Date(timeIntervalSince1970: Double(record.fields?.TimeStamp ?? "0") ?? 0)
 		ticketId = record.fields?.TicketId ?? "?"

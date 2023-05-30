@@ -54,8 +54,17 @@ enum ScanResult {
 
 struct ScannerView: View {
 	@Environment(\.colorScheme) var appearance
-	@ObservedObject var verwaltung = Verwaltung()
+	@ObservedObject var verwaltung: Verwaltung
 	@Binding var state: AppState
+	let verifier: VerifyTicket
+	let scanConnector: ScanConnector
+
+	init(verwaltung: Verwaltung, state: Binding<AppState>) {
+		self.verwaltung = verwaltung
+		self._state = state
+		self.scanConnector = ScanConnector()
+		self.verifier = VerifyTicket(verwaltung: verwaltung)
+	}
 
 	@State var result: ScanResult?
 	@State var ticket: Ticket?
@@ -63,6 +72,13 @@ struct ScannerView: View {
 
 	@State var showManual = false
 	@State var manualID: String = ""
+
+	var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+
+
+	// Wann und bei welchem Gerät eingesacnnt wurde
+	@State var invTime: Date? = nil
+	@State var invDevice: String? = nil
 	
 	var body: some View {
 		GeometryReader{ geo in
@@ -125,8 +141,7 @@ struct ScannerView: View {
 
 							CodeScannerView(codeTypes: [.qr]) { response in
 								if case let .success(scanText) = response {
-									let verifier = VerifyTicket(verwaltung: verwaltung)
-									result = .invalid
+									scanVerarbeiten(token: scanText.string)
 								} else {
 									result = .error
 								}
@@ -155,7 +170,29 @@ struct ScannerView: View {
 				Spacer()
 			}
 		}
+		.onReceive(timer, perform: { _ in
+			scanConnector.neueRecordsAbfragen()
+		})
 		
+	}
+
+	func scanVerarbeiten(token: String) {
+		invTime = nil
+		invDevice = nil
+		guard let scannedTicket = verifier.getTicketFromScan(text: token) else {
+			result = .invalid
+			return
+		}
+
+		if let recordDetails = scanConnector.ticketEingeloest(ticket: scannedTicket) {
+			result = .redeemed
+			invTime = recordDetails.date
+			invDevice = recordDetails.device
+		} else {
+			result = .success
+		}
+
+		scanConnector.uploadScan(ticket: scannedTicket)
 	}
 }
 

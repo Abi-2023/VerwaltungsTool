@@ -58,6 +58,20 @@ class VerifyTicket{
 
 	public func getTicketFromScan(text: String) -> Ticket? {
 		// TODO: "signature" überprüfen
+		do {
+			let regex = try NSRegularExpression(pattern: "(?!\\?x=)[ABCD1234]{3}-[ABCD1234]{3}", options: NSRegularExpression.Options.caseInsensitive)
+			let matches = regex.matches(in: text, options: [], range: NSRange(location: 0, length: text.utf8.count))
+
+			if let match = matches.first {
+				let range = match.range(at:0)
+				if let swiftRange = Range(range, in: text) {
+					let name = text[swiftRange]
+					return getTicketFromCode(text: String(name))
+				}
+			}
+		} catch {
+			return nil
+		}
 		guard let ticketId = NSRegularExpression.getMatches(regex: "(?!\\?x=)[ABCD1234]{3}-[ABCD1234]{3}", inputText: text).first else {
 			return nil
 		}
