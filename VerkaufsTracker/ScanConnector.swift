@@ -175,7 +175,7 @@ class ScanConnector: ObservableObject {
 	}
 }
 
-struct ScanRecord {
+struct ScanRecord: Hashable {
 	let airTableId: String
 	let id: String
 	let device: String

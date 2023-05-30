@@ -44,6 +44,7 @@
 		8FA603A82948D31B001CC2D2 /* Zahlungen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA603A72948D31B001CC2D2 /* Zahlungen.swift */; };
 		8FA8796E29F5AC7D00C58A82 /* ASPTicketBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA8796D29F5AC7D00C58A82 /* ASPTicketBackground.swift */; };
 		8FA8797029F5AD6800C58A82 /* SchullogoSVG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA8796F29F5AD6800C58A82 /* SchullogoSVG.swift */; };
+		8FAE71872A2697D4009D5C3D /* EinlassStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FAE71862A2697D4009D5C3D /* EinlassStatsView.swift */; };
 		8FB1EDB529806E4B00DB37DB /* Email_LE_Angekommen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB1EDB429806E4B00DB37DB /* Email_LE_Angekommen.swift */; };
 		8FBA1BF1298040F900C4559B /* Aktion_sendeAngekommen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBA1BF0298040F900C4559B /* Aktion_sendeAngekommen.swift */; };
 		8FBE08062958D6D00076AC2D /* Navbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBE08052958D6D00076AC2D /* Navbar.swift */; };
@@ -125,6 +126,7 @@
 		8FA603A72948D31B001CC2D2 /* Zahlungen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Zahlungen.swift; sourceTree = "<group>"; };
 		8FA8796D29F5AC7D00C58A82 /* ASPTicketBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASPTicketBackground.swift; sourceTree = "<group>"; };
 		8FA8796F29F5AD6800C58A82 /* SchullogoSVG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchullogoSVG.swift; sourceTree = "<group>"; };
+		8FAE71862A2697D4009D5C3D /* EinlassStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EinlassStatsView.swift; sourceTree = "<group>"; };
 		8FB1EDB429806E4B00DB37DB /* Email_LE_Angekommen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Email_LE_Angekommen.swift; sourceTree = "<group>"; };
 		8FBA1BF0298040F900C4559B /* Aktion_sendeAngekommen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aktion_sendeAngekommen.swift; sourceTree = "<group>"; };
 		8FBE08052958D6D00076AC2D /* Navbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navbar.swift; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 				8FBE08052958D6D00076AC2D /* Navbar.swift */,
 				8FA407FF2969A73B005BC839 /* DataImportView.swift */,
 				8FC643CF297D7891004D3CBB /* ZahlungsImportOptionen.swift */,
+				8FAE71862A2697D4009D5C3D /* EinlassStatsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -489,6 +492,7 @@
 				8FC643CE297D7530004D3CBB /* verarbeiteZahlungen.swift in Sources */,
 				8FFBA30C296894B1005E5A57 /* Email_LE_Ticket.swift in Sources */,
 				8FFBA2FB2968188A005E5A57 /* Email_Q2_Form.swift in Sources */,
+				8FAE71872A2697D4009D5C3D /* EinlassStatsView.swift in Sources */,
 				8F68A58A295B1CD900CAFAD6 /* CloudAvailability.swift in Sources */,
 				8FFBA30629689210005E5A57 /* BallTicketBackground.swift in Sources */,
 				8F80BCB52975E89300E733B1 /* personenExportieren.swift in Sources */,
