@@ -17,6 +17,18 @@ struct ScannerResults {
 
 class ScanConnector: ObservableObject {
 
+	private func newRecordID() -> String {
+		var tmp = ""
+		while tmp == "" || records.contains(where: {$0.id == tmp}) {
+			tmp = ""
+			for _ in 0..<6 {
+				let chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789".map{String($0)}
+				tmp += chars.randomElement()!
+			}
+		}
+		return tmp
+	}
+
 	func uploadScan() {
 		do {
 
@@ -30,7 +42,7 @@ class ScanConnector: ObservableObject {
    {"records": [
    {
    "fields": {
-   "ID": "\(UUID().uuidString)",
+   "ID": "\(newRecordID())",
    "Device": "\(CloudStatus.deviceId())",
    "TimeStamp": "\(Date().timeIntervalSince1970)",
    "TicketId": "abcdef",
