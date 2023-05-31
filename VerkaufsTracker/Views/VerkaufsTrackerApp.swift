@@ -29,7 +29,7 @@ struct VerkaufsTrackerApp: App {
 			GeometryReader { reader in
 				VStack{
 					if verwaltung.cloud != .connected {
-						CloudView(v: verwaltung)
+						CloudView(v: verwaltung, state: $state)
 					}else if aktionObserver.aktiv{
 						AktionLogView(ao: aktionObserver)
 
@@ -42,6 +42,13 @@ struct VerkaufsTrackerApp: App {
 					} else if state == .scanner{
 #if canImport(CodeScanner)
 						ScannerView(verwaltung: verwaltung, state: $state)
+#else
+						Text("scanner nicht verfügbar")
+						Button(action: {
+							state = .debug
+						}) {
+							Text("Stats")
+						}
 #endif
 					} else if state == .dataImport{
 						DataImportView(v: verwaltung, state: $state, ao: aktionObserver)
@@ -52,7 +59,16 @@ struct VerkaufsTrackerApp: App {
 						case .debug:
 							DebugView(verwaltung: verwaltung, state: $state,zahlungsVerarbeiter: $zahlungsVerarbeiter, ao: aktionObserver)
 						case .aktionen:
-							if selectedPersonen.isEmpty {
+							if verwaltung.scannerMode {
+								VStack {
+									Text("nicht verfügbar im scanner mode")
+									Button(action: {
+										verwaltung.cloud = .disconnected
+									}) {
+										Text("disconnect")
+									}.buttonStyle(.bordered)
+								}
+							} else if selectedPersonen.isEmpty {
 								AktionenView(verwaltung: verwaltung, selectedPersonen: $selectedPersonen, aktionObserver: aktionObserver, zahlungsVerarbeiter: $zahlungsVerarbeiter)
 							} else {
 								PersonenActionView(verwaltung: verwaltung, selectedPersonen: $selectedPersonen, aktionObserver: aktionObserver	)
@@ -67,14 +83,6 @@ struct VerkaufsTrackerApp: App {
 					}
 				}.onAppear {
 					aktionObserver.verwaltung = verwaltung
-//					verwaltung.cloud = .connected
-//					let person = Q2er(vorname: "Benedict", nachname: "***REMOVED***", email: "***REMOVED***", notes: "", bestellungen: [:], extraFields: [:], verwaltung: verwaltung)
-//					person.formID = "C1Q55"
-//
-//					let person2 = Q2er(vorname: "***REMOVED***", nachname: "***REMOVED***", email: "***REMOVED***", notes: "", bestellungen: [:], extraFields: [:], verwaltung: verwaltung)
-//					person2.formID = "E1WS3"
-//					verwaltung.personen.append(person)
-//					verwaltung.personen.append(person2)
 				}
 			}
 		}

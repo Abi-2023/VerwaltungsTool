@@ -13,7 +13,8 @@ struct CloudWrapper: Codable {
 
 extension Verwaltung {
 
-	func connectToCloud() {
+	func connectToCloud(scannerMode: Bool = false) {
+		self.scannerMode = scannerMode
 		CloudStatus.serverStatus(completion: { status in
 			if let status {
 				if status.version != SECRETS.VERSION {
@@ -23,7 +24,7 @@ extension Verwaltung {
 					}
 					return
 				}
-				if status.allowedToInteract() {
+				if status.allowedToInteract() || scannerMode {
 					self.fetchFromCloud()
 				} else {
 					DispatchQueue.main.async {
@@ -65,7 +66,9 @@ extension Verwaltung {
 						print(neueVerwaltung.lastFetchForm)
 
 						print(neueVerwaltung)
-						CloudStatus.setOwnToServer()
+						if !self.scannerMode {
+							CloudStatus.setOwnToServer()
+						}
 						DispatchQueue.main.sync {
 							self.personen = neueVerwaltung.personen
 							self.transaktionen = neueVerwaltung.transaktionen
@@ -93,6 +96,11 @@ extension Verwaltung {
 	}
 
 	func uploadToCloud(ao: AktionObserver? = nil) {
+		if scannerMode {
+			print("kein upload weil scanner mode")
+			ao?.log("Kann nicht im scanner mode")
+			return
+		}
 		do {
 			let encoder = JSONEncoder()
 			let data = try encoder.encode(CodableVerwaltung(verwaltung: self))

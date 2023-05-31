@@ -12,7 +12,8 @@ struct CloudView: View {
 
 	@State var deviceName = ""
 	@State var refreshID = UUID()
-	
+	@Binding var state: AppState
+
 	var body: some View {
 		ZStack(alignment: .center){
 			if CloudStatus.deviceName() == nil {
@@ -60,6 +61,15 @@ struct CloudView: View {
 							Text("Produktverwaltung Abi 2023").font(.largeTitle.weight(.heavy))
 								.multilineTextAlignment(.center)
 
+							Text(CloudStatus.deviceName() ?? "Anonym")
+								.font(.caption)
+								.onTapGesture {
+									CloudStatus.setDeviceName(name: nil)
+									refreshID = UUID()
+								}
+							Text(CloudStatus.deviceId())
+								.font(.caption)
+
 							if let cloudStatus = v.cloudStatus {
 								Text("Letzte Verbindung: \(cloudStatus.lastConnection.formatted(.dateTime))")
 								Text("Von: \(cloudStatus.lastConnectionName ?? "?")")
@@ -70,17 +80,31 @@ struct CloudView: View {
 								Text("\(v.cloud.stringGER)")
 							}.foregroundColor(v.cloud.color)
 
+							Spacer()
+
+							Button(action: {
+								let defaults = UserDefaults()
+								defaults.set(true, forKey: "SCANNER_MODE")
+								state = .scanner
+								v.connectToCloud(scannerMode: true)
+							}) {
+								ZStack{
+									RoundedRectangle(cornerRadius: 10).foregroundColor(.purple)
+										.frame(width: 150, height: 50)
+									Text("Scanner Modus")
+										.foregroundColor(.white)
+								}
+							}
+
+							Spacer()
 
 							Button(action: {
 								v.connectToCloud()
 							}) {
-								ZStack{
-									RoundedRectangle(cornerRadius: 10).foregroundColor(.blue)
-										.frame(width: 150, height: 50)
-									Text("Anmelden")
-										.foregroundColor(.white)
-								}
-							}
+								Text("Anmelden")
+									.foregroundColor(.white)
+							}.buttonStyle(.borderedProminent)
+
 						}
 						Spacer()
 					}

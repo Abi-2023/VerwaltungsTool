@@ -40,9 +40,12 @@ struct DebugView: View {
 				let v2 = Verwaltung()
 				let p = Person(name: "Benedict ***REMOVED***", email: "***REMOVED***", verwaltung: v2)
 				v2.personen.append(p)
-				let str =  Ticket(owner: p, type: .after_show_ticket, nth: 8, verwaltung: v2).ticketHTML(verwaltung: v2)
-				let renderer = CustomPrintPageRenderer()
-				renderer.exportHTMLContentToPDF(HTMLContent: str)
+
+				verwaltung.personen.first(where: {$0.name == "Benedict ***REMOVED***"})!.tickets.forEach { ticket in
+					let str =  ticket.ticketHTML(verwaltung: v2)
+					let renderer = CustomPrintPageRenderer()
+					renderer.exportHTMLContentToPDF(HTMLContent: str)
+				}
 			}) {
 				Text("render ticket")
 			}
@@ -56,11 +59,16 @@ struct DebugView: View {
 			}
 
 			Button(action: {
-				//			let m = verwaltung.personen.first(where: {$0.name.contains("Benedict")})!.generateBezahlEmail()
-				//			let sender = EmailManager()
-				//			sender.sendMail(mail: m!)
+//				ScanConnector().uploadScan(ticket: <#T##Ticket#>)
 			}) {
-				Text("Button1")
+				Text("Register Scan")
+			}
+
+			Button(action: {
+				let s = ScanConnector()
+				s.fetchResults()
+			}) {
+				Text("fetchResults")
 			}
 
 			Button(action: {

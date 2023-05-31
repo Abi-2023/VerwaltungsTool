@@ -15,7 +15,7 @@ enum ScanResult {
 	var colorCode: Color {
 		switch self {
 		case .success:
-            return .green
+			return .green
 		case .invalid:
 			return .red
 		case .redeemed:
@@ -54,8 +54,17 @@ enum ScanResult {
 
 struct ScannerView: View {
 	@Environment(\.colorScheme) var appearance
-	@ObservedObject var verwaltung = Verwaltung()
+	@ObservedObject var verwaltung: Verwaltung
 	@Binding var state: AppState
+	let verifier: VerifyTicket
+	let scanConnector: ScanConnector
+
+	init(verwaltung: Verwaltung, state: Binding<AppState>) {
+		self.verwaltung = verwaltung
+		self._state = state
+		self.scanConnector = ScanConnector()
+		self.verifier = VerifyTicket(verwaltung: verwaltung)
+	}
 
 	@State var result: ScanResult?
 	@State var ticket: Ticket?
@@ -63,9 +72,16 @@ struct ScannerView: View {
 
 	@State var showManual = false
 	@State var manualID: String = ""
+
+	var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+
+
+	// Wann und bei welchem Gerät eingesacnnt wurde
+	@State var invTime: Date? = nil
+	@State var invDevice: String? = nil
 	
 	var body: some View {
-        GeometryReader{ geo in
+		GeometryReader{ geo in
 			HStack{
 				Spacer()
 				VStack{
@@ -73,13 +89,18 @@ struct ScannerView: View {
 					if let result = result {
 						Text(result.message).font(.largeTitle.weight(.heavy))
 							.foregroundColor(result.colorCode)
+
+						if result == .redeemed {
+							Text(invTime?.timeAgoDisplay() ?? "?")
+							Text(invDevice ?? "?")
+						}
 						Spacer()
 						
 						if let ticket {
 							Text(ticket.itemType.displayName + " \(ticket.nth)").font(.title2.bold())
 							Text(verwaltung.personen.first(where: {$0.id == ticket.owner})?.name ?? "Unbekannt").font(.title2.bold())
 							Text("ID: " + ticket.id)
-                                .padding(.top, 15)
+								.padding(.top, 15)
 							Spacer()
 						}
 						
@@ -111,27 +132,21 @@ struct ScannerView: View {
 							HStack{
 								Text("Ticket-Scanner").font(.largeTitle.weight(.heavy))
 								Spacer()
-                                Button(action: {state = .personenView}, label: {
-                                    ZStack{
-                                        Circle().fill(.blue)
-                                            .frame(width: 30, height: 30)
-                                        Image(systemName: "door.left.hand.open")
-                                            .foregroundColor(.white)
-                                    }
-                                })
+
+								ZStack{
+									Circle().fill(.gray)
+										.frame(width: 30, height: 30)
+									Image(systemName: "door.left.hand.open")
+										.foregroundColor(.white)
+								}.onLongPressGesture {
+
+									state = .personenView
+								}
 							}
 
 							CodeScannerView(codeTypes: [.qr]) { response in
 								if case let .success(scanText) = response {
-									let verifier = VerifyTicket()
-									if verifier.verifyToken(token: scanText.string) {
-										result = .success
-										if let id = scanText.string.split(separator: "%")[safe: 0] {
-											ticket = verwaltung.personen.flatMap({$0.tickets}).first(where: {$0.id == id})
-										}
-									} else {
-										result = .invalid
-									}
+									scanVerarbeiten(token: scanText.string)
 								} else {
 									result = .error
 								}
@@ -139,117 +154,140 @@ struct ScannerView: View {
 							.onDisappear {
 								showScanner = true
 							}
-                            Spacer()
-                            Button(action: {
-                                showManual = true
-                            }, label: {
-                                ZStack{
-                                    Capsule().fill(.blue)
-                                    HStack{
-                                        Image(systemName: "hand.tap.fill")
-                                        Text("ID manuell eingeben").font(.title3.bold())
-                                    }.foregroundColor(.white)
-                                }.frame(height: 50)
-                            }).sheet(isPresented: $showManual){
-                                ManualIDView(v: verwaltung, result: $result, ticket: $ticket, isPresented: $showManual)
-                            }
+							Spacer()
+							Button(action: {
+								showManual = true
+							}, label: {
+								ZStack{
+									Capsule().fill(.blue)
+									HStack{
+										Image(systemName: "hand.tap.fill")
+										Text("ID manuell eingeben").font(.title3.bold())
+									}.foregroundColor(.white)
+								}.frame(height: 50)
+							}).sheet(isPresented: $showManual){
+								ManualIDView(v: verwaltung, result: $result, ticket: $ticket, isPresented: $showManual)
+							}
 						}.padding()
 					}
-                    Spacer()
+					Spacer()
 				}
-                Spacer()
+				Spacer()
 			}
-        }
+		}
+		.onReceive(timer, perform: { _ in
+			scanConnector.neueRecordsAbfragen()
+		})
 		
+	}
+
+	func scanVerarbeiten(token: String) {
+		invTime = nil
+		invDevice = nil
+		guard let scannedTicket = verifier.getTicketFromScan(text: token) else {
+			result = .invalid
+			return
+		}
+
+		ticket = scannedTicket
+		if let recordDetails = scanConnector.ticketEingeloest(ticket: scannedTicket) {
+			result = .redeemed
+			invTime = recordDetails.date
+			invDevice = recordDetails.device
+		} else {
+			result = .success
+		}
+
+		scanConnector.uploadScan(ticket: scannedTicket)
 	}
 }
 
 struct ManualIDView: View{
-    @Environment(\.colorScheme) var appearance
-    
-    let v: Verwaltung
-    @Binding var result: ScanResult?
-    @Binding var ticket: Ticket?
-    @Binding var isPresented: Bool
-    
-    @State var inputLength: Int = 0
-    
-    @State var inputCode: [String] = ["_", "_", "_", "_", "_", "_"]
-    let inputAccepted: [String] = ["A", "B", "C", "D", "1", "2", "3", "4"]
-    
-    let columns: [GridItem] = Array(repeating: GridItem(.flexible()), count: 4)
-        
-    var body: some View{
-        VStack{
-            HStack{
-                Text("ID manuell eingeben").font(.title.weight(.bold))
-                Spacer()
-                Button("Abbrechen"){
-                    isPresented = false
-                }
-            }
-            Spacer()
-            HStack(spacing: 7.5){
-                Spacer()
-                ForEach(0...2, id: \.self){ i in
-                    Text(inputCode[i])
-                        .foregroundColor(inputCode[i] != "_" ? .blue : .gray)
-                }
-                Text("-").foregroundColor(.gray)
-                ForEach(3...5, id: \.self){ i in
-                    Text(inputCode[i])
-                        .foregroundColor(inputCode[i] != "_" ? .blue : .gray)
-                }
-                Spacer()
-            }.font(.system(size: 50).weight(.light))
-            Spacer()
-            LazyVGrid(columns: columns, spacing: 7.5){
-                ForEach(inputAccepted, id: \.self){ letter in
-                    Button(action: {
-                        if inputLength <= 5{
-                            inputCode[inputLength] = letter
-                            inputLength += 1
-                        }
-                    }, label: {
-                        ZStack{
-                            Rectangle().fill(.clear)
-                            Text(letter).font(.largeTitle)
-                        }
-                    })
-                    .buttonStyle(.borderless)
-                }.border(.gray)
-            }.padding()
-            
-            HStack{
-                Spacer()
-                Button(action: {
-                    if inputLength > 0{
-                        inputLength -= 1
-                        inputCode[inputLength] = "_"
-                    }
-                }, label: {
-                    Image(systemName: "delete.left")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(height: 20)
-                        .foregroundColor(.red)
-                })
-                Spacer()
-            }
-            Spacer()
-        }.padding()
-            .onChange(of: inputCode){ _ in
-                if inputLength == 6{
-                    var code: String = inputCode.joined()
-                    code.insert("-", at: code.index(code.startIndex, offsetBy: 3))
-                    let ticketSearch = v.personen.flatMap({$0.tickets}).first(where: {$0.id == code})
-                    if ticketSearch != nil{
-                        ticket = ticketSearch
-                        result = .success
-                    }
-                }
-            }
-    }
+	@Environment(\.colorScheme) var appearance
+
+	let v: Verwaltung
+	@Binding var result: ScanResult?
+	@Binding var ticket: Ticket?
+	@Binding var isPresented: Bool
+
+	@State var inputLength: Int = 0
+
+	@State var inputCode: [String] = ["_", "_", "_", "_", "_", "_"]
+	let inputAccepted: [String] = ["A", "B", "C", "D", "1", "2", "3", "4"]
+
+	let columns: [GridItem] = Array(repeating: GridItem(.flexible()), count: 4)
+
+	var body: some View{
+		VStack{
+			HStack{
+				Text("ID manuell eingeben").font(.title.weight(.bold))
+				Spacer()
+				Button("Abbrechen"){
+					isPresented = false
+				}
+			}
+			Spacer()
+			HStack(spacing: 7.5){
+				Spacer()
+				ForEach(0...2, id: \.self){ i in
+					Text(inputCode[i])
+						.foregroundColor(inputCode[i] != "_" ? .blue : .gray)
+				}
+				Text("-").foregroundColor(.gray)
+				ForEach(3...5, id: \.self){ i in
+					Text(inputCode[i])
+						.foregroundColor(inputCode[i] != "_" ? .blue : .gray)
+				}
+				Spacer()
+			}.font(.system(size: 50).weight(.light))
+			Spacer()
+			LazyVGrid(columns: columns, spacing: 7.5){
+				ForEach(inputAccepted, id: \.self){ letter in
+					Button(action: {
+						if inputLength <= 5{
+							inputCode[inputLength] = letter
+							inputLength += 1
+						}
+					}, label: {
+						ZStack{
+							Rectangle().fill(.clear)
+							Text(letter).font(.largeTitle)
+						}
+					})
+					.buttonStyle(.borderless)
+				}.border(.gray)
+			}.padding()
+
+			HStack{
+				Spacer()
+				Button(action: {
+					if inputLength > 0{
+						inputLength -= 1
+						inputCode[inputLength] = "_"
+					}
+				}, label: {
+					Image(systemName: "delete.left")
+						.resizable()
+						.scaledToFit()
+						.frame(height: 20)
+						.foregroundColor(.red)
+				})
+				Spacer()
+			}
+			Spacer()
+		}.padding()
+			.onChange(of: inputCode){ _ in
+				if inputLength == 6{
+					var code: String = inputCode.joined()
+					code.insert("-", at: code.index(code.startIndex, offsetBy: 3))
+					let ticketSearch = v.personen.flatMap({$0.tickets}).first(where: {$0.id == code})
+					if ticketSearch != nil{
+						ticket = ticketSearch
+						result = .success
+					}
+				}
+			}
+	}
 }
 
 #endif

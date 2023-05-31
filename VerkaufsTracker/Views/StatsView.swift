@@ -11,29 +11,36 @@ import Charts
 
 struct StatsView: View {
 	let verwaltung: Verwaltung
-	
+	@State var einlassMode = false
 	
 	var body: some View {
 		VStack(spacing: 30){
 			Text("Statistiken").font(.largeTitle.weight(.heavy))
-			if #available(iOS 16, *) {
-				if UIDevice.current.userInterfaceIdiom == .phone{
-					ScrollView(showsIndicators: false){
-						VStack(spacing: 15){
-							StatsViewComponents(verwaltung: verwaltung)
+				.onLongPressGesture {
+					einlassMode.toggle()
+				}
+			if einlassMode {
+				EinlassStatsView(verwaltung: verwaltung)
+			} else {
+				if #available(iOS 16, *) {
+					if UIDevice.current.userInterfaceIdiom == .phone{
+						ScrollView(showsIndicators: false){
+							VStack(spacing: 15){
+								StatsViewComponents(verwaltung: verwaltung)
+							}
+						}
+					} else {
+						ScrollView(showsIndicators: false){
+							Spacer()
+							HStack{
+								StatsViewComponents(verwaltung: verwaltung)
+							}
+							Spacer()
 						}
 					}
 				} else {
-					ScrollView(showsIndicators: false){
-						Spacer()
-						HStack{
-							StatsViewComponents(verwaltung: verwaltung)
-						}
-						Spacer()
-					}
+					Text("in der iOS Version nicht verfügbar")
 				}
-			} else {
-				Text("in der iOS Version nicht verfügbar")
 			}
 
 		}.padding()
