@@ -43,7 +43,7 @@ class ScanConnector: ObservableObject {
    {
    "fields": {
    "ID": "\(newRecordID())",
-   "Device": "\(CloudStatus.deviceId())",
+   "Device": "\(CloudStatus.deviceName()?.replacingOccurrences(of: " ", with: "_") ?? "?")",
    "TimeStamp": "\(Date().timeIntervalSince1970)",
    "TicketId": "\(ticket.id)",
    "Aktiv": true
