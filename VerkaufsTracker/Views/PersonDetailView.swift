@@ -171,6 +171,7 @@ struct BestellungsUebersicht: View{
 			}) {
 				Text("Ball +1")
 			}
+			.disabled(true)
 			Button(action: {
 				p.bestellungen[.ball_ticket, default: 0] -= 1
 				p.notes += "Ball entfernt\n"
@@ -179,6 +180,7 @@ struct BestellungsUebersicht: View{
 			}) {
 				Text("Ball -1")
 			}
+			.disabled(true)
 			Spacer()
 			Button(action: {
 				p.bestellungen[.after_show_ticket, default: 0] += 1
@@ -188,6 +190,7 @@ struct BestellungsUebersicht: View{
 			}) {
 				Text("ASP +1")
 			}
+			.disabled(verwaltung.scannerMode ? true : false)
 			Button(action: {
 				p.bestellungen[.after_show_ticket, default: 0] -= 1
 				p.notes += "ASP entfernt\n"
@@ -197,8 +200,9 @@ struct BestellungsUebersicht: View{
 			}) {
 				Text("ASP -1")
 			}
+			.disabled(verwaltung.scannerMode ? true : false)
+
 		}.buttonStyle(.bordered)
-			.disabled(true)
 
 
 		Divider()
