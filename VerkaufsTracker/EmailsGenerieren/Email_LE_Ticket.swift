@@ -10,24 +10,7 @@ import SwiftSMTP
 
 extension Lehrer {
 	internal func generateTicketEmailInternal(v: Verwaltung, ao: AktionObserver? = nil) -> Mail? {
-		let subject = "Ihre Bestellung für die Abi-Feierlichkeiten der Q2"
-
-		var extraText = ""
-		let buecher = bestellungen[.buch, default: 0]
-		let pullis = bestellungen[.pulli, default: 0]
-
-		let buecherText = buecher == 1 ? "ein Buch"  : "\(buecher) Bücher"
-		let pulliText = pullis == 1 ? "einen Pulli"  : "\(pullis) Pullis"
-
-		if buecher > 0 && pullis > 0 {
-			extraText = "Außerdem werden Sie noch \(pulliText) und \(buecherText) erhalten."
-		} else if buecher > 0 {
-			extraText = "Außerdem werden Sie noch \(buecherText) erhalten."
-		} else if pullis > 0 {
-			extraText = "Außerdem werden Sie noch \(pulliText) erhalten."
-		}
-
-
+		let subject = "Tickets für die Abi-Feierlichkeiten 2023"
 
 
 
@@ -159,7 +142,21 @@ extension Lehrer {
                     </tr>
                     <tr>
                       <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                        <div style="font-family:Helvetica;font-size:16px;line-height:1;text-align:left;color:white;">Ihre Zahlung für die Abi-Feierlichkeiten ist bei uns eingegangen. <br></br>Hiermit senden wir Ihnen ihre Tickets für den Abiball und die anschließende After-Show-Party. \(extraText) <br></br> Bitte beachten Sie, das jedes Ticket am Abend des Abiballs nur einmal eingelöst werden kann. Die Tickets sind nummeriert, damit Sie diese nicht verwechseln. <br></br> Der Abiball findet am Mittwoch, den 21.06.2023 in der <a style="color: #0082ED" href="***REMOVED***">***REMOVED*** ***REMOVED*** ***REMOVED***</a> statt. Der Einlass beginnt um 16:30. <br></br> Bitte denken Sie daran, dass auf dem Gelände der ***REMOVED*** die <a style="color: #0082ED" href="***REMOVED***/de/meta-pages/hausordnung/">Hausordnung</a> gilt. <br></br> Wir bedanken uns für Ihre Unterstützung und wünschen Ihnen einen schönen Abiball. <br></br>Viele Grüße,<br></br> Die Q2</div>
+                        <div style="font-family:Helvetica;font-size:16px;line-height:1;text-align:left;color:white;">
+Im Namen der gesamten Stufe wollen wir Ihnen mitteilen, dass wir uns sehr freuen, Ihnen die Tickets für unseren bevorstehenden Abiball zukommen zu lassen.
+<br><br>
+Der Einlass für den Abiball findet am 21.06.2023 in der <a style="color: #0082ED" href="***REMOVED***">***REMOVED*** ***REMOVED*** ***REMOVED***</a> um xx:xx statt. Im Anschluss (gegen 00:30) beginnt dann die After Show Party.
+Um den Prozess möglichst effizient und umweltfreundlich zu gestalten, senden wir Ihnen die Tickets als PDF zu. Bitte überprüfen Sie Ihren Anhang und stellen Sie sicher, dass Sie die Tickets korrekt erhalten haben. Jedes Ticket ist personalisiert und am Abend einmal einlösbar. Bitte beachten Sie, dass wir am Eingang des Abiballs die Tickets scannen werden, um den Zugang zu gewährleisten. Wir bitten Sie daher, Ihr Ticket entweder in digitaler Form auf Ihrem Mobilgerät bereitzuhalten oder alternativ auszudrucken.
+<br>
+Falls Sie Fragen oder Anliegen bezüglich des Abiballs oder der Tickets haben, stehen wir Ihnen gerne zur Verfügung.
+<br>
+Wir freuen uns, diesen besonderen Abend mit Ihnen und unseren Freunden verbringen zu können.
+<br><br>
+Mit freundlichen Grüßen
+<br>
+Die Q2<br>
+c/o Anh & Benedict
+</div>
                       </td>
                     </tr>
                     <tr>
