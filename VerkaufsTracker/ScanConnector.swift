@@ -29,6 +29,20 @@ class ScanConnector: ObservableObject {
 		return tmp
 	}
 
+	func aktivVonPerson(person: Person) -> Int {
+		var i = 0
+		person.tickets.filter({$0.itemType == .ball_ticket}).forEach({ t in
+			if records.contains(where: {$0.ticketId == t.id && $0.active}) {
+				i += 1
+			}
+		})
+		return i
+	}
+
+	func aktivVonGruppe(personen: [Person]) -> Int {
+		personen.map({aktivVonPerson(person: $0)}).reduce(0, +)
+	}
+
 	func uploadScan(ticket: Ticket) {
 		do {
 
