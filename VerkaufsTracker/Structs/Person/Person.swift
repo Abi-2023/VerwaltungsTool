@@ -9,7 +9,7 @@ import Foundation
 import SwiftSMTP
 
 enum extraFields: String, Codable {
-	case sendFormEmail, hatFormEingetragen, pulli_xs, pulli_s, pulli_l, pulli_m, pulli_xl, sendBezahlEmail, sendAngekommenEmail, Lied, Tisch
+	case sendFormEmail, hatFormEingetragen, pulli_xs, pulli_s, pulli_l, pulli_m, pulli_xl, sendBezahlEmail, sendAngekommenEmail, Lied, TischName
 }
 
 class Person: Identifiable, Codable, Hashable {
