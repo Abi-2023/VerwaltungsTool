@@ -41,6 +41,14 @@ struct DataImportView: View {
 			}) {
 				Text("Import Lehrer")
 			}
+
+			Button(action: {
+				DispatchQueue.global(qos: .default).async {
+					Aktion.importTischplan(v: v, ao: ao, data: text)
+				}
+			}) {
+				Text("Import Tischplan")
+			}
 		}
 		.padding()
 	}
@@ -48,6 +56,27 @@ struct DataImportView: View {
 
 
 extension Aktion {
+	static func importTischplan(v: Verwaltung, ao: AktionObserver, data: String) {
+		ao.activate(name: "Import Tischplan")
+		ao.log("start Import")
+		ao.setPrompt("Import")
+
+		for x in data.split(separator: ";") {
+			let data = x.split(separator: "$")
+			guard let p = v.personen.first(where: {$0.formID == data[0]}) else {
+				ao.log("person nicht gefunden: \(data[0])")
+				continue
+			}
+			guard let t = tische.first(where: {$0.buchstabe == data[1]}) else {
+				ao.log("tisch nicht gefunden: \(data[1])")
+				continue
+			}
+			p.extraFields[.TischName] = t.name
+		}
+
+		ao.finish()
+	}
+
 	static func importQ2er(v: Verwaltung, ao: AktionObserver, data: String) {
 		ao.activate(name: "Import Q2er")
 		ao.log("start Import")
