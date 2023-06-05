@@ -35,9 +35,20 @@ let tische: [Tisch] = [
 ]
 
 
-struct Tisch {
+struct Tisch: Hashable {
 	let name: String
 	let buchstabe: String
 	let kapazitaet: Int
 	let ghId: String
+}
+
+
+extension Verwaltung {
+	func zahlAnTisch(name: String) -> Int {
+		personenAnTisch(name: name).map({$0.bestellungen[.ball_ticket] ?? 0}).reduce(0, +)
+	}
+
+	func personenAnTisch(name: String) -> [Person] {
+		personen.filter({$0.extraFields[.TischName] ?? "aasdfjlkhaslefkjh" == name})
+	}
 }

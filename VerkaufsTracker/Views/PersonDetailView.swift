@@ -78,7 +78,10 @@ struct PersonDetailView: View {
 								}
 							}
 							BestellungsUebersicht(refreshId: $refreshId, p: p, verwaltung: verwaltung)
-							Divider()
+							if person?.bestellungen[.ball_ticket] ?? 0 > 0 {
+								TischPlanAuswahl(verwaltung: verwaltung, person: $person)
+								Divider()
+							}
 							ExtraFields(p: p)
 
 							Divider()
@@ -236,3 +239,45 @@ struct ExtraFields: View{
 //                    mm.sendMail(mail: p.generateFormEmail()!)
 //                }
 //            }
+
+
+private struct TischPlanAuswahl: View {
+	let verwaltung: Verwaltung
+	@Binding var person: Person?
+
+	@State var gridLayout: [GridItem] = [ GridItem(), GridItem(), GridItem() ]
+	@State var refreshId = UUID()
+
+	var body: some View {
+		VStack {
+			Text("Tisch: \(person?.extraFields[.TischName] ?? "Ohne Zuordnung")")
+				.font(.title2.bold())
+
+//			List {
+				ForEach(verwaltung.personenAnTisch(name: person?.extraFields[.TischName] ?? ""), id: \.self) { p in
+					Text("\(p.name): \(p.bestellungen[.ball_ticket] ?? 0)")
+				}
+//			}
+
+			LazyVGrid(columns: gridLayout, alignment: .center, spacing: 10) {
+
+				ForEach(tische, id: \.self) { tisch in
+
+					Button(action: {
+						person?.extraFields[.TischName] = tisch.name
+						refreshId = UUID()
+					}) {
+						Text("\(tisch.name) (\(verwaltung.zahlAnTisch(name: tisch.name))/\(tisch.kapazitaet))")
+							.underline(person?.extraFields[.TischName] ?? "" == tisch.name)
+							.font(person?.extraFields[.TischName] ?? "" == tisch.name ? .body.bold() : .body)
+					}
+					.disabled(verwaltung.scannerMode || (tisch.kapazitaet - verwaltung.zahlAnTisch(name: tisch.name)) <= person?.bestellungen[.ball_ticket] ?? 0)
+					.buttonStyle(.bordered)
+
+				}
+			}
+			.padding(.all, 10)
+		}
+		.id(refreshId)
+	}
+}
