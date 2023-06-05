@@ -252,12 +252,12 @@ private struct TischPlanAuswahl: View {
 		VStack {
 			Text("Tisch: \(person?.extraFields[.TischName] ?? "Ohne Zuordnung")")
 				.font(.title2.bold())
-
-//			List {
+			
+			Divider()
 				ForEach(verwaltung.personenAnTisch(name: person?.extraFields[.TischName] ?? ""), id: \.self) { p in
 					Text("\(p.name): \(p.bestellungen[.ball_ticket] ?? 0)")
 				}
-//			}
+			Divider()
 
 			LazyVGrid(columns: gridLayout, alignment: .center, spacing: 10) {
 
@@ -270,8 +270,9 @@ private struct TischPlanAuswahl: View {
 						Text("\(tisch.name) (\(verwaltung.zahlAnTisch(name: tisch.name))/\(tisch.kapazitaet))")
 							.underline(person?.extraFields[.TischName] ?? "" == tisch.name)
 							.font(person?.extraFields[.TischName] ?? "" == tisch.name ? .body.bold() : .body)
+							.foregroundColor(person?.extraFields[.TischName] ?? "" == tisch.name ? .pink : .accentColor)
 					}
-					.disabled(verwaltung.scannerMode || (tisch.kapazitaet - verwaltung.zahlAnTisch(name: tisch.name)) <= person?.bestellungen[.ball_ticket] ?? 0)
+					.disabled(verwaltung.scannerMode || (tisch.kapazitaet - verwaltung.zahlAnTisch(name: tisch.name)) < person?.bestellungen[.ball_ticket] ?? 0)
 					.buttonStyle(.bordered)
 
 				}
