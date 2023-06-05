@@ -48,8 +48,8 @@ class VerifyTicket{
 
 	public func createToken(ticket: Ticket) -> String {
 		if ticket.itemType == .ball_ticket {
-			let tischQuoteLinkIdentifier = verwaltung.personen.first(where: {$0.id == ticket.owner})?.extraFields[.Tisch] ?? "404" //TODO: muss throwing sein
-			return "https://abi-2023.github.io/Ticket/\(tischQuoteLinkIdentifier).html?x=\(ticket.id)4bne8"
+			let tischQuoteLinkIdentifier = tische.first(where: {verwaltung.personen.first(where: {$0.id == ticket.owner})?.extraFields[.TischName] == $0.name})?.ghId ?? "404" //TODO: muss throwing sein
+			return "https://abi-2023.github.io/Ticket/T/\(tischQuoteLinkIdentifier).html?x=\(ticket.id)4bne8"
 		} else {
 			//TODO: link für ASP Tickets
 			return "https://abi-2023.github.io/Ticket/\("asp").html?x=\(ticket.id)4bne8"
