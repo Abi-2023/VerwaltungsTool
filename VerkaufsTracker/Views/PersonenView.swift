@@ -268,6 +268,17 @@ struct FilterView: View {
 				}) {
 					FilterButton("Nicht alle generierte Tickets gesendet")
 				}
+
+				Button(action: {
+					selectedPersonen = alleInGruppe.filter({$0.bestellungen[.ball_ticket] ?? 0 > 0 && $0.extraFields[.TischName] ?? "" == ""})
+				}) {
+					FilterButton("Ohne Tisch")
+				}
+				Button(action: {
+					selectedPersonen = alleInGruppe.filter({$0.bestellungen[.ball_ticket] ?? 0 > 0 && $0.extraFields[.TischName] ?? "" != ""})
+				}) {
+					FilterButton("MitTisch")
+				}
 			}
 			Spacer()
 		}

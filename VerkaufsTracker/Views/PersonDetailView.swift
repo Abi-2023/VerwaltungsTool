@@ -264,15 +264,21 @@ private struct TischPlanAuswahl: View {
 				ForEach(tische, id: \.self) { tisch in
 
 					Button(action: {
-						person?.extraFields[.TischName] = tisch.name
-						refreshId = UUID()
+						if person?.extraFields[.TischName] ?? "" == "" {
+							person?.extraFields[.TischName] = tisch.name
+							refreshId = UUID()
+							verwaltung.uploadToCloud()
+						} else {
+							person?.extraFields[.TischName] = nil
+							refreshId = UUID()
+						}
 					}) {
-						Text("\(tisch.name) (\(verwaltung.zahlAnTisch(name: tisch.name))/\(tisch.kapazitaet))")
+						Text("\(tisch.name)\(tisch.buchstabe) (\(verwaltung.zahlAnTisch(name: tisch.name))/\(tisch.kapazitaet))")
 							.underline(person?.extraFields[.TischName] ?? "" == tisch.name)
 							.font(person?.extraFields[.TischName] ?? "" == tisch.name ? .body.bold() : .body)
 							.foregroundColor(person?.extraFields[.TischName] ?? "" == tisch.name ? .pink : .accentColor)
 					}
-					.disabled(verwaltung.scannerMode || (tisch.kapazitaet - verwaltung.zahlAnTisch(name: tisch.name)) < person?.bestellungen[.ball_ticket] ?? 0)
+					.disabled(verwaltung.scannerMode || ((tisch.kapazitaet - verwaltung.zahlAnTisch(name: tisch.name)) < person?.bestellungen[.ball_ticket] ?? 0 && person?.extraFields[.TischName] != tisch.name))
 					.buttonStyle(.bordered)
 
 				}
