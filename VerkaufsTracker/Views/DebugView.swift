@@ -13,11 +13,48 @@ struct DebugView: View {
 	@Binding var state: AppState
 	@Binding var zahlungsVerarbeiter: ZahlungsVerarbeiter?
 	@State var ao: AktionObserver
+	@State var externerName: String = ""
+	@State var externNth: Int = 1
+	@State var refreshId = UUID()
 
 	var body: some View {
 		VStack (spacing: 15){
 			Text("Debug Optionen")
 				.font(.largeTitle.weight(.heavy))
+
+			VStack {
+				Text("ASP Tickets von Externen")
+					.font(.title2.bold())
+
+				let externePerson = verwaltung.personen.first(where: {$0.formID == "E7EN5"})!
+				HStack {
+					TextField("Name", text: $externerName)
+						.textFieldStyle(.roundedBorder)
+
+					Stepper("Nummer: \(externNth)", value: $externNth, in: 1...10, step: 1)
+
+					Button(action: {
+						externePerson.name = externerName
+						let ticket = Ticket(owner: externePerson, type: .after_show_ticket, nth: externNth, verwaltung: verwaltung)
+						let str =  ticket.ticketHTML(verwaltung: verwaltung)
+						let renderer = CustomPrintPageRenderer()
+						renderer.exportHTMLContentToPDF(HTMLContent: str)
+						externePerson.tickets.append(ticket)
+						externePerson.formID = "E7EN5"
+						externePerson.name = "Externe"
+						externePerson.notes += "\n \(ticket.itemType.displayName) für \(externerName) generiert: \(ticket.id)"
+						verwaltung.uploadToCloud()
+						refreshId = UUID()
+					}) {
+						Text("Speichern")
+					}.buttonStyle(.bordered)
+				}
+
+				Text("Info: GenerierteTickets: \(externePerson.tickets.count)")
+				Text(externePerson.notes)
+
+				Divider()
+			}.padding(20)
 
 
 			Button(action: {
@@ -71,16 +108,6 @@ struct DebugView: View {
 				Text("fetchResults")
 			}
 
-			Button(action: {
-				for item in Item.allCases {
-					print("----\(item.displayName)")
-					for i in (0...10) {
-						print("\(i)x \(Person.preisFuerItem(item: item, count: i).geldStr)")
-					}
-				}
-			}) {
-				Text("Preise Style")
-			}
 
 #if canImport(CodeScanner)
 			Button(action: {
@@ -91,5 +118,6 @@ struct DebugView: View {
 #endif
 		}
 		.padding()
+		.id(refreshId)
 	}
 }
