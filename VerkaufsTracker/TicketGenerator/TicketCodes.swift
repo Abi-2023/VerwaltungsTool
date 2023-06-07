@@ -52,7 +52,7 @@ class VerifyTicket{
 			return "https://abi-2023.github.io/Ticket/T/\(tischQuoteLinkIdentifier).html?x=\(ticket.id)4bne8"
 		} else {
 			//TODO: link für ASP Tickets
-			return "https://abi-2023.github.io/Ticket/\("asp").html?x=\(ticket.id)4bne8"
+			return "http://jdh.gg/watch?v=dQw4w9WgXcQ&x=\(ticket.id)4bne8"
 		}
 	}
 
