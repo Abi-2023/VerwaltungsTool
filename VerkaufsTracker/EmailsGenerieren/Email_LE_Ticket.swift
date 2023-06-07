@@ -152,7 +152,7 @@ Falls Sie Fragen oder Anliegen bezüglich des Abiballs oder der Tickets haben, s
 <br><br>
 Wir freuen uns, diesen besonderen Abend mit Ihnen und unseren Freunden verbringen zu können.
 <br><br>
-Mit freundlichen Grüßen
+Mit freundlichen Grüßen,
 <br>
 Die Q2<br>
 c/o Anh & Benedict
