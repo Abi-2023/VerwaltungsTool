@@ -163,10 +163,10 @@ struct SendCharts: View{
 		PieChart(title: "Vollständig gezahlte Personen", statement: "Gezahlt", counterStatement: "Ausstehend", value: bezahlt, capacityValue: bezahlSend)
 
 		let generiert = verwaltung.personen.filter({!$0.tickets.isEmpty && $0.tickets.count == ($0.bestellungen[.ball_ticket, default: 0] + $0.bestellungen[.after_show_ticket, default: 0])}).count
-		PieChart(title: "Vollständig für Personen generiert ", statement: "Voll generiert", counterStatement: "Nicht voll generiert", value: generiert, capacityValue: bezahlSend)
+        PieChart(title: "Vollständig für Personen generiert ", statement: "Voll generiert", counterStatement: "Nicht voll generiert", value: generiert, capacityValue: bezahlt)
 
 		let ticketSend = verwaltung.personen.filter({$0.extraFields[.hatFormEingetragen, default: ""] == "1"}).count //<- AENDERUNG BEI TICKET-FERTIGSTELLUNG
-		PieChart(title: "Ticket E-Mail-Sendestatus", statement: "Gesendet", counterStatement: "Nicht gesendet", value: ticketSend, capacityValue: generiert)
+		PieChart(title: "Ticket E-Mail-Sendestatus", statement: "Gesendet", counterStatement: "Nicht gesendet", value: generiert, capacityValue: bezahlt)
 	}
 }
 
