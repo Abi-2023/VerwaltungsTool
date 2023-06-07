@@ -88,6 +88,7 @@ extension Aktion {
 			}
 			i += 1
 			workerGroup.wait()
+			sleep(5)
 		}
 		ao.setPrompt("finished")
 		ao.log("finished sending")

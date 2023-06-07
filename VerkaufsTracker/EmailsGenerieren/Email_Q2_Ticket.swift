@@ -153,7 +153,7 @@ In einer Woche findet unser Abiball statt. Der Einlass beginnt um 16:30. Jedes D
 <br>
 Bitte denk daran, dass auf dem Gelände der <a style="color: #0082ED" href="***REMOVED***">***REMOVED*** ***REMOVED*** ***REMOVED***</a> die <a style="color: #0082ED" href="***REMOVED***/de/meta-pages/hausordnung/">Hausordnung</a> gilt und wir uns dementsprechend verhalten müssen.
 <br>Wir wünschen dir, Deiner Familie und Deinen Freunden einen schönen Abiball!
-<br>
+<br><br>
 Euer Orga-Team
 </div>
 					  </td>
