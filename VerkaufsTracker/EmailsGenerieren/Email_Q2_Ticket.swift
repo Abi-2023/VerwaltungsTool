@@ -149,7 +149,7 @@ extension Q2er {
 					<tr>
 					  <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
 						<div style="font-family:Helvetica;font-size:16px;line-height:1;text-align:left;color:white;">
-In einer Woche findet unser Abiball statt. Der Einlass beginnt um xx:xx. Jedes Deiner Tickets ist nummeriert und am Abend nur einmal einlösbar. Wenn Du Deinen Begleitungen ihre Tickets schickst, achte darauf, dass jede Begleitung ein anderes Ticket erhält. Eine genaue Anleitung und Erklärung zum Ablauf findest Du in der Stufengruppe.
+In einer Woche findet unser Abiball statt. Der Einlass beginnt um 16:30. Jedes Deiner Tickets ist nummeriert und am Abend nur einmal einlösbar. Wenn Du Deinen Begleitungen ihre Tickets schickst, achte darauf, dass jede Begleitung ein anderes Ticket erhält. Eine genaue Anleitung und Erklärung zum Ablauf findest Du in der Stufengruppe.
 <br>
 Bitte denk daran, dass auf dem Gelände der <a style="color: #0082ED" href="***REMOVED***">***REMOVED*** ***REMOVED*** ***REMOVED***</a> die <a style="color: #0082ED" href="***REMOVED***/de/meta-pages/hausordnung/">Hausordnung</a> gilt und wir uns dementsprechend verhalten müssen.
 <br>Wir wünschen dir, Deiner Familie und Deinen Freunden einen schönen Abiball!

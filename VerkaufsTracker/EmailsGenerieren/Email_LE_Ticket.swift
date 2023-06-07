@@ -145,7 +145,7 @@ extension Lehrer {
                         <div style="font-family:Helvetica;font-size:16px;line-height:1;text-align:left;color:white;">
 Im Namen der gesamten Stufe wollen wir Ihnen mitteilen, dass wir uns sehr freuen, Ihnen die Tickets für unseren bevorstehenden Abiball zukommen zu lassen.
 <br><br>
-Der Einlass für den Abiball findet am 21.06.2023 in der <a style="color: #0082ED" href="***REMOVED***">***REMOVED*** ***REMOVED*** ***REMOVED***</a> um xx:xx statt. Im Anschluss (gegen 00:30) beginnt dann die After Show Party.
+Der Einlass für den Abiball findet am 21.06.2023 in der <a style="color: #0082ED" href="***REMOVED***">***REMOVED*** ***REMOVED*** ***REMOVED***</a> um 16:30 statt. Im Anschluss (gegen 00:30) beginnt dann die After Show Party.
 Um den Prozess möglichst effizient und umweltfreundlich zu gestalten, senden wir Ihnen die Tickets als PDF zu. Bitte überprüfen Sie Ihren Anhang und stellen Sie sicher, dass Sie die Tickets korrekt erhalten haben. Jedes Ticket ist personalisiert und am Abend einmal einlösbar. Bitte beachten Sie, dass wir am Eingang des Abiballs die Tickets scannen werden, um den Zugang zu gewährleisten. Wir bitten Sie daher, Ihr Ticket entweder in digitaler Form auf Ihrem Mobilgerät bereitzuhalten oder alternativ auszudrucken.
 <br>
 Falls Sie Fragen oder Anliegen bezüglich des Abiballs oder der Tickets haben, stehen wir Ihnen gerne zur Verfügung.
