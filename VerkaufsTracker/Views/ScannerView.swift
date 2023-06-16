@@ -166,7 +166,7 @@ struct ScannerView: View {
 									}.foregroundColor(.white)
 								}.frame(height: 50)
 							}).sheet(isPresented: $showManual){
-								ManualIDView(v: verwaltung, result: $result, ticket: $ticket, isPresented: $showManual)
+								ManualIDView(v: verwaltung,scanVerarbeiten: scanVerarbeiten, result: $result, ticket: $ticket, isPresented: $showManual)
 							}
 						}.padding()
 					}
@@ -206,6 +206,7 @@ struct ManualIDView: View{
 	@Environment(\.colorScheme) var appearance
 
 	let v: Verwaltung
+	let scanVerarbeiten: (String) -> ()
 	@Binding var result: ScanResult?
 	@Binding var ticket: Ticket?
 	@Binding var isPresented: Bool
@@ -252,6 +253,7 @@ struct ManualIDView: View{
 						ZStack{
 							Rectangle().fill(.clear)
 							Text(letter).font(.largeTitle)
+								.padding(.vertical, 10)
 						}
 					})
 					.buttonStyle(.borderless)
@@ -280,11 +282,7 @@ struct ManualIDView: View{
 				if inputLength == 6{
 					var code: String = inputCode.joined()
 					code.insert("-", at: code.index(code.startIndex, offsetBy: 3))
-					let ticketSearch = v.personen.flatMap({$0.tickets}).first(where: {$0.id == code})
-					if ticketSearch != nil{
-						ticket = ticketSearch
-						result = .success
-					}
+					scanVerarbeiten(code)
 				}
 			}
 	}
