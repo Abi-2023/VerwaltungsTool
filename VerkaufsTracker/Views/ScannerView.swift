@@ -10,7 +10,7 @@ import SwiftUI
 import CodeScanner
 
 enum ScanResult {
-	case success, invalid, redeemed, error
+	case success, invalid, redeemed, error, typeError
 
 	var colorCode: Color {
 		switch self {
@@ -22,6 +22,8 @@ enum ScanResult {
 			return .orange
 		case .error:
 			return .red
+		case .typeError:
+			return .purple
 		}
 	}
 
@@ -35,6 +37,8 @@ enum ScanResult {
 			return "Ticket bereits eingelöst"
 		case .error:
 			return "Es ist ein Fehler aufgetreten"
+		case .typeError:
+			return "Falscher Tickettyp"
 		}
 	}
 	
@@ -48,6 +52,8 @@ enum ScanResult {
 			return "clock.arrow.circlepath"
 		case .error:
 			return "exclamationmark.circle.fill"
+		case .typeError:
+			return "arrow.triangle.swap"
 		}
 	}
 }
@@ -69,6 +75,7 @@ struct ScannerView: View {
 	@State var result: ScanResult?
 	@State var ticket: Ticket?
 	@State var showScanner = true
+	@State var ballMode = true
 
 	@State var showManual = false
 	@State var manualID: String = ""
@@ -130,7 +137,10 @@ struct ScannerView: View {
 					} else {
 						VStack{
 							HStack{
-								Text("Ticket-Scanner").font(.largeTitle.weight(.heavy))
+								Text("\(ballMode ? "Ball" : "ASP")-Scanner").font(.largeTitle.weight(.heavy))
+									.onTapGesture {
+										ballMode.toggle()
+									}
 								Spacer()
 
 								ZStack{
@@ -194,11 +204,15 @@ struct ScannerView: View {
 			result = .redeemed
 			invTime = recordDetails.date
 			invDevice = recordDetails.device
+			scanConnector.uploadScan(ticket: scannedTicket)
 		} else {
-			result = .success
+			if ballMode != (ticket?.itemType ?? .buch == .ball_ticket) {
+				result = .typeError
+			} else {
+				result = .success
+				scanConnector.uploadScan(ticket: scannedTicket)
+			}
 		}
-
-		scanConnector.uploadScan(ticket: scannedTicket)
 	}
 }
 
