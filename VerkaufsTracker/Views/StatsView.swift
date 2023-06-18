@@ -130,11 +130,13 @@ struct WunschPieCharts: View{
 //		PieChart(title: "Formularteilnahme", statement: "Formular ausgefüllt", counterStatement: "Formular ausstehend", value: formSubmitted, capacityValue: verwaltung.personen.count)
 
 		let bestellungenTickets = verwaltung.personen.map({$0.bestellungen[.ball_ticket] ?? 0}).reduce(0, +)
+        let externe = verwaltung.personen.filter({$0.formID == "E7EN5"}).first
         
-		PieChart(title: "Ball-Tickets", statement: "Belegte Tickets", counterStatement: "Freie Tickets", value: bestellungenTickets, capacityValue: Item.ball_ticket.verfuegbar)
+        
+        PieChart(title: "Ball-Tickets", statement: "Belegte Tickets", counterStatement: "Freie Tickets", value: bestellungenTickets + (externe?.tickets.filter({$0.itemType == .ball_ticket}).count ?? 0), capacityValue: Item.ball_ticket.verfuegbar)
 
 		let bestellungenTicketsASP = verwaltung.personen.map({$0.bestellungen[.after_show_ticket] ?? 0}).reduce(0, +)
-		PieChart(title: "ASP-Tickets", statement: "Belegte Tickets", counterStatement: "Freie Tickets", value: bestellungenTicketsASP, capacityValue: Item.after_show_ticket.verfuegbar)
+		PieChart(title: "ASP-Tickets", statement: "Belegte Tickets", counterStatement: "Freie Tickets", value: bestellungenTicketsASP + (externe?.tickets.filter({$0.itemType == .after_show_ticket}).count ?? 0), capacityValue: Item.after_show_ticket.verfuegbar)
 		/*
 		 PIE CHARTS
 		 let wunschBuch = verwaltung.personen.map({$0.wuenschBestellungen[.buch] ?? 0}).reduce(0, +)
@@ -246,7 +248,7 @@ struct PieChart: View{
 	
 	var counterLabel: String {
 		let x = capacityValue - value
-		if x < 0{
+		if x <= 0{
 			return "Keine"
 		} else {
 			return "\(capacityValue - value)/\(capacityValue) (\(counterStatementPercentage)%)"
