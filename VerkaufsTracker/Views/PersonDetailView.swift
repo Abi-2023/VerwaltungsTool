@@ -78,6 +78,23 @@ struct PersonDetailView: View {
 								}
 							}
 							BestellungsUebersicht(refreshId: $refreshId, p: p, verwaltung: verwaltung)
+							HStack {
+								Text("Ball Plätze: \(p.ballPlaetze)")
+								Spacer()
+								Button(action: {
+									p.extraFields[.plaetzeOverride] = String(p.ballPlaetze - 1)
+									refreshId = UUID()
+								}) {
+									Text("-")
+								}
+								.padding(.trailing, 20)
+								Button(action: {
+									p.extraFields[.plaetzeOverride] = String(p.ballPlaetze + 1)
+									refreshId = UUID()
+								}) {
+									Text("+")
+								}
+							}
 							if person?.bestellungen[.ball_ticket] ?? 0 > 0 {
 								TischPlanAuswahl(verwaltung: verwaltung, person: $person)
 								Divider()
@@ -250,7 +267,8 @@ private struct TischPlanAuswahl: View {
 
 	var body: some View {
 		VStack {
-			Text("Tisch: \(person?.extraFields[.TischName] ?? "Ohne Zuordnung")")
+			let aktTisch = tische.first(where: {$0.name == person?.extraFields[.TischName]})
+			Text("Tisch: \(person?.extraFields[.TischName] ?? "Ohne Zuordnung") (\(verwaltung.zahlAnTisch(name: aktTisch?.name ?? ""))/\(aktTisch?.kapazitaet ?? 0))")
 				.font(.title2.bold())
 			
 			Divider()

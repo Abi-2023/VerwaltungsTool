@@ -9,7 +9,7 @@ import Foundation
 import SwiftSMTP
 
 enum extraFields: String, Codable {
-	case sendFormEmail, hatFormEingetragen, pulli_xs, pulli_s, pulli_l, pulli_m, pulli_xl, sendBezahlEmail, sendAngekommenEmail, Lied, TischName
+	case sendFormEmail, hatFormEingetragen, pulli_xs, pulli_s, pulli_l, pulli_m, pulli_xl, sendBezahlEmail, sendAngekommenEmail, Lied, TischName, plaetzeOverride
 }
 
 class Person: Identifiable, Codable, Hashable {
@@ -31,6 +31,13 @@ class Person: Identifiable, Codable, Hashable {
 		hasher.combine(bestellungen)
 		hasher.combine(extraFields)
 		hasher.combine(formID)
+	}
+
+	var ballPlaetze: Int {
+		if let i = Int(extraFields[.plaetzeOverride] ?? "") {
+			return i
+		}
+		return bestellungen[.ball_ticket] ?? 0
 	}
 
 

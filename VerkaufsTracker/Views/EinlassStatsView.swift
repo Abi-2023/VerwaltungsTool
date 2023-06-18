@@ -55,7 +55,7 @@ struct EinlassStatsView: View {
 							.padding(.top, 10)
 						ForEach(verwaltung.personenAnTisch(name: tisch.name)) { p in
 							let aktivVonPerson = scanConnector.aktivVonPerson(person: p)
-							let ticketsPerson = p.bestellungen[.ball_ticket] ?? -1
+							let ticketsPerson = p.ballPlaetze
 							Text("\(p.name): \(aktivVonPerson)/\(ticketsPerson)")
 								.foregroundColor(ticketsPerson == aktivVonPerson ? .green : .primary)
 						}

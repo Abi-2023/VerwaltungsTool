@@ -27,9 +27,9 @@ let tische: [Tisch] = [
 	Tisch(name: "14", buchstabe: "N", kapazitaet: 28, ghId: "0C4"),
 	Tisch(name: "15", buchstabe: "O", kapazitaet: 24, ghId: "0C4"),
 	Tisch(name: "16", buchstabe: "P", kapazitaet: 24, ghId: "0C4"),
-	Tisch(name: "17", buchstabe: "Q", kapazitaet: 24, ghId: "0C4"),
-	Tisch(name: "18", buchstabe: "R", kapazitaet: 26, ghId: "0C4"),
-	Tisch(name: "19", buchstabe: "S", kapazitaet: 24, ghId: "0C4"),
+	Tisch(name: "17", buchstabe: "Q", kapazitaet: 18, ghId: "0C4"),
+	Tisch(name: "18", buchstabe: "R", kapazitaet: 18, ghId: "0C4"),
+	Tisch(name: "19", buchstabe: "S", kapazitaet: 18, ghId: "0C4"),
 	Tisch(name: "20", buchstabe: "T", kapazitaet: 24, ghId: "0C4"),
 	Tisch(name: "21", buchstabe: "U", kapazitaet: 24, ghId: "0C4")
 ]
@@ -45,7 +45,7 @@ struct Tisch: Hashable {
 
 extension Verwaltung {
 	func zahlAnTisch(name: String) -> Int {
-		personenAnTisch(name: name).map({$0.bestellungen[.ball_ticket] ?? 0}).reduce(0, +)
+		personenAnTisch(name: name).map({$0.ballPlaetze}).reduce(0, +)
 	}
 
 	func personenAnTisch(name: String) -> [Person] {
