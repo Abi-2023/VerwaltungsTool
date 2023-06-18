@@ -61,6 +61,10 @@ extension Aktion {
 		ao.log("start Import")
 		ao.setPrompt("Import")
 
+//		for person in v.personen {
+//			person.extraFields[.TischName] = nil
+//		}
+
 		for x in data.split(separator: ";") {
 			let data = x.split(separator: "$")
 			guard let p = v.personen.first(where: {$0.formID == data[0]}) else {

@@ -96,9 +96,11 @@ struct DebugView: View {
 			}
 
 			Button(action: {
-//				ScanConnector().uploadScan(ticket: <#T##Ticket#>)
+				for tisch in tische.shuffled() {
+					print(verwaltung.personenAnTisch(name: tisch.name).map({$0.name}))
+				}
 			}) {
-				Text("Register Scan")
+				Text("Tischplan")
 			}
 
 			Button(action: {

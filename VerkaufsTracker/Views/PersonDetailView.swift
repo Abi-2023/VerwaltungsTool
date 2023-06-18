@@ -282,14 +282,15 @@ private struct TischPlanAuswahl: View {
 				ForEach(tische, id: \.self) { tisch in
 
 					Button(action: {
-//						if person?.extraFields[.TischName] ?? "" == "" {
-//							person?.extraFields[.TischName] = tisch.name
-//							refreshId = UUID()
-//							verwaltung.uploadToCloud()
-//						} else {
-//							person?.extraFields[.TischName] = nil
-//							refreshId = UUID()
-//						}
+						if person?.extraFields[.TischName] ?? "" == "" {
+							person?.extraFields[.TischName] = tisch.name
+							refreshId = UUID()
+							verwaltung.uploadToCloud()
+						} else {
+							person?.extraFields[.TischName] = nil
+							refreshId = UUID()
+							verwaltung.uploadToCloud()
+						}
 					}) {
 						Text("\(tisch.name)\(tisch.buchstabe) (\(verwaltung.zahlAnTisch(name: tisch.name))/\(tisch.kapazitaet))")
 							.underline(person?.extraFields[.TischName] ?? "" == tisch.name)
