@@ -96,8 +96,10 @@ struct DebugView: View {
 			}
 
 			Button(action: {
-				for tisch in tische.shuffled() {
-					print(verwaltung.personenAnTisch(name: tisch.name).map({$0.name}))
+				for tisch in tische {
+					print(tisch.kapazitaet)
+					print(verwaltung.personenAnTisch(name: tisch.name).map({"\($0.name) [\($0.ballPlaetze)]"}))
+					print("---")
 				}
 			}) {
 				Text("Tischplan")
