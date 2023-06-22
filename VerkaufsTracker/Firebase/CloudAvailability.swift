@@ -46,7 +46,7 @@ enum CloudState: String{
     }
 }
 extension SECRETS {
-	public static let VERSION = 14
+	public static let VERSION = 15
 }
 struct CloudStatus: Codable {
 	var lastConnection: Date = .now
