@@ -144,7 +144,7 @@ extension Ticket {
    </td>
   </tr>
   <tr>
-   <th class="tg-0lax big" colspan="2">Historische ***REMOVED*** ***REMOVED***</th>
+   <th class="tg-0lax big" colspan="2">Historische  </th>
   </tr>
   <tr>
    <td class="tg-0lax title" colspan="2">Datum:</td>

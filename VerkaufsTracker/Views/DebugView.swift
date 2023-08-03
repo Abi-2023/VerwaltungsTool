@@ -75,10 +75,10 @@ struct DebugView: View {
 
 			Button(action: {
 				let v2 = Verwaltung()
-				let p = Person(name: "Benedict ***REMOVED***", email: "***REMOVED***", verwaltung: v2)
+				let p = Person(name: "Benedict", email: "", verwaltung: v2)
 				v2.personen.append(p)
 
-				verwaltung.personen.first(where: {$0.name == "Benedict ***REMOVED***"})!.tickets.forEach { ticket in
+				verwaltung.personen.first(where: {$0.name == "Benedict"})!.tickets.forEach { ticket in
 					let str =  ticket.ticketHTML(verwaltung: v2)
 					let renderer = CustomPrintPageRenderer()
 					renderer.exportHTMLContentToPDF(HTMLContent: str)

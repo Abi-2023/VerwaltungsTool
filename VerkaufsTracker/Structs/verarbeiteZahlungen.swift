@@ -21,7 +21,7 @@ func MD5(string: String) -> String {
 
 // Betrag in cent
 fileprivate func uploadZahlung(person: Person, betrag: Int, notiz: String) -> Bool{
-	let transaktionsQuery = "***REMOVED***formResponse"
+	let transaktionsQuery = "/formResponse"
 
 	guard let requestUrl = URL(string: transaktionsQuery) else {
 		print("invalid url")
