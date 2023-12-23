@@ -1,13 +1,26 @@
-# Verwaltungstoll
-### Für AbiJahrgang 2023
+# Verwaltungstool
+### Für den Abitur-Jahrgang 2023
 
+- 1275 versendete E-Mails
+- 882 digitale Tickets
+- 6 Scanner mit in Echtzeit synchronisierten Ticketdaten
+- 200 Überweisungen
+
+> alles automatisiert verwaltet
+
+
+
+## Ticket
 
 <img src="Images/Ticket.png" width="300">
+
+
+## Statistiken
 
 ![](Images/stat1.png)
 ![](Images/stat2.png)
 
-## EMails
+## E-Mails
 
 <img src="Images/email1.png" width="300">
 <img src="Images/email2.png" width="300">
